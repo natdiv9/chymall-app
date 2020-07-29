@@ -98,6 +98,21 @@ const routes: Routes = [
 
       {path: 'charts/chartjs', component: ChartjsComponent, data: {extraParameter: ''}},
 
+      // CHYMALL PAGES
+
+        // UTILISATEURS
+
+      {path: 'utilisateurs/all', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'utilisateurs/:id', component: DropdownsComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'utilisateurs/new', component: IconsComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'utilisateurs/update', component: CardsComponent, data: {extraParameter: 'elementsMenu'}},
+
+        // CLIENTS
+
+      {path: 'clients/all', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/:id', component: DropdownsComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/new', component: IconsComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/update', component: CardsComponent, data: {extraParameter: 'elementsMenu'}},
     ]
 
   },

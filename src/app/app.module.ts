@@ -103,6 +103,14 @@ import {BubbleChartComponent} from './DemoPages/Charts/chartjs/examples/bubble-c
 import {DynamicChartComponent} from './DemoPages/Charts/chartjs/examples/dynamic-chart/dynamic-chart.component';
 import {DoughnutChartComponent} from './DemoPages/Charts/chartjs/examples/doughnut-chart/doughnut-chart.component';
 import {PieChartComponent} from './DemoPages/Charts/chartjs/examples/pie-chart/pie-chart.component';
+import { UtilisateursNewComponent } from './ChymallPages/utilisateurs-new/utilisateurs-new.component';
+import { UtilisateursIdComponent } from './ChymallPages/Utilisateurs/utilisateurs-id/utilisateurs-id.component';
+import { UtilisateursAllComponent } from './ChymallPages/Utilisateurs/utilisateurs-all/utilisateurs-all.component';
+import { UtilisateursUpdateComponent } from './ChymallPages/Utilisateurs/utilisateurs-update/utilisateurs-update.component';
+import { ClientsNewComponent } from './ChymallPages/Clients/clients-new/clients-new.component';
+import { ClientsIdComponent } from './ChymallPages/Clients/clients-id/clients-id.component';
+import { ClientsUpdateComponent } from './ChymallPages/Clients/clients-update/clients-update.component';
+import { ClientsAllComponent } from './ChymallPages/Clients/clients-all/clients-all.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -193,6 +201,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DynamicChartComponent,
     BubbleChartComponent,
     ScatterChartComponent,
+    UtilisateursNewComponent,
+    UtilisateursIdComponent,
+    UtilisateursAllComponent,
+    UtilisateursUpdateComponent,
+    ClientsNewComponent,
+    ClientsIdComponent,
+    ClientsUpdateComponent,
+    ClientsAllComponent,
   ],
   imports: [
     BrowserModule,
