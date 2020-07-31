@@ -103,7 +103,7 @@ import {BubbleChartComponent} from './DemoPages/Charts/chartjs/examples/bubble-c
 import {DynamicChartComponent} from './DemoPages/Charts/chartjs/examples/dynamic-chart/dynamic-chart.component';
 import {DoughnutChartComponent} from './DemoPages/Charts/chartjs/examples/doughnut-chart/doughnut-chart.component';
 import {PieChartComponent} from './DemoPages/Charts/chartjs/examples/pie-chart/pie-chart.component';
-import { UtilisateursNewComponent } from './ChymallPages/utilisateurs-new/utilisateurs-new.component';
+import { UtilisateursNewComponent } from './ChymallPages/Utilisateurs/utilisateurs-new/utilisateurs-new.component';
 import { UtilisateursIdComponent } from './ChymallPages/Utilisateurs/utilisateurs-id/utilisateurs-id.component';
 import { UtilisateursAllComponent } from './ChymallPages/Utilisateurs/utilisateurs-all/utilisateurs-all.component';
 import { UtilisateursUpdateComponent } from './ChymallPages/Utilisateurs/utilisateurs-update/utilisateurs-update.component';
@@ -111,6 +111,24 @@ import { ClientsNewComponent } from './ChymallPages/Clients/clients-new/clients-
 import { ClientsIdComponent } from './ChymallPages/Clients/clients-id/clients-id.component';
 import { ClientsUpdateComponent } from './ChymallPages/Clients/clients-update/clients-update.component';
 import { ClientsAllComponent } from './ChymallPages/Clients/clients-all/clients-all.component';
+import { ProfilesNewComponent } from './ChymallPages/Profiles/profiles-new/profiles-new.component';
+import { ProfilesIdComponent } from './ChymallPages/Profiles/profiles-id/profiles-id.component';
+import { ProfilesAllComponent } from './ChymallPages/Profiles/profiles-all/profiles-all.component';
+import { ProfilesUpdateComponent } from './ChymallPages/Profiles/profiles-update/profiles-update.component';
+import { PaiementsNewComponent } from './ChymallPages/Paiements/paiements-new/paiements-new.component';
+import { PaiementsIdComponent } from './ChymallPages/Paiements/paiements-id/paiements-id.component';
+import { PaiementsAllComponent } from './ChymallPages/Paiements/paiements-all/paiements-all.component';
+import { RetraitsNewComponent } from './ChymallPages/Retraits/retraits-new/retraits-new.component';
+import { RetraitsAllComponent } from './ChymallPages/Retraits/retraits-all/retraits-all.component';
+import { RetraitsIdComponent } from './ChymallPages/Retraits/retraits-id/retraits-id.component';
+import { ProduitsNewComponent } from './ChymallPages/Produits/produits-new/produits-new.component';
+import { ProduitsAllComponent } from './ChymallPages/Produits/produits-all/produits-all.component';
+import { ProduitsIdComponent } from './ChymallPages/Produits/produits-id/produits-id.component';
+import { ProduitsUpdateComponent } from './ChymallPages/Produits/produits-update/produits-update.component';
+import { StockagesNewComponent } from './ChymallPages/Stockages/stockages-new/stockages-new.component';
+import { StockagesAllComponent } from './ChymallPages/Stockages/stockages-all/stockages-all.component';
+import { StockagesIdComponent } from './ChymallPages/Stockages/stockages-id/stockages-id.component';
+import { StockagesUpdateComponent } from './ChymallPages/Stockages/stockages-update/stockages-update.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -201,14 +219,32 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DynamicChartComponent,
     BubbleChartComponent,
     ScatterChartComponent,
-    UtilisateursNewComponent,
     UtilisateursIdComponent,
+    UtilisateursNewComponent,
     UtilisateursAllComponent,
     UtilisateursUpdateComponent,
     ClientsNewComponent,
     ClientsIdComponent,
     ClientsUpdateComponent,
     ClientsAllComponent,
+    ProfilesNewComponent,
+    ProfilesIdComponent,
+    ProfilesAllComponent,
+    ProfilesUpdateComponent,
+    PaiementsNewComponent,
+    PaiementsIdComponent,
+    PaiementsAllComponent,
+    RetraitsNewComponent,
+    RetraitsAllComponent,
+    RetraitsIdComponent,
+    ProduitsNewComponent,
+    ProduitsAllComponent,
+    ProduitsIdComponent,
+    ProduitsUpdateComponent,
+    StockagesNewComponent,
+    StockagesAllComponent,
+    StockagesIdComponent,
+    StockagesUpdateComponent,
   ],
   imports: [
     BrowserModule,

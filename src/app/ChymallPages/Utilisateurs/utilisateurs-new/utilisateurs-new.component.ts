@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-utilisateurs-new',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UtilisateursNewComponent implements OnInit {
 
-  constructor() { }
+  newUserForm: FormGroup;
+
+  constructor(private  formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.initForm();
   }
 
+  initForm() {
+    this.newUserForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
+      service: ['', [Validators.required]]
+    });
+  }
+
+  newUser() {
+
+  }
 }

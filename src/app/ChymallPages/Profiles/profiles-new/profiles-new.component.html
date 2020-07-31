@@ -1,0 +1,39 @@
+
+<div class="main-card mb-3 card">
+  <div class="card-body"><h5 class="card-title">CREER PROFILE</h5>
+    <form [formGroup]="newProfileForm" (ngSubmit)="newProfile()">
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label><input formControlName="username"
+                                                                                                          id="username"
+                                                                                                          placeholder="usename"
+                                                                                                          type="text"
+                                                                                                          class="form-control">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="produit">Produit de trading</label><input
+                  formControlName="produit" id="produit" placeholder="Sac à main" type="text"
+                  class="form-control"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="exampleSelect">Niveau d'adhésion</label>
+            <select
+                    formControlName="niveau" id="exampleSelect" class="form-control">
+              <option>VIP-1</option>
+              <option>VIP-2</option>
+              <option>VIP-3</option>
+              <option>VIP-4</option>
+              <option>VIP-5</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="mt-2 btn btn-primary" [disabled]="newProfileForm.invalid">Ajouter profile</button>
+    </form>
+
+  </div>
+</div>

@@ -1,3 +1,86 @@
-<p>
-  clients-new works!
-</p>
+<div class="main-card mb-3 card">
+  <div class="card-body"><h5 class="card-title">ENREGISTRER CLIENT</h5>
+    <form [formGroup]="newCientForm" (ngSubmit)="newClient()">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="telephone">N° Téléphone</label><input formControlName="telephone"
+                                                                                                    id="telephone"
+                                                                                                    placeholder="0974621121"
+                                                                                                    type="tel"
+                                                                                                    class="form-control">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="email">Email</label><input
+                  formControlName="email" id="email" placeholder="gkafwalubi@gmail.com" type="email"
+                  class="form-control"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="prenom">Prénom</label><input formControlName="prenom"
+                                                                                                      id="prenom"
+                                                                                                      placeholder="Gloire"
+                                                                                                      type="text"
+                                                                                                      class="form-control">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="nom">Password</label><input
+                  formControlName="nom" id="nom" placeholder="KAFWALUBI" type="text"
+                  class="form-control"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="exampleAddress">Adresse</label><input formControlName="address"
+                                                                                                      id="exampleAddress"
+                                                                                                      placeholder="6, Av. Des Ecoles"
+                                                                                                      type="text"
+                                                                                                      class="form-control">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="exampleAddress2">Adresse 2</label><input
+                  formControlName="address2" id="exampleAddress2" placeholder="Kitumaini, Kamalondo" type="text"
+                  class="form-control"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="exampleCity">Ville</label><input formControlName="city"
+                                                                                                 placeholder="Lubumbashi"
+                                                                                                id="exampleCity"
+                                                                                                type="text"
+                                                                                                class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative form-group"><label for="exampleState">Pays</label><input formControlName="state"
+                                                                                                 placeholder="RD. Congo"
+                                                                                                 id="exampleState"
+                                                                                                 type="text"
+                                                                                                 class="form-control">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="position-relative form-group"><label for="exampleZip">Code Postal</label><input formControlName="zip"
+                                                                                                      placeholder="7110"
+                                                                                              id="exampleZip"
+                                                                                              type="text"
+                                                                                              class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Photo De Profile</label>
+        <input formControlName="photo"
+               id="photo"
+               type="file"
+               class="form-control">
+      </div>
+      <button class="mt-2 btn btn-primary" [disabled]="newCientForm.invalid">Ajouter Client</button>
+    </form>
+  </div>
+</div>

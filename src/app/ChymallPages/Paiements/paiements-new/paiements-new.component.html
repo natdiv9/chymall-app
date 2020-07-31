@@ -1,0 +1,23 @@
+<div class="main-card mb-3 card">
+  <div class="card-body"><h5 class="card-title">EFFECTUER PAIEMENT</h5>
+    <form [formGroup]="newPaiementForm" (ngSubmit)="newPaiement()">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="exampleSelect">Motif de paiement</label>
+            <select
+                    formControlName="motif" id="exampleSelect" class="form-control">
+              <option>Activation Compte</option>
+              <option>Activation Trading</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="montant">Montant</label><input
+                  formControlName="montant" id="montant" placeholder="10000" type="number"
+                  class="form-control"></div>
+        </div>
+      </div>
+      <button class="mt-2 btn btn-primary" [disabled]="newPaiementForm.invalid">Effectuer Paiement</button>
+    </form>
+  </div>
+</div>

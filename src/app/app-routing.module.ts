@@ -51,6 +51,31 @@ import {LayoutComponent} from './DemoPages/Forms/Elements/layout/layout.componen
 // Charts
 
 import {ChartjsComponent} from './DemoPages/Charts/chartjs/chartjs.component';
+import {UtilisateursAllComponent} from './ChymallPages/Utilisateurs/utilisateurs-all/utilisateurs-all.component';
+import {UtilisateursIdComponent} from './ChymallPages/Utilisateurs/utilisateurs-id/utilisateurs-id.component';
+import {UtilisateursNewComponent} from './ChymallPages/Utilisateurs/utilisateurs-new/utilisateurs-new.component';
+import {UtilisateursUpdateComponent} from './ChymallPages/Utilisateurs/utilisateurs-update/utilisateurs-update.component';
+import {ClientsAllComponent} from './ChymallPages/Clients/clients-all/clients-all.component';
+import {ClientsIdComponent} from './ChymallPages/Clients/clients-id/clients-id.component';
+import {ClientsNewComponent} from './ChymallPages/Clients/clients-new/clients-new.component';
+import {ClientsUpdateComponent} from './ChymallPages/Clients/clients-update/clients-update.component';
+import {PaiementsAllComponent} from './ChymallPages/Paiements/paiements-all/paiements-all.component';
+import {PaiementsIdComponent} from './ChymallPages/Paiements/paiements-id/paiements-id.component';
+import {PaiementsNewComponent} from './ChymallPages/Paiements/paiements-new/paiements-new.component';
+import {ProduitsAllComponent} from './ChymallPages/Produits/produits-all/produits-all.component';
+import {ProduitsIdComponent} from './ChymallPages/Produits/produits-id/produits-id.component';
+import {ProduitsNewComponent} from './ChymallPages/Produits/produits-new/produits-new.component';
+import {ProduitsUpdateComponent} from './ChymallPages/Produits/produits-update/produits-update.component';
+import {ProfilesAllComponent} from './ChymallPages/Profiles/profiles-all/profiles-all.component';
+import {ProfilesIdComponent} from './ChymallPages/Profiles/profiles-id/profiles-id.component';
+import {ProfilesNewComponent} from './ChymallPages/Profiles/profiles-new/profiles-new.component';
+import {ProfilesUpdateComponent} from './ChymallPages/Profiles/profiles-update/profiles-update.component';
+import {RetraitsAllComponent} from './ChymallPages/Retraits/retraits-all/retraits-all.component';
+import {RetraitsIdComponent} from './ChymallPages/Retraits/retraits-id/retraits-id.component';
+import {RetraitsNewComponent} from './ChymallPages/Retraits/retraits-new/retraits-new.component';
+import {StockagesAllComponent} from './ChymallPages/Stockages/stockages-all/stockages-all.component';
+import {StockagesIdComponent} from './ChymallPages/Stockages/stockages-id/stockages-id.component';
+import {StockagesNewComponent} from './ChymallPages/Stockages/stockages-new/stockages-new.component';
 
 const routes: Routes = [
   {
@@ -102,17 +127,54 @@ const routes: Routes = [
 
         // UTILISATEURS
 
-      {path: 'utilisateurs/all', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'utilisateurs/:id', component: DropdownsComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'utilisateurs/new', component: IconsComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'utilisateurs/update', component: CardsComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'utilisateurs/all', component: UtilisateursAllComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'utilisateurs/:id/utilisateur', component: UtilisateursIdComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'utilisateurs/new', component: UtilisateursNewComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'utilisateurs/update', component: UtilisateursUpdateComponent, data: {extraParameter: 'elementsMenu'}},
 
         // CLIENTS
 
-      {path: 'clients/all', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'clients/:id', component: DropdownsComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'clients/new', component: IconsComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'clients/update', component: CardsComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/all', component: ClientsAllComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/:id/client', component: ClientsIdComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/new', component: ClientsNewComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/update', component: ClientsUpdateComponent, data: {extraParameter: 'elementsMenu'}},
+
+
+      // PAIEMENTS
+
+      {path: 'paiements/all', component: PaiementsAllComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'paiements/:id/paiement', component: PaiementsIdComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'paiements/new', component: PaiementsNewComponent, data: {extraParameter: 'elementsMenu'}},
+
+
+      // PRODUITS
+
+      {path: 'produits/all', component: ProduitsAllComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'produits/:id/produit', component: ProduitsIdComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'produits/new', component: ProduitsNewComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'produits/update', component: ProduitsUpdateComponent, data: {extraParameter: 'elementsMenu'}},
+
+      // PROFILES
+
+      {path: 'profiles/all', component: ProfilesAllComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'profiles/:id/profile', component: ProfilesIdComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'profiles/new', component: ProfilesNewComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'profiles/update', component: ProfilesUpdateComponent, data: {extraParameter: 'elementsMenu'}},
+
+
+      // RETRAITS
+
+      {path: 'retraits/all', component: RetraitsAllComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'retraits/:id/retrait', component: RetraitsIdComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'retraits/new', component: RetraitsNewComponent, data: {extraParameter: 'elementsMenu'}},
+
+
+      // STOCKAGES
+
+      {path: 'stockages/all', component: StockagesAllComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'stockages/:id/stockage', component: StockagesIdComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'stockages/new', component: StockagesNewComponent, data: {extraParameter: 'elementsMenu'}}
+
     ]
 
   },

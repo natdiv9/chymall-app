@@ -1,0 +1,19 @@
+<div class="main-card mb-3 card">
+  <div class="card-body"><h5 class="card-title">RETIRER LES FONDS</h5>
+    <form [formGroup]="newRetraitForm" (ngSubmit)="newRetrait()">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="montant">Désignation</label><input
+                  formControlName="montant" id="montant" placeholder="5000" type="number"
+                  class="form-control"></div>
+        </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group">
+            <label></label><br/>
+            <button class="mt-2 btn btn-primary" [disabled]="newRetraitForm.invalid">Retirer</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

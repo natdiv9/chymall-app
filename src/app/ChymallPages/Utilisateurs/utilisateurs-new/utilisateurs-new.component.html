@@ -1,3 +1,34 @@
-<p>
-  utilisateurs-new works!
-</p>
+<div class="main-card mb-3 card">
+  <div class="card-body"><h5 class="card-title">ENREGISTRER UTILISATEUR</h5>
+    <form [formGroup]="newUserForm" (ngSubmit)="newUser()">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label><input formControlName="username"
+                                                                                                      id="username"
+                                                                                                      placeholder="goomy"
+                                                                                                      type="text"
+                                                                                                      class="form-control">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="password">Password</label><input
+                  formControlName="password" id="password" placeholder="123456" type="password"
+                  class="form-control"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="exampleSelect">Services</label>
+            <select formControlName="service" id="exampleSelect" class="form-control">
+              <option>Adhésion</option>
+              <option>Comptabilité</option>
+              <option>Retrait</option>
+              <option>Technique</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="mt-2 btn btn-primary" [disabled]="newUserForm.invalid">Enregistrer utilisateur</button>
+    </form>
+  </div>
+</div>
