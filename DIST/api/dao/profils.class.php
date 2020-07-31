@@ -1,6 +1,7 @@
 <?php
 
-class Clients
+
+class Profils
 {
     private  $connexion;
 
@@ -22,8 +23,8 @@ class Clients
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_clients WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_clients");
+                ? $this->connexion->prepare("SELECT * FROM chy_profils WHERE id=$id LIMIT 1")
+                : $stmt = $this->connexion->prepare("SELECT * FROM chy_profils");
 
             $res = $stmt->execute();
 
@@ -46,15 +47,15 @@ class Clients
         }
     }
 
-    public function post($client)
+    public function post($profil)
     {
         try
         {
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_clients(telephone, email, prenom, nom, adresse, ville, pays, zip, photo)"
-                ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                "INSERT INTO chy_profils(client_id, username, niveau_adhesion, capital, produit_trading, activation_compte, activation_trading)"
+                ."VALUES(?, ?, ?, ?, ?, ?, ?)");
             $res = $stmt->execute(
-                $client
+                $profil
             );
 
             if($res)
@@ -70,14 +71,14 @@ class Clients
         }
     }
 
-    public function put($client)
+    public function put($profil)
     {
         try
         {
             $stmt = $this->connexion->prepare(
-                "UPDATE chy_clients SET telephone=?, email=?, prenom=?, nom=?, adresse=?, ville=?, pays=?, zip=?, photo=?, etat=? WHERE id=?");
+                "UPDATE chy_profils SET client_id=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, activation_compte=?, activation_trading=?, solde=?, etat=? WHERE id=?");
             $res = $stmt->execute(
-                $client
+                $profil
             );
 
             if($res)

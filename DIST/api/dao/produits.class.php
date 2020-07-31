@@ -1,6 +1,7 @@
 <?php
 
-class Clients
+
+class Produits
 {
     private  $connexion;
 
@@ -22,8 +23,8 @@ class Clients
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_clients WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_clients");
+                ? $this->connexion->prepare("SELECT * FROM chy_produits WHERE id=$id LIMIT 1")
+                : $stmt = $this->connexion->prepare("SELECT * FROM chy_produits");
 
             $res = $stmt->execute();
 
@@ -46,15 +47,15 @@ class Clients
         }
     }
 
-    public function post($client)
+    public function post($produit)
     {
         try
         {
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_clients(telephone, email, prenom, nom, adresse, ville, pays, zip, photo)"
-                ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                "INSERT INTO chy_produits(designation, stock_initial)"
+                ."VALUES(?, ?)");
             $res = $stmt->execute(
-                $client
+                $produit
             );
 
             if($res)
@@ -70,14 +71,14 @@ class Clients
         }
     }
 
-    public function put($client)
+    public function put($produit)
     {
         try
         {
             $stmt = $this->connexion->prepare(
-                "UPDATE chy_clients SET telephone=?, email=?, prenom=?, nom=?, adresse=?, ville=?, pays=?, zip=?, photo=?, etat=? WHERE id=?");
+                "UPDATE chy_produits SET designation=?, stock_initial=?, stock_final=? WHERE id=?");
             $res = $stmt->execute(
-                $client
+                $produit
             );
 
             if($res)

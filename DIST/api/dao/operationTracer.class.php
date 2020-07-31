@@ -1,6 +1,7 @@
 <?php
 
-class Clients
+
+class OperationTracer
 {
     private  $connexion;
 
@@ -22,8 +23,8 @@ class Clients
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_clients WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_clients");
+                ? $this->connexion->prepare("SELECT * FROM chy_operation_tracer WHERE id=$id LIMIT 1")
+                : $stmt = $this->connexion->prepare("SELECT * FROM chy_operation_tracer");
 
             $res = $stmt->execute();
 
@@ -46,38 +47,15 @@ class Clients
         }
     }
 
-    public function post($client)
+    public function post($operation)
     {
         try
         {
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_clients(telephone, email, prenom, nom, adresse, ville, pays, zip, photo)"
-                ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                "INSERT INTO chy_operation_tracer(utilisateur_id, operation)"
+                ."VALUES(?, ?)");
             $res = $stmt->execute(
-                $client
-            );
-
-            if($res)
-            {
-                return array(true, []);
-            } else
-            {
-                return array(false, "message" => $stmt->errorInfo()[2]);
-            }
-        } catch (Error | Exception $e)
-        {
-            return array(false, "message" => $e->getMessage());
-        }
-    }
-
-    public function put($client)
-    {
-        try
-        {
-            $stmt = $this->connexion->prepare(
-                "UPDATE chy_clients SET telephone=?, email=?, prenom=?, nom=?, adresse=?, ville=?, pays=?, zip=?, photo=?, etat=? WHERE id=?");
-            $res = $stmt->execute(
-                $client
+                $operation
             );
 
             if($res)

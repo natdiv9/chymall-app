@@ -1,6 +1,7 @@
 <?php
 
-class Clients
+
+class Retraits
 {
     private  $connexion;
 
@@ -22,8 +23,8 @@ class Clients
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_clients WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_clients");
+                ? $this->connexion->prepare("SELECT * FROM chy_retraits WHERE id=$id LIMIT 1")
+                : $stmt = $this->connexion->prepare("SELECT * FROM chy_retraits");
 
             $res = $stmt->execute();
 
@@ -46,15 +47,15 @@ class Clients
         }
     }
 
-    public function post($client)
+    public function post($retrait)
     {
         try
         {
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_clients(telephone, email, prenom, nom, adresse, ville, pays, zip, photo)"
-                ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                "INSERT INTO chy_retraits(profil_id, montant)"
+                ."VALUES(?, ?)");
             $res = $stmt->execute(
-                $client
+                $retrait
             );
 
             if($res)
@@ -70,14 +71,14 @@ class Clients
         }
     }
 
-    public function put($client)
+    public function put($retrait)
     {
         try
         {
             $stmt = $this->connexion->prepare(
-                "UPDATE chy_clients SET telephone=?, email=?, prenom=?, nom=?, adresse=?, ville=?, pays=?, zip=?, photo=?, etat=? WHERE id=?");
+                "UPDATE chy_retraits SET profil_id=?, montant=? WHERE id=?");
             $res = $stmt->execute(
-                $client
+                $retrait
             );
 
             if($res)

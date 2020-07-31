@@ -1,31 +1,31 @@
 <?php
-include 'dao/clients.class.php';
+include 'dao/stockages.class.php';
 $request_method = $_SERVER["REQUEST_METHOD"];
 
 
 switch ($request_method)
 {
     case 'GET':
-        $clientsDAO = new Clients();
+        $stockageDAO = new Stockages();
         if(!empty($_GET['id']))
         {
-            // Un client
+            // Un stockage
             $id = intval($_GET['id']);
-            $res = $clientsDAO->get($id);
+            $res = $stockageDAO->get($id);
             response($res);
         } else {
-            // Tous les clients
-            $res = $clientsDAO->get();
+            // Tous les stockages
+            $res = $stockageDAO->get();
             response($res);
 
         }
         break;
     case 'POST':
-        if(isset($_POST['telephone'], $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], $_POST['photo']))
+        if(isset($_POST['produit_id'], $_POST['quantite'], $_POST['entree_sortie']))
         {
-            $clientsDAO = new Clients();
-            $client = array($_POST['telephone'], (isset($_POST['email'])? $_POST['email']: ''), $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], (isset($_POST['zip'])? $_POST['zip']: ''), $_POST['photo']);
-            $res = $clientsDAO->post($client);
+            $stockageDAO = new Stockages();
+            $stockage = array($_POST['produit_id'], $_POST['quantite'], $_POST['entree_sortie']);
+            $res = $stockageDAO->post($stockage);
             response($res);
         } else
         {
@@ -40,11 +40,11 @@ switch ($request_method)
     case 'PUT':
         $_PUT = array();
         parse_str(file_get_contents('php://input'), $_PUT);
-        if(isset($_PUT['id'], $_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['photo'], $_PUT['zip'], $_PUT['etat']))
+        if(isset($_PUT['produit_id'], $_PUT['quantite'], $_PUT['entree_sortie'], $_PUT['id']))
         {
-            $clientsDAO = new Clients();
-            $clients = array($_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['zip'], $_PUT['photo'], $_PUT['etat'], intval($_PUT['id']));
-            $res = $clientsDAO->put($clients);
+            $stockageDAO = new Stockages();
+            $stockage = array($_PUT['produit_id'], $_PUT['quantite'], $_PUT['entree_sortie'], $_PUT['id']);
+            $res = $stockageDAO->put($stockage);
             response($res);
         } else
         {

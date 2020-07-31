@@ -1,31 +1,31 @@
 <?php
-include 'dao/clients.class.php';
+include 'dao/produits.class.php';
 $request_method = $_SERVER["REQUEST_METHOD"];
 
 
 switch ($request_method)
 {
     case 'GET':
-        $clientsDAO = new Clients();
+        $produitDAO = new Produits();
         if(!empty($_GET['id']))
         {
-            // Un client
+            // Un produit
             $id = intval($_GET['id']);
-            $res = $clientsDAO->get($id);
+            $res = $produitDAO->get($id);
             response($res);
         } else {
-            // Tous les clients
-            $res = $clientsDAO->get();
+            // Tous les produits
+            $res = $produitDAO->get();
             response($res);
 
         }
         break;
     case 'POST':
-        if(isset($_POST['telephone'], $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], $_POST['photo']))
+        if(isset($_POST['designation'], $_POST['stock_initial'], $_POST['stock_final']))
         {
-            $clientsDAO = new Clients();
-            $client = array($_POST['telephone'], (isset($_POST['email'])? $_POST['email']: ''), $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], (isset($_POST['zip'])? $_POST['zip']: ''), $_POST['photo']);
-            $res = $clientsDAO->post($client);
+            $produitDAO = new Produits();
+            $produit = array($_POST['designation'], $_POST['stock_initial']);
+            $res = $produitDAO->post($produit);
             response($res);
         } else
         {
@@ -40,11 +40,11 @@ switch ($request_method)
     case 'PUT':
         $_PUT = array();
         parse_str(file_get_contents('php://input'), $_PUT);
-        if(isset($_PUT['id'], $_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['photo'], $_PUT['zip'], $_PUT['etat']))
+        if(isset($_PUT['designation'], $_PUT['stock_initial'], $_PUT['stock_final'], $_PUT['id']))
         {
-            $clientsDAO = new Clients();
-            $clients = array($_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['zip'], $_PUT['photo'], $_PUT['etat'], intval($_PUT['id']));
-            $res = $clientsDAO->put($clients);
+            $produitDAO = new Produits();
+            $produit = array($_PUT['designation'], $_PUT['stock_final'], $_PUT['stock_final'], $_PUT['id']);
+            $res = $produitDAO->put($produit);
             response($res);
         } else
         {

@@ -22,8 +22,8 @@ class Utilisateurs
        try
        {
            $stmt = ($id)
-               ? $this->connexion->prepare("SELECT * FROM utilisateurs WHERE id=$id LIMIT 1")
-               : $stmt = $this->connexion->prepare("SELECT * FROM utilisateurs");
+               ? $this->connexion->prepare("SELECT * FROM chy_utilisateurs WHERE id=$id LIMIT 1")
+               : $stmt = $this->connexion->prepare("SELECT * FROM chy_utilisateurs");
 
            $res = $stmt->execute();
 
@@ -42,7 +42,7 @@ class Utilisateurs
     {
        try
        {
-           $stmt = $this->connexion->prepare("INSERT INTO utilisateurs(username, pwd, service, droits) VALUES(?, ?, ?, ?)");
+           $stmt = $this->connexion->prepare("INSERT INTO chy_utilisateurs(username, pwd, service, droits) VALUES(?, ?, ?, ?)");
            $res = $stmt->execute(
                $utilisateur
            );
@@ -64,7 +64,7 @@ class Utilisateurs
     {
         try
         {
-            $stmt = $this->connexion->prepare("UPDATE utilisateurs SET username=?, pwd=?, service=?, droits=?, etat=? WHERE id=?");
+            $stmt = $this->connexion->prepare("UPDATE chy_utilisateurs SET username=?, pwd=?, service=?, droits=?, etat=? WHERE id=?");
             $res = $stmt->execute(
                 $utilisateur
             );

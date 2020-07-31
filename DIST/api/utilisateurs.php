@@ -7,7 +7,6 @@
     {
         case 'GET':
             $utilisateursDAO = new Utilisateurs();
-            $utilisateurs = [];
             if(!empty($_GET['id']))
             {
                 // Un utilsateur
