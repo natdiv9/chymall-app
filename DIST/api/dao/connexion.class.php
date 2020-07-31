@@ -15,9 +15,6 @@ class Connexion
             return $bdd;
 
         } catch (PDOException $e) {
-            // die('Erreur: ' . $e->getMessage());
-            // return array(false, "message" => $e->getMessage());
-
             header('Content-Type: application/json');
             echo json_encode(
                 array(

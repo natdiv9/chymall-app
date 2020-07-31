@@ -26,12 +26,11 @@
             {
                 $utilisateursDAO = new Utilisateurs();
                 $utilisateur = array($_POST['username'], $_POST['pwd'], $_POST['service'], $_POST['droits']);
-                json_encode($utilisateur);
                 $res = $utilisateursDAO->post($utilisateur);
                 response($res);
             } else
             {
-                header('Content-Type: application/json');
+                header('Content-Type: application/json; charset=utf-8');
                 echo json_encode( array(
                     "status" => false,
                     "message" => "Data is not complete"
@@ -46,12 +45,11 @@
             {
                 $utilisateursDAO = new Utilisateurs();
                 $utilisateur = array($_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['droits'], $_PUT['etat'], $_PUT['id']);
-                json_encode($utilisateur);
                 $res = $utilisateursDAO->put($utilisateur);
                 response($res);
             } else
             {
-                header('Content-Type: application/json');
+                header('Content-Type: application/json; charset=utf-8');
                 echo json_encode( array(
                         "status" => false,
                         "message" => "Update error"
@@ -71,7 +69,7 @@
 
     function response($res) {
         if($res[0]) {
-            header('Content-Type: application/json');
+            header('Content-Type: application/json; charset=utf-8');
             echo json_encode(
                 array(
                     "status" => true,
@@ -80,7 +78,7 @@
                 JSON_PRETTY_PRINT
             );
         } else {
-            header('Content-Type: application/json');
+            header('Content-Type: application/json; charset=utf-8');
             echo json_encode(
                 array(
                     "status" => false,
