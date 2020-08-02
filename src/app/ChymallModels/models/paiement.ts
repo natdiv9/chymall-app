@@ -3,5 +3,5 @@ export class Paiement {
     public idProfile: number;
     public montant: number;
     public motif: string;
-    public dateOperation: Date;
+    public dateOperation?: Date;
 }

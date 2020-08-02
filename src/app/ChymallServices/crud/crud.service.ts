@@ -67,15 +67,43 @@ export class CrudService {
       return this.httpClient.get('localhost/chymall/DIST/api/controllers/');
   }
 
-  getRetraits() {
+  getRetraits(id?: number) {
       return this.httpClient.get('localhost/chymall/DIST/api/controllers/');
   }
 
-  getStockages() {
+  getStockages(id?: number) {
       return this.httpClient.get('localhost/chymall/DIST/api/controllers/');
   }
 
-  getUtilisateurs() {
+  getUtilisateurs(id?: number) {
       return this.httpClient.get('localhost/chymall/DIST/api/controllers/');
+  }
+
+  putClient(client: Client) {
+     return this.httpClient.put('localhost/chymall/DIST/api/controllers/', client);
+  }
+
+  putProfile(profile: Profile) {
+      return this.httpClient.put('localhost/chymall/DIST/api/controllers/', profile);
+  }
+
+  putPaiement(paiement: Paiement) {
+      return this.httpClient.put('localhost/chymall/DIST/api/controllers/', paiement);
+  }
+
+  putProduit(produit: Produit) {
+      return this.httpClient.put('localhost/chymall/DIST/api/controllers/', produit);
+  }
+
+  putRetrait(retrait: Retrait) {
+      return this.httpClient.put('localhost/chymall/DIST/api/controllers/', retrait);
+  }
+
+  putStockage(stockage: Stockage) {
+      return this.httpClient.put('localhost/chymall/DIST/api/controllers/', stockage);
+  }
+
+  putUtilisateur(utilisateur: Utilisateur) {
+      return this.httpClient.put('localhost/chymall/DIST/api/controllers/', utilisateur);
   }
 }

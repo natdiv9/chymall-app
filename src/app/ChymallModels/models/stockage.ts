@@ -3,5 +3,5 @@ export class Stockage {
     public idProduit: number;
     public quantite: number;
     public operation: string;
-    public dateOperation: Date;
+    public dateOperation?: Date;
 }
