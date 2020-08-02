@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-paiements-new',
@@ -10,7 +11,8 @@ export class PaiementsNewComponent implements OnInit {
 
   newPaiementForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.initForm();
@@ -23,6 +25,12 @@ export class PaiementsNewComponent implements OnInit {
     });
   }
   newPaiement() {
+    const paiement = {
+       idProfile: this.route.snapshot.params.id,
+       montant: this.newPaiementForm.get('montant').value,
+       motif: this.newPaiementForm.get('motif').value,
+       dateOperation: null
+    };
 
   }
 

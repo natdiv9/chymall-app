@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-retraits-new',
@@ -9,7 +10,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class RetraitsNewComponent implements OnInit {
   newRetraitForm: FormGroup;
 
-  constructor(private  formBuilder: FormBuilder) { }
+  constructor(private  formBuilder: FormBuilder,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.initForm();
@@ -22,6 +24,10 @@ export class RetraitsNewComponent implements OnInit {
   }
 
   newRetrait() {
-
+    const retrait = {
+      idProfile: this.route.snapshot.params.id,
+      montant: this.newRetraitForm.get('montant').value,
+      dateRetrait: null
+    };
   }
 }

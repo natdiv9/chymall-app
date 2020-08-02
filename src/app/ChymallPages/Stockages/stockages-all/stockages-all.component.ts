@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CrudService} from '../../../ChymallServices/crud/crud.service';
+import {Stockage} from '../../../ChymallModels/models/stockage';
 
 @Component({
   selector: 'app-stockages-all',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockagesAllComponent implements OnInit {
 
-  constructor() { }
+  stockages: Stockage[] = [];
+
+  constructor(private crudService: CrudService) { }
 
   ngOnInit() {
+    this.crudService.getStockages().subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.stockages = reponse.data;
+          } else {
+            this.stockages = null;
+          }
+        }
+    );
   }
 
 }

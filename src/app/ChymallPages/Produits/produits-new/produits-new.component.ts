@@ -23,6 +23,9 @@ export class ProduitsNewComponent implements OnInit {
     });
   }
   newProduit() {
-
+    const produit = {
+      designation: this.newProduitForm.get('designation').value,
+      quantite: this.newProduitForm.get('quantite').value
+    };
   }
 }

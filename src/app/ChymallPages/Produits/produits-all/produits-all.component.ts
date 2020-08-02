@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CrudService} from '../../../ChymallServices/crud/crud.service';
+import {Produit} from '../../../ChymallModels/models/produit';
 
 @Component({
   selector: 'app-produits-all',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProduitsAllComponent implements OnInit {
 
-  constructor() { }
+  produits: Produit[] = [];
+
+  constructor(private crudService: CrudService) { }
 
   ngOnInit() {
+    this.crudService.getProduits().subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.produits = reponse.data;
+          } else {
+            this.produits = null;
+          }
+        }
+    );
   }
 
 }

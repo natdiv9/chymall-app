@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CrudService} from '../../../ChymallServices/crud/crud.service';
+import {Retrait} from '../../../ChymallModels/models/retrait';
 
 @Component({
   selector: 'app-retraits-all',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RetraitsAllComponent implements OnInit {
 
-  constructor() { }
+  retraits: Retrait[] = [];
+
+  constructor(private crudService: CrudService) { }
 
   ngOnInit() {
+    this.crudService.getRetraits().subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.retraits = reponse.data;
+          } else {
+            this.retraits = null;
+          }
+        }
+    );
   }
 
 }

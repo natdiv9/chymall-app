@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-clients-new',
@@ -14,7 +16,15 @@ export class ClientsNewComponent implements OnInit {
   private loaded: boolean;
   private loading: boolean;
 
+  heading = 'Modals';
+  subheading = 'Wide selection of modal dialogs styles and animations available.';
+  icon = 'pe-7s-phone icon-gradient bg-premium-dark';
+
+  closeResult: string;
+
   constructor(private formBuilder: FormBuilder,
+              private modalService: NgbModal,
+              private router: Router,
               private crudService: CrudService) { }
 
   ngOnInit() {
@@ -52,6 +62,28 @@ export class ClientsNewComponent implements OnInit {
 
 
   newClient() {
+    const client = {
+      telephone: this.newCientForm.get('telephone').value,
+      email: this.newCientForm.get('email').value,
+      prenom: this.newCientForm.get('prenom').value,
+      nom: this.newCientForm.get('nom').value,
+      address: this.newCientForm.get('address').value,
+      address2: this.newCientForm.get('address2').value,
+      ville: this.newCientForm.get('ville').value,
+      pays: this.newCientForm.get('pays').value,
+      zip: this.newCientForm.get('zip').value,
+      photo: this.fileUrl,
+      etat: true
+    };
 
+    this.crudService.addClient(client).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.modalService.open(this.closeResult);
+          } else {
+            this.router.navigate(['profiles/new']);
+          }
+        }
+    );
   }
 }

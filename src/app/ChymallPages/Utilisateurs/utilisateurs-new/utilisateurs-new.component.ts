@@ -25,6 +25,12 @@ export class UtilisateursNewComponent implements OnInit {
   }
 
   newUser() {
-
+    const utilisateur = {
+      username: this.newUserForm.get('username').value,
+      pwd: this.newUserForm.get('password').value,
+      service: this.newUserForm.get('service').value,
+      droits: null,
+      etat: true
+    };
   }
 }
