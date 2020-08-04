@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CrudService} from '../../../ChymallServices/crud/crud.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-retraits-new',
@@ -9,8 +11,12 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class RetraitsNewComponent implements OnInit {
   newRetraitForm: FormGroup;
+  closeResult: string;
 
   constructor(private  formBuilder: FormBuilder,
+              private crudService: CrudService,
+              private modalService: NgbModal,
+              private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -29,5 +35,16 @@ export class RetraitsNewComponent implements OnInit {
       montant: this.newRetraitForm.get('montant').value,
       dateRetrait: null
     };
+
+    this.crudService.addRetrait(retrait).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.modalService.open(this.closeResult);
+            this.newRetraitForm.reset();
+          } else {
+            this.router.navigate(['profiles/new']);
+          }
+        }
+    );
   }
 }

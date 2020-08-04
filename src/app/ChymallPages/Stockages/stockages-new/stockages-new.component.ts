@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CrudService} from '../../../ChymallServices/crud/crud.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-stockages-new',
@@ -10,8 +12,12 @@ import {ActivatedRoute} from '@angular/router';
 export class StockagesNewComponent implements OnInit {
 
   newStockageForm: FormGroup;
+  closeResult: string;
 
   constructor(private formBuilder: FormBuilder,
+              private crudService: CrudService,
+              private router: Router,
+              private modalService: NgbModal,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -32,5 +38,16 @@ export class StockagesNewComponent implements OnInit {
       operation: this.newStockageForm.get('operation').value,
       dateOperation: null
     };
+
+    this.crudService.addStockage(stockage).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.modalService.open(this.closeResult);
+          } else {
+            this.router.navigate(['stockages/all']);
+          }
+        }
+    );
+
   }
 }

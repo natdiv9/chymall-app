@@ -52,6 +52,7 @@ export class ProfilesNewComponent implements OnInit {
         (reponse: any) => {
           if (reponse.status === true) {
             this.modalService.open(this.closeResult);
+            this.newProfileForm.reset();
           } else {
             this.router.navigate(['profiles/new']);
           }

@@ -1,3 +1,20 @@
-<p>
-  produits-update works!
-</p>
+<div class="main-card mb-3 card">
+  <div class="card-body"><h5 class="card-title">METTRE A JOUR PRODUIT</h5>
+    <form [formGroup]="updateProduitForm" (ngSubmit)="updateProduit()">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="designation">Désignation</label><input
+                  formControlName="designation" id="designation" placeholder="Montre" type="text"
+                  class="form-control"></div>
+        </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="quantite">Quantité</label><input
+                  formControlName="quantite" id="quantite" placeholder="99" type="number"
+                  class="form-control" disabled></div>
+        </div>
+      </div>
+      <button class="mt-2 btn btn-primary" [disabled]="updateProduitForm.invalid">Ajouter Produit</button>
+    </form>
+  </div>
+</div>
+

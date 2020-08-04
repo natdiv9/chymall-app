@@ -75,12 +75,14 @@
       </div>
       <div class="form-row">
         <label>Photo De Profile</label>
+        <span class="text-success" *ngIf="loaded">Photo chargée !</span>
         <input formControlName="photo"
                id="photo"
                type="file"
+               (change)="detectFiles($event)"
                class="form-control">
       </div>
-      <button class="mt-2 btn btn-primary" [disabled]="newCientForm.invalid">Ajouter Client</button>
+      <button class="mt-2 btn btn-primary" [disabled]="newCientForm.invalid || loading">Ajouter Client</button>
     </form>
   </div>
 </div>

@@ -80,8 +80,9 @@ export class ClientsNewComponent implements OnInit {
         (reponse: any) => {
           if (reponse.status === true) {
             this.modalService.open(this.closeResult);
+            this.newCientForm.reset();
           } else {
-            this.router.navigate(['profiles/new']);
+            this.router.navigate(['clients/new']);
           }
         }
     );

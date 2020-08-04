@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CrudService} from '../../../ChymallServices/crud/crud.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-paiements-new',
@@ -10,8 +12,12 @@ import {ActivatedRoute} from '@angular/router';
 export class PaiementsNewComponent implements OnInit {
 
   newPaiementForm: FormGroup;
+  closeResult: string;
 
   constructor(private formBuilder: FormBuilder,
+              private router: Router,
+              private modalService: NgbModal,
+              private crudService: CrudService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -31,6 +37,17 @@ export class PaiementsNewComponent implements OnInit {
        motif: this.newPaiementForm.get('motif').value,
        dateOperation: null
     };
+
+    this.crudService.addPaiement(paiement).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.modalService.open(this.closeResult);
+            this.newPaiementForm.reset();
+          } else {
+            this.router.navigate(['paiements/all']);
+          }
+        }
+    );
 
   }
 
