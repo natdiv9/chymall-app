@@ -103,10 +103,7 @@ import {BubbleChartComponent} from './DemoPages/Charts/chartjs/examples/bubble-c
 import {DynamicChartComponent} from './DemoPages/Charts/chartjs/examples/dynamic-chart/dynamic-chart.component';
 import {DoughnutChartComponent} from './DemoPages/Charts/chartjs/examples/doughnut-chart/doughnut-chart.component';
 import {PieChartComponent} from './DemoPages/Charts/chartjs/examples/pie-chart/pie-chart.component';
-<<<<<<< HEAD
 import { UtilisateursNewComponent } from './ChymallPages/Utilisateurs/utilisateurs-new/utilisateurs-new.component';
-=======
->>>>>>> a47583ce7ddea55af09a28eeb71657ee2861c469
 import { UtilisateursIdComponent } from './ChymallPages/Utilisateurs/utilisateurs-id/utilisateurs-id.component';
 import { UtilisateursAllComponent } from './ChymallPages/Utilisateurs/utilisateurs-all/utilisateurs-all.component';
 import { UtilisateursUpdateComponent } from './ChymallPages/Utilisateurs/utilisateurs-update/utilisateurs-update.component';
