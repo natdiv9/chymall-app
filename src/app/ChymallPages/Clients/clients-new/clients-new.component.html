@@ -1,6 +1,6 @@
 <div class="main-card mb-3 card">
   <div class="card-body"><h5 class="card-title">ENREGISTRER CLIENT</h5>
-    <form [formGroup]="newCientForm" (ngSubmit)="newClient()">
+    <form [formGroup]="newClientForm" (ngSubmit)="newClient()">
       <div class="form-row">
         <div class="col-md-6">
           <div class="position-relative form-group"><label for="telephone">N° Téléphone</label><input formControlName="telephone"
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="position-relative form-group"><label for="nom">Password</label><input
+          <div class="position-relative form-group"><label for="nom">Nom</label><input
                   formControlName="nom" id="nom" placeholder="KAFWALUBI" type="text"
                   class="form-control"></div>
         </div>
@@ -82,7 +82,7 @@
                (change)="detectFiles($event)"
                class="form-control">
       </div>
-      <button class="mt-2 btn btn-primary" [disabled]="newCientForm.invalid || loading">Ajouter Client</button>
+      <button class="mt-2 btn btn-primary" [disabled]="newClientForm.invalid || loading">Ajouter Client</button>
     </form>
   </div>
 </div>

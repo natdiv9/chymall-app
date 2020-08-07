@@ -27,14 +27,16 @@ export class ProduitsNewComponent implements OnInit {
   initForm() {
     this.newProduitForm = this.formBuilder.group({
       designation: ['', [Validators.required]],
-      quantite: ['', [Validators.required]]
+      stockInitial: ['', [Validators.required]]
     });
   }
   newProduit() {
     const produit = {
       designation: this.newProduitForm.get('designation').value,
-      stockInitial: this.newProduitForm.get('quantite').value
+      stockInitial: this.newProduitForm.get('stockInitial').value
     };
+
+    console.log(produit);
 
     this.crudService.addProduit(produit).subscribe(
         (reponse: any) => {

@@ -47,7 +47,7 @@ export class ProfilesNewComponent implements OnInit {
       etatCompte: false,
       etat: true
     };
-
+    console.log(profile);
     this.crudService.addProfile(profile).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {

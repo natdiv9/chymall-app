@@ -17,20 +17,20 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td class="text-center text-muted" style="width: 80px;">#34</td>
-        <td class="text-center">Gloire</td>
-        <td class="text-center">glory</td>
-        <td class="text-center">VIP-5</td>
-        <td class="text-center">Bugatti Veyron</td>
+      <tr *ngFor="let profile of profiles ; let i = index">
+        <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
+        <td class="text-center">{{profile.idClient}}</td>
+        <td class="text-center">{{profile.username}}</td>
+        <td class="text-center">{{profile.niveau}}</td>
+        <td class="text-center">{{profile.produit}}</td>
         <td class="text-center">
-          <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-primary" data-offstyle="outline-secondary">
+          <input type="checkbox" checked data-toggle="toggle" [value]="profile.etatCompte" data-onstyle="outline-primary" data-offstyle="outline-secondary">
         </td>
         <td class="text-center">
-          <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-primary" data-offstyle="outline-secondary">
+          <input type="checkbox" checked data-toggle="toggle" [value]="profile.etatTrading" data-onstyle="outline-primary" data-offstyle="outline-secondary">
         </td>
         <td class="text-center">
-          <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-primary" data-offstyle="outline-secondary">
+          <input type="checkbox" checked data-toggle="toggle" [value]="profile.etat" data-onstyle="outline-primary" data-offstyle="outline-secondary">
         </td>
       </tr>
       </tbody>

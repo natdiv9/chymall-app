@@ -13,11 +13,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td class="text-center text-muted" style="width: 80px;">#34</td>
-        <td class="text-center">Montre</td>
-        <td class="text-center">100</td>
-        <td class="text-center">55</td>
+      <tr *ngFor="let produit of produits ; let i = index">
+        <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
+        <td class="text-center">{{produit.designation}}</td>
+        <td class="text-center">{{produit.stockInitial}}</td>
+        <td class="text-center">{{produit.stockInitial}}</td>
       </tr>
       </tbody>
     </table>

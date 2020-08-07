@@ -22,20 +22,20 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td class="text-center text-muted" style="width: 80px;">#</td>
+      <tr *ngFor="let client of clients ; let i = index">
+        <td class="text-center text-muted" style="width: 80px;">{{client.id}}</td>
         <td class="text-center" style="width: 80px;">
-          <img width="40" class="rounded-circle" src="./assets/images/avatars/1.jpg" alt="">
+          <img width="40" class="rounded-circle" [src]="client.photo" alt="">
         </td>
-        <td class="text-center">Gloire</td>
-        <td class="text-center">KAFWALUBI</td>
-        <td class="text-center">0974621121</td>
-        <td class="text-center">gkafwalubi@gmail.com</td>
-        <td class="text-center">11, Kampemba prolongee</td>
-        <td class="text-center">Bel Air, Kampemba</td>
-        <td class="text-center">Lubumbashi</td>
-        <td class="text-center">RDC</td>
-        <td class="text-center">71105</td>
+        <td class="text-center">{{client.prenom}}</td>
+        <td class="text-center">{{client.nom}}</td>
+        <td class="text-center">{{client.telephone}}</td>
+        <td class="text-center">{{client.email}}</td>
+        <td class="text-center">{{client.address}}</td>
+        <td class="text-center">{{client.address2}}</td>
+        <td class="text-center">{{client.ville}}</td>
+        <td class="text-center">{{client.pays}}</td>
+        <td class="text-center">{{client.zip}}</td>
         <td class="text-center">
           <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-primary" data-offstyle="outline-secondary">
         </td>

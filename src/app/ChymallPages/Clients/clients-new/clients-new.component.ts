@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class ClientsNewComponent implements OnInit {
 
-  newCientForm: FormGroup;
+  newClientForm: FormGroup;
   private fileUrl: string;
   private loaded: boolean;
   private loading: boolean;
@@ -32,16 +32,16 @@ export class ClientsNewComponent implements OnInit {
   }
 
   initForm() {
-    this.newCientForm = this.formBuilder.group({
+    this.newClientForm = this.formBuilder.group({
       telephone: ['', [Validators.required]],
-      email: [''],
+      email: ['', []],
       prenom: ['', [Validators.required]],
+      nom: ['', [Validators.required]],
       address: ['', [Validators.required]],
       address2: [''],
-      city: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      zip: [''],
-      nom: ['', [Validators.required]],
+      ville: ['', [Validators.required]],
+      pays: ['', [Validators.required]],
+      zip: ['', []],
       photo: null
     });
   }
@@ -57,30 +57,33 @@ export class ClientsNewComponent implements OnInit {
     );
   }
   detectFiles(event) {
-    this.onUploadFile(event.target.files[0]);
+    // this.onUploadFile(event.target.files[0]);
   }
 
 
   newClient() {
     const client = {
-      telephone: this.newCientForm.get('telephone').value,
-      email: this.newCientForm.get('email').value,
-      prenom: this.newCientForm.get('prenom').value,
-      nom: this.newCientForm.get('nom').value,
-      address: this.newCientForm.get('address').value,
-      address2: this.newCientForm.get('address2').value,
-      ville: this.newCientForm.get('ville').value,
-      pays: this.newCientForm.get('pays').value,
-      zip: this.newCientForm.get('zip').value,
+      telephone: this.newClientForm.get('telephone').value,
+      email: this.newClientForm.get('email').value,
+      prenom: this.newClientForm.get('prenom').value,
+      nom: this.newClientForm.get('nom').value,
+      address: this.newClientForm.get('address').value,
+      address2: this.newClientForm.get('address2').value,
+      ville: this.newClientForm.get('ville').value,
+      pays: this.newClientForm.get('pays').value,
+      zip: this.newClientForm.get('zip').value,
       photo: this.fileUrl,
       etat: true
     };
+
+    console.log(client);
 
     this.crudService.addClient(client).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
             this.modalService.open(this.closeResult);
-            this.newCientForm.reset();
+            console.log(client);
+            this.newClientForm.reset();
           } else {
             this.router.navigate(['clients/new']);
           }
