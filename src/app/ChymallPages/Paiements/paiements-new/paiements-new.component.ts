@@ -37,7 +37,7 @@ export class PaiementsNewComponent implements OnInit {
        motif: this.newPaiementForm.get('motif').value,
        dateOperation: null
     };
-
+    console.log(paiement);
     this.crudService.addPaiement(paiement).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {

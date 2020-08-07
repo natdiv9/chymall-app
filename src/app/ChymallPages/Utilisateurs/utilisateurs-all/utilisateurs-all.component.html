@@ -15,13 +15,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="text-center text-muted" style="width: 80px;">#34</td>
-          <td class="text-center">glory</td>
-          <td class="text-center">Technique</td>
-          <td class="text-center">777</td>
+        <tr *ngFor="let utilisateur of utilisateurs; let i = index">
+          <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
+          <td class="text-center">{{utilisateur.username}}</td>
+          <td class="text-center">{{utilisateur.service}}</td>
+          <td class="text-center">{{utilisateur.droits}}</td>
           <td class="text-center">
-            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-primary" data-offstyle="outline-secondary">
+            <input type="checkbox" checked data-toggle="toggle" [value]="utilisateur.etat" data-onstyle="outline-primary" data-offstyle="outline-secondary">
           </td>
           <td class="text-center">
             <div role="group" class="btn-group-sm btn-group">

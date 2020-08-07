@@ -22,17 +22,17 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let client of clients; let i = index">
-        <td class="text-center text-muted" style="width: 80px;">#</td>
+      <tr *ngFor="let client of clients ; let i = index">
+        <td class="text-center text-muted" style="width: 80px;">{{client.id}}</td>
         <td class="text-center" style="width: 80px;">
-          <img width="40" class="rounded-circle" src="./assets/images/avatars/1.jpg" alt="">
+          <img width="40" class="rounded-circle" [src]="client.photo" alt="">
         </td>
         <td class="text-center">{{client.prenom}}</td>
         <td class="text-center">{{client.nom}}</td>
         <td class="text-center">{{client.telephone}}</td>
         <td class="text-center">{{client.email}}</td>
-        <td class="text-center">{{client.address}}</td>
-        <td class="text-center">{{client.address2}}</td>
+        <td class="text-center">{{client.adresse}}</td>
+        <td class="text-center">{{client.adresse}}</td>
         <td class="text-center">{{client.ville}}</td>
         <td class="text-center">{{client.pays}}</td>
         <td class="text-center">{{client.zip}}</td>

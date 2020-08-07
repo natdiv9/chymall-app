@@ -38,7 +38,7 @@ export class StockagesNewComponent implements OnInit {
       operation: this.newStockageForm.get('operation').value,
       dateOperation: null
     };
-
+    console.log(stockage);
     this.crudService.addStockage(stockage).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {

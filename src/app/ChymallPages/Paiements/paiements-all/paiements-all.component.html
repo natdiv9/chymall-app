@@ -14,12 +14,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td class="text-center text-muted" style="width: 80px;">#34</td>
-        <td class="text-center">Gloire</td>
-        <td class="text-center">100</td>
-        <td class="text-center">Activation Trading</td>
-        <td class="text-center">31122020</td>
+      <tr *ngFor="let paiement of paiements ; let i = index">
+        <td class="text-center text-muted" style="width: 80px;">#{{paiement.id}}</td>
+        <td class="text-center">{{paiement.idProfile}}</td>
+        <td class="text-center">{{paiement.montant}}</td>
+        <td class="text-center">{{paiement.motif}}</td>
+        <td class="text-center">{{paiement.dateOperation}}</td>
       </tr>
       </tbody>
     </table>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CrudService} from '../../../ChymallServices/crud/crud.service';
+import {Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-utilisateurs-new',
@@ -9,8 +12,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class UtilisateursNewComponent implements OnInit {
 
   newUserForm: FormGroup;
+  private closeResult: string;
 
-  constructor(private  formBuilder: FormBuilder) { }
+  constructor(private  formBuilder: FormBuilder,
+              private router: Router,
+              private modalService: NgbModal,
+              private crudService: CrudService) { }
 
   ngOnInit() {
     this.initForm();
@@ -32,5 +39,15 @@ export class UtilisateursNewComponent implements OnInit {
       droits: null,
       etat: true
     };
+    console.log(utilisateur);
+    this.crudService.addUtilisateur(utilisateur).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.modalService.open(this.closeResult);
+          } else {
+            this.router.navigate(['stockages/all']);
+          }
+        }
+    );
   }
 }

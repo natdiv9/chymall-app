@@ -36,6 +36,7 @@ export class RetraitsNewComponent implements OnInit {
       dateRetrait: null
     };
 
+    console.log(retrait);
     this.crudService.addRetrait(retrait).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
