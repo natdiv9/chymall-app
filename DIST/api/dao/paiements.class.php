@@ -8,7 +8,7 @@ class Paiements
     public function __construct()
     {
         try{
-            include'connexion.class.php';
+            require 'connexion.class.php';
             $this->connexion = Connexion::getConnexion();
 
         } catch (Exception | Error $e)

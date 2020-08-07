@@ -19,8 +19,8 @@ export class ClientsAllComponent implements OnInit {
           if (reponse.status === true) {
             this.clients = reponse.data;
           } else {
-
           }
+          console.log(reponse);
         }
     );
   }

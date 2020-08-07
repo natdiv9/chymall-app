@@ -12,9 +12,9 @@ import {Router} from '@angular/router';
 export class ClientsNewComponent implements OnInit {
 
   newCientForm: FormGroup;
-  private fileUrl: string;
-  private loaded: boolean;
-  private loading: boolean;
+  fileUrl: string;
+  loaded: boolean;
+  loading: boolean;
 
   heading = 'Modals';
   subheading = 'Wide selection of modal dialogs styles and animations available.';
