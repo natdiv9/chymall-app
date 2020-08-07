@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56dbc1c3-7786-401b-b5be-78a4d9f6694d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/dao/operationTracer.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dao/paiements.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dao/produits.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dao/profils.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dao/retraits.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dao/stockages.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paiements.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/produits.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/profils.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/retraits.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stockages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/natdiv.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/natdiv.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients.php" beforeDir="false" afterPath="$PROJECT_DIR$/clients.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/clients.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/dao/clients.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/utilisateurs.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/dao/utilisateurs.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilisateurs.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilisateurs.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/dao/produits.class.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="94" column="5" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="94" selection-end-column="5" />
+              <caret line="94" column="5" selection-start-line="5" selection-start-column="4" selection-end-line="94" selection-end-column="5" />
               <folding>
                 <element signature="n#__construct#0;n#Produits#0;n#!!top" />
                 <element signature="n#get#0;n#Produits#0;n#!!top" />
@@ -65,20 +49,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stockages.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
+            <state relative-caret-position="1035">
               <caret line="69" column="17" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
-              <folding>
-                <element signature="e#1074#1766#0#PHP" />
-              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dao/operationTracer.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dao/operationTracer.class.php">
+        <entry file="file://$PROJECT_DIR$/dao/clients.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+            <state relative-caret-position="-218">
+              <caret line="24" column="70" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="70" />
+              <folding>
+                <element signature="n#post#0;n#Clients#0;n#!!top" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -86,11 +79,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/produits.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="21" column="14" lean-forward="true" selection-end-line="87" selection-end-column="1" />
+            <state relative-caret-position="315">
+              <caret line="21" column="14" selection-end-line="87" selection-end-column="1" />
               <folding>
-                <element signature="e#119#491#0#PHP" />
-                <element signature="e#496#1033#0#PHP" />
                 <element signature="n#response#0;n#!!top" />
               </folding>
             </state>
@@ -154,7 +145,8 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1366" />
+    <option name="x" value="1366" />
+    <option name="width" value="1360" />
     <option name="height" value="768" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -221,18 +213,19 @@
       <workItem from="1596021073290" duration="18045000" />
       <workItem from="1596045626724" duration="3396000" />
       <workItem from="1596183311254" duration="9294000" />
-      <workItem from="1596198005896" duration="15225000" />
+      <workItem from="1596198005896" duration="15513000" />
+      <workItem from="1596745891286" duration="2115000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46846000" />
+    <option name="totallyTimeSpent" value="49249000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1366" height="768" extended-state="0" />
+    <frame x="1366" y="0" width="1360" height="768" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18078668" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1831307" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -245,7 +238,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.18586789" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.85714287" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -277,19 +270,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="244" column="4" lean-forward="true" selection-start-line="244" selection-start-column="4" selection-end-line="244" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/clients.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="n#__construct#0;n#Clients#0;n#!!top" />
-            <element signature="n#get#0;n#Clients#0;n#!!top" />
-            <element signature="n#post#0;n#Clients#0;n#!!top" />
-            <element signature="n#put#0;n#Clients#0;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -423,24 +403,12 @@
     <entry file="file://$PROJECT_DIR$/dao/produits.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="94" column="5" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="94" selection-end-column="5" />
+          <caret line="94" column="5" selection-start-line="5" selection-start-column="4" selection-end-line="94" selection-end-column="5" />
           <folding>
             <element signature="n#__construct#0;n#Produits#0;n#!!top" />
             <element signature="n#get#0;n#Produits#0;n#!!top" />
             <element signature="n#post#0;n#Produits#0;n#!!top" />
             <element signature="n#put#0;n#Produits#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/produits.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="21" column="14" lean-forward="true" selection-end-line="87" selection-end-column="1" />
-          <folding>
-            <element signature="e#119#491#0#PHP" />
-            <element signature="e#496#1033#0#PHP" />
-            <element signature="n#response#0;n#!!top" />
           </folding>
         </state>
       </provider>
@@ -459,10 +427,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stockages.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
+        <state relative-caret-position="1035">
           <caret line="69" column="17" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/produits.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="14" selection-end-line="87" selection-end-column="1" />
           <folding>
-            <element signature="e#1074#1766#0#PHP" />
+            <element signature="n#response#0;n#!!top" />
           </folding>
         </state>
       </provider>
@@ -470,7 +445,17 @@
     <entry file="file://$PROJECT_DIR$/dao/operationTracer.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/clients.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-218">
+          <caret line="24" column="70" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="70" />
+          <folding>
+            <element signature="n#post#0;n#Clients#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
