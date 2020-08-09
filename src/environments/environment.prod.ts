@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  server_base_url: '../api/controllers/'
+  server_base_url: '../api'
 };

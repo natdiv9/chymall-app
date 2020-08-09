@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  server_base_url: 'http://localhost/chymall/DIST/api/controllers/'
+  server_base_url: 'http://localhost/chymall/DIST/api'
 };
 
 /*
