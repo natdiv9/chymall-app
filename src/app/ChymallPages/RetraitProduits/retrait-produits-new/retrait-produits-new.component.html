@@ -1,0 +1,22 @@
+<div class="main-card mb-3 card">
+  <div class="card-body"><h5 class="card-title">RETRAIT PRODUIT</h5>
+    <form [formGroup]="retraitProduitForm" (ngSubmit)="newRetraitProduit()">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="exampleSelect">Produits</label>
+            <select formControlName="produit" id="exampleSelect" class="form-control">
+              <option *ngFor="let produit of produits" [ngValue]="produit.id">{{produit.designation}}</option>
+
+            </select>
+          </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="password">Password</label><input
+                  formControlName="password" id="password" placeholder="123456" type="password"
+                  class="form-control"></div>
+        </div>
+      </div>
+
+      <button class="mt-2 btn btn-primary" [disabled]="retraitProduitForm.invalid">Enregistrer utilisateur</button>
+    </form>
+  </div>
+</div>

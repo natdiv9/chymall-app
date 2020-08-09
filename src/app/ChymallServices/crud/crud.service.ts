@@ -7,11 +7,14 @@ import {Profile} from '../../ChymallModels/models/profile';
 import {Retrait} from '../../ChymallModels/models/retrait';
 import {Stockage} from '../../ChymallModels/models/stockage';
 import {Utilisateur} from '../../ChymallModels/models/utilisateur';
+import {RetraitProduits} from '../../ChymallModels/models/retrait-produits';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
+
+    currentUser: Utilisateur;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -106,4 +109,12 @@ export class CrudService {
   putUtilisateur(utilisateur: Utilisateur) {
       return this.httpClient.put('localhost/chymall/DIST/api/controllers/', utilisateur);
   }
+
+  getConnection(username: string, pwd: string) {
+        return this.httpClient.put('localhost/chymall/DIST/api/controllers/', {username, pwd});
+  }
+
+    retraitProduit(retraitProduit: RetraitProduits) {
+        return this.httpClient.put('localhost/chymall/DIST/api/controllers/', retraitProduit);
+    }
 }

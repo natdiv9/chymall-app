@@ -1,0 +1,41 @@
+<div class="h-100 bg-plum-plate bg-animation" xmlns="http://www.w3.org/1999/html">
+  <div class="d-flex h-100 justify-content-center align-items-center">
+    <div class="mx-auto app-login-box col-md-8">
+      <div class="app-logo-inverse mx-auto mb-3"></div>
+      <form [formGroup]="loginForm" (ngSubmit)="newConnexion()">
+      <div class="modal-dialog w-100 mx-auto">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="h5 modal-title text-center">
+              <h4 class="mt-2">
+                <div>Bienvenue chez Chymall</div>
+                <span>Connectez-vous avant toute chose SVP!</span></h4>
+            </div>
+            <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_"
+                 class="form-group">
+              <div><input id="exampleInput1" type="text" placeholder="Entrez votre nom d'utilisateur" required="required"
+                          formControlName="username"
+                          aria-required="true" class="form-control"
+                          aria-describedby="exampleInputGroup1__BV_description_">
+              </div>
+            </div>
+            <div id="exampleInputGroup2" role="group" class="form-group">
+              <div><input id="exampleInput2" type="password" placeholder="Entrez votre mot de passe" required="required"
+                          formControlName="pwd"
+                          aria-required="true" class="form-control"></div>
+            </div>
+          </div>
+          <div class="modal-footer clearfix">
+            <div class="float-center">
+              <button type="button" class="btn btn-primary btn-lg">Se Connecter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </form>
+      <div class="text-center text-white opacity-8 mt-3">
+        Copyright © ArchitectUI 2019
+      </div>
+    </div>
+  </div>
+</div>
