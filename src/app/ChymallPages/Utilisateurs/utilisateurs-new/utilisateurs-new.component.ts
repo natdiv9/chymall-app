@@ -37,7 +37,7 @@ export class UtilisateursNewComponent implements OnInit {
       pwd: this.newUserForm.get('password').value,
       service: this.newUserForm.get('service').value,
       droits: null,
-      etat: true
+      etat: 1
     };
     console.log(utilisateur);
     this.crudService.addUtilisateur(utilisateur).subscribe(

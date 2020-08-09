@@ -33,7 +33,7 @@ export class ProduitsUpdateComponent implements OnInit {
             this.produit = response.data;
             this.updateProduitForm = this.formBuilder.group({
               designation: this.produit.designation,
-              quantite: this.produit.stockInitial
+              quantite: this.produit.stock_initial
             });
           }
         }
@@ -43,7 +43,7 @@ export class ProduitsUpdateComponent implements OnInit {
   updateProduit() {
     const produit = {
       designation: this.updateProduitForm.get('designation').value,
-      stockInitial: this.updateProduitForm.get('quantite').value
+      stock_initial: this.updateProduitForm.get('quantite').value
     };
     this.crudService.putProduit(produit).subscribe(
         (reponse: any) => {

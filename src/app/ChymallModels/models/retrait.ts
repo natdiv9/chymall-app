@@ -1,6 +1,6 @@
 export class Retrait {
     public id?: number;
-    public idProfile: number;
+    public id_profile: number;
     public montant: number;
-    public dateRetrait?: Date;
+    public date_retrait?: Date;
 }

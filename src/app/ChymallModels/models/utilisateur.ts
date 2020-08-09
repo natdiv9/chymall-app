@@ -4,5 +4,5 @@ export class Utilisateur {
     public pwd: string;
     public service: string;
     public droits: string;
-    public etat: boolean;
+    public etat: number;
 }

@@ -11,6 +11,7 @@
         <th class="text-center">Montant</th>
         <th lass="text-center">Motif</th>
         <th lass="text-center">Date Opération</th>
+        <th lass="text-center">Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -20,6 +21,7 @@
         <td class="text-center">{{paiement.montant}}</td>
         <td class="text-center">{{paiement.motif}}</td>
         <td class="text-center">{{paiement.dateOperation}}</td>
+        <button class="btn-shadow btn btn-primary" [routerLink]="['paiements/id']">Afficher Paiement</button>
       </tr>
       </tbody>
     </table>

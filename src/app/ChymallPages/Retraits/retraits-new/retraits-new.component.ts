@@ -31,9 +31,9 @@ export class RetraitsNewComponent implements OnInit {
 
   newRetrait() {
     const retrait = {
-      idProfile: this.route.snapshot.params.id,
+      id_profile: this.route.snapshot.params.id,
       montant: this.newRetraitForm.get('montant').value,
-      dateRetrait: null
+      date_retrait: null
     };
 
     console.log(retrait);

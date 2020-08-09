@@ -32,10 +32,10 @@ export class PaiementsNewComponent implements OnInit {
   }
   newPaiement() {
     const paiement = {
-       idProfile: this.route.snapshot.params.id,
+       id_profile: this.route.snapshot.params.id,
        montant: this.newPaiementForm.get('montant').value,
        motif: this.newPaiementForm.get('motif').value,
-       dateOperation: null
+       date_operation: null
     };
     console.log(paiement);
     this.crudService.addPaiement(paiement).subscribe(

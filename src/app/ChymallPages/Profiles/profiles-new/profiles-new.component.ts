@@ -39,12 +39,12 @@ export class ProfilesNewComponent implements OnInit {
 
   newProfile() {
     const profile = {
-      idClient: this.route.snapshot.params.id,
+      id_client: this.route.snapshot.params.id,
       username: this.newProfileForm.get('username').value,
       produit: this.newProfileForm.get('produit').value,
       niveau: this.newProfileForm.get('niveau').value,
-      etatTrading: false,
-      etatCompte: false,
+      etat_trading: false,
+      etat_compte: false,
       etat: true
     };
     console.log(profile);

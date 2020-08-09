@@ -10,6 +10,7 @@
         <th class="text-center">Profile</th>
         <th lass="text-center">Montant</th>
         <th lass="text-center">Date de Retrait</th>
+        <th lass="text-center">Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -18,6 +19,7 @@
         <td class="text-center">{{retrait.idProfile}}</td>
         <td class="text-center">{{retrait.montant}}</td>
         <td class="text-center">{{retrait.dateRetrait}}</td>
+        <button [routerLink]="['retraits/id']">Détails retrait</button>
       </tr>
       </tbody>
     </table>

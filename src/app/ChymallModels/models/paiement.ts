@@ -1,7 +1,7 @@
 export class Paiement {
     public id?: number;
-    public idProfile: number;
+    public id_profile: number;
     public montant: number;
     public motif: string;
-    public dateOperation?: Date;
+    public date_operation?: Date;
 }
