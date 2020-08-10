@@ -16,10 +16,10 @@
       <tbody>
       <tr *ngFor="let retrait of retraits; let i = index">
         <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
-        <td class="text-center">{{retrait.idProfile}}</td>
+        <td class="text-center">{{retrait.id_profile}}</td>
         <td class="text-center">{{retrait.montant}}</td>
-        <td class="text-center">{{retrait.dateRetrait}}</td>
-        <button [routerLink]="['retraits/id']">Détails retrait</button>
+        <td class="text-center">{{retrait.date_retrait}}</td>
+        <button [routerLink]="'retraits/' + retrait.id + '/retrait'">Détails retrait</button>
       </tr>
       </tbody>
     </table>
