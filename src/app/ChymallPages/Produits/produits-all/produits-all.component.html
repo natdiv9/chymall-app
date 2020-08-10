@@ -18,6 +18,9 @@
         <td class="text-center">{{produit.designation}}</td>
         <td class="text-center">{{produit.stockInitial}}</td>
         <td class="text-center">{{produit.stockInitial}}</td>
+        <td>
+          <button [routerLink]="['stockages/new']">Gérer stock</button>
+        </td>
       </tr>
       </tbody>
     </table>

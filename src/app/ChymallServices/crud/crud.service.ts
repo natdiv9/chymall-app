@@ -7,6 +7,7 @@ import {Profile} from '../../ChymallModels/models/profile';
 import {Retrait} from '../../ChymallModels/models/retrait';
 import {Stockage} from '../../ChymallModels/models/stockage';
 import {Utilisateur} from '../../ChymallModels/models/utilisateur';
+import {RetraitProduits} from '../../ChymallModels/models/retrait-produits';
 
 // Environment
 import { environment } from '../../../environments/environment';
@@ -16,8 +17,9 @@ import { environment } from '../../../environments/environment';
 })
 export class CrudService {
 
-  constructor(private httpClient: HttpClient) {
-  }
+    currentUser: Utilisateur;
+
+  constructor(private httpClient: HttpClient) { }
 
   uploadFile(file: File) {
     return new Promise(
@@ -110,4 +112,12 @@ export class CrudService {
   putUtilisateur(utilisateur: Utilisateur) {
       return this.httpClient.put(`${environment.server_base_url}/utilisateurs.php`, utilisateur);
   }
+
+  getConnection(username: string, pwd: string) {
+        return this.httpClient.put('localhost/chymall/DIST/api/controllers/', {username, pwd});
+  }
+
+    retraitProduit(retraitProduit: RetraitProduits) {
+        return this.httpClient.put('localhost/chymall/DIST/api/controllers/', retraitProduit);
+    }
 }

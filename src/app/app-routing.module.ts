@@ -76,6 +76,10 @@ import {RetraitsNewComponent} from './ChymallPages/Retraits/retraits-new/retrait
 import {StockagesAllComponent} from './ChymallPages/Stockages/stockages-all/stockages-all.component';
 import {StockagesIdComponent} from './ChymallPages/Stockages/stockages-id/stockages-id.component';
 import {StockagesNewComponent} from './ChymallPages/Stockages/stockages-new/stockages-new.component';
+import {ConnexionComponent} from './ChymallPages/connexion/connexion.component';
+import {RetraitProduitsAllComponent} from './ChymallPages/RetraitProduits/retrait-produits-all/retrait-produits-all.component';
+import {RetraitProduitsIdComponent} from './ChymallPages/RetraitProduits/retrait-produits-id/retrait-produits-id.component';
+import {RetraitProduitsNewComponent} from './ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component';
 
 const routes: Routes = [
   {
@@ -173,7 +177,16 @@ const routes: Routes = [
 
       {path: 'stockages/all', component: StockagesAllComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'stockages/:id/stockage', component: StockagesIdComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'stockages/new', component: StockagesNewComponent, data: {extraParameter: 'elementsMenu'}}
+      {path: 'stockages/new', component: StockagesNewComponent, data: {extraParameter: 'elementsMenu'}},
+
+      {path: 'connexion', component: ConnexionComponent, data: {extraParameter: 'elementsMenu'}},
+
+      // STOCKAGES
+
+      {path: 'retrait-produits/all', component: RetraitProduitsAllComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'retrait-produits/id', component: RetraitProduitsIdComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'retrait-produits/new', component: RetraitProduitsNewComponent, data: {extraParameter: 'elementsMenu'}},
+
 
     ]
 

@@ -32,12 +32,12 @@ export class ProfilesUpdateComponent implements OnInit {
           if (response.status) {
             this.profile = response.data;
             this.updateProfileForm = this.formBuilder.group({
-              idClient: this.profile.idClient,
+              idClient: this.profile.id_client,
               username: this.profile.username,
               produit: this.profile.produit,
               niveau: this.profile.niveau,
-              etatTrading: this.profile.etatTrading,
-              etatCompte: this.profile.etatCompte,
+              etatTrading: this.profile.etat_trading,
+              etatCompte: this.profile.etat_compte,
               etat: this.profile.etat
             });
           }
@@ -47,12 +47,12 @@ export class ProfilesUpdateComponent implements OnInit {
 
   updateProfile() {
     const profile = {
-      idClient: this.profile.idClient,
+      id_client: this.profile.id_client,
       username: this.updateProfileForm.get('username').value,
       produit: this.updateProfileForm.get('produit').value,
       niveau: this.updateProfileForm.get('niveau').value,
-      etatTrading: this.profile.etatTrading,
-      etatCompte: this.profile.etatCompte,
+      etat_trading: this.profile.etat_trading,
+      etat_compte: this.profile.etat_compte,
       etat: true
     };
 

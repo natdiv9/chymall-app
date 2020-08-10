@@ -42,10 +42,10 @@ export class StockagesUpdateComponent implements OnInit {
 
   updateStockage() {
     const stockage = {
-      idProduit: this.stockage.idProduit,
+      id_produit: this.stockage.id_produit,
       quantite: this.updateStockageForm.get('quantite').value,
       operation: this.updateStockageForm.get('operation').value,
-      dateOperation: null
+      date_operation: null
     };
 
     this.crudService.putStockage(stockage).subscribe(

@@ -1,10 +1,10 @@
 export class Profile {
     public id?: number;
-    public idClient: number;
+    public id_client: number;
     public username: string;
     public niveau: number;
     public produit: string;
-    public etatTrading: boolean;
-    public etatCompte: boolean;
+    public etat_trading: boolean;
+    public etat_compte: boolean;
     public etat: boolean;
 }

@@ -33,7 +33,7 @@ export class ProduitsNewComponent implements OnInit {
   newProduit() {
     const produit = {
       designation: this.newProduitForm.get('designation').value,
-      stockInitial: this.newProduitForm.get('stockInitial').value
+      stock_initial: this.newProduitForm.get('stockInitial').value
     };
 
     console.log(produit);

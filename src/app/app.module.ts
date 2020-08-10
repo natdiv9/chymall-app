@@ -129,6 +129,11 @@ import { StockagesNewComponent } from './ChymallPages/Stockages/stockages-new/st
 import { StockagesAllComponent } from './ChymallPages/Stockages/stockages-all/stockages-all.component';
 import { StockagesIdComponent } from './ChymallPages/Stockages/stockages-id/stockages-id.component';
 import { StockagesUpdateComponent } from './ChymallPages/Stockages/stockages-update/stockages-update.component';
+import { ConnexionComponent } from './ChymallPages/connexion/connexion.component';
+import { RetraitProduitsNewComponent } from './ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component';
+import { RetraitProduitsAllComponent } from './ChymallPages/RetraitProduits/retrait-produits-all/retrait-produits-all.component';
+import { RetraitProduitsIdComponent } from './ChymallPages/RetraitProduits/retrait-produits-id/retrait-produits-id.component';
+import { RetraitProduitsComponent } from './ChymallModels/models/retrait-produits/retrait-produits.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -245,6 +250,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     StockagesAllComponent,
     StockagesIdComponent,
     StockagesUpdateComponent,
+    ConnexionComponent,
+    RetraitProduitsNewComponent,
+    RetraitProduitsAllComponent,
+    RetraitProduitsIdComponent,
+    RetraitProduitsComponent,
   ],
   imports: [
     BrowserModule,

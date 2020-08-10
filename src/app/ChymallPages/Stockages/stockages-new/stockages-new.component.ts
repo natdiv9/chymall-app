@@ -33,10 +33,10 @@ export class StockagesNewComponent implements OnInit {
 
   newStockage() {
     const stockage = {
-      idProduit: this.route.snapshot.params.id,
+      id_produit: this.route.snapshot.params.id,
       quantite: this.newStockageForm.get('quantite').value,
       operation: this.newStockageForm.get('operation').value,
-      dateOperation: null
+      date_operation: null
     };
     console.log(stockage);
     this.crudService.addStockage(stockage).subscribe(
