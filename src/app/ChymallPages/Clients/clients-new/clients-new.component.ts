@@ -37,8 +37,8 @@ export class ClientsNewComponent implements OnInit {
       email: ['', []],
       prenom: ['', [Validators.required]],
       nom: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      address2: [''],
+      adresse: ['', [Validators.required]],
+      adresse2: [''],
       ville: ['', [Validators.required]],
       pays: ['', [Validators.required]],
       zip: ['', []],
@@ -67,12 +67,12 @@ export class ClientsNewComponent implements OnInit {
       email: this.newClientForm.get('email').value,
       prenom: this.newClientForm.get('prenom').value,
       nom: this.newClientForm.get('nom').value,
-      address: this.newClientForm.get('address').value,
-      address2: this.newClientForm.get('address2').value,
+      adresse: this.newClientForm.get('adresse').value,
+      adresse2: this.newClientForm.get('adresse2').value,
       ville: this.newClientForm.get('ville').value,
       pays: this.newClientForm.get('pays').value,
       zip: this.newClientForm.get('zip').value,
-      photo: this.fileUrl,
+      photo: '',
       etat: true
     };
 
@@ -82,10 +82,11 @@ export class ClientsNewComponent implements OnInit {
         (reponse: any) => {
           if (reponse.status === true) {
             this.modalService.open(this.closeResult);
-            console.log(client);
+            console.log(reponse);
             this.newClientForm.reset();
           } else {
-            this.router.navigate(['clients/new']);
+            // this.router.navigate(['clients/new']);
+            console.log(reponse);
           }
         }
     );

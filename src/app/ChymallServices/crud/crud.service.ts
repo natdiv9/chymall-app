@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Client} from '../../ChymallModels/models/client';
 import {Paiement} from '../../ChymallModels/models/paiement';
 import {Produit} from '../../ChymallModels/models/produit';
@@ -27,8 +27,8 @@ export class CrudService {
     );
   }
 
-  addClient(client: Client) {
-    return this.httpClient.post(`${environment.server_base_url}/clients.php`, client);
+  addClient(client: any) {
+      return this.httpClient.post(`${environment.server_base_url}/clients.php`, client);
   }
 
   addPaiement(paiement: Paiement) {

@@ -22,6 +22,7 @@ switch ($request_method)
         }
         break;
     case 'POST':
+        $_POST = json_decode(file_get_contents('php://input'), true);
         if(isset($_POST['telephone'], $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], $_POST['photo']))
         {
             $clientsDAO = new Clients();
@@ -30,13 +31,11 @@ switch ($request_method)
             response($res);
         } else
         {
-            $_PUT = array();
-            parse_str(file_get_contents('php://input'), $_PUT);
             header('Content-Type: application/json');
             echo json_encode( array(
                     "status" => false,
                     "message" => "POST Client: Data is not complete",
-                    "data" => $_POST
+                    "data" => $_POST->telephone
                 )
             );
         }
