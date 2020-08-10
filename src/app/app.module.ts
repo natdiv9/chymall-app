@@ -252,11 +252,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnexionComponent,
     RetraitProduitsNewComponent,
     RetraitProduitsAllComponent,
-<<<<<<< HEAD
     RetraitProduitsIdComponent
-=======
-    RetraitProduitsIdComponent,
->>>>>>> 9de45c43187b056424c5c5c1a1f954f26e1522f4
   ],
   imports: [
     BrowserModule,

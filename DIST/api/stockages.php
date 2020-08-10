@@ -21,6 +21,7 @@ switch ($request_method)
         }
         break;
     case 'POST':
+        $_POST = json_decode(file_get_contents('php://input'), true);
         if(isset($_POST['produit_id'], $_POST['quantite'], $_POST['entree_sortie']))
         {
             $stockageDAO = new Stockages();
@@ -38,8 +39,7 @@ switch ($request_method)
         }
         break;
     case 'PUT':
-        $_PUT = array();
-        parse_str(file_get_contents('php://input'), $_PUT);
+        $_PUT = json_decode(file_get_contents('php://input'), true);;
         if(isset($_PUT['produit_id'], $_PUT['quantite'], $_PUT['entree_sortie'], $_PUT['id']))
         {
             $stockageDAO = new Stockages();

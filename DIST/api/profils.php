@@ -21,6 +21,7 @@ switch ($request_method)
         }
         break;
     case 'POST':
+        $_POST = json_decode(file_get_contents('php://input'), true);
         if(isset($_POST['client_id'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['activation_compte'], $_POST['activation_trading']))
         {
             $profilDAO = new Profils();
@@ -38,8 +39,7 @@ switch ($request_method)
         }
         break;
     case 'PUT':
-        $_PUT = array();
-        parse_str(file_get_contents('php://input'), $_PUT);
+        $_PUT = json_decode(file_get_contents('php://input'), true);
         if(isset($_PUT['client_id'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['id']))
         {
             $profilDAO = new Profils();

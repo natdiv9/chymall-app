@@ -41,8 +41,7 @@ switch ($request_method)
         }
         break;
     case 'PUT':
-        $_PUT = array();
-        parse_str(file_get_contents('php://input'), $_PUT);
+        $_PUT = json_decode(file_get_contents('php://input'), true);
         if(isset($_PUT['id'], $_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['photo'], $_PUT['zip'], $_PUT['etat']))
         {
             $clientsDAO = new Clients();
