@@ -42,7 +42,7 @@ export class ClientsUpdateComponent implements OnInit {
               prenom: this.client.prenom,
               adresse: this.client.adresse,
               adresse2: this.client.adresse2,
-              city: this.client.ville,
+              ville: this.client.ville,
               state: this.client.pays,
               zip: this.client.zip,
               nom: this.client.nom,
