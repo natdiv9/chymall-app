@@ -1,10 +1,7 @@
 <?php
-
-
 class Connexion
-
 {
-    public static function getConnexion()
+    public function getConnexion()
     {
         try {
             $host = 'mysql:host=127.0.0.1;dbname=chymall';

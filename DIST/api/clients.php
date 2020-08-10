@@ -1,7 +1,4 @@
 <?php
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Authorization, Content-Type, Accept");
-header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE");
-header("Access-Control-Allow-Origin: *");
 
 include 'dao/clients.class.php';
 $request_method = $_SERVER["REQUEST_METHOD"];
@@ -25,6 +22,7 @@ switch ($request_method)
         }
         break;
     case 'POST':
+        $_POST = json_decode(file_get_contents('php://input'), true);
         if(isset($_POST['telephone'], $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], $_POST['photo']))
         {
             $clientsDAO = new Clients();
@@ -36,7 +34,8 @@ switch ($request_method)
             header('Content-Type: application/json');
             echo json_encode( array(
                     "status" => false,
-                    "message" => "Data is not complete"
+                    "message" => "POST Client: Data is not complete",
+                    "data" => $_POST->telephone
                 )
             );
         }

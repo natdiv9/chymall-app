@@ -1,6 +1,5 @@
 <?php
 
-
 class OperationTracer
 {
     private  $connexion;

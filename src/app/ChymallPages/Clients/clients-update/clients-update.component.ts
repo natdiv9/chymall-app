@@ -40,8 +40,13 @@ export class ClientsUpdateComponent implements OnInit {
               telephone: this.client.telephone,
               email: this.client.email,
               prenom: this.client.prenom,
+<<<<<<< HEAD
+              adresse: this.client.adresse,
+              adresse2: this.client.adresse2,
+=======
               address: this.client.adresse,
               address2: this.client.adresse2,
+>>>>>>> abceed84cd2d9cc52de285158358306d1cec07dc
               city: this.client.ville,
               state: this.client.pays,
               zip: this.client.zip,
@@ -60,8 +65,13 @@ export class ClientsUpdateComponent implements OnInit {
       email: this.updateCientForm.get('email').value,
       prenom: this.updateCientForm.get('prenom').value,
       nom: this.updateCientForm.get('nom').value,
+<<<<<<< HEAD
+      adresse: this.updateCientForm.get('adresse').value,
+      adresse2: this.updateCientForm.get('adresse2').value,
+=======
       adresse: this.updateCientForm.get('address').value,
       adresse2: this.updateCientForm.get('address2').value,
+>>>>>>> abceed84cd2d9cc52de285158358306d1cec07dc
       ville: this.updateCientForm.get('ville').value,
       pays: this.updateCientForm.get('pays').value,
       zip: this.updateCientForm.get('zip').value,
