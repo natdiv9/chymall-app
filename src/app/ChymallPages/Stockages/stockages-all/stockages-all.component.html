@@ -17,13 +17,14 @@
       <tbody>
       <tr *ngFor="let stockage of stockages; let i = index">
         <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
-        <td class="text-center">{{stockage.idProduit}}</td>
+        <td class="text-center">{{stockage.id_produit}}</td>
         <td class="text-center">{{stockage.quantite}}</td>
         <td class="text-center">{{stockage.operation}}</td>
-        <td class="text-center">{{stockage.dateOperation}}</td>
+        <td class="text-center">{{stockage.date_operation}}</td>
         <td class="text-center">
           <div role="group" class="btn-group-sm btn-group">
-            <button class="btn-shadow btn btn-primary">Modifier</button>
+            <button class="btn-shadow btn btn-primary" routerLink="/stockages/update">Modifier</button>
+            <button [routerLink]="'/stockages/' + stockage.id + '/stockage'">Détails Stockage</button>
           </div>
         </td>
       </tr>

@@ -80,6 +80,7 @@ import {ConnexionComponent} from './ChymallPages/connexion/connexion.component';
 import {RetraitProduitsAllComponent} from './ChymallPages/RetraitProduits/retrait-produits-all/retrait-produits-all.component';
 import {RetraitProduitsIdComponent} from './ChymallPages/RetraitProduits/retrait-produits-id/retrait-produits-id.component';
 import {RetraitProduitsNewComponent} from './ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component';
+import {ActivitesComponent} from './ChymallPages/activites/activites.component';
 
 const routes: Routes = [
   {
@@ -179,13 +180,13 @@ const routes: Routes = [
       {path: 'stockages/:id/stockage', component: StockagesIdComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'stockages/new', component: StockagesNewComponent, data: {extraParameter: 'elementsMenu'}},
 
-      {path: 'connexion', component: ConnexionComponent, data: {extraParameter: 'elementsMenu'}},
-
       // STOCKAGES
 
       {path: 'retrait-produits/all', component: RetraitProduitsAllComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'retrait-produits/id', component: RetraitProduitsIdComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'retrait-produits/new', component: RetraitProduitsNewComponent, data: {extraParameter: 'elementsMenu'}},
+
+      {path: 'activites', component: ActivitesComponent, data: {extraParameter: 'elementsMenu'}}
 
 
     ]
@@ -198,7 +199,7 @@ const routes: Routes = [
 
       // User Pages
 
-      {path: 'pages/login-boxed', component: LoginBoxedComponent, data: {extraParameter: ''}},
+      {path: 'connexion', component: ConnexionComponent, data: {extraParameter: ''}},
       {path: 'pages/register-boxed', component: RegisterBoxedComponent, data: {extraParameter: ''}},
       {path: 'pages/forgot-password-boxed', component: ForgotPasswordBoxedComponent, data: {extraParameter: ''}},
     ]

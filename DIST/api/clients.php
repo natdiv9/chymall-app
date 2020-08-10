@@ -34,8 +34,7 @@ switch ($request_method)
             header('Content-Type: application/json');
             echo json_encode( array(
                     "status" => false,
-                    "message" => "POST Client: Data is not complete",
-                    "data" => $_POST->telephone
+                    "message" => "POST Client: Data is not complete"
                 )
             );
         }
@@ -53,7 +52,7 @@ switch ($request_method)
             header('Content-Type: application/json');
             echo json_encode( array(
                     "status" => false,
-                    "message" => "Update error"
+                    "message" => "PUT Client: Data is not complete"
                 )
             );
         }

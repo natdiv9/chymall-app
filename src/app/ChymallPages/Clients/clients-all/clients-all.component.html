@@ -7,42 +7,28 @@
       <thead>
       <tr>
         <th class="text-center">#</th>
-        <th class="text-center">Avatar</th>
         <th lass="text-center">Prénom</th>
         <th lass="text-center">Nom</th>
         <th class="text-center">Téléphone</th>
-        <th class="text-center">Email</th>
-        <th class="text-center">Adresse</th>
-        <th class="text-center">Adresse2</th>
         <th class="text-center">Ville</th>
-        <th class="text-center">Pays</th>
-        <th class="text-center">Code Postal</th>
-        <th class="text-center">Statut</th>
         <th class="text-center">Actions</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let client of clients ; let i = index">
         <td class="text-center text-muted" style="width: 80px;">{{client.id}}</td>
-        <td class="text-center" style="width: 80px;">
-          <img width="40" class="rounded-circle" [src]="client.photo" alt="">
-        </td>
         <td class="text-center">{{client.prenom}}</td>
         <td class="text-center">{{client.nom}}</td>
         <td class="text-center">{{client.telephone}}</td>
-        <td class="text-center">{{client.email}}</td>
-        <td class="text-center">{{client.adresse}}</td>
-        <td class="text-center">{{client.adresse}}</td>
         <td class="text-center">{{client.ville}}</td>
-        <td class="text-center">{{client.pays}}</td>
         <td class="text-center">{{client.zip}}</td>
         <td class="text-center">
           <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-primary" data-offstyle="outline-secondary">
         </td>
         <td class="text-center">
           <div role="group" class="btn-group-sm btn-group">
-            <button class="btn-shadow btn btn-primary" [routerLink]="['profiles/new']">Ajouter Profile</button>
-            <button class="btn-shadow btn btn-primary" [routerLink]="['profiles/id']">Afficher Profile</button>
+            <button class="btn-shadow btn btn-primary" routerLink="profiles/new">Ajouter Profile</button>
+            <button class="btn-shadow btn btn-primary" [routerLink]="'profiles/' + client.id + '/profile'">Afficher Profile</button>
           </div>
         </td>
       </tr>

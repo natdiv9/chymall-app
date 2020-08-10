@@ -16,10 +16,10 @@
       <tr *ngFor="let produit of produits ; let i = index">
         <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
         <td class="text-center">{{produit.designation}}</td>
-        <td class="text-center">{{produit.stockInitial}}</td>
-        <td class="text-center">{{produit.stockInitial}}</td>
+        <td class="text-center">{{produit.stock_initial}}</td>
+        <td class="text-center">{{produit.stock_initial}}</td>
         <td>
-          <button [routerLink]="['stockages/new']">Gérer stock</button>
+          <button routerLink="stockages/new">Gérer stock</button>
         </td>
       </tr>
       </tbody>

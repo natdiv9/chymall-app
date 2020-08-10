@@ -31,7 +31,8 @@ export class ConnexionComponent implements OnInit {
     const username = this.loginForm.get('username').value;
     const pwd = this.loginForm.get('pwd').value;
 
-    this.crudService.getConnection(username, pwd).subscribe((reponse: any) => {
+    this.crudService.getConnection(username, pwd).subscribe(
+        (reponse: any) => {
       if (reponse.status === true) {
         this.crudService.currentUser = reponse.data;
         if (this.crudService.currentUser.service === 'adhesion') {
@@ -47,6 +48,9 @@ export class ConnexionComponent implements OnInit {
       } else {
         this.message = 'Connexion impossible';
       }
-    });
+    },
+        (error1 => {
+          this.message = 'Erreur inconnue';
+        }));
   }
 }

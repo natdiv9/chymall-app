@@ -11,31 +11,23 @@
         <th class="text-center">Nom d'utilisateur</th>
         <th lass="text-center">Niveau</th>
         <th lass="text-center">Produit</th>
-        <th lass="text-center">Etat Compte</th>
-        <th lass="text-center">Etat Trading</th>
         <th lass="text-center">Etat</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let profile of profiles ; let i = index">
         <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
-        <td class="text-center">{{profile.idClient}}</td>
+        <td class="text-center">{{profile.id_client}}</td>
         <td class="text-center">{{profile.username}}</td>
         <td class="text-center">{{profile.niveau}}</td>
         <td class="text-center">{{profile.produit}}</td>
         <td class="text-center">
-          <input type="checkbox" checked data-toggle="toggle" [value]="profile.etatCompte" data-onstyle="outline-primary" data-offstyle="outline-secondary">
-        </td>
-        <td class="text-center">
-          <input type="checkbox" checked data-toggle="toggle" [value]="profile.etatTrading" data-onstyle="outline-primary" data-offstyle="outline-secondary">
-        </td>
-        <td class="text-center">
           <input type="checkbox" checked data-toggle="toggle" [value]="profile.etat" data-onstyle="outline-primary" data-offstyle="outline-secondary">
         </td>
         <td>
-          <button [routerLink]="['retrait-produits/new']">Retirer produit</button>
-          <button [routerLink]="['retraits/new']">Retirer argent</button>
-          <button [routerLink]="['paiements/new']">Payer Activation</button>
+          <button routerLink="retrait-produits/new">Retirer produit</button>
+          <button routerLink="retraits/new">Retirer argent</button>
+          <button routerLink="paiements/new">Payer Activation</button>
         </td>
       </tr>
       </tbody>

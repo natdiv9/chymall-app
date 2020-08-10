@@ -17,11 +17,11 @@
       <tbody>
       <tr *ngFor="let paiement of paiements ; let i = index">
         <td class="text-center text-muted" style="width: 80px;">#{{paiement.id}}</td>
-        <td class="text-center">{{paiement.idProfile}}</td>
+        <td class="text-center">{{paiement.id_profile}}</td>
         <td class="text-center">{{paiement.montant}}</td>
         <td class="text-center">{{paiement.motif}}</td>
-        <td class="text-center">{{paiement.dateOperation}}</td>
-        <button class="btn-shadow btn btn-primary" [routerLink]="['paiements/id']">Afficher Paiement</button>
+        <td class="text-center">{{paiement.date_operation}}</td>
+        <button class="btn-shadow btn btn-primary" [routerLink]="'paiements/' + paiement.id + '/paiement'">Afficher Paiement</button>
       </tr>
       </tbody>
     </table>

@@ -9,7 +9,6 @@
           <th class="text-center">#</th>
           <th class="text-center">Nom d'utilisateur</th>
           <th class="text-center">Service</th>
-          <th class="text-center">Droit</th>
           <th class="text-center">Etat</th>
           <th class="text-center">Actions</th>
         </tr>
@@ -19,13 +18,13 @@
           <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
           <td class="text-center">{{utilisateur.username}}</td>
           <td class="text-center">{{utilisateur.service}}</td>
-          <td class="text-center">{{utilisateur.droits}}</td>
           <td class="text-center">
             <input type="checkbox" checked data-toggle="toggle" [value]="utilisateur.etat" data-onstyle="outline-primary" data-offstyle="outline-secondary">
           </td>
           <td class="text-center">
             <div role="group" class="btn-group-sm btn-group">
-              <button class="btn-shadow btn btn-primary">Modifier</button>
+              <button class="btn-shadow btn btn-primary" routerLink="/utilisateurs/update">Modifier</button>
+              <button class="btn-shadow btn btn-primary" [routerLink]="'/utilisateurs/' + utilisateur.id + '/utilisateurs'">Afficher utilisateur</button>
             </div>
           </td>
         </tr>
