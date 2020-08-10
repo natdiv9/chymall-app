@@ -67,13 +67,8 @@ export class ClientsNewComponent implements OnInit {
       email: this.newClientForm.get('email').value,
       prenom: this.newClientForm.get('prenom').value,
       nom: this.newClientForm.get('nom').value,
-<<<<<<< HEAD
       adresse: this.newClientForm.get('adresse').value,
       adresse2: this.newClientForm.get('adresse2').value,
-=======
-      adresse: this.newClientForm.get('address').value,
-      address2: this.newClientForm.get('address2').value,
->>>>>>> abceed84cd2d9cc52de285158358306d1cec07dc
       ville: this.newClientForm.get('ville').value,
       pays: this.newClientForm.get('pays').value,
       zip: this.newClientForm.get('zip').value,
