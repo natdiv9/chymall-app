@@ -44,8 +44,9 @@ export class ProduitsNewComponent implements OnInit {
             this.modalService.open(this.closeResult);
             this.newProduitForm.reset();
           } else {
-            this.router.navigate(['clients/new']);
+            // this.router.navigate(['clients/new']);
           }
+          console.log(reponse);
         }
     );
   }
