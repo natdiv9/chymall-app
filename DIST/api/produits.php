@@ -22,7 +22,7 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['designation'], $_POST['stock_initial'], $_POST['stock_final']))
+        if(isset($_POST['designation'], $_POST['stock_initial']))
         {
             $produitDAO = new Produits();
             $produit = array($_POST['designation'], $_POST['stock_initial']);
@@ -33,7 +33,7 @@ switch ($request_method)
             header('Content-Type: application/json');
             echo json_encode( array(
                     "status" => false,
-                    "message" => "Data is not complete"
+                    "message" => "POST produit: Data is not complete"
                 )
             );
         }

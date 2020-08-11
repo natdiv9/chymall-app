@@ -39,23 +39,25 @@ export class ProfilesNewComponent implements OnInit {
 
   newProfile() {
     const profile = {
-      id_client: this.route.snapshot.params.id,
+      id_client: 1,
       username: this.newProfileForm.get('username').value,
       produit: this.newProfileForm.get('produit').value,
       niveau: this.newProfileForm.get('niveau').value,
-      etat_trading: false,
-      etat_compte: false,
-      etat: true
+      etat_trading: 0,
+      etat_compte: 0,
+      etat: 1
     };
     console.log(profile);
     this.crudService.addProfile(profile).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open(this.closeResult);
-            this.newProfileForm.reset();
+            // this.modalService.open(this.closeResult);
+            // this.newProfileForm.reset();
+            this.router.navigate(['profiles/all']);
           } else {
-            this.router.navigate(['profiles/new']);
+            // this.router.navigate(['profiles/new']);
           }
+          console.log(reponse);
         }
     );
   }

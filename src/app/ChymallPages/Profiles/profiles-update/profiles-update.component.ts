@@ -53,7 +53,7 @@ export class ProfilesUpdateComponent implements OnInit {
       niveau: this.updateProfileForm.get('niveau').value,
       etat_trading: this.profile.etat_trading,
       etat_compte: this.profile.etat_compte,
-      etat: true
+      etat: 1
     };
 
     this.crudService.putProfile(profile).subscribe(

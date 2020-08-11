@@ -38,7 +38,7 @@ export class CrudService {
   }
 
   addProduit(produit: Produit) {
-      return this.httpClient.post(`${environment.server_base_url}/retraits.php`, produit);
+      return this.httpClient.post(`${environment.server_base_url}/produits.php`, produit);
   }
 
   addProfile(profile: Profile) {

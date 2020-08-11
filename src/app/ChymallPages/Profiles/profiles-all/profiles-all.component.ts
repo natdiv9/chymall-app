@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class ProfilesAllComponent implements OnInit {
 
-  profiles: Profile[] = [];
+  profiles: any[] = [];
 
   constructor(private crudService: CrudService,
               private router: Router) { }

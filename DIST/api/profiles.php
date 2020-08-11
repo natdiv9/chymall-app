@@ -22,10 +22,10 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['client_id'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['activation_compte'], $_POST['activation_trading']))
+        if(isset($_POST['id_client'], $_POST['username'], $_POST['niveau'], $_POST['produit'], $_POST['etat_compte'], $_POST['etat_trading']))
         {
             $profilDAO = new Profils();
-            $profil = array($_POST['client_id'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['activation_compte'], $_POST['activation_trading']);
+            $profil = array($_POST['id_client'], $_POST['username'], $_POST['niveau'], 1000, $_POST['produit'], $_POST['etat_compte'], $_POST['etat_trading']);
             $res = $profilDAO->post($profil);
             response($res);
         } else
@@ -33,7 +33,8 @@ switch ($request_method)
             header('Content-Type: application/json');
             echo json_encode( array(
                     "status" => false,
-                    "message" => "Data is not complete"
+                    "message" => "POST Profiles: Data is not complete",
+                    "data" => $_POST
                 )
             );
         }
