@@ -26,18 +26,26 @@ export class PaiementsNewComponent implements OnInit {
 
   initForm() {
     this.newPaiementForm = this.formBuilder.group({
-      motif: ['', [Validators.required]],
-      montant: ['', [Validators.required]]
+      inscription: ['', [Validators.required]],
+      trading: ['', [Validators.required]]
     });
   }
   newPaiement() {
-    const paiement = {
-       id_profile: this.route.snapshot.params.id,
-       montant: this.newPaiementForm.get('montant').value,
-       motif: this.newPaiementForm.get('motif').value,
+
+      const m_inscription = this.newPaiementForm.get('inscription').value;
+      const m_trading = this.newPaiementForm.get('trading').value;
+
+      let f_inscription = (m_inscription * 15) / 100;
+      let f_trading = (m_trading.montant * 15) / 100;
+
+      const paiement = {
+       id_profile: 1,
+       montant_inscription: m_inscription,
+       montant_trading: m_trading,
+       frais_inscription: f_inscription,
+       frais_trading: f_trading,
        date_operation: null
     };
-    console.log(paiement);
     this.crudService.addPaiement(paiement).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {

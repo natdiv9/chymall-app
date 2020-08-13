@@ -10,6 +10,9 @@ export class Client {
     public pays: string;
     public zip: string;
     public photo: string;
-    public etat?: boolean;
+    public etat?: number;
+    public pwd_login: string;
+    public pwd_retrait: string;
+    public date: any;
 }
 

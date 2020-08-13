@@ -73,16 +73,15 @@ export class ClientsNewComponent implements OnInit {
       pays: this.newClientForm.get('pays').value,
       zip: this.newClientForm.get('zip').value,
       photo: '',
-      etat: true
+      etat: 1,
+      pwd_login: '123456',
+      pwd_retrait: '123456'
     };
-
-    console.log(client);
 
     this.crudService.addClient(client).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
             this.modalService.open(this.closeResult);
-            console.log(reponse);
             this.newClientForm.reset();
           } else {
             // this.router.navigate(['clients/new']);

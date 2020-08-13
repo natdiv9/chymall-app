@@ -8,8 +8,10 @@
       <tr>
         <th class="text-center">#</th>
         <th class="text-center">Profile</th>
-        <th class="text-center">Montant</th>
-        <th lass="text-center">Motif</th>
+        <th class="text-center">Montant Inscription</th>
+        <th lass="text-center">Montant Trading</th>
+        <th class="text-center">Frais Inscription</th>
+        <th lass="text-center">Frais Trading</th>
         <th lass="text-center">Date Opération</th>
         <th lass="text-center">Actions</th>
       </tr>
@@ -18,8 +20,10 @@
       <tr *ngFor="let paiement of paiements ; let i = index">
         <td class="text-center text-muted" style="width: 80px;">#{{paiement.id}}</td>
         <td class="text-center">{{paiement.id_profile}}</td>
-        <td class="text-center">{{paiement.montant}}</td>
-        <td class="text-center">{{paiement.motif}}</td>
+        <td class="text-center">{{paiement.montant_inscription}}</td>
+        <td class="text-center">{{paiement.montant_trading}}</td>
+        <td class="text-center">{{paiement.frais_inscription}}</td>
+        <td class="text-center">{{paiement.frais_trading}}</td>
         <td class="text-center">{{paiement.date_operation}}</td>
         <button class="btn-shadow btn btn-primary" [routerLink]="'paiements/' + paiement.id + '/paiement'">Afficher Paiement</button>
       </tr>

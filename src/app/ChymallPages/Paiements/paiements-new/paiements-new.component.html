@@ -3,17 +3,15 @@
     <form [formGroup]="newPaiementForm" (ngSubmit)="newPaiement()">
       <div class="form-row">
         <div class="col-md-6">
-          <div class="position-relative form-group"><label for="exampleSelect">Motif de paiement</label>
-            <select
-                    formControlName="motif" id="exampleSelect" class="form-control">
-              <option>Activation Compte</option>
-              <option>Activation Trading</option>
-            </select>
+          <div class="position-relative form-group"><label for="inscription">Montant Inscription</label>
+            <input
+                    formControlName="inscription" id="inscription" placeholder="10000" type="number"
+                    class="form-control">
           </div>
         </div>
         <div class="col-md-6">
-          <div class="position-relative form-group"><label for="montant">Montant</label><input
-                  formControlName="montant" id="montant" placeholder="10000" type="number"
+          <div class="position-relative form-group"><label for="montant">Montant Trading</label><input
+                  formControlName="trading" id="montant" placeholder="10000" type="number"
                   class="form-control"></div>
         </div>
       </div>
