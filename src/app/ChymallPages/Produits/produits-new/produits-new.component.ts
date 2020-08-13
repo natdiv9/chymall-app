@@ -62,8 +62,6 @@ export class ProduitsNewComponent implements OnInit {
       stock_initial: this.newProduitForm.get('stockInitial').value
     };
 
-    this.modalService.open('Produit enregistré avec succès!');
-
     this.crudService.addProduit(produit).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
