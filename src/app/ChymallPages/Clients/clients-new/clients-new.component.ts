@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 
 @Component({
@@ -29,6 +29,32 @@ export class ClientsNewComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+  }
+
+  open(content) {
+    this.modalService.open(content,
+        {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult =
+          `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  openLarge(content) {
+    this.modalService.open(content, {
+      size: 'lg'
+    });
   }
 
   initForm() {
@@ -77,15 +103,13 @@ export class ClientsNewComponent implements OnInit {
       pwd_login: '123456',
       pwd_retrait: '123456'
     };
-
     this.crudService.addClient(client).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open(this.closeResult);
+            this.modalService.open('Nouveau client enregistré avec succès');
             this.newClientForm.reset();
           } else {
-            // this.router.navigate(['clients/new']);
-            console.log(reponse);
+            this.modalService.open('L\'enregistrement a échoué');
           }
         }
     );

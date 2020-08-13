@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Utilisateur} from '../../../ChymallModels/models/utilisateur';
 
 @Component({
@@ -13,6 +13,7 @@ import {Utilisateur} from '../../../ChymallModels/models/utilisateur';
 export class UtilisateursUpdateComponent implements OnInit {
   updateUserForm: FormGroup;
   utilisateur: Utilisateur;
+  private closeResult: string;
 
   constructor(private formBuilder: FormBuilder,
               private crudService: CrudService,
@@ -22,6 +23,31 @@ export class UtilisateursUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+  }
+
+  open(content) {
+    this.modalService.open(content,
+        {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  openLarge(content) {
+    this.modalService.open(content, {
+      size: 'lg'
+    });
   }
 
   initForm() {
@@ -41,6 +67,23 @@ export class UtilisateursUpdateComponent implements OnInit {
   }
 
   updateUser() {
+    const utilisateur = {
+      username: this.updateUserForm.get('username').value,
+      pwd: this.updateUserForm.get('password').value,
+      service: this.updateUserForm.get('service').value,
+      droits: null,
+      etat: 1
+    };
+    this.crudService.putUtilisateur(utilisateur).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.modalService.open('Modification effectuée avec succès.');
+            this.router.navigate(['utilisateurs/all']);
+          } else {
+            this.modalService.open('Echec de modification.');
+          }
+        }
+    );
 
   }
 }

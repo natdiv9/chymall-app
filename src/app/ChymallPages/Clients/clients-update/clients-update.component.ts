@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Client} from '../../../ChymallModels/models/client';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-clients-update',
@@ -28,6 +28,32 @@ export class ClientsUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+  }
+
+  open(content) {
+    this.modalService.open(content,
+        {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult =
+          `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  openLarge(content) {
+    this.modalService.open(content, {
+      size: 'lg'
+    });
   }
 
   initForm() {
@@ -66,16 +92,18 @@ export class ClientsUpdateComponent implements OnInit {
       pays: this.updateCientForm.get('pays').value,
       zip: this.updateCientForm.get('zip').value,
       photo: this.client.photo,
-      etat: true
+      etat: 1,
+      pwd_login: '123456',
+      pwd_retrait: '123456'
     };
 
     this.crudService.putClient(client).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open(this.closeResult);
+            this.modalService.open('Modification effectuée avec succès!');
             this.updateCientForm.reset();
           } else {
-            this.router.navigate(['clients/all']);
+            this.modalService.open('Modification a echoué!');
           }
         }
     );

@@ -3,7 +3,7 @@ import {Produit} from '../../../ChymallModels/models/produit';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-retrait-produits-new',
@@ -32,6 +32,31 @@ export class RetraitProduitsNewComponent implements OnInit {
     );
   }
 
+  open(content) {
+    this.modalService.open(content,
+        {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult =
+          `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  openLarge(content) {
+    this.modalService.open(content, {
+      size: 'lg'
+    });
+  }
+
   initForm() {
     this.retraitProduitForm = this.formBuilder.group({
       designation: ['', [Validators.required]],
@@ -51,10 +76,11 @@ export class RetraitProduitsNewComponent implements OnInit {
     this.crudService.retraitProduit(retrait_produit).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open(this.closeResult);
+            this.modalService.open('Produit retiré avec succès.');
             this.retraitProduitForm.reset();
           } else {
-            this.router.navigate(['retrait-produits/new']);
+            this.modalService.open('Retrait impossible.');
+            this.retraitProduitForm.reset();
           }
         }
     );

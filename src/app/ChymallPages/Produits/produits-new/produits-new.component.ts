@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-produits-new',
@@ -24,6 +24,32 @@ export class ProduitsNewComponent implements OnInit {
     this.initForm();
   }
 
+  open(content) {
+    this.modalService.open(content,
+        {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult =
+          `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  openLarge(content) {
+    this.modalService.open(content, {
+      size: 'lg'
+    });
+  }
+
   initForm() {
     this.newProduitForm = this.formBuilder.group({
       designation: ['', [Validators.required]],
@@ -36,15 +62,15 @@ export class ProduitsNewComponent implements OnInit {
       stock_initial: this.newProduitForm.get('stockInitial').value
     };
 
-    console.log(produit);
+    this.modalService.open('Produit enregistré avec succès!');
 
     this.crudService.addProduit(produit).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open(this.closeResult);
+            this.modalService.open('Produit enregistré avec succès!');
             this.newProduitForm.reset();
           } else {
-            // this.router.navigate(['clients/new']);
+            this.modalService.open('Enregistrement a échoué!');
           }
           console.log(reponse);
         }

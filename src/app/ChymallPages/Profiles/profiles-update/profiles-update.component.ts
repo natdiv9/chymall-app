@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Profile} from '../../../ChymallModels/models/profile';
 
@@ -25,6 +25,30 @@ export class ProfilesUpdateComponent implements OnInit {
     this.initForm();
   }
 
+  open(content) {
+    this.modalService.open(content,
+        {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult =
+          `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  openLarge(content) {
+    this.modalService.open(content, {
+      size: 'lg'
+    });
+  }
   initForm() {
     const id = this.route.snapshot.params.id;
     this.crudService.getProfiles(id).subscribe(
@@ -59,10 +83,11 @@ export class ProfilesUpdateComponent implements OnInit {
     this.crudService.putProfile(profile).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open(this.closeResult);
+            this.modalService.open('Modification effectuée avec succès!');
             this.updateProfileForm.reset();
           } else {
-            this.router.navigate(['profiles/all']);
+            this.modalService.open('Modification a échoué!');
+            this.updateProfileForm.reset();
           }
         }
     );

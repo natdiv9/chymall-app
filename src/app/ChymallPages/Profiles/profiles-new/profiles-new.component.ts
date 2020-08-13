@@ -47,30 +47,25 @@ export class ProfilesNewComponent implements OnInit {
       etat_compte: 0,
       etat: 1
     };
-    console.log(profile);
     this.crudService.addProfile(profile).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            // this.modalService.open(this.closeResult);
-            // this.newProfileForm.reset();
-            this.router.navigate(['profiles/all']);
+            this.modalService.open('Enregistrement effectué avec succès!');
+            this.newProfileForm.reset();
           } else {
-            // this.router.navigate(['profiles/new']);
+            this.modalService.open('Enregistrement a échoué!');
           }
-          console.log(reponse);
         }
     );
   }
+
   open(content) {
-    this.modalService.open(content).result.then((result) => {
+    this.modalService.open(content,
+        {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-  openLarge(content) {
-    this.modalService.open(content, {
-      size: 'lg'
+      this.closeResult =
+          `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
@@ -83,4 +78,10 @@ export class ProfilesNewComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+  openLarge(content) {
+    this.modalService.open(content, {
+      size: 'lg'
+    });
+  }
+
 }
