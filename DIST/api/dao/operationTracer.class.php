@@ -6,7 +6,7 @@ class OperationTracer
 
     public function __construct()
     {
-        try{
+        /*try{
             require 'connexion.class.php';
             $this->connexion = Connexion::getConnexion();
 
@@ -14,16 +14,16 @@ class OperationTracer
         {
             header('Content-Type: application/json; charset=utf-8');
             die(json_encode(array("status" => false, "message" => "Le serveur a rencontré un problème")));
-        }
+        }*/
     }
 
-    public function get($id = false)
+    public static function get($id = false, $connexion)
     {
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_operation_tracer WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_operation_tracer");
+                ? $connexion->prepare("SELECT * FROM chy_operation_tracer WHERE id=$id LIMIT 1")
+                : $stmt = $connexion->prepare("SELECT * FROM chy_operation_tracer");
 
             $res = $stmt->execute();
 
@@ -46,11 +46,11 @@ class OperationTracer
         }
     }
 
-    public function post($operation)
+    public static function post($operation, $connexion)
     {
         try
         {
-            $stmt = $this->connexion->prepare(
+            $stmt = $connexion->prepare(
                 "INSERT INTO chy_operation_tracer(utilisateur_id, operation)"
                 ."VALUES(?, ?)");
             $res = $stmt->execute(

@@ -1,5 +1,7 @@
 <?php
 
+include 'operationTracer.class.php';
+
 class Clients
 {
     private  $connexion;
@@ -28,9 +30,11 @@ class Clients
             $res = $stmt->execute();
 
             if($res) {
+                OperationTracer::post([3, 'LECTURE SUCCESS'], $this->connexion);
                 return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
             }else{
                 // DEVELOPMENT
+                OperationTracer::post([3, 'LECTURE FAILURE'], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
 
                 // PRODUCTION
@@ -59,9 +63,11 @@ class Clients
 
             if($res)
             {
+                OperationTracer::post([3, 'ECRITURE SUCCESS'], $this->connexion);
                 return array(true, []);
             } else
             {
+                OperationTracer::post([3, 'ECRITURE FAILURE'], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
             }
         } catch (Error | Exception $e)
