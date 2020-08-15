@@ -1,5 +1,7 @@
 <?php
 
+include 'operationTracer.class.php';
+
 class Utilisateurs
 {
     private  $connexion;
@@ -17,7 +19,7 @@ class Utilisateurs
         }
     }
 
-    public function get($id = false)
+    public function get($id = false, $auteur_operation)
     {
        try
        {
@@ -28,17 +30,25 @@ class Utilisateurs
            $res = $stmt->execute();
 
            if($res) {
+               OperationTracer::post([$auteur_operation, 'LECTURE'], $this->connexion);
                return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
            }else{
+               // DEVELOPMENT
+               OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE'], $this->connexion);
                return array(false, "message" => $stmt->errorInfo()[2]);
+
+               // PRODUCTION
+               // return array(false, "message" => "The server encountered a problem");
            }
-       }catch (Exception $e)
+       }catch (Exception | Error $e)
        {
+           // DEVELOPMENT
+           OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE'], $this->connexion);
            return array(false, "message" => $e->getMessage());
        }
     }
 
-    public function post($utilisateur)
+    public function post($utilisateur, $auteur_operation)
     {
        try
        {
@@ -49,18 +59,21 @@ class Utilisateurs
 
            if($res)
            {
+               OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
                return array(true, []);
            } else
            {
+               OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
                return array(false, "message" => $stmt->errorInfo()[2]);
            }
-       } catch (Exception $e)
+       } catch (Error | Exception $e)
        {
+           OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
            return array(false, "message" => $e->getMessage());
        }
     }
 
-    public function put($utilisateur)
+    public function put($utilisateur, $auteur_operation)
     {
         try
         {
@@ -71,12 +84,41 @@ class Utilisateurs
 
             if($res)
             {
+                OperationTracer::post([$auteur_operation, 'MISE A JOUR', $this->table_name], $this->connexion);
                 return array(true, []);
             } else
             {
+                OperationTracer::post([$auteur_operation, 'TENTATIVE DE MISE A JOUR', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
             }
-        } catch (Exception $e)
+        } catch (Error | Exception $e)
+        {
+            OperationTracer::post([$auteur_operation, 'TENTATIVE DE MISE A JOUR', $this->table_name], $this->connexion);
+            return array(false, "message" => $e->getMessage());
+        }
+    }
+
+    public function auth($utilisateur)
+    {
+        try
+        {
+            $stmt = $this->connexion->prepare("SELECT * FROM chy_utilisateurs WHERE username=? AND pwd=? LIMIT 1");
+
+            $res = $stmt->execute($utilisateur);
+
+            if($res) {
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $is_auth = (sizeof($data) > 0) ? true : false;
+                if($is_auth) {
+                    $data = $data[0];
+                    $data["pwd"] = NULL;
+                    return array(true, $data);
+                }
+                return array(false, "message" => "Echec Authentification");
+            }else{
+                return array(false, "message" => $stmt->errorInfo()[2]);
+            }
+        }catch (Exception $e)
         {
             return array(false, "message" => $e->getMessage());
         }

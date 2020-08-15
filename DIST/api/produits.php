@@ -7,17 +7,28 @@ switch ($request_method)
 {
     case 'GET':
         $produitDAO = new Produits();
-        if(!empty($_GET['id']))
+        if(isset($_GET['auteur_operation']))
         {
-            // Un produit
-            $id = intval($_GET['id']);
-            $res = $produitDAO->get($id);
-            response($res);
-        } else {
-            // Tous les produits
-            $res = $produitDAO->get();
-            response($res);
+            if(!empty($_GET['id']))
+            {
+                // Un produit
+                $id = intval($_GET['id']);
+                $res = $produitDAO->get($id, $_GET['auteur_operation']);
+                response($res);
+            } else {
+                // Tous les produits
+                $res = $produitDAO->get(false, $_GET['auteur_operation']);
+                response($res);
 
+            }
+        } else
+        {
+            header('Content-Type: application/json');
+            echo json_encode( array(
+                    "status" => false,
+                    "message" => "Data is not complete"
+                )
+            );
         }
         break;
     case 'POST':

@@ -51,8 +51,8 @@ class OperationTracer
         try
         {
             $stmt = $connexion->prepare(
-                "INSERT INTO chy_operation_tracer(utilisateur_id, operation)"
-                ."VALUES(?, ?)");
+                "INSERT INTO chy_operation_tracer(auteur_operation, operation, table)"
+                ."VALUES(?, ?, ?)");
             $res = $stmt->execute(
                 $operation
             );

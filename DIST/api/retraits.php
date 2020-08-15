@@ -7,17 +7,28 @@ switch ($request_method)
 {
     case 'GET':
         $retraitsDAO = new Retraits();
-        if(!empty($_GET['id']))
+        if(isset($_GET['auteur_operation']))
         {
-            // Un retrait
-            $id = intval($_GET['id']);
-            $res = $retraitsDAO->get($id);
-            response($res);
-        } else {
-            // Tous les retraits
-            $res = $retraitsDAO->get();
-            response($res);
+            if(!empty($_GET['id']))
+            {
+                // Un retrait
+                $id = intval($_GET['id']);
+                $res = $retraitsDAO->get($id);
+                response($res);
+            } else {
+                // Tous les retraits
+                $res = $retraitsDAO->get();
+                response($res);
 
+            }
+        } else
+        {
+            header('Content-Type: application/json');
+            echo json_encode( array(
+                    "status" => false,
+                    "message" => "Data is not complete"
+                )
+            );
         }
         break;
     case 'POST':

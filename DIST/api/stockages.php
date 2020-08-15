@@ -7,17 +7,28 @@ switch ($request_method)
 {
     case 'GET':
         $stockageDAO = new Stockages();
-        if(!empty($_GET['id']))
+        if(isset($_GET['auteur_operation']))
         {
-            // Un stockage
-            $id = intval($_GET['id']);
-            $res = $stockageDAO->get($id);
-            response($res);
-        } else {
-            // Tous les stockages
-            $res = $stockageDAO->get();
-            response($res);
+            if(!empty($_GET['id']))
+            {
+                // Un stockage
+                $id = intval($_GET['id']);
+                $res = $stockageDAO->get($id, $_GET['auteur_operation']);
+                response($res);
+            } else {
+                // Tous les stockages
+                $res = $stockageDAO->get(false, $_GET['auteur_operation']);
+                response($res);
 
+            }
+        } else
+        {
+            header('Content-Type: application/json');
+            echo json_encode( array(
+                    "status" => false,
+                    "message" => "Data is not complete"
+                )
+            );
         }
         break;
     case 'POST':

@@ -7,17 +7,28 @@ switch ($request_method)
 {
     case 'GET':
         $profilDAO = new Profils();
-        if(!empty($_GET['id']))
+        if(isset($_GET['auteur_operation']))
         {
-            // Un profil
-            $id = intval($_GET['id']);
-            $res = $profilDAO->get($id);
-            response($res);
-        } else {
-            // Tous les profils
-            $res = $profilDAO->get();
-            response($res);
+            if(!empty($_GET['id']))
+            {
+                // Un profil
+                $id = intval($_GET['id']);
+                $res = $profilDAO->get($id, $_GET['auteur_operation']);
+                response($res);
+            } else {
+                // Tous les profils
+                $res = $profilDAO->get(false, $_GET['auteur_operation']);
+                response($res);
 
+            }
+        } else
+        {
+            header('Content-Type: application/json');
+            echo json_encode( array(
+                    "status" => false,
+                    "message" => "Data is not complete"
+                )
+            );
         }
         break;
     case 'POST':

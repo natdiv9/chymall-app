@@ -8,17 +8,28 @@ switch ($request_method)
 {
     case 'GET':
         $clientsDAO = new Clients();
-        if(!empty($_GET['id']))
+        if(isset($_GET['auteur_operation']))
         {
-            // Un client
-            $id = intval($_GET['id']);
-            $res = $clientsDAO->get($id);
-            response($res);
-        } else {
-            // Tous les clients
-            $res = $clientsDAO->get();
-            response($res);
+            if(!empty($_GET['id']))
+            {
+                // Un client
+                $id = intval($_GET['id']);
+                $res = $clientsDAO->get($id, $_GET['auteur_operation']);
+                response($res);
+            } else {
+                // Tous les clients
+                $res = $clientsDAO->get(false, $_GET['auteur_operation']);
+                response($res);
 
+            }
+        } else
+        {
+            header('Content-Type: application/json');
+            echo json_encode( array(
+                    "status" => false,
+                    "message" => "Data is not complete"
+                )
+            );
         }
         break;
     case 'POST':

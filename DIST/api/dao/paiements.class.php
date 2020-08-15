@@ -1,9 +1,11 @@
 <?php
 
+include 'operationTracer.class.php';
 
 class Paiements
 {
     private  $connexion;
+    private $table_name = 'chy_paiements';
 
     public function __construct()
     {
@@ -18,7 +20,7 @@ class Paiements
         }
     }
 
-    public function get($id = false)
+    public function get($id = false, $auteur_operation)
     {
         try
         {
@@ -29,9 +31,11 @@ class Paiements
             $res = $stmt->execute();
 
             if($res) {
+                OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
                 return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
             }else{
                 // DEVELOPMENT
+                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
 
                 // PRODUCTION
@@ -40,6 +44,7 @@ class Paiements
         }catch (Exception | Error $e)
         {
             // DEVELOPMENT
+            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
 
             // PRODUCTION
@@ -47,7 +52,7 @@ class Paiements
         }
     }
 
-    public function post($paiement)
+    public function post($paiement, $auteur_operation)
     {
         try
         {
@@ -60,18 +65,21 @@ class Paiements
 
             if($res)
             {
+                OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
                 return array(true, []);
             } else
             {
+                OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
             }
         } catch (Error | Exception $e)
         {
+            OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
         }
     }
 
-    public function put($paiement)
+    public function put($paiement, $auteur_operation)
     {
         try
         {
@@ -83,13 +91,16 @@ class Paiements
 
             if($res)
             {
+                OperationTracer::post([$auteur_operation, 'MISE A JOUR', $this->table_name], $this->connexion);
                 return array(true, []);
             } else
             {
+                OperationTracer::post([$auteur_operation, 'TENTATIVE DE MISE A JOUR', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
             }
         } catch (Error | Exception $e)
         {
+            OperationTracer::post([$auteur_operation, 'TENTATIVE DE MISE A JOUR', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
         }
     }

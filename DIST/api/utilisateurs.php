@@ -7,17 +7,28 @@
     {
         case 'GET':
             $utilisateursDAO = new Utilisateurs();
-            if(!empty($_GET['id']))
+            if(isset($_GET['auteur_operation']))
             {
-                // Un utilsateur
-                $id = intval($_GET['id']);
-                $res = $utilisateursDAO->get($id);
-                response($res);
-            } else {
-                // Tous les utilisateurs
-                $res = $utilisateursDAO->get();
-                response($res);
+                if(!empty($_GET['id']))
+                {
+                    // Un utilsateur
+                    $id = intval($_GET['id']);
+                    $res = $utilisateursDAO->get($id, $_GET['auteur_operation']);
+                    response($res);
+                } else {
+                    // Tous les utilisateurs
+                    $res = $utilisateursDAO->get(false, $_GET['auteur_operation']);
+                    response($res);
 
+                }
+            } else
+            {
+                header('Content-Type: application/json');
+                echo json_encode( array(
+                        "status" => false,
+                        "message" => "Data is not complete"
+                    )
+                );
             }
             break;
         case 'POST':
