@@ -22,6 +22,7 @@ export class PaiementsUpdateComponent implements OnInit {
               private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.initForm();
   }
 
   open(content) {
