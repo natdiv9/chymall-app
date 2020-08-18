@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import {AuthService} from '../../../ChymallServices/auth/auth.service';
 
 @Component({
   selector: 'app-clients-new',
@@ -21,11 +22,13 @@ export class ClientsNewComponent implements OnInit {
   icon = 'pe-7s-phone icon-gradient bg-premium-dark';
 
   closeResult: string;
+  private message: string;
 
   constructor(private formBuilder: FormBuilder,
               private modalService: NgbModal,
               private router: Router,
-              private crudService: CrudService) { }
+              private crudService: CrudService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.initForm();
@@ -87,7 +90,7 @@ export class ClientsNewComponent implements OnInit {
   }
 
 
-  newClient() {
+  newClient(content: any) {
     const client = {
       telephone: this.newClientForm.get('telephone').value,
       email: this.newClientForm.get('email').value,
@@ -101,15 +104,18 @@ export class ClientsNewComponent implements OnInit {
       photo: '',
       etat: 1,
       pwd_login: '123456',
-      pwd_retrait: '123456'
+      pwd_retrait: '123456',
+      auteur_operation: this.authService.currentUser.username
     };
     this.crudService.addClient(client).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open('Nouveau client enregistré avec succès');
+            this.message = 'Nouveau client enregistré avec succès';
+            this.open(content);
             this.newClientForm.reset();
           } else {
-            this.modalService.open('L\'enregistrement a échoué');
+            this.message = 'L\'enregistrement a échoué';
+            this.open(content);
           }
         }
     );

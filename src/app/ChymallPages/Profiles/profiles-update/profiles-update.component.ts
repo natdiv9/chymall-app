@@ -56,13 +56,17 @@ export class ProfilesUpdateComponent implements OnInit {
           if (response.status) {
             this.profile = response.data;
             this.updateProfileForm = this.formBuilder.group({
-              idClient: this.profile.id_client,
+              id_client: this.profile.id_client,
               username: this.profile.username,
-              produit: this.profile.produit,
-              niveau: this.profile.niveau,
-              etatTrading: this.profile.etat_trading,
-              etatCompte: this.profile.etat_compte,
-              etat: this.profile.etat
+              niveau_adhesion: this.profile.niveau_adhesion,
+              capital: this.profile.capital,
+              produit_trading: this.profile.produit_trading,
+              activation_compte: this.profile.activation_compte,
+              activation_trading: this.profile.activation_trading,
+              solde: this.profile.solde,
+              etat_trading: this.profile.etat_trading,
+              etat_activation: this.profile.etat_activation,
+              etat: this.profile.etat,
             });
           }
         }
@@ -70,16 +74,15 @@ export class ProfilesUpdateComponent implements OnInit {
   }
 
   updateProfile() {
-    const profile = {
+    /*const profile = {
       id_client: this.profile.id_client,
       username: this.updateProfileForm.get('username').value,
       produit: this.updateProfileForm.get('produit').value,
       niveau: this.updateProfileForm.get('niveau').value,
       etat_trading: this.profile.etat_trading,
       etat_compte: this.profile.etat_compte,
-      etat: 1
+      etat:
     };
-
     this.crudService.putProfile(profile).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
@@ -90,6 +93,6 @@ export class ProfilesUpdateComponent implements OnInit {
             this.updateProfileForm.reset();
           }
         }
-    );
+    );*/
   }
 }

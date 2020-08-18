@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {Retrait} from '../../../ChymallModels/models/retrait';
+import {AuthService} from '../../../ChymallServices/auth/auth.service';
 
 @Component({
   selector: 'app-retraits-all',
@@ -11,10 +12,11 @@ export class RetraitsAllComponent implements OnInit {
 
   retraits: Retrait[] = [];
 
-  constructor(private crudService: CrudService) { }
+  constructor(private crudService: CrudService,
+              private authService: AuthService) { }
 
   ngOnInit() {
-    this.crudService.getRetraits().subscribe(
+    this.crudService.getRetraits(this.authService.currentUser.username).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
             this.retraits = reponse.data;

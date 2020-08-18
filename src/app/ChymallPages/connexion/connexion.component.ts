@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../ChymallServices/crud/crud.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../ChymallServices/auth/auth.service';
 
 @Component({
   selector: 'app-connexion',
@@ -11,9 +12,10 @@ import {Router} from '@angular/router';
 export class ConnexionComponent implements OnInit {
   loginForm: FormGroup;
   message = '';
+  isChargement = false;
 
   constructor(private formBuilder: FormBuilder,
-              private crudService: CrudService,
+              private authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
@@ -27,30 +29,36 @@ export class ConnexionComponent implements OnInit {
     });
   }
 
-  newConnexion() {
+  connexion() {
+    this.isChargement = true;
     const username = this.loginForm.get('username').value;
     const pwd = this.loginForm.get('pwd').value;
 
-    this.crudService.getConnection(username, pwd).subscribe(
+    this.authService.auth(username, pwd).subscribe(
         (reponse: any) => {
       if (reponse.status === true) {
-        this.crudService.currentUser = reponse.data;
-        if (this.crudService.currentUser.service === 'adhesion') {
+        this.authService.currentUser = reponse.data;
+        this.authService.connected = true;
+        this.isChargement = false;
+        if (this.authService.currentUser.service === 'adhesion') {
           this.router.navigate(['clients/new']);
-        } else if (this.crudService.currentUser.service === 'comptabilite') {
+        } else if (this.authService.currentUser.service === 'comptabilite') {
           this.router.navigate(['profiles/all']);
-        } else if (this.crudService.currentUser.service === 'retrait') {
+        } else if (this.authService.currentUser.service === 'retrait') {
           this.router.navigate(['retrait/new']);
-        } else if (this.crudService.currentUser.service === 'technique') {
+        } else if (this.authService.currentUser.service === 'technique') {
           this.router.navigate(['retrait/new']);
         }
-        this.router.navigate(['']);
+        // this.router.navigate(['/']);
       } else {
-        this.message = 'Connexion impossible';
+        this.isChargement = false;
+        this.message = reponse.message;
       }
     },
         (error1 => {
-          this.message = 'Erreur inconnue';
+          this.isChargement = false;
+          this.message = 'Une erreur inconnue est survenue';
+          console.log(error1);
         }));
   }
 }

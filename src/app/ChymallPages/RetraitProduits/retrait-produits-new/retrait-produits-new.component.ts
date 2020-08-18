@@ -4,6 +4,7 @@ import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService} from '../../../ChymallServices/auth/auth.service';
 
 @Component({
   selector: 'app-retrait-produits-new',
@@ -17,13 +18,14 @@ export class RetraitProduitsNewComponent implements OnInit {
   closeResult: string;
 
   constructor(private crudService: CrudService,
+              private authService: AuthService,
               private modalService: NgbModal,
               private route: ActivatedRoute,
               private router: Router,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.crudService.getProduits().subscribe(
+    this.crudService.getProduits(this.authService.currentUser.username).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
             this.produits = reponse.data;

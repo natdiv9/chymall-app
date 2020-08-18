@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Client} from '../../ChymallModels/models/client';
 import {Paiement} from '../../ChymallModels/models/paiement';
@@ -10,114 +10,116 @@ import {Utilisateur} from '../../ChymallModels/models/utilisateur';
 import {RetraitProduits} from '../../ChymallModels/models/retrait-produits';
 
 // Environment
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CrudService {
 
     currentUser: Utilisateur;
 
-  constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient) {
+    }
 
-  uploadFile(file: File) {
-    return new Promise(
-        (resolve, reject) => {
-          const almostUniqueFileName = Date.now().toString();
-        }
-    );
-  }
+    uploadFile(file: File) {
+        return new Promise(
+            (resolve, reject) => {
+                const almostUniqueFileName = Date.now().toString();
+            }
+        );
+    }
 
-  addClient(client: any) {
-      return this.httpClient.post(`${environment.server_base_url}/clients.php`, client);
-  }
+    addClient(client: any) {
+        return this.httpClient.post(`${environment.server_base_url}/clients.php`, client);
+    }
 
-  addPaiement(paiement: Paiement) {
-      return this.httpClient.post(`${environment.server_base_url}/paiements.php`, paiement);
-  }
+    addPaiement(paiement: Paiement) {
+        return this.httpClient.post(`${environment.server_base_url}/paiements.php`, paiement);
+    }
 
-  addProduit(produit: Produit) {
-      return this.httpClient.post(`${environment.server_base_url}/produits.php`, produit);
-  }
+    addProduit(produit: Produit) {
+        return this.httpClient.post(`${environment.server_base_url}/produits.php`, produit);
+    }
 
-  addProfile(profile: Profile) {
-      return this.httpClient.post(`${environment.server_base_url}/profiles.php`, profile);
-  }
+    addProfile(profile: Profile) {
+        return this.httpClient.post(`${environment.server_base_url}/profiles.php`, profile);
+    }
 
-  addRetrait(retrait: Retrait) {
-      return this.httpClient.post(`${environment.server_base_url}/retraits.php`, retrait);
-  }
+    addRetrait(retrait: Retrait) {
+        return this.httpClient.post(`${environment.server_base_url}/retraits.php`, retrait);
+    }
 
-  addStockage(stockage: Stockage) {
-      return this.httpClient.post(`${environment.server_base_url}/stockages.php`, stockage);
-  }
+    addStockage(stockage: Stockage) {
+        return this.httpClient.post(`${environment.server_base_url}/stockages.php`, stockage);
+    }
 
-  addUtilisateur(utilisateur: Utilisateur) {
-      return this.httpClient.post(`${environment.server_base_url}/utilisateurs.php`, utilisateur);
-  }
+    addUtilisateur(utilisateur: Utilisateur) {
+        return this.httpClient.post(`${environment.server_base_url}/utilisateurs.php`, utilisateur);
+    }
 
-  getProfiles(id?: number) {
-      return this.httpClient.get(`${environment.server_base_url}/profiles.php`);
-  }
+    getProfiles(auteur_operation: string, id?: number, is_by_client: boolean = false) {
+        return this.httpClient.get(
+            `${environment.server_base_url}/profiles.php?auteur_operation=${auteur_operation}&id=${id}&is_by_client=${is_by_client}`);
+    }
 
-  getClients(id?: number) {
-        return this.httpClient.get(`${environment.server_base_url}/clients.php`);
-  }
+    getClients(auteur_operation: string, id?: number) {
+        return this.httpClient.get(`${environment.server_base_url}/clients.php?auteur_operation=${auteur_operation}&id=${id}`);
+    }
 
-  getPaiements(id?: number) {
-        return this.httpClient.get(`${environment.server_base_url}/paiements.php`);
-  }
+    getPaiements(auteur_operation: string, id?: number) {
+        return this.httpClient.get(`${environment.server_base_url}/paiements.php?auteur_operation=${auteur_operation}&id=${id}`);
+    }
 
-  getProduits(id?: number) {
-      return this.httpClient.get(`${environment.server_base_url}/produits.php`);
-  }
+    getProduits(auteur_operation: string, id?: number) {
+        return this.httpClient.get(`${environment.server_base_url}/produits.php?auteur_operation=${auteur_operation}&id=${id}`);
+    }
 
-  getRetraits(id?: number) {
-      return this.httpClient.get(`${environment.server_base_url}/retraits.php`);
-  }
+    getRetraits(auteur_operation: string, id?: number) {
+        return this.httpClient.get(`${environment.server_base_url}/retraits.php?auteur_operation=${auteur_operation}&id=${id}`);
+    }
 
-  getStockages(id?: number) {
-      return this.httpClient.get(`${environment.server_base_url}/stockages.php`);
-  }
+    getStockages(auteur_operation: string, id?: number) {
+        return this.httpClient.get(`${environment.server_base_url}/stockages.php?auteur_operation=${auteur_operation}&id=${id}`);
+    }
 
-  getUtilisateurs(id?: number) {
-      return this.httpClient.get(`${environment.server_base_url}/utilisateurs.php`);
-  }
+    getUtilisateurs(auteur_operation: string, id?: number) {
+        return this.httpClient.get(`${environment.server_base_url}/utilisateurs.php?auteur_operation=${auteur_operation}&id=${id}`);
+    }
 
-  putClient(client: Client) {
-     return this.httpClient.put(`${environment.server_base_url}/clients,php`, client);
-  }
+    putClient(client: Client) {
+        return this.httpClient.put(`${environment.server_base_url}/clients,php`, client);
+    }
 
-  putProfile(profile: Profile) {
-      return this.httpClient.put(`${environment.server_base_url}/profiles.php`, profile);
-  }
+    putProfile(profile: Profile) {
+        return this.httpClient.put(`${environment.server_base_url}/profiles.php`, profile);
+    }
 
-  putPaiement(paiement: Paiement) {
-      return this.httpClient.put(`${environment.server_base_url}/paiements.php`, paiement);
-  }
+    putPaiement(paiement: Paiement) {
+        return this.httpClient.put(`${environment.server_base_url}/paiements.php`, paiement);
+    }
 
-  putProduit(produit: Produit) {
-      return this.httpClient.put(`${environment.server_base_url}/produits.php`, produit);
-  }
+    putProduit(produit: Produit) {
+        return this.httpClient.put(`${environment.server_base_url}/produits.php`, produit);
+    }
 
-  putRetrait(retrait: Retrait) {
-      return this.httpClient.put(`${environment.server_base_url}/retraits.php`, retrait);
-  }
+    putRetrait(retrait: Retrait) {
+        return this.httpClient.put(`${environment.server_base_url}/retraits.php`, retrait);
+    }
 
-  putStockage(stockage: Stockage) {
-      return this.httpClient.put(`${environment.server_base_url}/stockages.php`, stockage);
-  }
+    putStockage(stockage: Stockage) {
+        return this.httpClient.put(`${environment.server_base_url}/stockages.php`, stockage);
+    }
 
-  putUtilisateur(utilisateur: Utilisateur) {
-      return this.httpClient.put(`${environment.server_base_url}/utilisateurs.php`, utilisateur);
-  }
-
-  getConnection(username: string, pwd: string) {
-        return this.httpClient.put('localhost/chymall/DIST/api/controllers/', {username, pwd});
-  }
+    putUtilisateur(utilisateur: Utilisateur) {
+        return this.httpClient.put(`${environment.server_base_url}/utilisateurs.php`, utilisateur);
+    }
 
     retraitProduit(retraitProduit: RetraitProduits) {
-        return this.httpClient.put('localhost/chymall/DIST/api/controllers/', retraitProduit);
+        return this.httpClient.put(`${environment.server_base_url}/retrait_produits.php`, retraitProduit);
+    }
+
+    getOperations() {
+        return this.httpClient.get(`${environment.server_base_url}/operations.php`);
     }
 }

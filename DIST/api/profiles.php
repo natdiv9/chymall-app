@@ -11,10 +11,18 @@ switch ($request_method)
         {
             if(!empty($_GET['id']))
             {
-                // Un profil
-                $id = intval($_GET['id']);
-                $res = $profilDAO->get($id, $_GET['auteur_operation']);
-                response($res);
+                if(isset($_GET['is_by_client']) && $_GET['is_by_client'] == true){
+                    // Un profil
+                    $id = intval($_GET['id']);
+                    $res = $profilDAO->getByClient($id, $_GET['auteur_operation']);
+                    response($res);
+                } else {
+                    // Un profil
+                    $id = intval($_GET['id']);
+                    $res = $profilDAO->get($id, $_GET['auteur_operation']);
+                    response($res);
+                }
+
             } else {
                 // Tous les profils
                 $res = $profilDAO->get(false, $_GET['auteur_operation']);
@@ -33,11 +41,11 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['id_client'], $_POST['username'], $_POST['niveau'], $_POST['produit'], $_POST['etat_compte'], $_POST['etat_trading']))
+        if(isset($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['auteur_operation']))
         {
             $profilDAO = new Profils();
-            $profil = array($_POST['id_client'], $_POST['username'], $_POST['niveau'], 1000, $_POST['produit'], $_POST['etat_compte'], $_POST['etat_trading']);
-            $res = $profilDAO->post($profil);
+            $profil = array($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation']);
+            $res = $profilDAO->post($profil, $_POST['auteur_operation']);
             response($res);
         } else
         {

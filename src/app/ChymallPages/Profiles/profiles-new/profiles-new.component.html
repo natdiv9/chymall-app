@@ -1,58 +1,72 @@
-
 <div class="main-card mb-3 card">
-  <div class="card-body"><h5 class="card-title">CREER PROFILE</h5>
-    <form [formGroup]="newProfileForm" (ngSubmit)="newProfile()">
+    <div class="card-body">
+        <h5 class="card-title">CREER PROFILE</h5>
+        <form [formGroup]="newProfileForm" (ngSubmit)="newProfile(content)">
 
-      <div class="form-row">
-        <div class="col-md-6">
-          <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label><input formControlName="username"
-                                                                                                          id="username"
-                                                                                                          placeholder="usename"
-                                                                                                          type="text"
-                                                                                                          class="form-control">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="position-relative form-group"><label for="produit">Produit de trading</label><input
-                  formControlName="produit" id="produit" placeholder="Sac à main" type="text"
-                  class="form-control"></div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col-md-6">
-          <div class="position-relative form-group"><label for="exampleSelect">Niveau d'adhésion</label>
-            <select
-                    formControlName="niveau" id="exampleSelect" class="form-control">
-              <option>VIP-1</option>
-              <option>VIP-2</option>
-              <option>VIP-3</option>
-              <option>VIP-4</option>
-              <option>VIP-5</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <button class="mt-2 btn btn-primary float-right" [disabled]="newProfileForm.invalid">Ajouter profile</button>
-    </form>
+            <div class="form-row">
+                <div class="col-6">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label><input
+                                    formControlName="username"
+                                    id="username"
+                                    type="text"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="produit_trading">Produit de trading</label><input
+                                    formControlName="produit_trading" id="produit_trading" placeholder="" type="text"
+                                    class="form-control"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="exampleSelect">Niveau d'adhésion</label>
+                                <select #vip (change)="patcs(vip)"
+                                        formControlName="niveau_adhesion" id="exampleSelect" class="form-control">
+                                    <option value="VIP-1">VIP-1</option>
+                                    <option value="VIP-2">VIP-2</option>
+                                    <option value="VIP-3">VIP-3</option>
+                                    <option value="VIP-4">VIP-4</option>
+                                    <option value="VIP-5">VIP-5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="capital">Montant d'inscription</label><input
+                                    formControlName="capital" id="capital" placeholder="" type="text" readonly
+                                    class="form-control" [disabled]="true" [value]="ct_inscription"></div>
+                        </div>
+                        <div class="col-md-12" *ngIf="trading_state!==0">
+                            <div class="position-relative form-group"><label for="activation_compte">Coût total (Trading + Inscription)</label><input
+                                    formControlName="activation_compte" id="activation_compte" placeholder="" type="text" readonly
+                                    class="form-control" [disabled]="true" [value]="cout_total"></div>
+                        </div>
+                        <div class="col-md-12" *ngIf="trading_state!==0">
+                            <div class="position-relative form-group"><label for="activation_trading">Coût total + (15%) Frais de transfert</label><input
+                                    formControlName="activation_trading" id="activation_trading" placeholder="" type="text" readonly
+                                    class="form-control" [disabled]="true" [value]="ct_frais_tranfert"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="mt-2 btn btn-primary float-right" [disabled]="newProfileForm.invalid">Ajouter profile
+            </button>
+        </form>
 
-  </div>
+    </div>
 </div>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{message}}</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+    </div>
+</ng-template>
 
-<div class="col-md-3">
-      <ng-template #content6 let-c="close" let-d="dismiss">
-        <div class="modal-header">
-          <h4 class="modal-title">Ajout Profile</h4>
-          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>
-            Profile ajouté avec succès
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="c('Close click')">OK</button>
-        </div>
-      </ng-template>
-</div>

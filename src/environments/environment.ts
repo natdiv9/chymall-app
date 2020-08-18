@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  server_base_url: 'https://chymalldemo.000webhostapp.com/api'
+  server_base_url: 'http://localhost/api'
 };
 
 /*

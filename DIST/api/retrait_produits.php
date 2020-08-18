@@ -1,24 +1,24 @@
 <?php
 
-include 'dao/clients.class.php';
+include 'dao/retrait_produits.class.php';
 $request_method = $_SERVER["REQUEST_METHOD"];
 
 
 switch ($request_method)
 {
     case 'GET':
-        $clientsDAO = new Clients();
+        $retraitDAO = new RetraitProduits();
         if(isset($_GET['auteur_operation']))
         {
             if(!empty($_GET['id']))
             {
                 // Un client
                 $id = intval($_GET['id']);
-                $res = $clientsDAO->get($id, $_GET['auteur_operation']);
+                $res = $retraitDAO->get($id, $_GET['auteur_operation']);
                 response($res);
             } else {
                 // Tous les clients
-                $res = $clientsDAO->get(false, $_GET['auteur_operation']);
+                $res = $retraitDAO->get(false, $_GET['auteur_operation']);
                 response($res);
 
             }
@@ -34,10 +34,10 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['telephone'], $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], $_POST['photo'], $_POST['auteur_operation']))
+        if(isset($_POST['quantite'], $_POST['id_profile'], $_POST['id_produit'], $_POST['auteur_operation']))
         {
             $clientsDAO = new Clients();
-            $client = array($_POST['telephone'], (isset($_POST['email'])? $_POST['email']: ''), $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], (isset($_POST['zip'])? $_POST['zip']: ''), $_POST['photo']);
+            $client = array($_POST['quantite'], $_POST['id_profile'], $_POST['id_produit']);
             $res = $clientsDAO->post($client, $_POST['auteur_operation']);
             response($res);
         } else
@@ -49,26 +49,6 @@ switch ($request_method)
                 )
             );
         }
-        break;
-    case 'PUT':
-        $_PUT = json_decode(file_get_contents('php://input'), true);
-        if(isset($_PUT['id'], $_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['photo'], $_PUT['zip'], $_PUT['etat'], $_PUT['auteur_operation']))
-        {
-            $clientsDAO = new Clients();
-            $clients = array($_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['zip'], $_PUT['photo'], $_PUT['etat'], intval($_PUT['id']));
-            $res = $clientsDAO->put($clients, $_PUT['auteur_operation']);
-            response($res);
-        } else
-        {
-            header('Content-Type: application/json');
-            echo json_encode( array(
-                    "status" => false,
-                    "message" => "PUT Client: Data is not complete"
-                )
-            );
-        }
-        break;
-    case 'DELETE':
         break;
     default:
         http_response_code(405);

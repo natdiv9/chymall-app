@@ -1,12 +1,15 @@
 <?php
 
-class OperationTracer
+include 'operationTracer.class.php';
+
+class Operations
 {
-    private  $connexion;
+    private $connexion;
+    private $table_name = 'chy_operation_tracer';
 
     public function __construct()
     {
-        /*try{
+        try{
             require 'connexion.class.php';
             $this->connexion = Connexion::getConnexion();
 
@@ -14,23 +17,25 @@ class OperationTracer
         {
             header('Content-Type: application/json; charset=utf-8');
             die(json_encode(array("status" => false, "message" => "Le serveur a rencontré un problème")));
-        }*/
+        }
     }
 
-    public static function get($id = false, $connexion)
+    public function get($id = false)
     {
         try
         {
             $stmt = ($id)
-                ? $connexion->prepare("SELECT * FROM chy_operation_tracer WHERE id=$id LIMIT 1")
-                : $stmt = $connexion->prepare("SELECT * FROM chy_operation_tracer");
+                ? $this->connexion->prepare("SELECT * FROM chy_operation_tracer WHERE id=$id LIMIT 1")
+                : $stmt = $this->connexion->prepare("SELECT * FROM chy_operation_tracer");
 
             $res = $stmt->execute();
 
             if($res) {
+                // OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
                 return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
             }else{
                 // DEVELOPMENT
+                // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
 
                 // PRODUCTION
@@ -39,34 +44,11 @@ class OperationTracer
         }catch (Exception | Error $e)
         {
             // DEVELOPMENT
+            // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
 
             // PRODUCTION
             // return array(false, "message" => "The server encountered a problem");
-        }
-    }
-
-    public static function post($operation, $connexion)
-    {
-        try
-        {
-            $stmt = $connexion->prepare(
-                "INSERT INTO chy_operation_tracer(auteur_operation, operation, `table`)"
-                ."VALUES(?, ?, ?)");
-            $res = $stmt->execute(
-                $operation
-            );
-
-            if($res)
-            {
-                return array(true, []);
-            } else
-            {
-                return array(false, "message" => $stmt->errorInfo()[2]);
-            }
-        } catch (Error | Exception $e)
-        {
-            return array(false, "message" => $e->getMessage());
         }
     }
 }

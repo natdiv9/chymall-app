@@ -5,6 +5,7 @@ include 'operationTracer.class.php';
 class Utilisateurs
 {
     private  $connexion;
+    private $table_name = 'chy_utilisateurs';
 
     public function __construct()
     {
@@ -30,11 +31,11 @@ class Utilisateurs
            $res = $stmt->execute();
 
            if($res) {
-               OperationTracer::post([$auteur_operation, 'LECTURE'], $this->connexion);
+               OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
                return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
            }else{
                // DEVELOPMENT
-               OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE'], $this->connexion);
+               OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
                return array(false, "message" => $stmt->errorInfo()[2]);
 
                // PRODUCTION
@@ -43,7 +44,7 @@ class Utilisateurs
        }catch (Exception | Error $e)
        {
            // DEVELOPMENT
-           OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE'], $this->connexion);
+           OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
            return array(false, "message" => $e->getMessage());
        }
     }
@@ -112,9 +113,10 @@ class Utilisateurs
                 if($is_auth) {
                     $data = $data[0];
                     $data["pwd"] = NULL;
+                    OperationTracer::post([$data["username"], 'CONNEXION', $this->table_name], $this->connexion);
                     return array(true, $data);
                 }
-                return array(false, "message" => "Echec Authentification");
+                return array(false, "message" => "Vos identifiants ne sont pas correctes");
             }else{
                 return array(false, "message" => $stmt->errorInfo()[2]);
             }

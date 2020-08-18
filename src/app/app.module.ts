@@ -135,6 +135,7 @@ import { RetraitProduitsAllComponent } from './ChymallPages/RetraitProduits/retr
 import { RetraitProduitsIdComponent } from './ChymallPages/RetraitProduits/retrait-produits-id/retrait-produits-id.component';
 import { ActivitesComponent } from './ChymallPages/activites/activites.component';
 import { PaiementsUpdateComponent } from './ChymallPages/Paiements/paiements-update/paiements-update.component';
+import { ProfilesByClientComponent } from './ChymallPages/Profiles/profiles-by-client/profiles-by-client.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -257,6 +258,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RetraitProduitsIdComponent,
     ActivitesComponent,
     PaiementsUpdateComponent,
+    ProfilesByClientComponent,
   ],
   imports: [
     BrowserModule,

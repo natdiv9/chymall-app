@@ -7,13 +7,13 @@
             <button type="button" class="btn btn-link p-0 mr-2" ngbDropdownToggle>
               <span>
                 <div class="icon-wrapper icon-wrapper-alt rounded-circle">
-                  <img width="42" src="../../../../../../assets/images/avatars/avatar.png" alt="" class="rounded-circle">
+                  <img width="42" src="./assets/images/avatars/avatar.png" alt="" class="rounded-circle">
                 </div>
               </span>
             </button>
             <div ngbDropdownMenu>
-              <button class="dropdown-item" routerLink="/profiles/update" >Profile</button>
-              <button class="dropdown-item" routerLink="/connexion">Deconnexion</button>
+              <button class="dropdown-item" >Profile</button>
+              <button class="dropdown-item" (click)="deconnecxion()">Deconnexion</button>
             </div>
           </div>
         </div>

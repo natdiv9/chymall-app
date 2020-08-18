@@ -1,11 +1,10 @@
 <?php
 
-include 'operationTracer.class.php';
 
-class Clients
+class RetraitProduits
 {
-    private $connexion;
-    private $table_name = 'chy_clients';
+    private  $connexion;
+    private $table_name = 'chy_retrait_produits';
 
     public function __construct()
     {
@@ -25,8 +24,8 @@ class Clients
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_clients WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_clients");
+                ? $this->connexion->prepare("SELECT * FROM chy_retrait_produits WHERE id=$id LIMIT 1")
+                : $stmt = $this->connexion->prepare("SELECT * FROM chy_retrait_produits");
 
             $res = $stmt->execute();
 
@@ -52,20 +51,20 @@ class Clients
         }
     }
 
-    public function post($client, $auteur_operation)
+    public function post($retrait_produits, $auteur_operation)
     {
         try
         {
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_clients(telephone, email, prenom, nom, adresse, ville, pays, zip, photo)"
-                ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                "INSERT INTO chy_retrait_produits(id_profile, id_produit, quantite)"
+                ."VALUES(?, ?, ?)");
             $res = $stmt->execute(
-                $client
+                $retrait_produits
             );
 
             if($res)
             {
-                return OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
+                OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
                 return array(true, []);
             } else
             {
@@ -79,29 +78,8 @@ class Clients
         }
     }
 
-    public function put($client, $auteur_operation)
+    public function put($retrait, $auteur_operation)
     {
-        try
-        {
-            $stmt = $this->connexion->prepare(
-                "UPDATE chy_clients SET telephone=?, email=?, prenom=?, nom=?, adresse=?, ville=?, pays=?, zip=?, photo=?, etat=? WHERE id=?");
-            $res = $stmt->execute(
-                $client
-            );
 
-            if($res)
-            {
-                OperationTracer::post([$auteur_operation, 'MISE A JOUR', $this->table_name], $this->connexion);
-                return array(true, []);
-            } else
-            {
-                OperationTracer::post([$auteur_operation, 'TENTATIVE DE MISE A JOUR', $this->table_name], $this->connexion);
-                return array(false, "message" => $stmt->errorInfo()[2]);
-            }
-        } catch (Error | Exception $e)
-        {
-            OperationTracer::post([$auteur_operation, 'TENTATIVE DE MISE A JOUR', $this->table_name], $this->connexion);
-            return array(false, "message" => $e->getMessage());
-        }
     }
 }

@@ -1,0 +1,38 @@
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">PROFILES DU CLIENT {{username}}</div>
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+      <thead>
+      <tr>
+        <th class="text-center">#id</th>
+        <th class="text-center">Nom d'utilisateur</th>
+        <th class="text-center">Pacts</th>
+        <th class="text-center">Produit</th>
+        <th class="text-center">Capital</th>
+        <th class="text-center">Etat</th>
+        <th class="text-center"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let profile of profiles ; let i = index">
+        <td class="text-center text-muted" style="width: 80px;">{{profile.id}}</td>
+        <td class="text-center">{{profile.username}}</td>
+        <td class="text-center">{{profile.niveau_adhesion}}</td>
+        <td class="text-center">{{profile.produit_trading}}</td>
+        <td class="text-center">{{profile.etat_trading == 0 ? profile.capita : profile.produit_trading}}</td>
+        <td class="text-center">
+          <div [class]="'badge badge-pill' + (profile.etat==1 ? ' badge-success' : ' badge-danger')">{{profile.etat==1 ? 'actif' : 'inactif'}}</div>
+        </td>
+        <td>
+            <a class="btn-shadow btn btn-primary" [routerLink]="'/retrait-produits/new'">Retirer produit</a>
+            <a class="btn-shadow btn btn-primary" [routerLink]="'/retraits/new'">Retirer argent</a>
+            <a class="btn-shadow btn btn-primary" [routerLink]="'/paiements/new'">Payer Activation</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

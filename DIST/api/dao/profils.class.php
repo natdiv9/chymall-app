@@ -5,7 +5,7 @@ include 'operationTracer.class.php';
 class Profils
 {
     private  $connexion;
-    private $table_name = 'chy_profils';
+    private $table_name = 'chy_profiles';
 
     public function __construct()
     {
@@ -25,8 +25,40 @@ class Profils
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_profils WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_profils");
+                ? $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id=$id LIMIT 1")
+                : $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles");
+
+            $res = $stmt->execute();
+
+            if($res) {
+                OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
+                return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
+            }else{
+                // DEVELOPMENT
+                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+                return array(false, "message" => $stmt->errorInfo()[2]);
+
+                // PRODUCTION
+                // return array(false, "message" => "The server encountered a problem");
+            }
+        }catch (Exception | Error $e)
+        {
+            // DEVELOPMENT
+            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+            return array(false, "message" => $e->getMessage());
+
+            // PRODUCTION
+            // return array(false, "message" => "The server encountered a problem");
+        }
+    }
+
+    public function getByClient($id = false, $auteur_operation)
+    {
+        try
+        {
+            $stmt = ($id)
+                ? $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id_client=$id")
+                : $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles");
 
             $res = $stmt->execute();
 
@@ -57,8 +89,8 @@ class Profils
         try
         {
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_profils(client_id, username, niveau_adhesion, capital, produit_trading, activation_compte, activation_trading)"
-                ."VALUES(?, ?, ?, ?, ?, ?, ?)");
+                "INSERT INTO chy_profiles(id_client, username, niveau_adhesion, capital, produit_trading, activation_compte, activation_trading, etat_trading, etat_activation)"
+                ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $res = $stmt->execute(
                 $profil
             );
@@ -84,7 +116,7 @@ class Profils
         try
         {
             $stmt = $this->connexion->prepare(
-                "UPDATE chy_profils SET client_id=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, activation_compte=?, activation_trading=?, solde=?, etat=? WHERE id=?");
+                "UPDATE chy_profiles SET client_id=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, activation_compte=?, activation_trading=?, solde=?, etat=? WHERE id=?");
             $res = $stmt->execute(
                 $profil
             );

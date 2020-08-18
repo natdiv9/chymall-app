@@ -4,6 +4,7 @@ import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Client} from '../../../ChymallModels/models/client';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService} from '../../../ChymallServices/auth/auth.service';
 
 @Component({
   selector: 'app-clients-update',
@@ -24,7 +25,8 @@ export class ClientsUpdateComponent implements OnInit {
               private route: ActivatedRoute,
               private modalService: NgbModal,
               private router: Router,
-              private crudService: CrudService) { }
+              private crudService: CrudService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.initForm();
@@ -82,6 +84,7 @@ export class ClientsUpdateComponent implements OnInit {
 
   updateClient() {
     const client = {
+      id: this.client.id,
       telephone: this.updateCientForm.get('telephone').value,
       email: this.updateCientForm.get('email').value,
       prenom: this.updateCientForm.get('prenom').value,
@@ -94,7 +97,8 @@ export class ClientsUpdateComponent implements OnInit {
       photo: this.client.photo,
       etat: 1,
       pwd_login: '123456',
-      pwd_retrait: '123456'
+      pwd_retrait: '123456',
+      auteur_operation: this.authService.currentUser.username
     };
 
     this.crudService.putClient(client).subscribe(
@@ -102,6 +106,7 @@ export class ClientsUpdateComponent implements OnInit {
           if (reponse.status === true) {
             this.modalService.open('Modification effectuée avec succès!');
             this.updateCientForm.reset();
+            this.router.navigate(['/', 'clients', 'all']);
           } else {
             this.modalService.open('Modification a echoué!');
           }

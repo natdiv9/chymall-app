@@ -3,7 +3,7 @@
     <div class="mx-auto app-login-box col-md-8">
 <!--      <div class="app-logo-inverse mx-auto mb-3"></div>-->
       <h3 style="text-align: center; font-weight: bold; color: #e2ebf0;">CHYMALL</h3>
-      <form [formGroup]="loginForm" (ngSubmit)="newConnexion()">
+      <form [formGroup]="loginForm" (ngSubmit)="connexion()">
       <div class="modal-dialog w-100 mx-auto">
         <div class="modal-content">
           <div class="modal-body">
@@ -16,6 +16,7 @@
                  class="form-group">
               <div><input id="exampleInput1" type="text" placeholder="Entrez votre nom d'utilisateur" required="required"
                           formControlName="username"
+                          (focus)="message = ''"
                           aria-required="true" class="form-control"
                           aria-describedby="exampleInputGroup1__BV_description_">
               </div>
@@ -23,13 +24,19 @@
             <div id="exampleInputGroup2" role="group" class="form-group">
               <div><input id="exampleInput2" type="password" placeholder="Entrez votre mot de passe" required="required"
                           formControlName="pwd"
+                          (focus)="message = ''"
                           aria-required="true" class="form-control"></div>
             </div>
           </div>
-            <span style="color: red;" >{{message}}</span>
+          <p *ngIf="isChargement" style="text-align: center; margin-left: 20px; margin-right: 20px">
+            Veuillez patientez!
+            <ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true">
+            </ngb-progressbar>
+          </p>
+            <span class="" style="color: red; text-align: center" >{{message}}</span>
           <div class="modal-footer clearfix">
             <div class="float-center">
-              <button type="button" class="btn btn-primary btn-lg float-right">Se Connecter</button>
+              <button type="button" class="btn btn-primary btn-lg float-right" type="submit" [disabled]="loginForm.invalid">Se Connecter</button>
             </div>
           </div>
         </div>

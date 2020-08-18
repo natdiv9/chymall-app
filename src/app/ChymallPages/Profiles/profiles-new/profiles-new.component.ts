@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService} from '../../../ChymallServices/auth/auth.service';
 
 @Component({
   selector: 'app-profiles-new',
@@ -19,9 +20,17 @@ export class ProfilesNewComponent implements OnInit {
 
   closeResult: string;
 
+  username: string;
+  cout_total = 0;
+  ct_frais_tranfert = 0;
+  ct_inscription = 0;
+  trading_state = 0;
+  message = '';
+
   constructor(private  formBuilder: FormBuilder,
               private modalService: NgbModal,
               private crudService: CrudService,
+              private authService: AuthService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -32,30 +41,42 @@ export class ProfilesNewComponent implements OnInit {
   initForm() {
     this.newProfileForm = this.formBuilder.group({
       username: ['', [Validators.required]],
-      produit: ['', [Validators.required]],
-      niveau: ['', [Validators.required]]
+      produit_trading: ['', [Validators.required]],
+      niveau_adhesion: ['', [Validators.required]],
+      capital: [''],
+      activation_compte: [''],
+      activation_trading: ['']
     });
   }
 
-  newProfile() {
+  newProfile(content: any) {
+    const id = this.route.snapshot.params.id;
+    this.username = this.route.snapshot.params.id;
     const profile = {
-      id_client: 1,
+      id_client: id,
       username: this.newProfileForm.get('username').value,
-      produit: this.newProfileForm.get('produit').value,
-      niveau: this.newProfileForm.get('niveau').value,
-      etat_trading: 0,
-      etat_compte: 0,
-      etat: 1
+      niveau_adhesion: this.newProfileForm.get('niveau_adhesion').value,
+      capital: this.ct_inscription,
+      produit_trading: this.newProfileForm.get('produit_trading').value,
+      activation_compte: this.ct_inscription,
+      activation_trading: this.ct_frais_tranfert,
+      etat_trading: this.trading_state,
+      etat_activation: 1,
+      auteur_operation: this.authService.currentUser.username
     };
     this.crudService.addProfile(profile).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open('Enregistrement effectué avec succès!');
+            this.message = 'Enregistrement profile effectué avec succès!';
+            this.open(content);
             this.newProfileForm.reset();
           } else {
-            this.modalService.open('Enregistrement a échoué!');
+            this.message = 'Enregistrement a échoué!';
+            this.open(content);
+            console.log(reponse.message);
           }
-        }
+        },
+        (error) => {console.log(error); }
     );
   }
 
@@ -84,4 +105,38 @@ export class ProfilesNewComponent implements OnInit {
     });
   }
 
+  patcs(vip: HTMLSelectElement) {
+    const pact = vip.value;
+    switch (pact) {
+      case 'VIP-1' :
+        this.ct_inscription = 25;
+        this.cout_total = 0;
+        this.ct_frais_tranfert = 0;
+        this.trading_state = 0;
+        break;
+      case 'VIP-2' :
+        this.ct_inscription = 50;
+        this.cout_total = 140;
+        this.ct_frais_tranfert = (this.cout_total * 15 / 100) + this.cout_total;
+        this.trading_state = 1;
+        break;
+      case 'VIP-3' :
+        this.ct_inscription = 100;
+        this.cout_total = 280;
+        this.ct_frais_tranfert = (this.cout_total * 15 / 100) + this.cout_total;
+        this.trading_state = 1;
+        break;
+      case 'VIP-4' :
+        this.ct_inscription = 300;
+        this.cout_total = 840;
+        this.ct_frais_tranfert = (this.cout_total * 15 / 100) + this.cout_total;
+        this.trading_state = 1;
+        break;
+      case 'VIP-5' :
+        this.ct_inscription = 600;
+        this.cout_total = 1680;
+        this.ct_frais_tranfert = (this.cout_total * 15 / 100) + this.cout_total;
+        break;
+    }
+  }
 }

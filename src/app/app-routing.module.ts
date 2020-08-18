@@ -81,6 +81,8 @@ import {RetraitProduitsAllComponent} from './ChymallPages/RetraitProduits/retrai
 import {RetraitProduitsIdComponent} from './ChymallPages/RetraitProduits/retrait-produits-id/retrait-produits-id.component';
 import {RetraitProduitsNewComponent} from './ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component';
 import {ActivitesComponent} from './ChymallPages/activites/activites.component';
+import {AuthGuardService} from './ChymallServices/auth/auth-guard.service';
+import {ProfilesByClientComponent} from './ChymallPages/Profiles/profiles-by-client/profiles-by-client.component';
 
 const routes: Routes = [
   {
@@ -132,61 +134,79 @@ const routes: Routes = [
 
         // UTILISATEURS
 
-      {path: 'utilisateurs/all', component: UtilisateursAllComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'utilisateurs/:id/utilisateur', component: UtilisateursIdComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'utilisateurs/new', component: UtilisateursNewComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'utilisateurs/update', component: UtilisateursUpdateComponent, data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'utilisateurs/all', component: UtilisateursAllComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'utilisateurs/:id/details', component: UtilisateursIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'utilisateurs/new', component: UtilisateursNewComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'utilisateurs/:id/update', component: UtilisateursUpdateComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
 
         // CLIENTS
 
-      {path: 'clients/all', component: ClientsAllComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'clients/:id/client', component: ClientsIdComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'clients/new', component: ClientsNewComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'clients/update', component: ClientsUpdateComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/all', component: ClientsAllComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/:id/details', component: ClientsIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/new', component: ClientsNewComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'clients/:id/update', component: ClientsUpdateComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
 
 
       // PAIEMENTS
 
-      {path: 'paiements/all', component: PaiementsAllComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'paiements/:id/paiement', component: PaiementsIdComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'paiements/new', component: PaiementsNewComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'paiements/all', component: PaiementsAllComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'paiements/:id/details', component: PaiementsIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'paiements/new', component: PaiementsNewComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
 
 
       // PRODUITS
 
-      {path: 'produits/all', component: ProduitsAllComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'produits/:id/produit', component: ProduitsIdComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'produits/new', component: ProduitsNewComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'produits/update', component: ProduitsUpdateComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'produits/all', component: ProduitsAllComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'produits/:id/details', component: ProduitsIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'produits/new', component: ProduitsNewComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'produits/:id/update', component: ProduitsUpdateComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
 
       // PROFILES
 
-      {path: 'profiles/all', component: ProfilesAllComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'profiles/:id/profile', component: ProfilesIdComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'profiles/new', component: ProfilesNewComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'profiles/update', component: ProfilesUpdateComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'profiles/all', component: ProfilesAllComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'profiles/:idclient/:username/all', component: ProfilesByClientComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'profiles/:id/details', component: ProfilesIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'profiles/:id/:username/new', component: ProfilesNewComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'profiles/:id/update', component: ProfilesUpdateComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
 
 
       // RETRAITS
 
-      {path: 'retraits/all', component: RetraitsAllComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'retraits/:id/retrait', component: RetraitsIdComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'retraits/new', component: RetraitsNewComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'retraits/all', component: RetraitsAllComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'retraits/:id/details', component: RetraitsIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'retraits/new', component: RetraitsNewComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
 
 
       // STOCKAGES
 
-      {path: 'stockages/all', component: StockagesAllComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'stockages/:id/stockage', component: StockagesIdComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'stockages/new', component: StockagesNewComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'stockages/all', component: StockagesAllComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'stockages/:id/details', component: StockagesIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'stockages/new', component: StockagesNewComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
 
       // STOCKAGES
 
-      {path: 'retrait-produits/all', component: RetraitProduitsAllComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'retrait-produits/id', component: RetraitProduitsIdComponent, data: {extraParameter: 'elementsMenu'}},
-      {path: 'retrait-produits/new', component: RetraitProduitsNewComponent, data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'retrait-produits/all', component: RetraitProduitsAllComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'retrait-produits/:id/details', component: RetraitProduitsIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'retrait-produits/new', component: RetraitProduitsNewComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
 
-      {path: 'activites', component: ActivitesComponent, data: {extraParameter: 'elementsMenu'}}
+      {path: 'activites', component: ActivitesComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}}
 
 
     ]

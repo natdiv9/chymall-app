@@ -12,17 +12,17 @@ import { environment } from '../../../environments/environment';
 export class AuthService {
 
   connected = false;
-  user: Utilisateur = null;
+  currentUser: Utilisateur = null;
 
   constructor(private httpClient: HttpClient) {
   }
 
-  auth(username, password) {
-    return this.httpClient.post<any>(`${environment.server_base_url}/authentification.php`, {username, password});
+  auth(username, pwd) {
+    return this.httpClient.post<any>(`${environment.server_base_url}/authentification.php`, {username, pwd});
   }
 
   logout() {
-    this.user = null;
+    this.currentUser = null;
     this.connected = false;
   }
 }
