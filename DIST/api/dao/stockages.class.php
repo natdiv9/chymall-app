@@ -26,7 +26,7 @@ class Stockages
         {
             $stmt = ($id)
                 ? $this->connexion->prepare("SELECT * FROM chy_stockages WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_stockages");
+                : $stmt = $this->connexion->prepare("SELECT chy_stockages.quantite, DATE_FORMAT(chy_stockages.date, '%d-%m-%Y %H:%i:%s') as date, chy_produits.designation FROM chy_stockages, chy_produits WHERE chy_stockages.id_produit=chy_produits.id");
 
             $res = $stmt->execute();
 
@@ -57,8 +57,8 @@ class Stockages
         try
         {
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_stockages(produit_id, quantite, entree_sortie)"
-                ."VALUES(?, ?, ?)");
+                "INSERT INTO chy_stockages(id_produit, quantite)"
+                ."VALUES(?, ?)");
             $res = $stmt->execute(
                 $stockage
             );

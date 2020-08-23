@@ -9,8 +9,15 @@ switch ($request_method)
         $profilDAO = new Profils();
         if(isset($_GET['auteur_operation']))
         {
+            if(isset($_GET['incomplete']) && $_GET['incomplete'] == true){
+                $res = $profilDAO->getIncompletProfiles($_GET['incomplete'], $_GET['auteur_operation']);
+                response($res);
+                return;
+            }
+
             if(!empty($_GET['id']))
             {
+
                 if(isset($_GET['is_by_client']) && $_GET['is_by_client'] == true){
                     // Un profil
                     $id = intval($_GET['id']);
@@ -41,10 +48,10 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['auteur_operation']))
+        if(isset($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['auteur_operation']))
         {
             $profilDAO = new Profils();
-            $profil = array($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation']);
+            $profil = array($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation']);
             $res = $profilDAO->post($profil, $_POST['auteur_operation']);
             response($res);
         } else
@@ -60,18 +67,18 @@ switch ($request_method)
         break;
     case 'PUT':
         $_PUT = json_decode(file_get_contents('php://input'), true);
-        if(isset($_PUT['client_id'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['id']))
+        if(isset($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['id'], $_PUT['auteur_operation']))
         {
             $profilDAO = new Profils();
-            $profil = array($_PUT['client_id'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['id']);
-            $res = $profilDAO->put($profil);
+            $profil = array($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['id']);
+            $res = $profilDAO->put($profil, $_PUT['auteur_operation']);
             response($res);
         } else
         {
             header('Content-Type: application/json');
             echo json_encode( array(
                     "status" => false,
-                    "message" => "Update error"
+                    "message" => "Expected data is not complete"
                 )
             );
         }

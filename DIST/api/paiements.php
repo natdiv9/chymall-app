@@ -34,10 +34,10 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['id_profile:'], $_POST['montant_trading:'],$_POST['montant_inscription:'], $_POST['frais_trading:'], $_POST['frais_inscription:'], $_POST['auteur_operation']))
+        if(isset($_POST['id_profile'], $_POST['montant_trading'],$_POST['montant_inscription'], $_POST['frais_trading'], $_POST['frais_inscription'], $_POST['auteur_operation']))
         {
             $paiementDAO = new Paiements();
-            $paiement = array($_POST['id_profile:'], $_POST['montant_trading:'],$_POST['montant_inscription:'], $_POST['frais_trading:'], $_POST['frais_inscription:']);
+            $paiement = array($_POST['id_profile'], $_POST['montant_trading'],$_POST['montant_inscription'], $_POST['frais_trading'], $_POST['frais_inscription']);
             $res = $paiementDAO->post($paiement, $_POST['auteur_operation']);
             response($res);
         } else

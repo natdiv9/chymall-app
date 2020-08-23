@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService} from '../../../ChymallServices/auth/auth.service';
 
 @Component({
   selector: 'app-produits-new',
@@ -13,12 +14,13 @@ export class ProduitsNewComponent implements OnInit {
 
   newProduitForm: FormGroup;
   closeResult: string;
+  private message: string;
 
   constructor(private  formBuilder: FormBuilder,
               private router: Router,
-              private route: ActivatedRoute,
               private modalService: NgbModal,
-              private crudService: CrudService) { }
+              private crudService: CrudService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.initForm();
@@ -44,34 +46,39 @@ export class ProduitsNewComponent implements OnInit {
     }
   }
 
-  openLarge(content) {
-    this.modalService.open(content, {
-      size: 'lg'
-    });
-  }
-
   initForm() {
     this.newProduitForm = this.formBuilder.group({
       designation: ['', [Validators.required]],
-      stockInitial: ['', [Validators.required]]
+      quantite: [0, [Validators.required, Validators.min(0)]],
+      pacts: ['', [Validators.required]]
     });
   }
-  newProduit() {
+  newProduit(content: any) {
     const produit = {
       designation: this.newProduitForm.get('designation').value,
-      stock_initial: this.newProduitForm.get('stockInitial').value
+      stock_initial: this.newProduitForm.get('quantite').value,
+      stock_final: this.newProduitForm.get('quantite').value,
+      pacts: this.newProduitForm.get('pacts').value,
+      auteur_operation: this.authService.currentUser.username
     };
 
     this.crudService.addProduit(produit).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open('Produit enregistré avec succès!');
+            this.message = 'Produit enregistré avec succès!';
+            this.open(content);
             this.newProduitForm.reset();
           } else {
-            this.modalService.open('Enregistrement a échoué!');
+            this.message = 'Enregistrement a échoué!';
+            console.log(reponse.message);
+            this.open(content);
           }
-          console.log(reponse);
-        }
+        },
+        (error => {
+          this.message = 'Enregistrement a échoué!';
+          this.open(content);
+          console.log(error);
+        })
     );
   }
 }

@@ -20,13 +20,20 @@ class Retraits
         }
     }
 
-    public function get($id = false, $auteur_operation)
+    public function get($id = false, $auteur_operation, $is_by_client = false)
     {
         try
         {
-            $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_retraits WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_retraits");
+            if($is_by_client)
+            {
+                $sql = "SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, profiles.username, profiles.niveau_adhesion FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE retraits.etat=0 AND clients.id=$is_by_client ORDER BY retraits.date DESC";
+                $stmt = $this->connexion->prepare($sql);
+            } else {
+                $stmt = ($id)
+                    ? $this->connexion->prepare("SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, profiles.username, profiles.niveau_adhesion FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id WHERE retraits.etat=0 ORDER BY retraits.date DESC")
+                    : $stmt = $this->connexion->prepare("SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, profiles.username, profiles.niveau_adhesion FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id ORDER BY retraits.date DESC");
+
+            }
 
             $res = $stmt->execute();
 
@@ -56,8 +63,9 @@ class Retraits
     {
         try
         {
+            $code = $this->gen_code(6);
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_retraits(profil_id, montant)"
+                "INSERT INTO chy_retraits(id_profile, montant)"
                 ."VALUES(?, ?)");
             $res = $stmt->execute(
                 $retrait
@@ -66,7 +74,7 @@ class Retraits
             if($res)
             {
                 OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
-                return array(true, []);
+                return array(true, ["code" => $code]);
             } else
             {
                 OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
@@ -84,7 +92,7 @@ class Retraits
         try
         {
             $stmt = $this->connexion->prepare(
-                "UPDATE chy_retraits SET profil_id=?, montant=? WHERE id=?");
+                "UPDATE chy_retraits SET id_profile=?, montant=?, etat=? WHERE id=?");
             $res = $stmt->execute(
                 $retrait
             );
@@ -103,5 +111,15 @@ class Retraits
             OperationTracer::post([$auteur_operation, 'TENTATIVE DE MISE A JOUR', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
         }
+    }
+
+    private function gen_code($car) {
+        $string = "";
+        $chaine = "9aAbBcC1dDeEfF2gGhHiI3jJkKlL4mMnNpP5qQrRsS6tTuUvV7wWxXyY8";
+        srand((double)microtime()*1000000);
+        for($i=0; $i<$car; $i++) {
+            $string .= $chaine[rand()%strlen($chaine)];
+        }
+        return $string;
     }
 }

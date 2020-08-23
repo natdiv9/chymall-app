@@ -1,6 +1,6 @@
 <div class="main-card mb-3 card">
     <div class="card-body">
-        <h5 class="card-title">CREER PROFILE</h5>
+        <h5 class="card-title">CREER PROFILE  [{{this.username}}}}]</h5>
         <form [formGroup]="newProfileForm" (ngSubmit)="newProfile(content)">
 
             <div class="form-row">
@@ -10,6 +10,9 @@
                             <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label><input
                                     formControlName="username"
                                     id="username"
+                                    [disabled]="true"
+                                    readonly
+                                    placeholder="Cette information sera fournie par le technicien"
                                     type="text"
                                     class="form-control">
                             </div>
@@ -17,9 +20,15 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12">
-                            <div class="position-relative form-group"><label for="produit_trading">Produit de trading</label><input
-                                    formControlName="produit_trading" id="produit_trading" placeholder="" type="text"
-                                    class="form-control"></div>
+                            <div class="position-relative form-group"><label for="produit_trading">Produit d'adhesion</label><input
+                                        formControlName="produit_trading"
+                                        id="produit_trading"
+                                        placeholder=""
+                                        [disabled]="true"
+                                        readonly
+                                        type="text"
+                                        class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,14 +52,14 @@
                                     class="form-control" [disabled]="true" [value]="ct_inscription"></div>
                         </div>
                         <div class="col-md-12" *ngIf="trading_state!==0">
-                            <div class="position-relative form-group"><label for="activation_compte">Coût total (Trading + Inscription)</label><input
+                            <div class="position-relative form-group"><label for="activation_compte">Montant Trading</label><input
                                     formControlName="activation_compte" id="activation_compte" placeholder="" type="text" readonly
-                                    class="form-control" [disabled]="true" [value]="cout_total"></div>
+                                    class="form-control" [disabled]="true" [value]="cout_trading"></div>
                         </div>
                         <div class="col-md-12" *ngIf="trading_state!==0">
-                            <div class="position-relative form-group"><label for="activation_trading">Coût total + (15%) Frais de transfert</label><input
+                            <div class="position-relative form-group"><label for="activation_trading">Coût total (Inscription + Trading)</label><input
                                     formControlName="activation_trading" id="activation_trading" placeholder="" type="text" readonly
-                                    class="form-control" [disabled]="true" [value]="ct_frais_tranfert"></div>
+                                    class="form-control" [disabled]="true" [value]="cout_total"></div>
                         </div>
                     </div>
                 </div>

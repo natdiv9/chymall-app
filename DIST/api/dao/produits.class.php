@@ -58,8 +58,8 @@ class Produits
         try
         {
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_produits(designation, stock_initial)"
-                ."VALUES(?, ?)");
+                "INSERT INTO chy_produits(designation, stock_initial, stock_final, pacts)"
+                ."VALUES(?, ?, ?, ?)");
             $res = $stmt->execute(
                 $produit
             );

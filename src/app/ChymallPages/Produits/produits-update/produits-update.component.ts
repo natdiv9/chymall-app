@@ -66,7 +66,7 @@ export class ProduitsUpdateComponent implements OnInit {
     );
   }
 
-  updateProduit() {
+ /* updateProduit() {
     const produit = {
       designation: this.updateProduitForm.get('designation').value,
       stock_initial: this.updateProduitForm.get('quantite').value
@@ -81,6 +81,9 @@ export class ProduitsUpdateComponent implements OnInit {
           }
         }
     );
+
+  }*/
+  updateProduit() {
 
   }
 }

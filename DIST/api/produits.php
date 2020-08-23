@@ -33,11 +33,11 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['designation'], $_POST['stock_initial']))
+        if(isset($_POST['designation'], $_POST['stock_initial'], $_POST['stock_final'], $_POST['pacts'], $_POST['auteur_operation']))
         {
             $produitDAO = new Produits();
-            $produit = array($_POST['designation'], $_POST['stock_initial']);
-            $res = $produitDAO->post($produit);
+            $produit = array($_POST['designation'], $_POST['stock_initial'], $_POST['stock_final'], $_POST['pacts']);
+            $res = $produitDAO->post($produit, $_POST['auteur_operation']);
             response($res);
         } else
         {
@@ -51,11 +51,11 @@ switch ($request_method)
         break;
     case 'PUT':
         $_PUT = json_decode(file_get_contents('php://input'), true);
-        if(isset($_PUT['designation'], $_PUT['stock_initial'], $_PUT['stock_final'], $_PUT['id']))
+        if(isset($_PUT['designation'], $_PUT['stock_initial'], $_PUT['stock_final'], $_PUT['id'], $_PUT['auteur_operation']))
         {
             $produitDAO = new Produits();
-            $produit = array($_PUT['designation'], $_PUT['stock_final'], $_PUT['stock_final'], $_PUT['id']);
-            $res = $produitDAO->put($produit);
+            $produit = array($_PUT['designation'], $_PUT['stock_initial'], $_PUT['stock_final'], $_PUT['id']);
+            $res = $produitDAO->put($produit, $_PUT['auteur_operation']);
             response($res);
         } else
         {

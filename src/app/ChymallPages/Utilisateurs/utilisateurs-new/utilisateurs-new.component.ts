@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService} from '../../../ChymallServices/auth/auth.service';
 
 @Component({
   selector: 'app-utilisateurs-new',
@@ -13,11 +14,13 @@ export class UtilisateursNewComponent implements OnInit {
 
   newUserForm: FormGroup;
   private closeResult: string;
+  private message: string;
 
   constructor(private  formBuilder: FormBuilder,
               private router: Router,
               private modalService: NgbModal,
-              private crudService: CrudService) { }
+              private crudService: CrudService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.initForm();
@@ -55,27 +58,36 @@ export class UtilisateursNewComponent implements OnInit {
     this.newUserForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
-      service: ['', [Validators.required]]
+      service: ['', [Validators.required]],
+      droits: ['', [Validators.required]]
     });
   }
 
-  newUser() {
+  newUser(content: any) {
     const utilisateur = {
       username: this.newUserForm.get('username').value,
       pwd: this.newUserForm.get('password').value,
       service: this.newUserForm.get('service').value,
-      droits: null,
-      etat: 1
+      droits: this.newUserForm.get('droits').value,
+      auteur_operation: this.authService.currentUser.username
     };
     this.crudService.addUtilisateur(utilisateur).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open('Utilisateur enregistré avec succès.');
-            this.router.navigate(['utilisateurs/all']);
+            this.message = 'Utilisateur enregistré avec succès!';
+            this.open(content);
+            this.newUserForm.reset();
           } else {
-            this.modalService.open('Echec d\'enregistrement.');
+            this.message = 'Echec de l\'enregistrement!';
+            this.open(content);
+            console.log(reponse.message);
           }
-        }
+        },
+        (error => {
+          this.message = 'Echec de l\'enregistrement!';
+          this.open(content);
+          console.log(error);
+        })
     );
   }
 }

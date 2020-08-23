@@ -41,13 +41,15 @@ export class ConnexionComponent implements OnInit {
         this.authService.connected = true;
         this.isChargement = false;
         if (this.authService.currentUser.service === 'adhesion') {
-          this.router.navigate(['clients/new']);
+          this.router.navigate(['/', 'clients', 'new']);
         } else if (this.authService.currentUser.service === 'comptabilite') {
-          this.router.navigate(['profiles/all']);
+          this.router.navigate(['/', 'clients', 'all2']);
         } else if (this.authService.currentUser.service === 'retrait') {
-          this.router.navigate(['retrait/new']);
+          this.router.navigate(['/', 'retrait-produits', 'all']);
         } else if (this.authService.currentUser.service === 'technique') {
-          this.router.navigate(['retrait/new']);
+          this.router.navigate(['/profiles/completer']);
+        } else if (this.authService.currentUser.service === 'admin') {
+          this.router.navigate(['/']);
         }
         // this.router.navigate(['/']);
       } else {
@@ -58,7 +60,6 @@ export class ConnexionComponent implements OnInit {
         (error1 => {
           this.isChargement = false;
           this.message = 'Une erreur inconnue est survenue';
-          console.log(error1);
         }));
   }
 }

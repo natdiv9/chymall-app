@@ -5,6 +5,7 @@ import {Utilisateur} from '../../ChymallModels/models/utilisateur';
 
 // Environment
 import { environment } from '../../../environments/environment';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class AuthService {
   connected = false;
   currentUser: Utilisateur = null;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+              private router: Router) {
   }
 
   auth(username, pwd) {
@@ -24,5 +26,6 @@ export class AuthService {
   logout() {
     this.currentUser = null;
     this.connected = false;
+    this.router.navigate(['/']);
   }
 }

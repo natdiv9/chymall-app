@@ -7,8 +7,8 @@ import {Color} from 'ng2-charts/ng2-charts';
 })
 export class AnalyticsComponent implements OnInit {
 
-  heading = 'Analytics Dashboard';
-  subheading = 'This is an example dashboard created using build-in elements and components.';
+  heading = 'Page de synthèse';
+  subheading = 'Vue d\'ensemble sur toutes les activités recentes';
   icon = 'pe-7s-plane icon-gradient bg-tempting-azure';
 
   slideConfig6 = {

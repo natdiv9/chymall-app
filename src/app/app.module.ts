@@ -128,7 +128,6 @@ import { ProduitsUpdateComponent } from './ChymallPages/Produits/produits-update
 import { StockagesNewComponent } from './ChymallPages/Stockages/stockages-new/stockages-new.component';
 import { StockagesAllComponent } from './ChymallPages/Stockages/stockages-all/stockages-all.component';
 import { StockagesIdComponent } from './ChymallPages/Stockages/stockages-id/stockages-id.component';
-import { StockagesUpdateComponent } from './ChymallPages/Stockages/stockages-update/stockages-update.component';
 import { ConnexionComponent } from './ChymallPages/connexion/connexion.component';
 import { RetraitProduitsNewComponent } from './ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component';
 import { RetraitProduitsAllComponent } from './ChymallPages/RetraitProduits/retrait-produits-all/retrait-produits-all.component';
@@ -136,6 +135,13 @@ import { RetraitProduitsIdComponent } from './ChymallPages/RetraitProduits/retra
 import { ActivitesComponent } from './ChymallPages/activites/activites.component';
 import { PaiementsUpdateComponent } from './ChymallPages/Paiements/paiements-update/paiements-update.component';
 import { ProfilesByClientComponent } from './ChymallPages/Profiles/profiles-by-client/profiles-by-client.component';
+import { CustomModalComponent } from './ChymallServices/auth/custom-modal/custom-modal.component';
+// tslint:disable-next-line:max-line-length
+import { ProfilesCompleterUsernameComponent } from './ChymallPages/Profiles/profiles-completer-username/profiles-completer-username.component';
+import { RetraitsDemandeNewComponent } from './ChymallPages/Retraits/retraits-demande-new/retraits-demande-new.component';
+
+// CHY
+// import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -251,7 +257,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     StockagesNewComponent,
     StockagesAllComponent,
     StockagesIdComponent,
-    StockagesUpdateComponent,
     ConnexionComponent,
     RetraitProduitsNewComponent,
     RetraitProduitsAllComponent,
@@ -259,6 +264,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ActivitesComponent,
     PaiementsUpdateComponent,
     ProfilesByClientComponent,
+    CustomModalComponent,
+    ProfilesCompleterUsernameComponent,
+    RetraitsDemandeNewComponent,
   ],
   imports: [
     BrowserModule,
@@ -267,7 +275,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgReduxModule,
     CommonModule,
     LoadingBarRouterModule,
-
     // Angular Bootstrap Components
 
     PerfectScrollbarModule,

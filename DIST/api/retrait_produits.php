@@ -36,9 +36,9 @@ switch ($request_method)
         $_POST = json_decode(file_get_contents('php://input'), true);
         if(isset($_POST['quantite'], $_POST['id_profile'], $_POST['id_produit'], $_POST['auteur_operation']))
         {
-            $clientsDAO = new Clients();
-            $client = array($_POST['quantite'], $_POST['id_profile'], $_POST['id_produit']);
-            $res = $clientsDAO->post($client, $_POST['auteur_operation']);
+            $retraitDAO = new RetraitProduits();
+            $retrait = array($_POST['quantite'], $_POST['id_profile'], $_POST['id_produit']);
+            $res = $retraitDAO->post($retrait, $_POST['auteur_operation']);
             response($res);
         } else
         {

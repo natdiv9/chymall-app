@@ -1,33 +1,42 @@
 <div class="main-card mb-3 card">
   <div class="card-header">
-    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">LISTES DE PROFILES</div>
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">TOUS LES PROFILES</div>
   </div>
-  <div class="table-responsive">
+  <div class="table">
     <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
       <thead>
       <tr>
-        <th class="text-center">#</th>
-        <th class="text-center">Client</th>
         <th class="text-center">Nom d'utilisateur</th>
-        <th lass="text-center">Niveau</th>
-        <th lass="text-center">Produit</th>
-        <th lass="text-center">Etat</th>
+        <th class="text-center">Pacts</th>
+        <th class="text-center">Produit trading</th>
+        <th class="text-center">Produit adhesion</th>
+        <th class="text-center">Capital</th>
+        <th class="text-center">Etat compte</th>
+        <th class="text-center">Etat trading</th>
+        <th class="text-center">Etat</th>
+        <th class="text-center"></th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let profile of profiles ; let i = index">
-        <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
-        <td class="text-center">{{profile.id_client}}</td>
         <td class="text-center">{{profile.username}}</td>
         <td class="text-center">{{profile.niveau_adhesion}}</td>
         <td class="text-center">{{profile.produit_trading}}</td>
+        <td class="text-center">{{profile.produit_adhesion}}</td>
+        <td class="text-center">{{profile.etat_trading == 0 ? profile.capital : profile.activation_trading}}</td>
         <td class="text-center">
-          <input type="checkbox" checked data-toggle="toggle" [value]="profile.etat" data-onstyle="outline-primary" data-offstyle="outline-secondary">
+          <div [class]="'badge badge-pill' + (profile.etat_activation==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_activation==1 ? 'activé' : 'inactivé'}}</div>
+        </td>
+        <td class="text-center">
+          <div [class]="'badge badge-pill' + (profile.etat_trading==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_trading==1 ? 'activé' : 'inactivé'}}</div>
+        </td>
+        <td class="text-center">
+          <div [class]="'badge badge-pill' + (profile.etat==1 ? ' badge-warning' : (profile.etat==2 ? ' badge-success': ' badge-danger'))">
+            {{profile.etat==1 ? 'incomplet' : (profile.etat==2) ? 'actif' : 'inactif'}}</div>
         </td>
         <td>
-          <button routerLink="retrait-produits/new">Retirer produit</button>
-          <button routerLink="retraits/new">Retirer argent</button>
-          <button routerLink="paiements/new">Payer Activation</button>
+          <button [disabled]="profile.etat_activation!=0" class="btn-shadow btn btn-primary" style="margin-right: 5px;" (click)="activer_compte(profile, content)">Activer le compte</button>
+          <button [disabled]="profile.etat_trading!=0" class="btn-shadow btn btn-primary" (click)="activer_trading(profile, content)">Activer le trading</button>
         </td>
       </tr>
       </tbody>
@@ -35,3 +44,11 @@
   </div>
 </div>
 
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{message}}</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+  </div>
+</ng-template>

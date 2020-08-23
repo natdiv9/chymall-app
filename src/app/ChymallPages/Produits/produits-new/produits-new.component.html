@@ -1,15 +1,27 @@
 <div class="main-card mb-3 card">
   <div class="card-body"><h5 class="card-title">ENREGISTRER PRODUIT</h5>
-    <form [formGroup]="newProduitForm" (ngSubmit)="newProduit()">
+    <form [formGroup]="newProduitForm" (ngSubmit)="newProduit(content)">
       <div class="form-row">
         <div class="col-md-6">
           <div class="position-relative form-group"><label for="designation">Désignation</label><input
-                  formControlName="designation" id="designation" placeholder="Montre" type="text"
+                  formControlName="designation" id="designation" type="text"
                   class="form-control"></div>
         </div>
-        <div class="col-md-6">
-          <div class="position-relative form-group"><label for="quantite">Quantité</label><input
-                  formControlName="stockInitial" id="quantite" placeholder="99" type="number"
+        <div class="col-md-3">
+          <div class="position-relative form-group"><label for="exampleSelect">Produit de pacts</label>
+            <select
+                    formControlName="pacts" id="exampleSelect" class="form-control">
+              <option value="VIP-1">VIP-1</option>
+              <option value="VIP-2">VIP-2</option>
+              <option value="VIP-3">VIP-3</option>
+              <option value="VIP-4">VIP-4</option>
+              <option value="VIP-5">VIP-5</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="position-relative form-group"><label for="quantite">Quantité initiale</label><input
+                  formControlName="quantite" id="quantite" type="number" placeholder="0 par défaut.."
                   class="form-control"></div>
         </div>
       </div>
@@ -18,3 +30,12 @@
   </div>
 </div>
 
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{message}}</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+  </div>
+</ng-template>

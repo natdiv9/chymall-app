@@ -10,7 +10,7 @@ import {AuthService} from '../../../ChymallServices/auth/auth.service';
 })
 export class StockagesAllComponent implements OnInit {
 
-  stockages: Stockage[] = [];
+  stockages: Stockage[] | any[] = [];
 
   constructor(private crudService: CrudService,
               private authService: AuthService) { }

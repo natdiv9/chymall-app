@@ -4,6 +4,7 @@ import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Utilisateur} from '../../../ChymallModels/models/utilisateur';
+import {AuthService} from '../../../ChymallServices/auth/auth.service';
 
 @Component({
   selector: 'app-utilisateurs-update',
@@ -14,9 +15,11 @@ export class UtilisateursUpdateComponent implements OnInit {
   updateUserForm: FormGroup;
   utilisateur: Utilisateur;
   private closeResult: string;
+  id: string;
 
   constructor(private formBuilder: FormBuilder,
               private crudService: CrudService,
+              private authService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
               private modalService: NgbModal) { }
@@ -51,15 +54,16 @@ export class UtilisateursUpdateComponent implements OnInit {
   }
 
   initForm() {
-    const id = this.route.snapshot.params.id;
-    this.crudService.getUtilisateurs(id).subscribe(
+    this.id = this.route.snapshot.params.id;
+    this.crudService.getUtilisateurs(this.id).subscribe(
         (response: any) => {
           if (response.status) {
             this.utilisateur = response.data;
             this.updateUserForm = this.formBuilder.group({
               username: this.utilisateur.username,
               pwd: this.utilisateur.pwd,
-              service: this.utilisateur.service
+              service: this.utilisateur.service,
+              droits: this.utilisateur.droits
             });
           }
         }

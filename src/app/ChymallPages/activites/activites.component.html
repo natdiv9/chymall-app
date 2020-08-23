@@ -1,14 +1,14 @@
 <div class="main-card mb-3 card">
   <div class="card-header">
-    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">ACTIVITES</div>
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">TOUTES LES ACTIVITES</div>
   </div>
   <div class="table-responsive">
     <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
       <thead>
       <tr>
         <th class="">#</th>
+        <th lass="">Utilisateurs</th>
         <th lass="">Opérations</th>
-        <th lass="">Auteurs</th>
         <th class="">Table</th>
         <th class="">Date</th>
       </tr>
@@ -16,8 +16,8 @@
       <tbody>
       <tr *ngFor="let operation of operations ; let i = index">
         <td class=" text-muted" style="width: 80px;">{{i+1}}</td>
-        <td class="">{{operation.operation}}</td>
         <td class="">{{operation.auteur_operation}}</td>
+        <td class="">{{operation.operation}}</td>
         <td class="">{{operation.table}}</td>
         <td class="">{{operation.date}}</td>
       </tr>

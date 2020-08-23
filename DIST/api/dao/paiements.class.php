@@ -57,8 +57,8 @@ class Paiements
         try
         {
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_paiements(profil_id, montant, motif)"
-                ."VALUES(?, ?, ?)");
+                "INSERT INTO chy_paiements(id_profile, montant_trading, montant_inscription, frais_trading, frais_inscription)"
+                ."VALUES(?, ?, ?, ?, ?)");
             $res = $stmt->execute(
                 $paiement
             );

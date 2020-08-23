@@ -2,7 +2,10 @@
   <div class="d-flex h-100 justify-content-center align-items-center">
     <div class="mx-auto app-login-box col-md-8">
 <!--      <div class="app-logo-inverse mx-auto mb-3"></div>-->
-      <h3 style="text-align: center; font-weight: bold; color: #e2ebf0;">CHYMALL</h3>
+      <!--h3 style="text-align: center; font-weight: bold; color: #e2ebf0;">CHYMALL</h3-->
+      <div style="text-align: center;">
+        <img src="./assets/images/logo.png" width="130px">
+      </div>
       <form [formGroup]="loginForm" (ngSubmit)="connexion()">
       <div class="modal-dialog w-100 mx-auto">
         <div class="modal-content">
@@ -33,10 +36,10 @@
             <ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true">
             </ngb-progressbar>
           </p>
-            <span class="" style="color: red; text-align: center" >{{message}}</span>
+          <h5 class="" style="color: red; text-align: center" >{{message}}</h5>
           <div class="modal-footer clearfix">
             <div class="float-center">
-              <button type="button" class="btn btn-primary btn-lg float-right" type="submit" [disabled]="loginForm.invalid">Se Connecter</button>
+              <button type="button" class="btn btn-primary btn-lg float-right" type="submit" [disabled]="loginForm.invalid">Se connecter</button>
             </div>
           </div>
         </div>
@@ -45,3 +48,11 @@
     </div>
   </div>
 </div>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{message}}</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+  </div>
+</ng-template>

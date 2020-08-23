@@ -1,18 +1,17 @@
 <div class="main-card mb-3 card">
   <div class="card-body"><h5 class="card-title">ENREGISTRER UTILISATEUR</h5>
-    <form [formGroup]="newUserForm" (ngSubmit)="newUser()">
+    <form [formGroup]="newUserForm" (ngSubmit)="newUser(content)">
       <div class="form-row">
         <div class="col-md-6">
           <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label><input formControlName="username"
                                                                                                       id="username"
-                                                                                                      placeholder="goomy"
                                                                                                       type="text"
                                                                                                       class="form-control">
           </div>
         </div>
         <div class="col-md-6">
           <div class="position-relative form-group"><label for="password">Password</label><input
-                  formControlName="password" id="password" placeholder="123456" type="password"
+                  formControlName="password" id="password" type="text"
                   class="form-control"></div>
         </div>
       </div>
@@ -28,8 +27,25 @@
             </select>
           </div>
         </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="droits">Type utilisateur</label>
+            <select formControlName="droits" id="droits" class="form-control">
+              <option value="2">Utilisateur simple</option>
+              <option value="3">Administrateur</option>
+            </select>
+          </div>
+        </div>
       </div>
-      <button class="mt-2 btn btn-primary float-right" [disabled]="newUserForm.invalid">Enregistrer utilisateur</button>
+      <button class="mt-2 btn btn-primary float-right" [disabled]="newUserForm.invalid" type="submit">Enregistrer utilisateur</button>
     </form>
   </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{message}}</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+  </div>
+</ng-template>

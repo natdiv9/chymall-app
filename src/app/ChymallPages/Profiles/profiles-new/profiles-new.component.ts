@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../../ChymallServices/auth/auth.service';
+import {Produit} from '../../../ChymallModels/models/produit';
 
 @Component({
   selector: 'app-profiles-new',
@@ -22,10 +23,11 @@ export class ProfilesNewComponent implements OnInit {
 
   username: string;
   cout_total = 0;
-  ct_frais_tranfert = 0;
+  cout_trading = 0;
   ct_inscription = 0;
   trading_state = 0;
   message = '';
+  produits: Produit[] = [];
 
   constructor(private  formBuilder: FormBuilder,
               private modalService: NgbModal,
@@ -35,13 +37,21 @@ export class ProfilesNewComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.username = this.route.snapshot.params.username;
+    this.crudService.getProduits(this.authService.currentUser.username).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.produits = reponse.data;
+          }
+        }
+    );
     this.initForm();
   }
 
   initForm() {
     this.newProfileForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      produit_trading: ['', [Validators.required]],
+      username: [''],
+      produit_adhesion: [''],
       niveau_adhesion: ['', [Validators.required]],
       capital: [''],
       activation_compte: [''],
@@ -51,17 +61,19 @@ export class ProfilesNewComponent implements OnInit {
 
   newProfile(content: any) {
     const id = this.route.snapshot.params.id;
-    this.username = this.route.snapshot.params.id;
+    this.username = this.route.snapshot.params.username;
     const profile = {
       id_client: id,
-      username: this.newProfileForm.get('username').value,
+      username: '_incomplet',
       niveau_adhesion: this.newProfileForm.get('niveau_adhesion').value,
-      capital: this.ct_inscription,
-      produit_trading: this.newProfileForm.get('produit_trading').value,
+      capital: this.cout_total,
+      produit_trading: this.newProfileForm.get('produit_adhesion').value,
+      produit_adhesion: this.newProfileForm.get('produit_adhesion').value,
       activation_compte: this.ct_inscription,
-      activation_trading: this.ct_frais_tranfert,
-      etat_trading: this.trading_state,
-      etat_activation: 1,
+      activation_trading: this.cout_trading,
+      etat_trading: 0,
+      etat_activation: 0,
+      etat: 1,
       auteur_operation: this.authService.currentUser.username
     };
     this.crudService.addProfile(profile).subscribe(
@@ -99,43 +111,39 @@ export class ProfilesNewComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  openLarge(content) {
-    this.modalService.open(content, {
-      size: 'lg'
-    });
-  }
 
   patcs(vip: HTMLSelectElement) {
     const pact = vip.value;
     switch (pact) {
       case 'VIP-1' :
-        this.ct_inscription = 25;
-        this.cout_total = 0;
-        this.ct_frais_tranfert = 0;
+        this.ct_inscription = 28.75;
+        this.cout_trading = 0;
+        this.cout_total = this.ct_inscription + this.cout_trading;
         this.trading_state = 0;
         break;
       case 'VIP-2' :
-        this.ct_inscription = 50;
-        this.cout_total = 140;
-        this.ct_frais_tranfert = (this.cout_total * 15 / 100) + this.cout_total;
+        this.ct_inscription = 57.5;
+        this.cout_trading = 103.5;
+        this.cout_total = this.ct_inscription + this.cout_trading;
         this.trading_state = 1;
         break;
       case 'VIP-3' :
-        this.ct_inscription = 100;
-        this.cout_total = 280;
-        this.ct_frais_tranfert = (this.cout_total * 15 / 100) + this.cout_total;
+        this.ct_inscription = 115;
+        this.cout_trading = 207;
+        this.cout_total = this.ct_inscription + this.cout_trading;
         this.trading_state = 1;
         break;
       case 'VIP-4' :
-        this.ct_inscription = 300;
-        this.cout_total = 840;
-        this.ct_frais_tranfert = (this.cout_total * 15 / 100) + this.cout_total;
+        this.ct_inscription = 345;
+        this.cout_trading = 621;
+        this.cout_total = this.ct_inscription + this.cout_trading;
         this.trading_state = 1;
         break;
       case 'VIP-5' :
-        this.ct_inscription = 600;
-        this.cout_total = 1680;
-        this.ct_frais_tranfert = (this.cout_total * 15 / 100) + this.cout_total;
+        this.ct_inscription = 690;
+        this.cout_trading = 1242;
+        this.cout_total = this.ct_inscription + this.cout_trading;
+        this.trading_state = 1;
         break;
     }
   }

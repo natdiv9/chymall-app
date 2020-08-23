@@ -3,6 +3,6 @@ export class Utilisateur {
     public username: string;
     public pwd: string;
     public service: string;
-    public droits: string;
-    public etat: number;
+    public droits?: number;
+    public etat?: number;
 }

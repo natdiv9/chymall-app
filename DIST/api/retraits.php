@@ -7,19 +7,23 @@ switch ($request_method)
 {
     case 'GET':
         $retraitsDAO = new Retraits();
-        if(isset($_GET['auteur_operation']))
+        if(isset($_GET['auteur_operation'], $_GET['activated']))
         {
-            if(!empty($_GET['id']))
+            if(!empty($_GET['is_by_client']) && $_GET['is_by_client'] != 'false')
             {
-                // Un retrait
-                $id = intval($_GET['id']);
-                $res = $retraitsDAO->get($id);
+                $res = $retraitsDAO->get(true, $_GET['auteur_operation'], $_GET['is_by_client']);
                 response($res);
+                return;
+            }
+            if($_GET['activated'] == 'true')
+            {
+                $res = $retraitsDAO->get(true, $_GET['auteur_operation']);
+                response($res);
+                return;
             } else {
-                // Tous les retraits
-                $res = $retraitsDAO->get();
+                $res = $retraitsDAO->get(false, $_GET['auteur_operation']);
                 response($res);
-
+                return;
             }
         } else
         {
@@ -33,11 +37,11 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['profil_id'], $_POST['montant']))
+        if(isset($_POST['id_profile'], $_POST['montant'], $_POST['auteur_operation']))
         {
             $retraitDAO = new Retraits();
-            $retrait = array($_POST['profil_id'], $_POST['montant']);
-            $res = $retraitDAO->post($retrait);
+            $retrait = array($_POST['id_profile'], $_POST['montant']);
+            $res = $retraitDAO->post($retrait, $_POST['auteur_operation']);
             response($res);
         } else
         {
@@ -51,11 +55,11 @@ switch ($request_method)
         break;
     case 'PUT':
         $_PUT = json_decode(file_get_contents('php://input'), true);
-        if(isset($_PUT['profil_id'], $_PUT['montant'], $_PUT['id']))
+        if(isset($_PUT['id_profile'], $_PUT['montant'], $_PUT['id'], $_PUT['etat'], $_PUT['auteur_operation']))
         {
             $retraitDAO = new Retraits();
-            $retrait = array($_PUT['profil_id'], $_PUT['montant'], $_PUT['id']);
-            $res = $retraitDAO->put($retrait);
+            $retrait = array($_PUT['id_profile'], $_PUT['montant'], $_PUT['etat'], $_PUT['id']);
+            $res = $retraitDAO->put($retrait, $_PUT['auteur_operation']);
             response($res);
         } else
         {

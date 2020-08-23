@@ -5,6 +5,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../../ChymallServices/auth/auth.service';
+import {Client} from '../../../ChymallModels/models/client';
+import {Profile} from '../../../ChymallModels/models/profile';
+declare  var $: any;
 
 @Component({
   selector: 'app-retrait-produits-new',
@@ -16,15 +19,28 @@ export class RetraitProduitsNewComponent implements OnInit {
   produits: Produit[] = [];
   retraitProduitForm: FormGroup;
   closeResult: string;
-
+  message: string;
+  idprofile: number;
+  stock_disponible: number;
+  qte_message: string;
+  currentProduit: Produit;
+  is_client_found_message: string;
+   is_client_found = false;
+   current_client: Client;
+   all_profiles_client: Profile[] = [];
+  current_profile: Profile;
   constructor(private crudService: CrudService,
               private authService: AuthService,
               private modalService: NgbModal,
-              private route: ActivatedRoute,
               private router: Router,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.retraitProduitForm = this.formBuilder.group({
+      id_produit: [''],
+      quantite: [''],
+      id_client: ['']
+    });
     this.crudService.getProduits(this.authService.currentUser.username).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
@@ -53,38 +69,111 @@ export class RetraitProduitsNewComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  openLarge(content) {
-    this.modalService.open(content, {
-      size: 'lg'
-    });
-  }
 
-  initForm() {
-    this.retraitProduitForm = this.formBuilder.group({
-      designation: ['', [Validators.required]],
-      quantite: ['', [Validators.required, Validators.min(1)]]
-    });
-  }
-
-  newRetraitProduit() {
+  newRetraitProduit(content) {
 
     const retrait_produit = {
-      id_profile: this.route.snapshot.params.id,
-      id_produit: this.retraitProduitForm.get('produit').value,
+      id_profile: this.current_profile.id,
+      id_produit: +this.retraitProduitForm.get('id_produit').value,
       quantite: this.retraitProduitForm.get('quantite').value,
-      date_retrait: null
+      auteur_operation: this.authService.currentUser.username
     };
 
-    this.crudService.retraitProduit(retrait_produit).subscribe(
+    if (retrait_produit.quantite > this.stock_disponible) {
+      this.message = this.qte_message;
+      this.open(content);
+      return;
+    }
+
+    this.crudService.addRetraitProduit(retrait_produit).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open('Produit retiré avec succès.');
-            this.retraitProduitForm.reset();
+            const produit_update = {
+              id: this.currentProduit.id,
+              designation: this.currentProduit.designation,
+              stock_initial: this.currentProduit.stock_initial,
+              stock_final: this.currentProduit.stock_final - retrait_produit.quantite,
+              pacts: this.currentProduit.pacts,
+              auteur_operation: this.authService.currentUser.username
+            };
+            this.crudService.putProduit(produit_update).subscribe(
+                (reponse2: any) => {
+                  if (reponse2.status === true) {
+                    this.message = 'Produit retiré avec succès!';
+                    this.open(content);
+                    this.retraitProduitForm.reset();
+                  } else {
+                    this.message = 'Echec de la mise a jour du produit!';
+                    this.open(content);
+                  }
+                }
+            );
           } else {
-            this.modalService.open('Retrait impossible.');
-            this.retraitProduitForm.reset();
+            this.message = 'Retrait impossible!';
+            this.open(content);
+            console.log(reponse);
           }
+        },
+        (error) => {
+          this.message = 'Retrait impossible!';
+          this.open(content);
+          console.log(error);
         }
     );
+  }
+
+  checkQuantite(qte: HTMLInputElement) {
+    if (+qte.value > this.stock_disponible) {
+      this.qte_message = 'Le stock est insuffisant';
+    } else {
+      this.qte_message = '';
+    }
+  }
+
+  produitChange(produit: Produit) {
+    this.stock_disponible = produit.stock_final;
+    this.currentProduit = produit;
+  }
+
+  checkClient(input_id_client: HTMLInputElement, content: any) {
+    if (input_id_client.value === '' || input_id_client.value === undefined) { return; }
+    this.crudService.getClientByIdentifier(
+        this.authService.currentUser.username,
+        input_id_client.value
+    ).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.is_client_found = true;
+            this.current_client = reponse.data;
+            this.crudService.getProfiles(
+                this.authService.currentUser.username,
+                this.current_client.id,
+                true
+            ).subscribe(
+                (reponse2: any) => {
+                  if (reponse2.status === true) {
+                    this.all_profiles_client = reponse2.data;
+                  }
+                }, (error2 => {})
+            );
+          } else {
+            this.is_client_found = false;
+            this.message = 'Cet identifiant client n\'existe pas dans la base de donnée';
+            this.open(content);
+          }
+        },
+        (error) => {console.log(error);
+        }
+    );
+  }
+
+  retrait_produit_trading(profile: Profile, content: any, content2: any) {
+    this.current_profile = profile;
+    this.open(content2);
+  }
+
+  retrait_produit_adhesion(profile: Profile, content: any, content2: any) {
+    this.current_profile = profile;
+    this.open(content2);
   }
 }

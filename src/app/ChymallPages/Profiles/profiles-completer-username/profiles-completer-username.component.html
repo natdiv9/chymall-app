@@ -1,0 +1,90 @@
+<div class="main-card mb-3 card">
+  <div class="card-body">
+    <h5 class="card-title">COMPLETER PROFILE</h5>
+    <div class="divider"></div>
+    <div class="row">
+      <div class="col-6">
+        <div class="position-relative form-group"><label for="id_client">ID CLIENT</label>
+          <input #input_id_client
+                 id="id_client" type="text"
+                 class="form-control">
+          <button (click)="checkClient(input_id_client, content)" class="btn btn-primary float-right">Lister profiles d'un client</button>
+        </div>
+      </div>
+    </div>
+      <div class="divider"></div>
+  </div>
+</div>
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div *ngIf="!is_client_found" class="card-header-title font-size-lg text-capitalize font-weight-normal">
+      PROFILES INCOMPLETS
+    </div>
+    <div *ngIf="is_client_found" class="card-header-title font-size-lg text-capitalize font-weight-normal">
+      PROFILES DU CLIENT [CLIENT ID: {{current_client.identifiant}}]
+    </div>
+  </div>
+  <div class="table table-responsive">
+    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+      <thead>
+      <tr>
+        <th class="text-center">Nom d'utilisateur</th>
+        <th class="text-center">Pacts</th>
+        <th class="text-center">Mot de passe généré</th>
+        <th class="text-center">Etat</th>
+        <th class="text-center"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let profile of all_profiles_client ; let i = index">
+        <td class="text-center">{{profile.username}}</td>
+        <td class="text-center">{{profile.niveau_adhesion}}</td>
+        <td class="text-center">{{profile.password}}</td>
+        <td class="text-center">
+          <div [class]="'badge badge-pill' + (profile.etat==1 ? ' badge-warning' : (profile.etat==2 ? ' badge-success': ' badge-danger'))">
+            {{profile.etat==1 ? 'incomplet' : (profile.etat==2) ? 'actif' : 'inactif'}}</div>
+        </td>
+        <td>
+          <button class="btn-shadow btn btn-primary" (click)="completer_profile(profile, content, content2)">
+            Completer
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #content2 let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">COMPLETER LE PROFILE </h4>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="completerProfileForm" (ngSubmit)="completion(content)">
+      <div class="form-row">
+        <div class="col-md-12">
+          <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label>
+            <input
+                    formControlName="username" id="username" type="text"
+                   class="form-control">
+          </div>
+        </div>
+      </div>
+      <button class="mt-2 btn btn-primary float-right" type="submit" [disabled]="completerProfileForm.invalid">Valider
+      </button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+  </div>
+</ng-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{message}}</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+  </div>
+</ng-template>
+

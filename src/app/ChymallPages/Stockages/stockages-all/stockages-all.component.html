@@ -9,24 +9,15 @@
         <th class="text-center">#</th>
         <th class="text-center">Produit</th>
         <th class="text-center">Quantité</th>
-        <th class="text-center">Opération</th>
         <th class="text-center">Date Opération</th>
-        <th class="text-center">Actions</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let stockage of stockages; let i = index">
-        <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
-        <td class="text-center">{{stockage.id_produit}}</td>
+        <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
+        <td class="text-center">{{stockage.designation}}</td>
         <td class="text-center">{{stockage.quantite}}</td>
-        <td class="text-center">{{stockage.operation}}</td>
-        <td class="text-center">{{stockage.date_operation}}</td>
-        <td class="text-center">
-          <div role="group" class="btn-group-sm btn-group">
-            <button class="btn-shadow btn btn-primary" routerLink="/stockages/update">Modifier</button>
-            <button [routerLink]="'/stockages/' + stockage.id + '/stockage'">Détails Stockage</button>
-          </div>
-        </td>
+        <td class="text-center">{{stockage.date}}</td>
       </tr>
       </tbody>
     </table>

@@ -8,18 +8,20 @@
       <tr>
         <th class="text-center">#</th>
         <th class="text-center">Désignation</th>
+        <th class="text-center">Pacts</th>
         <th class="text-center">Stock Initial</th>
-        <th lass="text-center">Stock Final</th>
+        <th class="text-center">Stock Final</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let produit of produits ; let i = index">
-        <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
+        <td class="text-center text-muted" style="width: 80px;">{{i}}</td>
         <td class="text-center">{{produit.designation}}</td>
+        <td class="text-center">{{produit.pacts}}</td>
         <td class="text-center">{{produit.stock_initial}}</td>
-        <td class="text-center">{{produit.stock_initial}}</td>
+        <td class="text-center">{{produit.stock_final}}</td>
         <td>
-          <button routerLink="stockages/new">Gérer stock</button>
+          <button class="btn-shadow btn btn-primary" (click)="on_ajouter_stock(produit, content2)">Nouveau stock</button>
         </td>
       </tr>
       </tbody>
@@ -27,3 +29,40 @@
   </div>
 </div>
 
+
+<ng-template #content2 let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">NOUVEAU STOCK : {{current_produit.designation}} </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="stockForm" (ngSubmit)="ajouterStock(content, c('Close click'))">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="quantite">Quantité</label><input
+                  formControlName="quantite" id="quantite" type="number" min="1"
+                  class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12">
+          <button class="mt-2 btn btn-primary float-right mb-0" type="submit" [disabled]="stockForm.invalid">
+            Enregistrer
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{message}} </h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+  </div>
+</ng-template>

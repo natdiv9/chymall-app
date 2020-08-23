@@ -33,11 +33,11 @@
             break;
         case 'POST':
             $_POST = json_decode(file_get_contents('php://input'), true);
-            if(isset($_POST['username'], $_POST['pwd'], $_POST['service'], $_POST['droits']))
+            if(isset($_POST['username'], $_POST['pwd'], $_POST['service'], $_POST['droits'], $_POST['auteur_operation']))
             {
                 $utilisateursDAO = new Utilisateurs();
                 $utilisateur = array($_POST['username'], $_POST['pwd'], $_POST['service'], $_POST['droits']);
-                $res = $utilisateursDAO->post($utilisateur);
+                $res = $utilisateursDAO->post($utilisateur, $_POST['auteur_operation']);
                 response($res);
             } else
             {

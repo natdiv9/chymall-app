@@ -1,23 +1,100 @@
 <div class="main-card mb-3 card">
-  <div class="card-body"><h5 class="card-title">RETRAIT PRODUIT</h5>
-    <form [formGroup]="retraitProduitForm" (ngSubmit)="newRetraitProduit()">
-      <div class="form-row">
-        <div class="col-md-6">
-          <div class="position-relative form-group"><label for="exampleSelect">Produits</label>
-            <select formControlName="produit" id="exampleSelect" class="form-control">
-              <option *ngFor="let produit of produits" [ngValue]="produit.id">{{produit.designation}}</option>
-
-            </select>
-          </div>
-        <div class="col-md-6">
-          <div class="position-relative form-group"><label for="password">Password</label><input
-                  formControlName="password" id="password" placeholder="123456" type="password"
-                  class="form-control"></div>
+    <div class="card-body">
+        <h5 class="card-title">RETRAIT PRODUIT</h5>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col-6">
+                <div class="position-relative form-group"><label for="id_client">ID CLIENT</label>
+                    <input #input_id_client
+                           id="id_client" type="text"
+                           class="form-control">
+                </div>
+                <button (click)="checkClient(input_id_client, content)" class="btn btn-primary">Lister profiles</button>
+            </div>
         </div>
-      </div>
 
-      <button class="mt-2 btn btn-primary float-right" [disabled]="retraitProduitForm.invalid">Enregistrer utilisateur</button>
-      </div>
-    </form>
-  </div>
+        <div class="divider"></div>
+    </div>
 </div>
+<div *ngIf="is_client_found" class="main-card mb-3 card">
+    <div class="card-header">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">PROFILES DU CLIENT [CLIENT ID: {{current_client.identifiant}}]</div>
+    </div>
+    <div class="table table-responsive">
+        <div *ngIf="is_client_found" class="table">
+    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+        <thead>
+        <tr>
+            <th class="text-center">Nom d'utilisateur</th>
+            <th class="text-center">Pacts</th>
+            <th class="text-center">Produit Trading</th>
+            <th class="text-center">Produit Adhesion</th>
+            <th class="text-center">Action/Retrait</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let profile of all_profiles_client ; let i = index">
+            <td class="text-center">{{profile.username}}</td>
+            <td class="text-center">{{profile.niveau_adhesion}}</td>
+            <td class="text-center">{{profile.produit_trading}}</td>
+            <td class="text-center">{{profile.produit_adhesion}}
+            <td class="text-center">
+                <button [disabled]="profile.etat_produit_adhesion==1" class="btn-shadow btn btn-primary" style="margin-right: 5px;" (click)="retrait_produit_adhesion(profile, content, content2)">
+                    {{(profile.etat_produit_adhesion==1) ? 'Produit retiré' : 'Produit Adhesion'}}
+                </button>
+                <button class="btn-shadow btn btn-primary" (click)="retrait_produit_trading(profile, content, content2)">
+                    Produit Trading
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+    </div>
+</div>
+
+<ng-template #content2 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">RETRAIT PRODUIT PROFILE </h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="retraitProduitForm" (ngSubmit)="newRetraitProduit(content)">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="position-relative form-group"><label for="id_produit">Produits</label>
+                        <select formControlName="id_produit" id="id_produit" class="form-control">
+                            <option *ngFor="let produit of produits"
+                                    (click)="produitChange(produit)"
+                                    [value]="produit.id">{{produit.designation}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="position-relative form-group"><label for="quantite">Quantite</label>
+                        <input #qte (keyup)="checkQuantite(qte)"
+                               formControlName="quantite" id="quantite" type="number" min="1" [max]="stock_disponible"
+                               class="form-control">
+                        <span class="form-text" style="color: red;">{{qte_message}}
+                        </span>
+
+                    </div>
+                    <span class="form-text" style="color: royalblue;">Stock Disponible: {{stock_disponible}}</span>
+                </div>
+            </div>
+            <button class="mt-2 btn btn-primary float-right" type="submit" [disabled]="retraitProduitForm.invalid">Enregistrer
+            </button>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{message}} </h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+    </div>
+</ng-template>

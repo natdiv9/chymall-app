@@ -3,5 +3,5 @@ export class RetraitProduits {
     id_profile: number;
     id_produit: number;
     quantite: number;
-    date?: any;
+    date?: string;
 }

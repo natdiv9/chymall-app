@@ -10,7 +10,7 @@ import {AuthService} from '../../../ChymallServices/auth/auth.service';
 })
 export class RetraitsAllComponent implements OnInit {
 
-  retraits: Retrait[] = [];
+  retraits: any[] = [];
 
   constructor(private crudService: CrudService,
               private authService: AuthService) { }
@@ -22,8 +22,11 @@ export class RetraitsAllComponent implements OnInit {
             this.retraits = reponse.data;
           } else {
             this.retraits = null;
+            console.log(reponse.message);
           }
-        }
+        }, (error => {
+            console.log(error);
+        })
     );
   }
 

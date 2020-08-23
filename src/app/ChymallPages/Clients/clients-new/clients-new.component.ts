@@ -13,8 +13,6 @@ import {AuthService} from '../../../ChymallServices/auth/auth.service';
 export class ClientsNewComponent implements OnInit {
 
   newClientForm: FormGroup;
-  fileUrl: string;
-  loaded: boolean;
   loading: boolean;
 
   heading = 'Modals';
@@ -22,7 +20,8 @@ export class ClientsNewComponent implements OnInit {
   icon = 'pe-7s-phone icon-gradient bg-premium-dark';
 
   closeResult: string;
-  private message: string;
+  message: string;
+  identifiant: string;
 
   constructor(private formBuilder: FormBuilder,
               private modalService: NgbModal,
@@ -34,10 +33,11 @@ export class ClientsNewComponent implements OnInit {
     this.initForm();
   }
 
-  open(content) {
+  open(content, route  = []) {
     this.modalService.open(content,
         {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      this.router.navigate(route);
     }, (reason) => {
       this.closeResult =
           `Dismissed ${this.getDismissReason(reason)}`;
@@ -54,12 +54,6 @@ export class ClientsNewComponent implements OnInit {
     }
   }
 
-  openLarge(content) {
-    this.modalService.open(content, {
-      size: 'lg'
-    });
-  }
-
   initForm() {
     this.newClientForm = this.formBuilder.group({
       telephone: ['', [Validators.required]],
@@ -67,28 +61,13 @@ export class ClientsNewComponent implements OnInit {
       prenom: ['', [Validators.required]],
       nom: ['', [Validators.required]],
       adresse: ['', [Validators.required]],
-      adresse2: [''],
       ville: ['', [Validators.required]],
       pays: ['', [Validators.required]],
-      zip: ['', []],
-      photo: null
+      nom_beneficiaire: '',
+      prenom_beneficiaire: '',
+      identifiant_sponsor: ''
     });
   }
-
-  onUploadFile(file: File) {
-    this.loading = true;
-    this.crudService.uploadFile(file).then(
-        (url: string) => {
-          this.fileUrl = url;
-          this.loading = false;
-          this.loaded = true;
-        }
-    );
-  }
-  detectFiles(event) {
-    // this.onUploadFile(event.target.files[0]);
-  }
-
 
   newClient(content: any) {
     const client = {
@@ -97,27 +76,31 @@ export class ClientsNewComponent implements OnInit {
       prenom: this.newClientForm.get('prenom').value,
       nom: this.newClientForm.get('nom').value,
       adresse: this.newClientForm.get('adresse').value,
-      adresse2: this.newClientForm.get('adresse2').value,
       ville: this.newClientForm.get('ville').value,
       pays: this.newClientForm.get('pays').value,
-      zip: this.newClientForm.get('zip').value,
-      photo: '',
-      etat: 1,
-      pwd_login: '123456',
-      pwd_retrait: '123456',
+      nom_beneficiaire: this.newClientForm.get('nom_beneficiaire').value,
+      prenom_beneficiaire: this.newClientForm.get('prenom_beneficiaire').value,
+      identifiant_sponsor: this.newClientForm.get('identifiant_sponsor').value,
       auteur_operation: this.authService.currentUser.username
     };
     this.crudService.addClient(client).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
+            this.identifiant = reponse.data.identifiant;
             this.message = 'Nouveau client enregistré avec succès';
-            this.open(content);
+            this.open(content, ['/', 'profiles', reponse.data.id, reponse.data.identifiant, 'new']);
             this.newClientForm.reset();
           } else {
             this.message = 'L\'enregistrement a échoué';
             this.open(content);
+            console.log(reponse.message);
           }
-        }
+        },
+        (error => {
+          this.message = 'L\'enregistrement a échoué';
+          this.open(content);
+          console.log(error);
+        })
     );
   }
 }

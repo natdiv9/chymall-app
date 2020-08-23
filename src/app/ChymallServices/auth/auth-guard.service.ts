@@ -15,7 +15,7 @@ export class AuthGuardService implements CanActivate {
     return new Promise(
         (resolve, reject) => {
           if (this.authService.connected) {
-            resolve(true);
+              resolve(true);
           } else {
             this.router.navigate(['/', 'connexion']);
             resolve(false);

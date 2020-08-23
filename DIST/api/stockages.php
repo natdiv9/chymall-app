@@ -33,11 +33,11 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['produit_id'], $_POST['quantite'], $_POST['entree_sortie']))
+        if(isset($_POST['id_produit'], $_POST['quantite'], $_POST['auteur_operation']))
         {
             $stockageDAO = new Stockages();
-            $stockage = array($_POST['produit_id'], $_POST['quantite'], $_POST['entree_sortie']);
-            $res = $stockageDAO->post($stockage);
+            $stockage = array($_POST['id_produit'], $_POST['quantite']);
+            $res = $stockageDAO->post($stockage, $_POST['auteur_operation']);
             response($res);
         } else
         {

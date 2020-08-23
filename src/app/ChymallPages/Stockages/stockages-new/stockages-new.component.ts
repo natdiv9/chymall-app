@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService} from '../../../ChymallServices/auth/auth.service';
 
 @Component({
   selector: 'app-stockages-new',
@@ -13,14 +14,17 @@ export class StockagesNewComponent implements OnInit {
 
   newStockageForm: FormGroup;
   closeResult: string;
+  idproduit: number;
 
   constructor(private formBuilder: FormBuilder,
               private crudService: CrudService,
+              private authService: AuthService,
               private router: Router,
               private modalService: NgbModal,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.idproduit = +this.route.snapshot.params.idproduit;
     this.initForm();
   }
 
@@ -44,36 +48,30 @@ export class StockagesNewComponent implements OnInit {
     }
   }
 
-  openLarge(content) {
-    this.modalService.open(content, {
-      size: 'lg'
-    });
-  }
-
   initForm() {
     this.newStockageForm = this.formBuilder.group({
-      operation: ['', [Validators.required]],
       quantite: ['', [Validators.required]]
     });
   }
 
   newStockage() {
     const stockage = {
-      id_produit: this.route.snapshot.params.id,
+      id_produit: +this.route.snapshot.params.idproduit,
       quantite: this.newStockageForm.get('quantite').value,
-      operation: this.newStockageForm.get('operation').value,
-      date_operation: null
+      auteur_operation: this.authService.currentUser.username
     };
     this.crudService.addStockage(stockage).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open('' + stockage.operation + 'effectuée' + 'avec succès.');
+            this.modalService.open('Stockage effectuéavec succès!');
             this.newStockageForm.reset();
           } else {
-            this.modalService.open('' + stockage.operation + 'a échoué' + '');
+            this.modalService.open('Stockage a échoué');
             this.newStockageForm.reset();
           }
-        }
+        }, (error) => {
+          console.log(error);
+    }
     );
 
   }

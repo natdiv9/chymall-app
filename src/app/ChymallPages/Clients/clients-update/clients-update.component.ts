@@ -69,12 +69,8 @@ export class ClientsUpdateComponent implements OnInit {
               email: this.client.email,
               prenom: this.client.prenom,
               adresse: this.client.adresse,
-              adresse2: this.client.adresse2,
               ville: this.client.ville,
-              state: this.client.pays,
-              zip: this.client.zip,
-              nom: this.client.nom,
-              photo: this.client.photo
+              nom: this.client.nom
             });
           }
         }
@@ -90,14 +86,9 @@ export class ClientsUpdateComponent implements OnInit {
       prenom: this.updateCientForm.get('prenom').value,
       nom: this.updateCientForm.get('nom').value,
       adresse: this.updateCientForm.get('adresse').value,
-      adresse2: this.updateCientForm.get('adresse2').value,
       ville: this.updateCientForm.get('ville').value,
       pays: this.updateCientForm.get('pays').value,
-      zip: this.updateCientForm.get('zip').value,
-      photo: this.client.photo,
       etat: 1,
-      pwd_login: '123456',
-      pwd_retrait: '123456',
       auteur_operation: this.authService.currentUser.username
     };
 

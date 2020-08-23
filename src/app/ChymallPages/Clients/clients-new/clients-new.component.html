@@ -35,7 +35,7 @@
             </div>
 
             <div class="form-row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="position-relative form-group"><label for="exampleAddress">Adresse</label><input
                             formControlName="adresse"
                             id="exampleAddress"
@@ -44,14 +44,7 @@
                             class="form-control">
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="position-relative form-group"><label for="exampleAddress2">Adresse 2</label><input
-                            formControlName="adresse2" id="exampleAddress2" placeholder="" type="text"
-                            class="form-control"></div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="position-relative form-group"><label for="exampleCity">Ville</label><input
                             formControlName="ville"
                             placeholder=""
@@ -69,34 +62,47 @@
                             class="form-control">
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="position-relative form-group"><label for="exampleZip">Code Postal</label><input
-                            formControlName="zip"
+            </div>
+            <div class="divider"> Autre Informations</div>
+            <div class="form-row">
+                <div class="col-md-4">
+                    <div class="position-relative form-group"><label for="nom_beneficiaire">Nom du Bénéficiaire</label><input
+                            formControlName="nom_beneficiaire"
+                            id="nom_beneficiaire"
                             placeholder=""
-                            id="exampleZip"
+                            type="text"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="position-relative form-group"><label for="prenom_beneficiaire">Prénom du Bénéficiaire</label><input
+                            formControlName="prenom_beneficiaire"
+                            placeholder=""
+                            id="prenom_beneficiaire"
+                            type="text"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="position-relative form-group"><label for="identifiant_sponsor">ID Sponsor</label><input
+                            formControlName="identifiant_sponsor"
+                            placeholder=""
+                            id="identifiant_sponsor"
                             type="text"
                             class="form-control">
                     </div>
                 </div>
             </div>
-            <div class="form-row">
-                <label>Photo De Profile</label>
-                <span class="text-success" *ngIf="loaded">Photo chargée !</span>
-                <input formControlName="photo"
-                       id="photo"
-                       type="file"
-                       (change)="detectFiles($event)"
-                       class="form-control">
-            </div>
-            <button class="mt-2 btn btn-primary float-right" [disabled]="newClientForm.invalid || loading">Ajouter
-                Client
+            <button class="mt-2 btn btn-primary float-right" [disabled]="newClientForm.invalid || loading">
+                Ajouter Client
             </button>
         </form>
     </div>
 </div>
 <ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">{{message}}</h4>
+    <div class="modal-body">
+        <h4 class="text-center">{{message}}</h4>
+        <h6 class="text-center">L'identifiant du client est <strong>{{identifiant}}</strong></h6>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>

@@ -5,5 +5,5 @@ export class Paiement {
     public montant_inscription: number;
     public frais_trading: number;
     public frais_inscription: number;
-    public date_operation?: Date;
+    public date?: any;
 }
