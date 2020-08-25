@@ -11,20 +11,32 @@ import {AuthService} from '../../../ChymallServices/auth/auth.service';
 export class StockagesAllComponent implements OnInit {
 
   stockages: Stockage[] | any[] = [];
+    chargement: boolean;
+    message: string;
 
   constructor(private crudService: CrudService,
               private authService: AuthService) { }
 
   ngOnInit() {
-    this.crudService.getStockages(this.authService.currentUser.username).subscribe(
-        (reponse: any) => {
-          if (reponse.status === true) {
-            this.stockages = reponse.data;
-          } else {
-            this.stockages = null;
-          }
-        }
-    );
+    this.refresh();
   }
 
+  refresh() {
+      this.chargement = true;
+      this.crudService.getStockages(this.authService.currentUser.username).subscribe(
+            (reponse: any) => {
+                if (reponse.status === true) {
+                    this.chargement = false;
+                    this.stockages = reponse.data;
+                } else {
+                    this.chargement = false;
+                    this.message = 'Echec de recupération de données';
+                    console.log(reponse.message);
+                }
+            }, (error => {
+              this.message = 'Echec de recupération de données';
+              console.log(error);
+          })
+        );
+    }
 }

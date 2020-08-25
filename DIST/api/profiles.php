@@ -10,9 +10,16 @@ switch ($request_method)
         if(isset($_GET['auteur_operation']))
         {
             if(isset($_GET['incomplete']) && $_GET['incomplete'] == true){
-                $res = $profilDAO->getIncompletProfiles($_GET['incomplete'], $_GET['auteur_operation']);
-                response($res);
-                return;
+                if(!empty($_GET['id']) && $_GET['id'] != 'undefined' && isset($_GET['is_by_client']) && $_GET['is_by_client'] == true) {
+                    $res = $profilDAO->getIncompletProfiles($_GET['incomplete'], $_GET['auteur_operation'], true, $_GET['id']);
+                    response($res);
+                    return;
+                } else {
+                    $res = $profilDAO->getIncompletProfiles($_GET['incomplete'], $_GET['auteur_operation']);
+                    response($res);
+                    return;
+                }
+
             }
 
             if(!empty($_GET['id']) && $_GET['id'] != 'undefined')

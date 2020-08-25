@@ -55,7 +55,10 @@ export class UtilisateursUpdateComponent implements OnInit {
 
   initForm() {
     this.id = this.route.snapshot.params.id;
-    this.crudService.getUtilisateurs(this.id).subscribe(
+    this.crudService.getUtilisateurs(
+        this.authService.currentUser.username,
+        +this.id
+    ).subscribe(
         (response: any) => {
           if (response.status) {
             this.utilisateur = response.data;

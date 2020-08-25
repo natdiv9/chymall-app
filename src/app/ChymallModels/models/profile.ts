@@ -15,4 +15,5 @@ export class Profile {
     public etat?: number;
     public password?: string;
     public data?: string;
+    public date_activation?: string;
 }

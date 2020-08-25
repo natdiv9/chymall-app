@@ -1,6 +1,8 @@
 <div class="main-card mb-3 card">
   <div class="card-body">
-    <h5 class="card-title">VALIDER TRANFERT DE POINTS</h5>
+    <h5 class="card-title">
+      <strong>VALIDER TRANFERT DE POINTS</strong>
+    </h5>
     <div class="divider"></div>
     <div class="row">
       <div class="col-6">
@@ -9,19 +11,30 @@
                  id="id_client" type="text"
                  class="form-control">
         </div>
-        <button (click)="checkClient(input_id_client, content)" class="btn btn-primary">Lister profiles</button>
+        <button (click)="checkClient(input_id_client, content)" class="btn btn-primary float-right">Lister les profiles</button>
       </div>
     </div>
-
     <div class="divider"></div>
   </div>
 </div>
+
 <div *ngIf="is_client_found" class="main-card mb-3 card">
   <div class="card-header">
-    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">PROFILES DU CLIENT [{{current_client.identifiant}}]</div>
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+      <strong>PROFILES DU CLIENT [{{current_client.identifiant}}]</strong>
+      <button (click)="refresh()"
+              class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
   <div class="card-body">
-    <div class="table table-responsive">
+    <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+      <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+      <br>
+      Chargement de données en cours..
+    </div>
+    <div *ngIf="!chargement" class="table table-responsive">
       <div *ngIf="is_client_found" class="table">
         <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
           <thead>
@@ -38,7 +51,8 @@
             <td class="text-center">{{profile.username}}</td>
             <td class="text-center">{{profile.niveau_adhesion}}</td>
             <td class="text-center">
-              <button class="btn-shadow btn btn-primary" (click)="demande_retrait(profile, content, content2)">
+              <button [disabled]="profile.etat_trading==0 && profile.etat_activation==0"
+                      class="btn-shadow btn btn-primary" (click)="demande_retrait(profile, content, content2)">
                 Valider tranfert
               </button>
             </td>

@@ -1,36 +1,52 @@
 <div class="main-card mb-3 card">
-  <div class="card-header">
-    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">LISTE D'UTILISATEURS</div>
+    <div class="card-header">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+            <strong>LISTE DES UTILISATEURS</strong>
+            <button (click)="refresh()"
+                    class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+                <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+            </button>
+        </div>
     </div>
-    <div class="table-responsive">
-      <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
-        <thead>
-        <tr>
-          <th class="text-center">#</th>
-          <th class="text-center">Nom d'utilisateur</th>
-          <th class="text-center">Service</th>
-          <th class="text-center">Etat</th>
-          <th class="text-center">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let utilisateur of utilisateurs; let i = index">
-          <td class="text-center text-muted" style="width: 80px;">#{{i}}</td>
-          <td class="text-center">{{utilisateur.username}}</td>
-          <td class="text-center">{{utilisateur.service}}</td>
-          <td class="text-center">
-            <div [class]="'badge badge-pill' + (utilisateur.etat==1 ? ' badge-success' : ' badge-danger')">{{utilisateur.etat==1 ? 'actif' : 'inactif'}}</div>
-          </td>
-          <td class="text-center">
-            <div role="group" class="btn-group-sm btn-group">
-              <button style="margin-right: 5px;" class="btn-shadow btn btn-primary" [routerLink]="'/utilisateurs/' + utilisateur.id + '/update'">Modifier</button>
-              <button style="margin-right: 5px;" class="btn-shadow btn btn-danger">Supprimer</button>
+    <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+        <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+        <br>
+        Chargement de données en cours..
+    </div>
+    <div *ngIf="!chargement" class="table-responsive">
+        <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Nom d'utilisateur</th>
+                <th class="text-center">Service</th>
+                <th class="text-center">Etat</th>
+                <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let utilisateur of utilisateurs; let i = index">
+                <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
+                <td class="text-center">{{utilisateur.username}}</td>
+                <td class="text-center">{{utilisateur.service}}</td>
+                <td class="text-center">
+                    <div [class]="'badge badge-pill' + (utilisateur.etat==1 ? ' badge-success' : ' badge-danger')">{{utilisateur.etat == 1 ? 'actif' : 'inactif'}}</div>
+                </td>
+                <td class="text-center">
+                    <div role="group" class="btn-group-sm btn-group">
+                        <button style="margin-right: 5px;" class="btn-shadow btn btn-primary"
+                                [routerLink]="'/utilisateurs/' + utilisateur.id + '/update'">Modifier
+                        </button>
+                        <button style="margin-right: 5px;" class="btn-shadow btn btn-danger">Supprimer</button>
+                    </div>
+                </td>
+            </tr>
+            <div class="row mt-5">
+                <div class="col-12 divider mt-2"></div>
             </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+            </tbody>
+        </table>
     </div>
-  </div>
+</div>
 
 

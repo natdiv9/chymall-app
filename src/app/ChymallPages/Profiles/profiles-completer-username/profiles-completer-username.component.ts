@@ -24,6 +24,7 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
     current_client: Client;
     all_profiles_client: Profile[] = [];
     current_profile: Profile;
+    chargement: boolean;
 
     constructor(
         private authService: AuthService,
@@ -41,7 +42,7 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
         });
     }
 
-    completion(content: any) {
+    completion(content: any, c: any) {
         const data_sent = Object.assign(this.current_profile, {
             auteur_operation: this.authService.currentUser.username,
             username: this.completerProfileForm.get('username').value,
@@ -52,11 +53,9 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
         ).subscribe(
             (reponse: any) => {
                 if (reponse.status === true) {
-                    this.current_profile.etat = 2;
-                    this.current_profile.username = this.completerProfileForm.get('username').value;
                     this.completerProfileForm.reset();
-                    this.refresh();
                     this.message = 'Enregistrement effectué avec succès!';
+                    this.refresh();
                     this.open(content);
                 } else {
                     this.message = 'Echec de l\'opération!';
@@ -97,6 +96,7 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
         if (input_id_client.value === '' || input_id_client.value === undefined) {
             return;
         }
+        this.chargement = true;
         this.crudService.getClientByIdentifier(
             this.authService.currentUser.username,
             input_id_client.value
@@ -105,13 +105,14 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
                 if (reponse.status === true) {
                     this.is_client_found = true;
                     this.current_client = reponse.data;
-                    this.crudService.getProfiles(
+                    this.crudService.getIncompletProfiles(
                         this.authService.currentUser.username,
                         this.current_client.id,
                         true
                     ).subscribe(
                         (reponse2: any) => {
                             if (reponse2.status === true) {
+                                this.chargement = false;
                                 this.all_profiles_client = reponse2.data;
                             }
                         }, (error2 => {
@@ -119,11 +120,13 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
                     );
                 } else {
                     this.is_client_found = false;
+                    this.chargement = false;
                     this.message = 'Cet identifiant client n\'existe pas dans la base de donnée';
                     this.open(content);
                 }
             },
             (error) => {
+                this.message = 'Echec de recupération de données';
                 console.log(error);
             }
         );
@@ -135,15 +138,22 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
     }
 
     refresh() {
+        this.chargement = true;
         this.crudService.getIncompletProfiles(
             this.authService.currentUser.username
         ).subscribe(
             (reponse2: any) => {
                 if (reponse2.status === true) {
                     this.is_client_found = false;
+                    this.chargement = false;
                     this.all_profiles_client = reponse2.data;
+                } else {
+                    this.chargement = false;
+                    this.message = 'Echec de recupération de données';
+                    console.log(reponse2.message);
                 }
             }, (error2 => {
+                this.message = 'Echec de recupération de données';
                 console.log(error2);
             })
         );

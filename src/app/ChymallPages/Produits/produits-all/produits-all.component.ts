@@ -17,6 +17,7 @@ export class ProduitsAllComponent implements OnInit {
     closeResult: string;
     stockForm: FormGroup;
     message: string;
+    chargement: boolean;
 
     constructor(
         private crudService: CrudService,
@@ -101,14 +102,22 @@ export class ProduitsAllComponent implements OnInit {
         );
     }
 
-    private refresh() {
+    refresh() {
+        this.chargement = true;
         this.crudService.getProduits(this.authService.currentUser.username).subscribe(
             (reponse: any) => {
                 if (reponse.status === true) {
+                    this.chargement = false;
                     this.produits = reponse.data;
                 } else {
-                    this.produits = null;
+                    this.chargement = false;
+                    this.message = 'Echec de recupération de données';
+                    console.log(reponse.message);
                 }
+            }, (error) => {
+                this.chargement = false;
+                this.message = 'Echec de recupération de données';
+                console.log(error);
             }
         );
     }

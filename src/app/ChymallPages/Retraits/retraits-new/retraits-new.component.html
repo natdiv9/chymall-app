@@ -1,6 +1,8 @@
 <div class="main-card mb-3 card">
   <div class="card-body">
-    <h5 class="card-title">VALIDER RETRAIT ARGENT</h5>
+    <h5 class="card-title">
+      <strong>VALIDER RETRAIT ARGENT</strong>
+    </h5>
     <div class="divider"></div>
     <div class="row">
       <div class="col-6">
@@ -9,7 +11,9 @@
                  id="id_client" type="text"
                  class="form-control">
         </div>
-        <button (click)="checkClient(input_id_client, content)" class="btn btn-primary">Lister profiles</button>
+        <button (click)="checkClient(input_id_client, content)" class="btn btn-primary float-right">
+          Lister les profiles
+        </button>
       </div>
     </div>
 
@@ -17,48 +21,63 @@
   </div>
 </div>
 <div *ngIf="!is_client_found" class="main-card mb-3 card">
-  <div class="card-header">
-    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">DEMANDES DE RETRAIT</div>
+  <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+    <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+    <br>
+    Chargement de données en cours..
+  </div>
+  <div *ngIf="!chargement" class="card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+      <strong>DEMANDES DE RETRAIT</strong>
+      <button (click)="refresh()"
+              class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
   <div class="card-body">
-    <div class="table table-responsive">
-      <div class="table">
-        <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
-          <thead>
-          <tr>
-            <th class="text-center text-muted">#</th>
-            <th class="text-center">Nom d'utilisateur</th>
-            <th class="text-center">Pacts</th>
-            <th class="text-center">Montant</th>
-            <th class="text-center">Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let profile of all_profiles_client ; let i = index">
-            <td class="text-center">{{i+1}}</td>
-            <td class="text-center">{{profile.username}}</td>
-            <td class="text-center">{{profile.niveau_adhesion}}</td>
-            <td class="text-center">{{profile.montant}}</td>
-            <td class="text-center">
-              <button class="btn-shadow btn btn-primary" (click)="valider_retrait(profile, content, content2)">
-                Valider retrait
-              </button>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="table">
+      <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+        <thead>
+        <tr>
+          <th class="text-center text-muted">#</th>
+          <th class="text-center">Nom d'utilisateur</th>
+          <th class="text-center">Pacts</th>
+          <th class="text-center">Montant</th>
+          <th class="text-center">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let profile of all_profiles_client ; let i = index">
+          <td class="text-center">{{i+1}}</td>
+          <td class="text-center">{{profile.username}}</td>
+          <td class="text-center">{{profile.niveau_adhesion}}</td>
+          <td class="text-center">{{profile.montant}}</td>
+          <td class="text-center">
+            <button class="btn-shadow btn btn-primary" (click)="valider_retrait(profile, content, content2)">
+              Valider retrait
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
 <div *ngIf="is_client_found" class="main-card mb-3 card">
   <div class="card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      DEMANDES DE RETRAIT [{{current_client.prenom}} {{current_client.nom}}]
+      <strong>
+        DEMANDES DE RETRAIT [{{current_client.prenom}} {{current_client.nom}}]
+      </strong>
+      <button (click)="refresh()"
+              class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
-  <div class="card-body">
-    <div class="table table-responsive">
+
+    <div class="table-responsive">
       <div *ngIf="is_client_found" class="table">
         <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
           <thead>
@@ -87,7 +106,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <ng-template #content2 let-c="close" let-d="dismiss">
   <div class="modal-body">

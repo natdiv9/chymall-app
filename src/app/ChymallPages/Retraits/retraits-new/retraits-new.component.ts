@@ -22,6 +22,7 @@ export class RetraitsNewComponent implements OnInit {
   all_profiles_client: any[] = [];
   message: string;
   currentRetrait: any;
+    chargement: boolean;
 
   constructor(private crudService: CrudService,
               private authService: AuthService,
@@ -102,7 +103,6 @@ export class RetraitsNewComponent implements OnInit {
     this.crudService.putRetrait(data_to_send).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-              this.refresh();
               this.message = 'Retrait enregistré avec succcès';
               this.refreshData(this.current_client.identifiant, content);
               this.open(content);
@@ -134,6 +134,9 @@ export class RetraitsNewComponent implements OnInit {
                 (reponse2: any) => {
                   if (reponse2.status === true) {
                     this.all_profiles_client = reponse2.data;
+                    if (this.all_profiles_client.length === 0) {
+                        this.refresh();
+                    }
                   } else {
                     this.message = 'Impossible de trouver les profiles';
                     this.open(content);
@@ -154,19 +157,24 @@ export class RetraitsNewComponent implements OnInit {
   }
 
     refresh() {
+        this.chargement = true;
         this.crudService.getRetraits(
             this.authService.currentUser.username,
             'true'
         ).subscribe(
             (reponse2: any) => {
                 if (reponse2.status === true) {
+                    this.chargement = false;
                     this.is_client_found = false;
                     this.all_profiles_client = reponse2.data;
                     console.log(reponse2.message);
                 } else {
+                    this.chargement = false;
+                    this.message = 'Echec de recupération de données';
                     console.log(reponse2.message);
                 }
             }, (error2 => {
+                this.message = 'Echec de recupération de données';
                 console.log(error2);
             })
         );

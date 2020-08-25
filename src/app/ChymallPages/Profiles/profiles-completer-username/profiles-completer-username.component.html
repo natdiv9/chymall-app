@@ -1,9 +1,11 @@
 <div class="main-card mb-3 card">
   <div class="card-body">
-    <h5 class="card-title">COMPLETER PROFILE</h5>
+    <h5 class="card-title">
+      <strong>COMPLETER PROFILE</strong>
+    </h5>
     <div class="divider"></div>
     <div class="row">
-      <div class="col-4">
+      <div class="col-6">
         <div class="position-relative form-group"><label for="id_client">ID CLIENT</label>
           <input #input_id_client
                  id="id_client" type="text"
@@ -20,21 +22,34 @@
 <div class="main-card mb-3 card">
   <div class="card-header">
     <div *ngIf="!is_client_found" class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      PROFILES INCOMPLETS
+      <strong>PROFILES INCOMPLETS</strong>
+      <button (click)="refresh()"
+              class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+      </button>
     </div>
     <div *ngIf="is_client_found" class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      PROFILES DU CLIENT [CLIENT ID: {{current_client.identifiant}}]
+      <strong>PROFILES DU CLIENT [CLIENT ID: {{current_client.identifiant}}] </strong>
+      <button (click)="refresh()"
+              class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
-  <div class="table table-responsive">
+  <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+    <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+    <br>
+    Chargement de données en cours..
+  </div>
+  <div *ngIf="!chargement" class="table table-responsive">
     <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
       <thead>
       <tr>
         <th class="text-center">Nom d'utilisateur</th>
         <th class="text-center">Pacts</th>
         <th class="text-center">Mot de passe généré</th>
-        <th class="text-center">Etat</th>
-        <th class="text-center"></th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -46,7 +61,7 @@
           <div [class]="'badge badge-pill' + (profile.etat==1 ? ' badge-warning' : (profile.etat==2 ? ' badge-success': ' badge-danger'))">
             {{profile.etat==1 ? 'incomplet' : (profile.etat==2) ? 'actif' : 'inactif'}}</div>
         </td>
-        <td>
+        <td class="text-center">
           <button class="btn-shadow btn btn-primary" (click)="completer_profile(profile, content, content2)">
             Completer
           </button>
@@ -59,10 +74,10 @@
 
 <ng-template #content2 let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">COMPLETER LE PROFILE </h4>
+    <h4 class="modal-title">Completer ce profile</h4>
   </div>
   <div class="modal-body">
-    <form [formGroup]="completerProfileForm" (ngSubmit)="completion(content)">
+    <form [formGroup]="completerProfileForm" (ngSubmit)="completion(content, c('Close click'))">
       <div class="form-row">
         <div class="col-md-12">
           <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label>
@@ -75,9 +90,6 @@
       <button class="mt-2 btn btn-primary float-right" type="submit" [disabled]="completerProfileForm.invalid">Valider
       </button>
     </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
   </div>
 </ng-template>
 

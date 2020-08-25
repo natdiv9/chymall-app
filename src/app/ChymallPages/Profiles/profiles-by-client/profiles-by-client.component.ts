@@ -15,8 +15,9 @@ export class ProfilesByClientComponent implements OnInit {
     profiles: Profile[] = [];
     username = '';
     message: string;
-  closeResult: string;
-    source = ['Afghanistan', 'Czech Republic', 'Denmark', 'Djibouti', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore'];
+    closeResult: string;
+    chargement: boolean;
+    selected_profile: Profile;
 
     constructor(private crudService: CrudService,
                 private authService: AuthService,
@@ -26,15 +27,30 @@ export class ProfilesByClientComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.refresh();
+    }
+
+    refresh() {
+        this.chargement = true;
         const id = this.route.snapshot.params.idclient;
         this.username = this.route.snapshot.params.username;
-        this.crudService.getProfiles(this.authService.currentUser.username, id, true).subscribe(
+        this.crudService.getProfiles(
+            this.authService.currentUser.username,
+            id,
+            true
+        ).subscribe(
             (reponse: any) => {
                 if (reponse.status === true) {
+                    this.chargement = false;
                     this.profiles = reponse.data;
                 } else {
-
+                    this.chargement = false;
+                    this.message = 'Echec de recupération de données';
+                    console.log(reponse.message);
                 }
+            }, (error) => {
+                this.message = 'Echec de recupération de données';
+                console.log(error);
             }
         );
     }
@@ -49,26 +65,40 @@ export class ProfilesByClientComponent implements OnInit {
         });
     }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
+    private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return `with: ${reason}`;
+        }
     }
-  }
 
-    activer_trading(profile: Profile, content: any) {
-        profile.etat_trading = 1;
+    confirmation_ct(profile: Profile, content: any, content2: any) {
+        this.selected_profile = profile;
+        this.open(content2);
+    }
+
+    confirmation_tr(profile: Profile, content: any, content2: any) {
+        this.selected_profile = profile;
+        this.open(content2);
+    }
+
+    activer_trading(content: any, c: any) {
+        // profile.etat_trading = 1;
         this.crudService.putProfile(Object.assign(
-            profile,
-            {auteur_operation: this.authService.currentUser.username}
+            this.selected_profile,
+            {
+                etat_trading: 1,
+                auteur_operation: this.authService.currentUser.username
+            }
         )).subscribe(
             (reponse: any) => {
                 if (reponse.status === true) {
                     this.message = 'Activation du trading effectuée avec succès!';
                     this.open(content);
+                    this.refresh();
                 } else {
                     this.message = 'Echec d\'activation du trading!';
                     this.open(content);
@@ -83,27 +113,31 @@ export class ProfilesByClientComponent implements OnInit {
         );
     }
 
-    activer_compte(profile: Profile, content: any) {
-        profile.etat_activation = 1;
+    activer_compte(content: any, c: any) {
+        // profile.etat_activation = 1;
         this.crudService.putProfile(Object.assign(
-            profile,
-            {auteur_operation: this.authService.currentUser.username}
-        )).subscribe(
-          (reponse: any) => {
-            if (reponse.status === true) {
-              this.message = 'Activation du compte effectuée avec succès!';
-              this.open(content);
-            } else {
-              this.message = 'Echec d\'activation du compte!';
-              this.open(content);
-              console.log(reponse.message);
+            this.selected_profile,
+            {
+                etat_activation: 1,
+                auteur_operation: this.authService.currentUser.username
             }
-          },
-          (error) => {
-            this.message = 'Echec d\'activation du compte!';
-            this.open(content);
-            console.log(error);
-          }
-      );
+        )).subscribe(
+            (reponse: any) => {
+                if (reponse.status === true) {
+                    this.message = 'Activation du compte effectuée avec succès!';
+                    this.open(content);
+                    this.refresh();
+                } else {
+                    this.message = 'Echec d\'activation du compte!';
+                    this.open(content);
+                    console.log(reponse.message);
+                }
+            },
+            (error) => {
+                this.message = 'Echec d\'activation du compte!';
+                this.open(content);
+                console.log(error);
+            }
+        );
     }
 }

@@ -115,9 +115,6 @@ import { ProfilesNewComponent } from './ChymallPages/Profiles/profiles-new/profi
 import { ProfilesIdComponent } from './ChymallPages/Profiles/profiles-id/profiles-id.component';
 import { ProfilesAllComponent } from './ChymallPages/Profiles/profiles-all/profiles-all.component';
 import { ProfilesUpdateComponent } from './ChymallPages/Profiles/profiles-update/profiles-update.component';
-import { PaiementsNewComponent } from './ChymallPages/Paiements/paiements-new/paiements-new.component';
-import { PaiementsIdComponent } from './ChymallPages/Paiements/paiements-id/paiements-id.component';
-import { PaiementsAllComponent } from './ChymallPages/Paiements/paiements-all/paiements-all.component';
 import { RetraitsNewComponent } from './ChymallPages/Retraits/retraits-new/retraits-new.component';
 import { RetraitsAllComponent } from './ChymallPages/Retraits/retraits-all/retraits-all.component';
 import { RetraitsIdComponent } from './ChymallPages/Retraits/retraits-id/retraits-id.component';
@@ -133,7 +130,6 @@ import { RetraitProduitsNewComponent } from './ChymallPages/RetraitProduits/retr
 import { RetraitProduitsAllComponent } from './ChymallPages/RetraitProduits/retrait-produits-all/retrait-produits-all.component';
 import { RetraitProduitsIdComponent } from './ChymallPages/RetraitProduits/retrait-produits-id/retrait-produits-id.component';
 import { ActivitesComponent } from './ChymallPages/activites/activites.component';
-import { PaiementsUpdateComponent } from './ChymallPages/Paiements/paiements-update/paiements-update.component';
 import { ProfilesByClientComponent } from './ChymallPages/Profiles/profiles-by-client/profiles-by-client.component';
 import { CustomModalComponent } from './ChymallServices/auth/custom-modal/custom-modal.component';
 // tslint:disable-next-line:max-line-length
@@ -244,9 +240,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProfilesIdComponent,
     ProfilesAllComponent,
     ProfilesUpdateComponent,
-    PaiementsNewComponent,
-    PaiementsIdComponent,
-    PaiementsAllComponent,
     RetraitsNewComponent,
     RetraitsAllComponent,
     RetraitsIdComponent,
@@ -262,7 +255,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RetraitProduitsAllComponent,
     RetraitProduitsIdComponent,
     ActivitesComponent,
-    PaiementsUpdateComponent,
     ProfilesByClientComponent,
     CustomModalComponent,
     ProfilesCompleterUsernameComponent,

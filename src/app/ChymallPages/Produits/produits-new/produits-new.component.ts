@@ -49,7 +49,7 @@ export class ProduitsNewComponent implements OnInit {
   initForm() {
     this.newProduitForm = this.formBuilder.group({
       designation: ['', [Validators.required]],
-      quantite: [0, [Validators.required, Validators.min(0)]],
+      quantite: [0, [Validators.min(0)]],
       pacts: ['', [Validators.required]]
     });
   }

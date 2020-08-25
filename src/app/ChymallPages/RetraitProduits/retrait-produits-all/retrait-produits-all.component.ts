@@ -10,6 +10,8 @@ import {AuthService} from '../../../ChymallServices/auth/auth.service';
 })
 export class RetraitProduitsAllComponent implements OnInit {
     retraits: any[] = [];
+    chargement: boolean;
+    message: string;
 
   constructor(
       private crudService: CrudService,
@@ -17,16 +19,24 @@ export class RetraitProduitsAllComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.crudService.getRetraitProduit(this.authService.currentUser.username).subscribe(
-        (reponse: any) => {
-          if (reponse.status === true) {
-            this.retraits = reponse.data;
-          } else {
-              console.log(reponse.message);
-          }
-        }, (error) => {
-          console.log(error);
-        });
+    this.refresh();
   }
 
+    refresh() {
+        this.chargement = true;
+        this.crudService.getRetraitProduit(this.authService.currentUser.username).subscribe(
+            (reponse: any) => {
+                if (reponse.status === true) {
+                    this.chargement = false;
+                    this.retraits = reponse.data;
+                } else {
+                    this.chargement = false;
+                    this.message = 'Echec de recupération de données';
+                    console.log(reponse.message);
+                }
+            }, (error) => {
+                this.message = 'Echec de recupération de données';
+                console.log(error);
+            });
+    }
 }

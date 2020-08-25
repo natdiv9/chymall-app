@@ -1,6 +1,8 @@
 <div class="main-card mb-3 card">
     <div class="card-body">
-        <h5 class="card-title">RETRAIT PRODUIT</h5>
+        <h5 class="card-title">
+            <strong>RETRAIT PRODUIT</strong>
+        </h5>
         <div class="divider"></div>
         <div class="row">
             <div class="col-6">
@@ -9,7 +11,9 @@
                            id="id_client" type="text"
                            class="form-control">
                 </div>
-                <button (click)="checkClient(input_id_client, content)" class="btn btn-primary">Lister profiles</button>
+                <button (click)="checkClient(input_id_client, content)" class="btn btn-primary float-right">Lister
+                    profiles
+                </button>
             </div>
         </div>
 
@@ -18,44 +22,64 @@
 </div>
 <div *ngIf="is_client_found" class="main-card mb-3 card">
     <div class="card-header">
-        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">PROFILES DU CLIENT [CLIENT ID: {{current_client.identifiant}}]</div>
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+            <strong>PROFILES DU CLIENT [{{current_client.identifiant}}]</strong>
+            <button (click)="refresh()"
+                    class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+                <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+            </button>
+        </div>
     </div>
-    <div class="table table-responsive">
+    <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+        <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+        <br>
+        Chargement de données en cours..
+    </div>
+    <div *ngIf="!chargement" class="table-responsive">
         <div *ngIf="is_client_found" class="table">
-    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
-        <thead>
-        <tr>
-            <th class="text-center">Nom d'utilisateur</th>
-            <th class="text-center">Pacts</th>
-            <th class="text-center">Produit Trading</th>
-            <th class="text-center">Produit Adhesion</th>
-            <th class="text-center">Action/Retrait</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let profile of all_profiles_client ; let i = index">
-            <td class="text-center">{{profile.username}}</td>
-            <td class="text-center">{{profile.niveau_adhesion}}</td>
-            <td class="text-center">{{profile.produit_trading}}</td>
-            <td class="text-center">{{profile.produit_adhesion}}
-            <td class="text-center">
-                <button [disabled]="profile.etat_produit_adhesion==1" class="btn-shadow btn btn-primary" style="margin-right: 5px;" (click)="retrait_produit_adhesion(profile, content, content2)">
-                    {{(profile.etat_produit_adhesion==1) ? 'Produit retiré' : 'Produit Adhesion'}}
-                </button>
-                <button class="btn-shadow btn btn-primary" (click)="retrait_produit_trading(profile, content, content2)">
-                    Produit Trading
-                </button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+            <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                <thead>
+                <tr>
+                    <th class="text-center">Nom d'utilisateur</th>
+                    <th class="text-center">Pacts</th>
+                    <th class="text-center">Produit Adhesion</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let profile of all_profiles_client ; let i = index">
+                    <td class="text-center">{{profile.username}}</td>
+                    <td class="text-center">{{profile.niveau_adhesion}}</td>
+                    <td class="text-center">{{profile.produit_adhesion}}
+                    <td class="text-center">
+                        <div class="mb-2 mr-2 btn-group" ngbDropdown>
+                            <button type="button" ngbDropdownToggle class="dropdown-toggle-split btn btn-primary"><span
+                                    class="sr-only">Toggle Dropdown</span></button>
+                            <div ngbDropdownMenu>
+                                <button [disabled]="profile.etat_produit_adhesion==1" class="dropdown-item"
+                                        (click)="retrait_produit_adhesion(profile, content, content2)">
+                                    Retirer produit d'adhésion
+                                </button>
+                                <button [disabled]="profile.etat_trading==0" class="dropdown-item"
+                                        (click)="retrait_produit_trading(profile, content, content2)">
+                                    Retirer produit de trading
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <div class="row mt-5">
+                    <div class="col-12 divider mt-2"></div>
+                </div>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 <ng-template #content2 let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">RETRAIT PRODUIT PROFILE </h4>
+        <h4 class="modal-title">Retrait de produit</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -84,7 +108,8 @@
                     <span class="form-text" style="color: royalblue;">Stock Disponible: {{stock_disponible}}</span>
                 </div>
             </div>
-            <button class="mt-2 btn btn-primary float-right" type="submit" [disabled]="retraitProduitForm.invalid">Enregistrer
+            <button class="mt-2 btn btn-primary float-right" type="submit" [disabled]="retraitProduitForm.invalid">
+                Enregistrer
             </button>
         </form>
     </div>

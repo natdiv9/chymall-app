@@ -25,8 +25,8 @@ class Operations
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_operation_tracer WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_operation_tracer");
+                ? $this->connexion->prepare("SELECT * FROM chy_operation_tracer WHERE id=$id ORDER BY 'id' DESC LIMIT 1")
+                : $stmt = $this->connexion->prepare("SELECT * FROM chy_operation_tracer ORDER BY 'id' DESC");
 
             $res = $stmt->execute();
 

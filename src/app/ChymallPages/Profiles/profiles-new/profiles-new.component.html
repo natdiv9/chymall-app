@@ -1,6 +1,8 @@
 <div class="main-card mb-3 card">
     <div class="card-body">
-        <h5 class="card-title">CREER PROFILE  [{{this.username}}]</h5>
+        <h5 class="card-title">
+            <strong>CREER PROFILE  [{{this.username}}]</strong>
+        </h5>
         <form [formGroup]="newProfileForm" (ngSubmit)="newProfile(content)">
 
             <div class="form-row">

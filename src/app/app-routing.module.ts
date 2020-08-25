@@ -59,9 +59,6 @@ import {ClientsAllComponent} from './ChymallPages/Clients/clients-all/clients-al
 import {ClientsIdComponent} from './ChymallPages/Clients/clients-id/clients-id.component';
 import {ClientsNewComponent} from './ChymallPages/Clients/clients-new/clients-new.component';
 import {ClientsUpdateComponent} from './ChymallPages/Clients/clients-update/clients-update.component';
-import {PaiementsAllComponent} from './ChymallPages/Paiements/paiements-all/paiements-all.component';
-import {PaiementsIdComponent} from './ChymallPages/Paiements/paiements-id/paiements-id.component';
-import {PaiementsNewComponent} from './ChymallPages/Paiements/paiements-new/paiements-new.component';
 import {ProduitsAllComponent} from './ChymallPages/Produits/produits-all/produits-all.component';
 import {ProduitsIdComponent} from './ChymallPages/Produits/produits-id/produits-id.component';
 import {ProduitsNewComponent} from './ChymallPages/Produits/produits-new/produits-new.component';
@@ -163,17 +160,6 @@ const routes: Routes = [
       {path: 'clients/new', component: ClientsNewComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'clients/:id/update', component: ClientsUpdateComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
-
-
-      // PAIEMENTS
-
-      // tslint:disable-next-line:max-line-length
-      {path: 'paiements/all', component: PaiementsAllComponent, canActivate: [AuthGuardService, ComptabiliteGuardService], data: {extraParameter: 'elementsMenu'}},
-      // tslint:disable-next-line:max-line-length
-      {path: 'paiements/:id/details', component: PaiementsIdComponent, canActivate: [AuthGuardService, ComptabiliteGuardService], data: {extraParameter: 'elementsMenu'}},
-      // tslint:disable-next-line:max-line-length
-      {path: 'paiements/:idprofile/new', component: PaiementsNewComponent, canActivate: [AuthGuardService, ComptabiliteGuardService], data: {extraParameter: 'elementsMenu'}},
-
 
       // PRODUITS
 

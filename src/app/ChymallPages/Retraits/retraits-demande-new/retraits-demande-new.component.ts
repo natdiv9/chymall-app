@@ -21,6 +21,7 @@ export class RetraitsDemandeNewComponent implements OnInit {
   current_profile: Profile;
   demandeRetraitForm: FormGroup;
   message_body: string;
+    chargement: boolean;
 
   constructor(
       private crudService: CrudService,
@@ -45,17 +46,7 @@ export class RetraitsDemandeNewComponent implements OnInit {
           if (reponse.status === true) {
             this.is_client_found = true;
             this.current_client = reponse.data;
-            this.crudService.getProfiles(
-                this.authService.currentUser.username,
-                this.current_client.id,
-                true
-            ).subscribe(
-                (reponse2: any) => {
-                  if (reponse2.status === true) {
-                    this.all_profiles_client = reponse2.data;
-                  }
-                }, (error2 => {})
-            );
+            this.refresh();
           } else {
             this.is_client_found = false;
             this.message = 'Cet identifiant client n\'existe pas dans la base de donnée';
@@ -114,6 +105,29 @@ export class RetraitsDemandeNewComponent implements OnInit {
         },
         (error => {
           console.log(error);
+        })
+    );
+  }
+
+  refresh() {
+    this.chargement = true;
+    this.crudService.getProfiles(
+        this.authService.currentUser.username,
+        this.current_client.id,
+        true
+    ).subscribe(
+        (reponse2: any) => {
+          if (reponse2.status === true) {
+            this.chargement = false;
+            this.all_profiles_client = reponse2.data;
+          } else {
+            this.chargement = false;
+            this.message = 'Echec de recupération de données';
+            console.log(reponse2.message);
+          }
+        }, (error2 => {
+          this.message = 'Echec de recupération de données';
+          console.log(error2);
         })
     );
   }

@@ -139,8 +139,8 @@ export class CrudService {
         return this.httpClient.get(`${environment.server_base_url}/clients.php?auteur_operation=${auteur_operation}&recherche=${recherche}`);
     }
 
-    getIncompletProfiles(auteur_operation: string) {
+    getIncompletProfiles(auteur_operation: string, id?: number, is_by_client: boolean = false) {
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.get(`${environment.server_base_url}/profiles.php?auteur_operation=${auteur_operation}&incomplete=true`);
+        return this.httpClient.get(`${environment.server_base_url}/profiles.php?auteur_operation=${auteur_operation}&incomplete=true&id=${id}&is_by_client=${is_by_client}`);
     }
 }

@@ -29,6 +29,7 @@ export class RetraitProduitsNewComponent implements OnInit {
    current_client: Client;
    all_profiles_client: Profile[] = [];
   current_profile: Profile;
+    chargement: boolean;
   constructor(private crudService: CrudService,
               private authService: AuthService,
               private modalService: NgbModal,
@@ -41,13 +42,7 @@ export class RetraitProduitsNewComponent implements OnInit {
       quantite: [''],
       id_client: ['']
     });
-    this.crudService.getProduits(this.authService.currentUser.username).subscribe(
-        (reponse: any) => {
-          if (reponse.status === true) {
-            this.produits = reponse.data;
-          }
-        }
-    );
+    this.refresh();
   }
 
   open(content) {
@@ -99,9 +94,29 @@ export class RetraitProduitsNewComponent implements OnInit {
             this.crudService.putProduit(produit_update).subscribe(
                 (reponse2: any) => {
                   if (reponse2.status === true) {
-                    this.message = 'Produit retiré avec succès!';
-                    this.open(content);
-                    this.retraitProduitForm.reset();
+                    this.crudService.putProfile(
+                        Object.assign(
+                            this.current_profile, {
+                              etat_produit_adhesion: 1,
+                              auteur_operation: this.authService.currentUser.username
+                            }
+                        )
+                    ).subscribe(
+                        (rep: any) => {
+                          if (rep.status === true) {
+                            this.message = 'Produit retiré avec succès!';
+                            this.open(content);
+                            this.retraitProduitForm.reset();
+                          } else {
+                            this.message = 'Echec de la mise à jour profile du trading!';
+                            this.open(content);
+                            console.log(rep.message);
+                          }
+                        }, (error) => {
+                          this.open(content);
+                          console.log(error);
+                        }
+                    );
                   } else {
                     this.message = 'Echec de la mise a jour du produit!';
                     this.open(content);
@@ -145,17 +160,7 @@ export class RetraitProduitsNewComponent implements OnInit {
           if (reponse.status === true) {
             this.is_client_found = true;
             this.current_client = reponse.data;
-            this.crudService.getProfiles(
-                this.authService.currentUser.username,
-                this.current_client.id,
-                true
-            ).subscribe(
-                (reponse2: any) => {
-                  if (reponse2.status === true) {
-                    this.all_profiles_client = reponse2.data;
-                  }
-                }, (error2 => {})
-            );
+            this.refresh();
           } else {
             this.is_client_found = false;
             this.message = 'Cet identifiant client n\'existe pas dans la base de donnée';
@@ -175,5 +180,37 @@ export class RetraitProduitsNewComponent implements OnInit {
   retrait_produit_adhesion(profile: Profile, content: any, content2: any) {
     this.current_profile = profile;
     this.open(content2);
+  }
+
+  refresh() {
+    this.chargement = true;
+    if (this.is_client_found) {
+      this.crudService.getProfiles(
+          this.authService.currentUser.username,
+          this.current_client.id,
+          true
+      ).subscribe(
+          (reponse2: any) => {
+            if (reponse2.status === true) {
+              this.chargement = false;
+              this.all_profiles_client = reponse2.data;
+            } else {
+              this.chargement = false;
+              this.message = 'Echec de recupération de données';
+              console.log(reponse2.message);
+            }
+          }, (error2 => {
+            this.message = 'Echec de recupération de données';
+            console.log(error2);
+          })
+      );
+    }
+    this.crudService.getProduits(this.authService.currentUser.username).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.produits = reponse.data;
+          }
+        }
+    );
   }
 }

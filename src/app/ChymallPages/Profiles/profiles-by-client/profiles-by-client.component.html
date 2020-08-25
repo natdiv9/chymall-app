@@ -1,29 +1,38 @@
 <div class="main-card mb-3 card">
   <div class="card-header">
-    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">PROFILES DU CLIENT [CLIENT ID: {{username}}]</div>
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+      <strong>PROFILES DU CLIENT [CLIENT ID: {{username}}]</strong>
+      <button (click)="refresh()"
+              class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
-  <div class="table">
+  <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+    <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+    <br>
+    Chargement de données en cours..
+  </div>
+  <div *ngIf="!chargement" class="table-responsive">
     <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
       <thead>
       <tr>
         <th class="text-center">Nom d'utilisateur</th>
         <th class="text-center">Pacts</th>
-        <th class="text-center">Produit trading</th>
-        <th class="text-center">Produit adhesion</th>
+        <th class="text-center">Produit adhésion</th>
         <th class="text-center">Capital</th>
-        <th class="text-center">Etat compte</th>
-        <th class="text-center">Etat trading</th>
-        <th class="text-center">Etat</th>
-        <th class="text-center"></th>
+        <th class="text-center">Compte</th>
+        <th class="text-center">Trading</th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Actions</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let profile of profiles ; let i = index">
         <td class="text-center">{{profile.username}}</td>
         <td class="text-center">{{profile.niveau_adhesion}}</td>
-        <td class="text-center">{{profile.produit_trading}}</td>
         <td class="text-center">{{profile.produit_adhesion}}</td>
-        <td class="text-center">{{profile.etat_trading == 0 ? profile.capital : profile.activation_trading}}</td>
+        <td class="text-center">{{profile.capital}}</td>
         <td class="text-center">
           <div [class]="'badge badge-pill' + (profile.etat_activation==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_activation==1 ? 'activé' : 'inactivé'}}</div>
         </td>
@@ -35,14 +44,45 @@
             {{profile.etat==1 ? 'incomplet' : (profile.etat==2) ? 'actif' : 'inactif'}}</div>
         </td>
         <td>
-          <button [disabled]="profile.etat_activation!=0" class="btn-shadow btn btn-primary" style="margin-right: 5px;" (click)="activer_compte(profile, content)">Activer le compte</button>
-          <button [disabled]="profile.etat_trading!=0" class="btn-shadow btn btn-primary" (click)="activer_trading(profile, content)">Activer le trading</button>
+          <div class="mb-2 mr-2 btn-group" ngbDropdown>
+            <button type="button" ngbDropdownToggle class="dropdown-toggle-split btn btn-primary"><span class="sr-only">Toggle Dropdown</span></button>
+            <div ngbDropdownMenu>
+              <button [disabled]="profile.etat_activation!=0" class="dropdown-item"  (click)="confirmation_ct(profile, content, content_ct)">
+                Activer le compte
+              </button>
+              <button [disabled]="profile.etat_trading!=0" class="dropdown-item" (click)="confirmation_tr(profile, content, content_tr)">
+                Activer le trading
+              </button>
+            </div>
+          </div>
         </td>
       </tr>
+      <div class="row mt-5">
+        <div class="col-12 divider mt-2"></div>
+      </div>
       </tbody>
     </table>
   </div>
 </div>
+
+<ng-template #content_ct let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <h5 class="text-center">Confirmez-vous l'activation pour ce compte?</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn-hover-shine btn btn-primary" (click)="activer_compte(content, c('Close click'))">Oui</button>
+    <button type="button" class="btn-hover-shine  btn btn-danger" (click)="c('Close click')">Non</button>
+  </div>
+</ng-template>
+<ng-template #content_tr let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <h5 class="text-center">Confirmez-vous l'activation du trading pour ce compte?</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn-hover-shine btn btn-primary" (click)="activer_trading(content, c('Close click'))">Oui</button>
+    <button type="button" class="btn-hover-shine btn btn-danger" (click)="c('Close click')">Non</button>
+  </div>
+</ng-template>
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">

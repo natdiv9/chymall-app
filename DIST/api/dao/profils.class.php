@@ -84,11 +84,15 @@ class Profils
         }
     }
 
-    public function getIncompletProfiles($incomplete, $auteur_operation)
+    public function getIncompletProfiles($incomplete, $auteur_operation, $is_by_client = false, $id_client = 0)
     {
         try
         {
-            $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles WHERE username='_incomplet' AND etat=1");
+            if ($is_by_client && $id_client != 0){
+                $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id_client='$id_client' AND username='_incomplet' AND etat=1");
+            } else {
+                $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles WHERE username='_incomplet' AND etat=1");
+            }
 
             $res = $stmt->execute();
 
