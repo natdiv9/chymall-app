@@ -3,13 +3,15 @@
     <h5 class="card-title">COMPLETER PROFILE</h5>
     <div class="divider"></div>
     <div class="row">
-      <div class="col-6">
+      <div class="col-4">
         <div class="position-relative form-group"><label for="id_client">ID CLIENT</label>
           <input #input_id_client
                  id="id_client" type="text"
                  class="form-control">
-          <button (click)="checkClient(input_id_client, content)" class="btn btn-primary float-right">Lister profiles d'un client</button>
         </div>
+        <button (click)="checkClient(input_id_client, content)" class="btn btn-primary float-right">
+          Lister profiles d'un client
+        </button>
       </div>
     </div>
       <div class="divider"></div>

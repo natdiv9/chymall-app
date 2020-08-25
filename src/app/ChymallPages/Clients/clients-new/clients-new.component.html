@@ -1,5 +1,9 @@
 <div class="main-card mb-3 card">
-    <div class="card-body"><h5 class="card-title">ENREGISTRER CLIENT</h5>
+    <div class="card-body">
+        <h5 class="card-title">
+        ENREGISTRER CLIENT
+        </h5>
+        <div class="divider"></div>
         <form [formGroup]="newClientForm" (ngSubmit)="newClient(content)">
             <div class="form-row">
                 <div class="col-md-6">
@@ -102,7 +106,7 @@
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-body">
         <h4 class="text-center">{{message}}</h4>
-        <h6 class="text-center">L'identifiant du client est <strong>{{identifiant}}</strong></h6>
+        <h6 *ngIf="identifiant ? true : false" class="text-center">L'identifiant du client est <strong>{{identifiant}}</strong></h6>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>

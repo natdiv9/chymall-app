@@ -25,8 +25,8 @@ class Profils
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles");
+                ? $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id='$id'  LIMIT 1")
+                : $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles ORDER  BY id DESC");
 
             $res = $stmt->execute();
 

@@ -6,7 +6,18 @@
       <div style="text-align: center;">
         <img src="./assets/images/logo.png" width="130px">
       </div>
-      <form [formGroup]="loginForm" (ngSubmit)="connexion()">
+      <div *ngIf="chargement" class="modal-dialog w-100 mx-auto">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="mt-5 mb-5" style="text-align: center;">
+              <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+              <br>
+              <strong>Connexion..</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form  *ngIf="!chargement"  [formGroup]="loginForm" (ngSubmit)="connexion()">
       <div class="modal-dialog w-100 mx-auto">
         <div class="modal-content">
           <div class="modal-body">
@@ -31,11 +42,6 @@
                           aria-required="true" class="form-control"></div>
             </div>
           </div>
-          <p *ngIf="isChargement" style="text-align: center; margin-left: 20px; margin-right: 20px">
-            Veuillez patientez!
-            <ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true">
-            </ngb-progressbar>
-          </p>
           <h5 class="" style="color: red; text-align: center" >{{message}}</h5>
           <div class="modal-footer clearfix">
             <div class="float-center">

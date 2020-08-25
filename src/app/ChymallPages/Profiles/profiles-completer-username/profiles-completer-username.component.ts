@@ -55,6 +55,7 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
                     this.current_profile.etat = 2;
                     this.current_profile.username = this.completerProfileForm.get('username').value;
                     this.completerProfileForm.reset();
+                    this.refresh();
                     this.message = 'Enregistrement effectué avec succès!';
                     this.open(content);
                 } else {

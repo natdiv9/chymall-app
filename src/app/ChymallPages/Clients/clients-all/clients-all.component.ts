@@ -15,6 +15,7 @@ export class ClientsAllComponent implements OnInit {
     clients: Client[] = [];
     message = '';
     closeResult: string;
+    chargement: boolean;
 
     constructor(
         private crudService: CrudService,
@@ -44,13 +45,22 @@ export class ClientsAllComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.refresh();
+    }
+
+    refresh() {
+        this.chargement = true;
         this.crudService.getClients(this.authService.currentUser.username).subscribe(
             (reponse: any) => {
                 if (reponse.status === true) {
+                    this.chargement = false;
                     this.clients = reponse.data;
                 } else {
+                    this.chargement = false;
+                    this.message = 'Echec de recupération de données';
+                    console.log(reponse.message);
                 }
-                this.message = 'Aucune information disponible';
+                this.message = 'Echec de recupération de données';
                 console.log(reponse);
             }
         );

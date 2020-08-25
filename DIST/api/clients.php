@@ -57,8 +57,8 @@ switch ($request_method)
         if(isset($_POST['telephone'], $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], $_POST['auteur_operation']))
         {
             $clientsDAO = new Clients();
-            $client = array($_POST['telephone'], (isset($_POST['email'])? $_POST['email']: ''), ucfirst(strtolower($_POST['prenom'])), ucfirst(strtolower($_POST['nom'])), $_POST['adresse'], ucfirst(strtolower($_POST['ville'])), ucfirst(strtolower($_POST['pays'],
-                $_POST['nom_beneficiaire'], $_POST['prenom_beneficiaire'], $_POST['identifiant_sponsor'])));
+            $client = array($_POST['telephone'], (isset($_POST['email'])? $_POST['email']: ''), ucfirst(strtolower($_POST['prenom'])), ucfirst(strtolower($_POST['nom'])), $_POST['adresse'], ucfirst(strtolower($_POST['ville'])), ucfirst(strtolower($_POST['pays'])),
+                $_POST['nom_beneficiaire'], $_POST['prenom_beneficiaire'], $_POST['identifiant_sponsor']);
             $res = $clientsDAO->post($client, $_POST['auteur_operation']);
             response($res);
         } else

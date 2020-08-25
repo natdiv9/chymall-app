@@ -91,6 +91,7 @@ import {RetraitGuardService} from './ChymallServices/auth/retrait-guard.service'
 // tslint:disable-next-line:max-line-length
 import {ProfilesCompleterUsernameComponent} from './ChymallPages/Profiles/profiles-completer-username/profiles-completer-username.component';
 import {RetraitsDemandeNewComponent} from './ChymallPages/Retraits/retraits-demande-new/retraits-demande-new.component';
+import {TranfertGuard} from './ChymallServices/auth/tranfert.guard';
 
 const routes: Routes = [
   {
@@ -210,7 +211,7 @@ const routes: Routes = [
       // tslint:disable-next-line:max-line-length
       {path: 'retraits/new', component: RetraitsNewComponent, canActivate: [AuthGuardService, ComptabiliteGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
-      {path: 'retraits/demande/new', component: RetraitsDemandeNewComponent, canActivate: [AuthGuardService, ComptabiliteGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'retraits/demande/new', component: RetraitsDemandeNewComponent, canActivate: [AuthGuardService, TranfertGuard], data: {extraParameter: 'elementsMenu'}},
 
 
       // STOCKAGES

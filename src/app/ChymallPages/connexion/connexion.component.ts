@@ -13,12 +13,14 @@ export class ConnexionComponent implements OnInit {
   loginForm: FormGroup;
   message = '';
   isChargement = false;
+  chargement: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
+    this.chargement = false;
     this.initForm();
   }
 
@@ -31,6 +33,7 @@ export class ConnexionComponent implements OnInit {
 
   connexion() {
     this.isChargement = true;
+    this.chargement = true;
     const username = this.loginForm.get('username').value;
     const pwd = this.loginForm.get('pwd').value;
 
@@ -40,6 +43,7 @@ export class ConnexionComponent implements OnInit {
         this.authService.currentUser = reponse.data;
         this.authService.connected = true;
         this.isChargement = false;
+        this.chargement = false;
         if (this.authService.currentUser.service === 'adhesion') {
           this.router.navigate(['/', 'clients', 'new']);
         } else if (this.authService.currentUser.service === 'comptabilite') {
@@ -48,12 +52,15 @@ export class ConnexionComponent implements OnInit {
           this.router.navigate(['/', 'retrait-produits', 'all']);
         } else if (this.authService.currentUser.service === 'technique') {
           this.router.navigate(['/profiles/completer']);
+        } else if (this.authService.currentUser.service === 'transfert') {
+          this.router.navigate(['/', 'retraits', 'demande', 'new']);
         } else if (this.authService.currentUser.service === 'admin') {
           this.router.navigate(['/']);
         }
         // this.router.navigate(['/']);
       } else {
         this.isChargement = false;
+        this.chargement = false;
         this.message = reponse.message;
       }
     },

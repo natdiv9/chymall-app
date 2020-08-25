@@ -57,12 +57,12 @@ export class ClientsNewComponent implements OnInit {
   initForm() {
     this.newClientForm = this.formBuilder.group({
       telephone: ['', [Validators.required]],
-      email: ['', []],
+      email: ['', [Validators.email]],
       prenom: ['', [Validators.required]],
       nom: ['', [Validators.required]],
-      adresse: ['', [Validators.required]],
-      ville: ['', [Validators.required]],
-      pays: ['', [Validators.required]],
+      adresse: [''],
+      ville: [''],
+      pays: [''],
       nom_beneficiaire: '',
       prenom_beneficiaire: '',
       identifiant_sponsor: ''

@@ -28,6 +28,7 @@ export class RetraitsNewComponent implements OnInit {
               private modalService: NgbModal) { }
 
   ngOnInit() {
+      this.refresh();
   }
 
   open(content) {
@@ -101,9 +102,10 @@ export class RetraitsNewComponent implements OnInit {
     this.crudService.putRetrait(data_to_send).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.message = 'Retrait enregistrée avec succcès';
-            this.refreshData(this.current_client.identifiant, content);
-            this.open(content);
+              this.refresh();
+              this.message = 'Retrait enregistré avec succcès';
+              this.refreshData(this.current_client.identifiant, content);
+              this.open(content);
           } else {
             this.message = 'Echèc de la demande';
             console.log(reponse.message);
@@ -150,4 +152,24 @@ export class RetraitsNewComponent implements OnInit {
         }
     );
   }
+
+    refresh() {
+        this.crudService.getRetraits(
+            this.authService.currentUser.username,
+            'true'
+        ).subscribe(
+            (reponse2: any) => {
+                if (reponse2.status === true) {
+                    this.is_client_found = false;
+                    this.all_profiles_client = reponse2.data;
+                    console.log(reponse2.message);
+                } else {
+                    console.log(reponse2.message);
+                }
+            }, (error2 => {
+                console.log(error2);
+            })
+        );
+
+    }
 }

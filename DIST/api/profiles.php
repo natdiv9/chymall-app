@@ -15,7 +15,7 @@ switch ($request_method)
                 return;
             }
 
-            if(!empty($_GET['id']))
+            if(!empty($_GET['id']) && $_GET['id'] != 'undefined')
             {
 
                 if(isset($_GET['is_by_client']) && $_GET['is_by_client'] == true){
