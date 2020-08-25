@@ -1,6 +1,38 @@
-<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
+<div class="app-page-title">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div class="page-title-icon">
+        <i class="icon {{icon}}"></i>
+      </div>
+      <div>
+        {{heading}}
+        <div
+                class="page-title-subheading">
+          {{subheading}}
+        </div>
+      </div>
+    </div>
+    <div class="page-title-actions">
+      <button type="button" class="btn-shadow mr-3 btn btn-dark">
+        <fa name="star"></fa>
+      </button>
+      <button (click)="refresh()" type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success">
+        <fa class="fa fa-fw" name="plus"></fa>
+        Actualiser
+      </button>
+    </div>
+  </div>
+</div>
 
-<div class="mb-3 card">
+
+
+<div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+  <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+  <br>
+  Chargement de données en cours..
+</div>
+
+<div *ngIf="!chargement" class="mb-3 card">
   <div class="card-header-tab card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
       <i class="header-icon lnr-charts icon-gradient bg-happy-green"> </i>
@@ -15,7 +47,7 @@
           <i class="pe-7s-users text-white opacity-8"></i></div>
         <div class="widget-chart-content">
           <div class="widget-subheading">Adhésion</div>
-          <div class="widget-numbers">14</div>
+          <div class="widget-numbers">{{synthese.total_adhesion_today}}</div>
           <div class="widget-description opacity-8 text-focus">
             <div class="d-inline text-danger pr-1">
               <span class="pl-1"></span>
@@ -32,7 +64,7 @@
           <i class="pe-7s-check text-white"></i></div>
         <div class="widget-chart-content">
           <div class="widget-subheading">Compte activé</div>
-          <div class="widget-numbers"><span>23</span></div>
+          <div class="widget-numbers"><span>{{synthese.total_activation_today}}</span></div>
           <div class="widget-description opacity-8 text-focus">
             <span class="text-info pl-1">
                 <span class="pl-1"></span>
@@ -49,7 +81,7 @@
           <i class="pe-7s-cash" aria-hidden="true"></i></div>
         <div class="widget-chart-content">
           <div class="widget-subheading">Total retraits</div>
-          <div class="widget-numbers text-success"><span>$563</span></div>
+          <div class="widget-numbers text-success"><span>${{synthese.total_retrait_today}}</span></div>
           <div class="widget-description text-focus">
             <span class="text-warning pl-1">
                 <span class="pl-1"></span>
@@ -60,7 +92,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div *ngIf="!chargement" class="row">
   <div class="col-sm-12 col-lg-12">
     <div class="row">
       <div class="col-lg-4">
@@ -72,7 +104,7 @@
                   <div class="widget-chart-flex">
                     <div class="fsize-4">
                       <small class="opacity-5">$</small>
-                      <span>874</span></div>
+                      <span>{{synthese.total_retrait_month}}</span></div>
                   </div>
                 </div>
               </div>
@@ -90,7 +122,7 @@
                   <div class="widget-chart-flex">
                     <div class="fsize-4">
                       <small class="opacity-5">$</small>
-                      <span>3400</span></div>
+                      <span>{{synthese.tota_capitaux_month}}</span></div>
                   </div>
                 </div>
               </div>
@@ -108,7 +140,7 @@
                   <div class="widget-chart-flex">
                     <div class="fsize-4">
                       <small class="opacity-5"></small>
-                      <span>13</span></div>
+                      <span>{{synthese.total_adhesion_month}}</span></div>
                   </div>
                 </div>
               </div>
@@ -126,7 +158,7 @@
                   <div class="widget-chart-flex">
                     <div class="fsize-4">
                       <small class="opacity-5"></small>
-                      <span>21</span></div>
+                      <span>{{synthese.total_activation_month}}</span></div>
                   </div>
                 </div>
               </div>
@@ -144,7 +176,7 @@
                   <div class="widget-chart-flex">
                     <div class="fsize-4">
                       <small class="opacity-5"></small>
-                      <span>18</span></div>
+                      <span>{{synthese.tota_retrait_produit_month}}</span></div>
                   </div>
                 </div>
               </div>
@@ -162,11 +194,11 @@
                   <div class="widget-chart-flex">
                     <div class="fsize-4">
                       <small class="opacity-5"></small>
-                      <span>9</span></div>
+                      <span>{{synthese.total_stockage_month}}</span></div>
                   </div>
                 </div>
               </div>
-              <h6 class="widget-subheading mb-0 opacity-5">nouveaux membres ce mois</h6>
+              <h6 class="widget-subheading mb-0 opacity-5">stockages du mois</h6>
             </div>
           </div>
         </div>
@@ -175,7 +207,7 @@
   </div>
 </div>
 
-<div class="card mb-3">
+<div *ngIf="!chargement" class="card mb-3">
   <div class="no-gutters row">
     <div class="col-md-12 col-lg-4">
       <ul class="list-group list-group-flush">
@@ -188,7 +220,7 @@
                   <div class="widget-subheading">Capitaux des membres</div>
                 </div>
                 <div class="widget-content-right">
-                  <div class="widget-numbers text-success">$114020</div>
+                  <div class="widget-numbers text-success">${{synthese.tota_capitaux_all}}</div>
                 </div>
               </div>
             </div>
@@ -203,7 +235,7 @@
                   <div class="widget-subheading">Retraits d'argent</div>
                 </div>
                 <div class="widget-content-right">
-                  <div class="widget-numbers text-primary">$26000</div>
+                  <div class="widget-numbers text-primary">${{synthese.total_retrait_all}}</div>
                 </div>
               </div>
             </div>
@@ -222,7 +254,7 @@
                   <div class="widget-subheading">Tous les membres</div>
                 </div>
                 <div class="widget-content-right">
-                  <div class="widget-numbers text-danger">1200</div>
+                  <div class="widget-numbers text-danger">{{synthese.total_adhesion_all}}</div>
                 </div>
               </div>
             </div>
@@ -237,7 +269,7 @@
                   <div class="widget-subheading">Comptes de membres</div>
                 </div>
                 <div class="widget-content-right">
-                  <div class="widget-numbers text-warning">2000</div>
+                  <div class="widget-numbers text-warning">{{synthese.total_compte_all}}</div>
                 </div>
               </div>
             </div>
@@ -256,7 +288,7 @@
                   <div class="widget-subheading">Retrait de produits</div>
                 </div>
                 <div class="widget-content-right">
-                  <div class="widget-numbers text-success">1896</div>
+                  <div class="widget-numbers text-success">{{synthese.tota_retrait_produit_all}}</div>
                 </div>
               </div>
             </div>
@@ -271,7 +303,7 @@
                   <div class="widget-subheading">Entrée en stock</div>
                 </div>
                 <div class="widget-content-right">
-                  <div class="widget-numbers text-primary">100</div>
+                  <div class="widget-numbers text-primary">{{synthese.total_stockage_all}}</div>
                 </div>
               </div>
             </div>

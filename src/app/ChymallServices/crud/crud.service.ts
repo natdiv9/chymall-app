@@ -143,4 +143,8 @@ export class CrudService {
         // tslint:disable-next-line:max-line-length
         return this.httpClient.get(`${environment.server_base_url}/profiles.php?auteur_operation=${auteur_operation}&incomplete=true&id=${id}&is_by_client=${is_by_client}`);
     }
+
+    getResume(auteur_operation: string) {
+        return this.httpClient.get(`${environment.server_base_url}/resume.php?auteur_operation=${auteur_operation}`);
+    }
 }

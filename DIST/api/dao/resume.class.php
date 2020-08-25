@@ -4,17 +4,70 @@ include 'operationTracer.class.php';
 
 class Resume
 {
-    private  $connexion;
+    private $connexion;
+    private $table_name = 'mixed';
+
     public function __construct()
     {
-        try{
+        try {
             require 'connexion.class.php';
             $this->connexion = Connexion::getConnexion();
 
-        } catch (Exception | Error $e)
-        {
+        } catch (Exception | Error $e) {
             header('Content-Type: application/json; charset=utf-8');
             die(json_encode(array("status" => false, "message" => "Le serveur a rencontré un problème")));
         }
+    }
+
+    public function getDay($auteur_operation)
+    {
+
+        try {
+            $stmt = $stmt = $this->connexion->prepare("SELECT
+(SELECT COUNT(*) FROM chy_clients WHERE DATE(chy_clients.date)=CURRENT_DATE ) as total_adhesion_today,
+(SELECT COUNT(*) FROM chy_profiles WHERE DATE(chy_profiles.date_activation)=CURRENT_DATE ) as total_activation_today,
+(SELECT SUM(chy_retraits.montant) FROM chy_retraits WHERE DATE(chy_retraits.date)=CURRENT_DATE) as total_retrait_today,
+(SELECT SUM(chy_retraits.montant) FROM chy_retraits WHERE MONTH(chy_retraits.date)=MONTH(CURRENT_DATE)) as total_retrait_month,
+(SELECT COUNT(*) FROM chy_profiles WHERE MONTH(chy_profiles.date_activation)=MONTH(CURRENT_DATE) )  as total_activation_month,
+(SELECT COUNT(*) FROM chy_retrait_produits WHERE MONTH(chy_retrait_produits.date)=MONTH(CURRENT_DATE)) as tota_retrait_produit_month,
+(SELECT SUM(chy_profiles.capital) FROM chy_profiles WHERE MONTH(chy_profiles.date)=MONTH(CURRENT_DATE)) as tota_capitaux_month,
+(SELECT COUNT(*) FROM chy_clients WHERE MONTH(chy_clients.date)=MONTH(CURRENT_DATE) ) as total_adhesion_month,
+(SELECT COUNT(*) FROM chy_stockages WHERE MONTH(chy_stockages.date)=MONTH(CURRENT_DATE) ) as total_stockage_month,
+(SELECT SUM(chy_retraits.montant) FROM chy_retraits ) as total_retrait_all,
+(SELECT COUNT(*) FROM chy_profiles )  as total_compte_all,
+(SELECT COUNT(*) FROM chy_retrait_produits ) as tota_retrait_produit_all,
+(SELECT SUM(chy_profiles.capital) FROM chy_profiles ) as tota_capitaux_all,
+(SELECT COUNT(*) FROM chy_clients ) as total_adhesion_all,
+(SELECT COUNT(*) FROM chy_stockages ) as total_stockage_all");
+
+            $res = $stmt->execute();
+
+            if ($res) {
+                OperationTracer::post([$auteur_operation, 'LECTURE RESUME', $this->table_name], $this->connexion);
+                return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
+            } else {
+                // DEVELOPMENT
+                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE RESUME', $this->table_name], $this->connexion);
+                return array(false, "message" => $stmt->errorInfo()[2]);
+
+                // PRODUCTION
+                // return array(false, "message" => "The server encountered a problem");
+            }
+        } catch (Exception | Error $e) {
+            // DEVELOPMENT
+            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE RESUME', $this->table_name], $this->connexion);
+            return array(false, "message" => $e->getMessage());
+        }
+
+    }
+
+    public function getMonth()
+    {
+
+    }
+
+    public function getAll()
+    {
+
     }
 }

@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07b96753-1936-4dc5-a84b-fe51329c5dba" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/api/dao/operations.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/operations.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/dao/profils.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/profils.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/profiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/profiles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/main.b7886db32a5d24cab289.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Produits/produits-all/produits-all.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Produits/produits-all/produits-all.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Produits/produits-all/produits-all.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Produits/produits-all/produits-all.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/resume.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/dao/resume.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/resume.class.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,15 +19,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/stockages.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="35" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/dao/stockages.class.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -74,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/operations.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state relative-caret-position="330">
+              <caret line="22" lean-forward="true" selection-end-line="62" />
             </state>
           </provider>
         </entry>
@@ -98,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/dao/utilisateurs.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="27" column="43" lean-forward="true" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+            <state relative-caret-position="515">
+              <caret line="48" column="8" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="48" selection-end-column="8" />
               <folding>
                 <element signature="n#__construct#0;n#Utilisateurs#0;n#!!top" />
                 <element signature="n#post#0;n#Utilisateurs#0;n#!!top" />
@@ -113,14 +98,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/dao/resume.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+            <state relative-caret-position="330">
+              <caret line="33" column="52" lean-forward="true" selection-start-line="33" selection-start-column="52" selection-end-line="33" selection-end-column="52" />
               <folding>
                 <element signature="n#__construct#0;n#Resume#0;n#!!top" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/resume.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -152,24 +146,13 @@
         <option value="$PROJECT_DIR$/api/dao/stockages.class.php" />
         <option value="$PROJECT_DIR$/api/dao/produits.class.php" />
         <option value="$PROJECT_DIR$/api/produits.php" />
-        <option value="$PROJECT_DIR$/api/dao/resume.class.php" />
         <option value="$PROJECT_DIR$/api/dao/retraits.class.php" />
         <option value="$PROJECT_DIR$/api/clients.php" />
         <option value="$PROJECT_DIR$/api/profiles.php" />
         <option value="$PROJECT_DIR$/api/dao/profils.class.php" />
         <option value="$PROJECT_DIR$/api/dao/operations.class.php" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/DIST.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/php.xml" />
-        <option value="$PROJECT_DIR$/.idea/dictionaries/natdiv.xml" />
+        <option value="$PROJECT_DIR$/api/resume.php" />
+        <option value="$PROJECT_DIR$/api/dao/resume.class.php" />
       </list>
     </option>
   </component>
@@ -196,6 +179,12 @@
               <item name="DIST" type="b2602c69:ProjectViewProjectNode" />
               <item name="DIST" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DIST" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DIST" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -254,12 +243,12 @@
       <workItem from="1598111552779" duration="1844000" />
       <workItem from="1598125235921" duration="19244000" />
       <workItem from="1598298586953" duration="4426000" />
-      <workItem from="1598363080534" duration="4080000" />
+      <workItem from="1598363080534" duration="6669000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76495000" />
+    <option name="totallyTimeSpent" value="79084000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1365" y="0" width="1282" height="769" extended-state="6" />
@@ -390,16 +379,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/dao/resume.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-          <folding>
-            <element signature="n#__construct#0;n#Resume#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/dao/produits.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
@@ -431,13 +410,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/operations.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/dao/operations.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
@@ -454,13 +426,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/dao/utilisateurs.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="27" column="43" lean-forward="true" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+        <state relative-caret-position="515">
+          <caret line="48" column="8" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="48" selection-end-column="8" />
           <folding>
             <element signature="n#__construct#0;n#Utilisateurs#0;n#!!top" />
             <element signature="n#post#0;n#Utilisateurs#0;n#!!top" />
             <element signature="n#put#0;n#Utilisateurs#0;n#!!top" />
             <element signature="n#auth#0;n#Utilisateurs#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/operations.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" lean-forward="true" selection-end-line="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/resume.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/dao/resume.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="33" column="52" lean-forward="true" selection-start-line="33" selection-start-column="52" selection-end-line="33" selection-end-column="52" />
+          <folding>
+            <element signature="n#__construct#0;n#Resume#0;n#!!top" />
           </folding>
         </state>
       </provider>
