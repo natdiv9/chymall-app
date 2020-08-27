@@ -25,8 +25,8 @@ class Operations
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_operation_tracer WHERE id=$id ORDER BY 'id' DESC LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_operation_tracer ORDER BY 'id' DESC");
+                ? $this->connexion->prepare("SELECT id, operation, DATE_FORMAT(chy_operation_tracer.date, '%d-%m-%Y %H:%i:%s') as 'date', auteur_operation, 'table' FROM chy_operation_tracer WHERE id=$id ORDER BY 'id' DESC LIMIT 1")
+                : $stmt = $this->connexion->prepare("SELECT * FROM `chy_operation_tracer` ORDER BY `chy_operation_tracer`.`date` DESC ");
 
             $res = $stmt->execute();
 

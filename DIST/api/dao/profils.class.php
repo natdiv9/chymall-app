@@ -147,12 +147,20 @@ class Profils
         }
     }
 
-    public function put($profil, $auteur_operation)
+    public function put($profil, $auteur_operation, $activated = false)
     {
         try
         {
-            $stmt = $this->connexion->prepare(
-                "UPDATE chy_profiles SET id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=?  WHERE id=?");
+            if ($activated) {
+                $stmt = $this->connexion->prepare(
+                    "UPDATE chy_profiles SET date_activation=CURRENT_TIMESTAMP, id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=?  WHERE id=?");
+
+            } else {
+                $stmt = $this->connexion->prepare(
+                    "UPDATE chy_profiles SET id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=?  WHERE id=?");
+
+            }
+
             $res = $stmt->execute(
                 $profil
             );

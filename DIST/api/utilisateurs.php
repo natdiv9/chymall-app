@@ -9,7 +9,7 @@
             $utilisateursDAO = new Utilisateurs();
             if(isset($_GET['auteur_operation']))
             {
-                if(!empty($_GET['id']))
+                if(!empty($_GET['id']) && intval($_GET['id'] > 0))
                 {
                     // Un utilsateur
                     $id = intval($_GET['id']);
@@ -51,11 +51,11 @@
             break;
         case 'PUT':
             $_PUT = json_decode(file_get_contents('php://input'), true);
-            if(isset($_PUT['id'], $_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['droits'], $_PUT['etat']))
+            if(isset($_PUT['id'], $_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['droits'], $_PUT['etat'],  $_PUT['auteur_operation']))
             {
                 $utilisateursDAO = new Utilisateurs();
                 $utilisateur = array($_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['droits'], $_PUT['etat'], $_PUT['id']);
-                $res = $utilisateursDAO->put($utilisateur);
+                $res = $utilisateursDAO->put($utilisateur, $_PUT['auteur_operation']);
                 response($res);
             } else
             {

@@ -2,7 +2,12 @@
     <div class="card-body"><h5 class="card-title">
         <strong>MODIFIER UTILISATEUR</strong>
     </h5>
-        <form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
+        <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+            <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+            <br>
+            Chargement de données en cours..
+        </div>
+        <form *ngIf="!chargement" [formGroup]="updateUserForm" (ngSubmit)="updateUser(content)">
             <div class="form-row">
                 <div class="col-md-6">
                     <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label>
@@ -46,3 +51,14 @@
         </form>
     </div>
 </div>
+
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{message}}</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+    </div>
+</ng-template>

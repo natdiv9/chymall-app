@@ -78,7 +78,11 @@ switch ($request_method)
         {
             $profilDAO = new Profils();
             $profil = array($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['id']);
-            $res = $profilDAO->put($profil, $_PUT['auteur_operation']);
+            if(isset($_PUT['date_activation']) && $_PUT['date_activation'] == 'activated'){
+                $res = $profilDAO->put($profil, $_PUT['auteur_operation'], true);
+            } else {
+                $res = $profilDAO->put($profil, $_PUT['auteur_operation']);
+            }
             response($res);
         } else
         {

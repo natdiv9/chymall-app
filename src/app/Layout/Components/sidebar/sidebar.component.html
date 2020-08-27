@@ -22,7 +22,16 @@
                   <div class="vsm-header">Main Navigation</div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="dashboardsMenu">
+              <ngb-panel id="dashboardMenu">
+                <ng-template ngbPanelHeader>
+                  <a class="vsm-link" routerLink="/">
+                    <i class="vsm-icon pe-7s-browser"></i>
+                    <span class="vsm-title">Tableau de bord</span>
+                    <i class="vsm-arrow"></i>
+                  </a>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="gestionClient">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-browser"></i>

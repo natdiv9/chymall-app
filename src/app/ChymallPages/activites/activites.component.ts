@@ -10,19 +10,28 @@ import {CrudService} from '../../ChymallServices/crud/crud.service';
 export class ActivitesComponent implements OnInit {
 
   operations: any[] = [];
+    chargement: boolean;
 
   constructor(private crudService: CrudService) {
   }
 
   ngOnInit() {
-    this.crudService.getOperations()
-        .subscribe((reponse: any) => {
-          if (reponse.status === true) {
-            this.operations = reponse.data;
-          }
-        }, (error => {
-            console.log();
-        }));
+    this.refresh();
+  }
+
+  refresh() {
+      this.chargement = true;
+      this.crudService.getOperations()
+          .subscribe((reponse: any) => {
+              if (reponse.status === true) {
+                  this.chargement = false;
+                  this.operations = reponse.data;
+              } else {
+                  console.log(reponse.message);
+              }
+          }, (error => {
+              console.log();
+          }));
   }
 
 }

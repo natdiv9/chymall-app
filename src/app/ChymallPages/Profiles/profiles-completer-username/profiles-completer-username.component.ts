@@ -46,7 +46,8 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
         const data_sent = Object.assign(this.current_profile, {
             auteur_operation: this.authService.currentUser.username,
             username: this.completerProfileForm.get('username').value,
-            etat: 2
+            etat: 2,
+            date_activation: 'activated'
         });
         this.crudService.putProfile(
             data_sent

@@ -26,7 +26,7 @@ class Resume
             $stmt = $stmt = $this->connexion->prepare("SELECT
 (SELECT COUNT(*) FROM chy_clients WHERE DATE(chy_clients.date)=CURRENT_DATE ) as total_adhesion_today,
 (SELECT COUNT(*) FROM chy_profiles WHERE DATE(chy_profiles.date_activation)=CURRENT_DATE ) as total_activation_today,
-(SELECT SUM(chy_retraits.montant) FROM chy_retraits WHERE DATE(chy_retraits.date)=CURRENT_DATE) as total_retrait_today,
+(SELECT COALESCE(SUM(chy_retraits.montant), 0) FROM chy_retraits WHERE DATE(chy_retraits.date)=CURRENT_DATE) as total_retrait_today,
 (SELECT SUM(chy_retraits.montant) FROM chy_retraits WHERE MONTH(chy_retraits.date)=MONTH(CURRENT_DATE)) as total_retrait_month,
 (SELECT COUNT(*) FROM chy_profiles WHERE MONTH(chy_profiles.date_activation)=MONTH(CURRENT_DATE) )  as total_activation_month,
 (SELECT COUNT(*) FROM chy_retrait_produits WHERE MONTH(chy_retrait_produits.date)=MONTH(CURRENT_DATE)) as tota_retrait_produit_month,
