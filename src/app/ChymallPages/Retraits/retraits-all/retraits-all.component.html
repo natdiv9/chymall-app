@@ -1,44 +1,56 @@
+<!--div class="card">
+    <div class="widget-numbers text-success float-right ">Total du jour: <span>${{synthese.total_retrait_today}}</span></div>
+    <select class="float-right mr-4" id="exampleSelect">
+        <option value="" [disabled]="true">Trier par</option>
+        <option value="today">Aujourd'hui</option>
+        <option value="effectue">Effectué</option>
+        <option value="attente">En attente</option>
+    </select>
+</div-->
+
 <div class="main-card mb-3 card">
-  <div class="card-header">
-    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      <strong>LISTE DE RETRAITS</strong>
-      <button (click)="refresh()"
-              class="btn-icon btn-icon-only  btn btn-outline-success float-right">
-        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
-      </button>
+    <div class="card-header">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+            <strong>LISTE DE RETRAITS</strong>
+            <button (click)="refresh()"
+                    class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+                <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+            </button>
+            <div class="float-right mr-5">Total du jour: <span class="text-success">${{synthese.total_retrait_today}}</span></div>
+        </div>
     </div>
-  </div><div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
-  <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
-  <br>
-  Chargement de données en cours..
-</div>
-  <div *ngIf="!chargement" class="table-responsive">
-    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
-      <thead>
-      <tr>
-        <th class="text-center">#</th>
-        <th class="text-center">Profile</th>
-        <th class="text-center">Montant</th>
-        <th class="text-center">Date de Retrait</th>
-        <th class="text-center">Status</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let retrait of retraits; let i = index">
-        <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
-        <td class="text-center">{{retrait.username}}</td>
-        <td class="text-center">{{retrait.montant}}</td>
-        <td class="text-center">{{retrait.date}}</td>
-        <td class="text-center">
-          <div [class]="'badge badge-pill' + (retrait.etat==1 ? ' badge-success' : ' badge-warning')">{{retrait.etat==1 ? 'effectué' : 'en attente'}}</div>
-        </td>
-      </tr>
-      <div class="row mt-5">
-        <div class="col-12 divider mt-2"></div>
-      </div>
-      </tbody>
-    </table>
-  </div>
+    <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+        <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+        <br>
+        Chargement de données en cours..
+    </div>
+    <div *ngIf="!chargement" class="table-responsive">
+        <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Profile</th>
+                <th class="text-center">Montant</th>
+                <th class="text-center">Date de Retrait</th>
+                <th class="text-center">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let retrait of retraits; let i = index">
+                <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
+                <td class="text-center">{{retrait.username}}</td>
+                <td class="text-center">{{retrait.montant}}</td>
+                <td class="text-center">{{retrait.date}}</td>
+                <td class="text-center">
+                    <div [class]="'badge badge-pill' + (retrait.etat==1 ? ' badge-success' : ' badge-warning')">{{retrait.etat == 1 ? 'effectué' : 'en attente'}}</div>
+                </td>
+            </tr>
+            <div class="row mt-5">
+                <div class="col-12 divider mt-2"></div>
+            </div>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 

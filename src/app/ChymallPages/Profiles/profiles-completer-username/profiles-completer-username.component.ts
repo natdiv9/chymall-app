@@ -16,13 +16,11 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
     closeResult: string;
 
     completerProfileForm: FormGroup;
-    clients: Client[] = [];
-    profiles: Profile[] = [];
     message: string;
     identifiant: string;
     is_client_found = false;
     current_client: Client;
-    all_profiles_client: Profile[] = [];
+    all_profiles_client: any[] = [];
     current_profile: Profile;
     chargement: boolean;
 
@@ -93,41 +91,27 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
         }
     }
 
-    checkClient(input_id_client: HTMLInputElement, content: any) {
-        if (input_id_client.value === '' || input_id_client.value === undefined) {
+    rechercher(value: HTMLInputElement, content: any) {
+        if (value.value === '') {
             return;
         }
-        this.chargement = true;
-        this.crudService.getClientByIdentifier(
+        const recherche = value.value;
+        value.value = '';
+
+        this.crudService.getProfilesByRecherche(
             this.authService.currentUser.username,
-            input_id_client.value
+            recherche,
+            'incomplete'
         ).subscribe(
             (reponse: any) => {
                 if (reponse.status === true) {
-                    this.is_client_found = true;
-                    this.current_client = reponse.data;
-                    this.crudService.getIncompletProfiles(
-                        this.authService.currentUser.username,
-                        this.current_client.id,
-                        true
-                    ).subscribe(
-                        (reponse2: any) => {
-                            if (reponse2.status === true) {
-                                this.chargement = false;
-                                this.all_profiles_client = reponse2.data;
-                            }
-                        }, (error2 => {
-                        })
-                    );
+                    this.all_profiles_client = reponse.data;
+                    console.log(reponse.data);
                 } else {
-                    this.is_client_found = false;
-                    this.chargement = false;
-                    this.message = 'Cet identifiant client n\'existe pas dans la base de donnée';
-                    this.open(content);
+                    console.log(reponse.message);
                 }
-            },
-            (error) => {
-                this.message = 'Echec de recupération de données';
+                // tslint:disable-next-line:no-shadowed-variable
+            }, (error) => {
                 console.log(error);
             }
         );

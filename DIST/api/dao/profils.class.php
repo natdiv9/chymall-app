@@ -26,7 +26,7 @@ class Profils
         {
             $stmt = ($id)
                 ? $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id='$id'  LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles ORDER  BY id DESC");
+                : $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_clients clients INNER JOIN chy_profiles profiles ON clients.id=profiles.id_client ORDER  BY id DESC");
 
             $res = $stmt->execute();
 
@@ -89,9 +89,9 @@ class Profils
         try
         {
             if ($is_by_client && $id_client != 0){
-                $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id_client='$id_client' AND username='_incomplet' AND etat=1");
+                $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.id_client='$id_client' AND profiles.username='_incomplet' AND profiles.etat=1");
             } else {
-                $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles WHERE username='_incomplet' AND etat=1");
+                $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.username='_incomplet' AND profiles.etat=1");
             }
 
             $res = $stmt->execute();
@@ -144,6 +144,51 @@ class Profils
         {
             OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
+        }
+    }
+
+    public function rechercherProfile($recherche, $auteur_operation, $incomplete = false)
+    {
+        try
+        {
+            if($incomplete)
+            {
+                $sql = "SELECT profils.*, clients.identifiant, clients.prenom, clients.nom
+                    FROM chy_profiles profils INNER JOIN chy_clients clients ON profils.id_client=clients.id 
+                    WHERE (MATCH (profils.username, profils.niveau_adhesion) AGAINST ('$recherche') 
+                    OR MATCH (clients.prenom, clients.nom, clients.identifiant, clients.telephone, clients.email, identifiant_sponsor ) AGAINST ('$recherche')) 
+                    AND (profils.username='_incomplet' AND profils.etat=1)";
+            }
+            else
+            {
+                $sql = "SELECT profils.*, clients.identifiant, clients.prenom, clients.nom
+                    FROM chy_profiles profils INNER JOIN chy_clients clients ON profils.id_client=clients.id 
+                    WHERE MATCH (profils.username, profils.niveau_adhesion) AGAINST ('$recherche') 
+                    OR MATCH (clients.prenom, clients.nom, clients.identifiant, clients.telephone, clients.email, identifiant_sponsor ) AGAINST ('$recherche')";
+            }
+            $stmt = $this->connexion->prepare($sql);
+
+            $res = $stmt->execute();
+
+            if($res) {
+                OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
+                return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC), "recherche" => true);
+            }else{
+                // DEVELOPMENT
+                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+                return array(false, "message" => $stmt->errorInfo()[2]);
+
+                // PRODUCTION
+                // return array(false, "message" => "The server encountered a problem");
+            }
+        }catch (Exception | Error $e)
+        {
+            // DEVELOPMENT
+            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+            return array(false, "message" => $e->getMessage());
+
+            // PRODUCTION
+            // return array(false, "message" => "The server encountered a problem");
         }
     }
 

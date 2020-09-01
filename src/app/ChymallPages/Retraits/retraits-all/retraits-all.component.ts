@@ -13,6 +13,7 @@ export class RetraitsAllComponent implements OnInit {
   retraits: any[] = [];
   chargement: boolean;
   message: string;
+  synthese: any;
 
   constructor(private crudService: CrudService,
               private authService: AuthService) { }
@@ -21,7 +22,23 @@ export class RetraitsAllComponent implements OnInit {
       this.refresh();
   }
 
+  getResume() {
+      this.crudService.getResume(this.authService.currentUser.username).subscribe(
+          (reponse: any) => {
+              if (reponse.status === true) {
+                  this.synthese = reponse.data[0];
+              } else {
+                  // this.message = 'Echec de recupération de données';
+                  // console.log(reponse.message);
+              }
+          }, (error => {
+              // this.message = 'Echec de recupération de données';
+              // console.log(error);
+          })
+      );
+  }
   refresh() {
+      this.getResume();
       this.chargement = true;
       this.crudService.getRetraits(this.authService.currentUser.username).subscribe(
           (reponse: any) => {

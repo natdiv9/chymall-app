@@ -89,6 +89,8 @@ import {RetraitGuardService} from './ChymallServices/auth/retrait-guard.service'
 import {ProfilesCompleterUsernameComponent} from './ChymallPages/Profiles/profiles-completer-username/profiles-completer-username.component';
 import {RetraitsDemandeNewComponent} from './ChymallPages/Retraits/retraits-demande-new/retraits-demande-new.component';
 import {TranfertGuard} from './ChymallServices/auth/tranfert.guard';
+import {TechniqueComponent} from './ChymallPages/Profiles/technique/technique.component';
+import {RetraitsAllDemandesComponent} from './ChymallPages/Retraits/retraits-all-demandes/retraits-all-demandes.component';
 
 const routes: Routes = [
   {
@@ -166,6 +168,8 @@ const routes: Routes = [
       // tslint:disable-next-line:max-line-length
       {path: 'produits/all', component: ProduitsAllComponent, canActivate: [AuthGuardService, RetraitGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
+      {path: 'profiles/technique', component: TechniqueComponent, canActivate: [AuthGuardService, TechniqueGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
       {path: 'produits/:id/details', component: ProduitsIdComponent, canActivate: [AuthGuardService, RetraitGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'produits/new', component: ProduitsNewComponent, canActivate: [AuthGuardService, RetraitGuardService], data: {extraParameter: 'elementsMenu'}},
@@ -198,7 +202,8 @@ const routes: Routes = [
       {path: 'retraits/new', component: RetraitsNewComponent, canActivate: [AuthGuardService, ComptabiliteGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'retraits/demande/new', component: RetraitsDemandeNewComponent, canActivate: [AuthGuardService, TranfertGuard], data: {extraParameter: 'elementsMenu'}},
-
+      // tslint:disable-next-line:max-line-length
+      {path: 'retraits/demande/all', component: RetraitsAllDemandesComponent, canActivate: [AuthGuardService, TranfertGuard], data: {extraParameter: 'elementsMenu'}},
 
       // STOCKAGES
 

@@ -1,7 +1,6 @@
-<div class="search-wrapper" [class.active]="isActive">
+<div class="search-wrapper" [class.active]="true">
   <div class="input-holder">
-    <input type="text" placeholder="Type to search" class="search-input">
-    <button class="search-icon" (click)="isActive = true"><span></span></button>
+    <input type="text" placeholder="Faites une recherche" class="search-input">
+    <button class="search-icon"><span></span></button>
   </div>
-  <button class="close" (click)="isActive = false"></button>
 </div>

@@ -15,6 +15,7 @@ export class AdhesionGuardService implements CanActivate {
   }
 
   canActivate(): boolean {
+      // tslint:disable-next-line:max-line-length
         if (this.authService.connected && (this.authService.currentUser.service === 'adhesion' || this.authService.currentUser.service === 'admin')) {
             return true;
         } else {

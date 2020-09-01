@@ -13,7 +13,7 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProfilesAllComponent implements OnInit {
 
-    profiles: Profile[] = [];
+    profiles: any[] = [];
     message: string;
     closeResult: string;
     isSearchActive: any;
@@ -135,4 +135,28 @@ export class ProfilesAllComponent implements OnInit {
         }
     }
 
+    rechercher(value: HTMLInputElement, content: any) {
+        if (value.value === '') {
+            return;
+        }
+        const recherche = value.value;
+        value.value = '';
+
+        this.crudService.getProfilesByRecherche(
+            this.authService.currentUser.username,
+            recherche
+        ).subscribe(
+            (reponse: any) => {
+                if (reponse.status === true) {
+                    this.profiles = reponse.data;
+                    console.log(reponse.data);
+                } else {
+                    console.log(reponse.message);
+                }
+                // tslint:disable-next-line:no-shadowed-variable
+            }, (error) => {
+                console.log(error);
+            }
+        );
+    }
 }

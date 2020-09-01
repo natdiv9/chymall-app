@@ -105,6 +105,7 @@ export class RetraitsNewComponent implements OnInit {
           if (reponse.status === true) {
               this.message = 'Retrait enregistré avec succcès';
               this.refreshData(this.current_client.identifiant, content);
+              this.refresh();
               this.open(content);
           } else {
             this.message = 'Echèc de la demande';

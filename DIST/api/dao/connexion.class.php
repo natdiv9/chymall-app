@@ -21,7 +21,8 @@ class Connexion
             echo json_encode(
                 array(
                     "status" => false,
-                    "message" => $e->getMessage()
+                    "message" => $e->getMessage(),
+                    "code" => 0
                 ),
                 JSON_PRETTY_PRINT
                 );

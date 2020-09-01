@@ -147,4 +147,10 @@ export class CrudService {
     getResume(auteur_operation: string) {
         return this.httpClient.get(`${environment.server_base_url}/resume.php?auteur_operation=${auteur_operation}`);
     }
+
+    getProfilesByRecherche(auteur_operation: string, recherche: string, incomplete?: string) {
+        // tslint:disable-next-line:max-line-length
+        return this.httpClient.get(`${environment.server_base_url}/profiles.php?auteur_operation=${auteur_operation}&recherche=${recherche}&incomplete=${incomplete}`);
+
+    }
 }

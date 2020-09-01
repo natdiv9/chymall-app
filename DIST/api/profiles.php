@@ -9,6 +9,25 @@ switch ($request_method)
         $profilDAO = new Profils();
         if(isset($_GET['auteur_operation']))
         {
+            if(!empty($_GET['recherche']))
+            {
+                if (!empty($_GET['incomplete']) && $_GET['incomplete'] == 'incomplete')
+                {
+                    $recherche = $_GET['recherche'];
+                    $res = $profilDAO->rechercherProfile($recherche, $_GET['auteur_operation'], true);
+                    response($res);
+                }
+                else
+                {
+                    $recherche = $_GET['recherche'];
+                    $res = $profilDAO->rechercherProfile($recherche, $_GET['auteur_operation']);
+                    response($res);
+                }
+
+                return;
+
+            }
+
             if(isset($_GET['incomplete']) && $_GET['incomplete'] == true){
                 if(!empty($_GET['id']) && $_GET['id'] != 'undefined' && isset($_GET['is_by_client']) && $_GET['is_by_client'] == true) {
                     $res = $profilDAO->getIncompletProfiles($_GET['incomplete'], $_GET['auteur_operation'], true, $_GET['id']);
@@ -39,6 +58,7 @@ switch ($request_method)
 
             } else {
                 // Tous les profils
+                // die("TOUS LES PROFILES");
                 $res = $profilDAO->get(false, $_GET['auteur_operation']);
                 response($res);
 

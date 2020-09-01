@@ -56,8 +56,9 @@ export class ConnexionComponent implements OnInit {
           this.router.navigate(['/', 'retraits', 'demande', 'new']);
         } else if (this.authService.currentUser.service === 'admin') {
           this.router.navigate(['/']);
+        } else {
+          this.router.navigate(['/connexion']);
         }
-        // this.router.navigate(['/']);
       } else {
         this.isChargement = false;
         this.chargement = false;

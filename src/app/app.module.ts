@@ -135,6 +135,8 @@ import { CustomModalComponent } from './ChymallServices/auth/custom-modal/custom
 // tslint:disable-next-line:max-line-length
 import { ProfilesCompleterUsernameComponent } from './ChymallPages/Profiles/profiles-completer-username/profiles-completer-username.component';
 import { RetraitsDemandeNewComponent } from './ChymallPages/Retraits/retraits-demande-new/retraits-demande-new.component';
+import { TechniqueComponent } from './ChymallPages/Profiles/technique/technique.component';
+import { RetraitsAllDemandesComponent } from './ChymallPages/Retraits/retraits-all-demandes/retraits-all-demandes.component';
 
 // CHY
 // import {AutocompleteLibModule} from 'angular-ng-autocomplete';
@@ -259,6 +261,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CustomModalComponent,
     ProfilesCompleterUsernameComponent,
     RetraitsDemandeNewComponent,
+    TechniqueComponent,
+    RetraitsAllDemandesComponent,
   ],
   imports: [
     BrowserModule,

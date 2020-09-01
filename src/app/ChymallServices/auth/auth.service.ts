@@ -26,6 +26,6 @@ export class AuthService {
   logout() {
     this.currentUser = null;
     this.connected = false;
-    this.router.navigate(['/']);
+    this.router.navigate(['/connexion']);
   }
 }

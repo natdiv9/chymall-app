@@ -66,10 +66,12 @@ export class ClientsAllComponent implements OnInit {
         );
     }
 
-    rechercher(recherche: string, content: any) {
-        if (recherche === '') {
+    rechercher(value: HTMLInputElement, content: any) {
+        if (value.value === '') {
             return;
         }
+        const recherche = value.value;
+        value.value = '';
         this.crudService.getClientsByRecherche(
             this.authService.currentUser.username,
             recherche

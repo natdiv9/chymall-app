@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-search-box',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchBoxComponent implements OnInit {
 
+  @Input() recherche_on;
   public isActive: any;
 
   constructor() { }

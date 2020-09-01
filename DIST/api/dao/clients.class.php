@@ -93,9 +93,9 @@ class Clients
     {
         try
         {
-            $sql = "SELECT *, MATCH (identifiant, nom, prenom, telephone, email) AGAINST ('$recherche') as pertinence\n"
+            $sql = "SELECT *, MATCH (identifiant, nom, prenom, telephone, email, identifiant_sponsor) AGAINST ('$recherche') as pertinence\n"
 
-                . "FROM  chy_clients WHERE MATCH (identifiant, nom, prenom, telephone, email) AGAINST ('$recherche')\n"
+                . "FROM  chy_clients WHERE MATCH (identifiant, nom, prenom, telephone, email, identifiant_sponsor) AGAINST ('$recherche')\n"
 
                 . "ORDER BY pertinence DESC";
             $stmt = $this->connexion->prepare($sql);

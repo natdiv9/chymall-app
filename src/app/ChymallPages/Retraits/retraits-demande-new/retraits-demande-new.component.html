@@ -1,17 +1,17 @@
-<div class="main-card mb-3 card">
+<div class="main-card mb-3 card no-shadow rm-border bg-transparent widget-chart">
   <div class="card-body">
     <h5 class="card-title">
-      <strong>VALIDER TRANFERT DE POINTS</strong>
+      <strong>TRANFERT DE POINTS</strong>
     </h5>
     <div class="divider"></div>
     <div class="row">
-      <div class="col-6">
-        <div class="position-relative form-group"><label for="id_client">ID CLIENT</label>
-          <input #input_id_client
-                 id="id_client" type="text"
-                 class="form-control">
+      <div class="col-12" style="text-align: center">
+        <div class="search-wrapper" [class.active]="true">
+          <div class="input-holder">
+            <input type="text" #input_id_client placeholder="Entrez un identifiant du client.." class="search-input">
+            <button (click)="rechercher(input_id_client, content)"  class="search-icon"><span></span></button>
+          </div>
         </div>
-        <button (click)="checkClient(input_id_client, content)" class="btn btn-primary float-right">Lister les profiles</button>
       </div>
     </div>
     <div class="divider"></div>
@@ -21,8 +21,8 @@
 <div *ngIf="is_client_found" class="main-card mb-3 card">
   <div class="card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      <strong>PROFILES DU CLIENT [{{current_client.identifiant}}]</strong>
-      <button (click)="refresh()"
+      <strong>LISTE DE PROFILES</strong>
+      <button (click)="refresh(content)"
               class="btn-icon btn-icon-only  btn btn-outline-success float-right">
         <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
       </button>
@@ -40,6 +40,9 @@
           <thead>
           <tr>
             <th class="text-center text-muted">#</th>
+            <th class="text-center">ID Client</th>
+            <th class="text-center">Nom</th>
+            <th class="text-center">Prenom</th>
             <th class="text-center">Nom d'utilisateur</th>
             <th class="text-center">Pacts</th>
             <th class="text-center">Action</th>
@@ -48,6 +51,9 @@
           <tbody>
           <tr *ngFor="let profile of all_profiles_client ; let i = index">
             <td class="text-center">{{i+1}}</td>
+            <td class="text-center">{{profile.identifiant}}</td>
+            <td class="text-center">{{profile.nom}}</td>
+            <td class="text-center">{{profile.prenom}}</td>
             <td class="text-center">{{profile.username}}</td>
             <td class="text-center">{{profile.niveau_adhesion}}</td>
             <td class="text-center">
@@ -66,7 +72,7 @@
 
 <ng-template #content2 let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">DEMANDE PROFIL : {{current_profile.username}} </h4>
+    <h4 class="modal-title">Demande transfert de {{current_profile.username}} </h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
