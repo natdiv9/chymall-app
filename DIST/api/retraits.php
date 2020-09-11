@@ -7,8 +7,19 @@ switch ($request_method)
 {
     case 'GET':
         $retraitsDAO = new Retraits();
+        if(isset($_GET['auteur_operation'], $_GET['recherche']))
+        {
+
+            $recherche = $_GET['recherche'];
+            $res = $retraitsDAO->rechercherRetraits($recherche, $_GET['auteur_operation']);
+            response($res);
+            return;
+
+        }
+
         if(isset($_GET['auteur_operation'], $_GET['activated']))
         {
+
             if(!empty($_GET['is_by_client']) && $_GET['is_by_client'] != 'false')
             {
                 $res = $retraitsDAO->get(true, $_GET['auteur_operation'], $_GET['is_by_client']);

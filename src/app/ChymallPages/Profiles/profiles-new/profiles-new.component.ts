@@ -5,6 +5,7 @@ import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../../ChymallServices/auth/auth.service';
 import {Produit} from '../../../ChymallModels/models/produit';
+import {Pacts} from '../../../ChymallModels/models/pacts';
 
 @Component({
   selector: 'app-profiles-new',
@@ -28,6 +29,9 @@ export class ProfilesNewComponent implements OnInit {
   trading_state = 0;
   message = '';
   produits: Produit[] = [];
+  chargement: boolean;
+  all_pacts: any[] = [];
+  produits_by_pact: Produit[] = [];
 
   constructor(private  formBuilder: FormBuilder,
               private modalService: NgbModal,
@@ -38,6 +42,7 @@ export class ProfilesNewComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.route.snapshot.params.username;
+    this.get_pacts();
     this.crudService.getProduits(this.authService.currentUser.username).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
@@ -48,6 +53,23 @@ export class ProfilesNewComponent implements OnInit {
     this.initForm();
   }
 
+  get_pacts() {
+    this.chargement = true;
+    this.crudService.getPacts(this.authService.currentUser.username).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.all_pacts = reponse.data;
+            this.chargement = false;
+          } else {
+            this.chargement = false;
+            console.log(reponse.message);
+          }
+        }, (error) => {
+          console.log(error);
+        }
+    );
+  }
+
   initForm() {
     this.newProfileForm = this.formBuilder.group({
       username: [''],
@@ -55,7 +77,8 @@ export class ProfilesNewComponent implements OnInit {
       niveau_adhesion: ['', [Validators.required]],
       capital: [''],
       activation_compte: [''],
-      activation_trading: ['']
+      activation_trading: [''],
+      username_parain: ['']
     });
   }
 
@@ -74,6 +97,7 @@ export class ProfilesNewComponent implements OnInit {
       etat_trading: 0,
       etat_activation: 0,
       etat: 1,
+      username_parain: this.newProfileForm.get('username_parain').value,
       auteur_operation: this.authService.currentUser.username
     };
     this.crudService.addProfile(profile).subscribe(
@@ -112,39 +136,32 @@ export class ProfilesNewComponent implements OnInit {
     }
   }
 
-  patcs(vip: HTMLSelectElement) {
-    const pact = vip.value;
-    switch (pact) {
-      case 'VIP-1' :
-        this.ct_inscription = 28.75;
-        this.cout_trading = 0;
-        this.cout_total = this.ct_inscription + this.cout_trading;
-        this.trading_state = 0;
+  choix_patcs(pact: any) {
+    this.newProfileForm.get('produit_adhesion').reset();
+    this.produits_by_pact = [];
+    this.get_products_by_pacts(pact);
+    if (pact === 1) {
+      this.trading_state = 0;
+    } else {
+      this.trading_state = 1;
+    }
+
+    for (const p of this.all_pacts) {
+      if (pact === p.niveau) {
+        this.ct_inscription = p.montant_compte;
+        this.cout_trading = p.montant_trading;
+        this.cout_total = p.total;
         break;
-      case 'VIP-2' :
-        this.ct_inscription = 57.5;
-        this.cout_trading = 103.5;
-        this.cout_total = this.ct_inscription + this.cout_trading;
-        this.trading_state = 1;
-        break;
-      case 'VIP-3' :
-        this.ct_inscription = 115;
-        this.cout_trading = 207;
-        this.cout_total = this.ct_inscription + this.cout_trading;
-        this.trading_state = 1;
-        break;
-      case 'VIP-4' :
-        this.ct_inscription = 345;
-        this.cout_trading = 621;
-        this.cout_total = this.ct_inscription + this.cout_trading;
-        this.trading_state = 1;
-        break;
-      case 'VIP-5' :
-        this.ct_inscription = 690;
-        this.cout_trading = 1242;
-        this.cout_total = this.ct_inscription + this.cout_trading;
-        this.trading_state = 1;
-        break;
+      }
+    }
+  }
+
+  private get_products_by_pacts(pact: number) {
+    this.produits_by_pact = [];
+    for (const pr of this.produits) {
+      if (pr.pacts === pact) {
+        this.produits_by_pact.push(pr);
+      }
     }
   }
 }

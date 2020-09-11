@@ -56,6 +56,7 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
                     this.message = 'Enregistrement effectué avec succès!';
                     this.refresh();
                     this.open(content);
+                    console.log(reponse);
                 } else {
                     this.message = 'Echec de l\'opération!';
                     this.open(content);
@@ -107,6 +108,10 @@ export class ProfilesCompleterUsernameComponent implements OnInit {
                 if (reponse.status === true) {
                     this.all_profiles_client = reponse.data;
                     console.log(reponse.data);
+                    if (reponse.data.length === 0) {
+                        this.message = 'Aucune information correspondante!';
+                        this.open(content);
+                    }
                 } else {
                     console.log(reponse.message);
                 }

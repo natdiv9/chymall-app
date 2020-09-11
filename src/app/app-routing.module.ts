@@ -91,6 +91,8 @@ import {RetraitsDemandeNewComponent} from './ChymallPages/Retraits/retraits-dema
 import {TranfertGuard} from './ChymallServices/auth/tranfert.guard';
 import {TechniqueComponent} from './ChymallPages/Profiles/technique/technique.component';
 import {RetraitsAllDemandesComponent} from './ChymallPages/Retraits/retraits-all-demandes/retraits-all-demandes.component';
+import {PactsAllComponent} from './ChymallPages/pacts-all/pacts-all.component';
+import {ProfilesEnligneComponent} from './ChymallPages/Profiles/profiles-enligne/profiles-enligne.component';
 
 const routes: Routes = [
   {
@@ -185,11 +187,14 @@ const routes: Routes = [
       // tslint:disable-next-line:max-line-length
       {path: 'profiles/completer', component: ProfilesCompleterUsernameComponent, canActivate: [AuthGuardService, TechniqueGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
+      {path: 'profiles/enligne', component: ProfilesEnligneComponent, canActivate: [AuthGuardService, TechniqueGuardService], data: {extraParameter: 'elementsMenu'}},
+
+      // tslint:disable-next-line:max-line-length
       {path: 'profiles/:id/details', component: ProfilesIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'profiles/:id/:username/new', component: ProfilesNewComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
-      {path: 'profiles/:id/update', component: ProfilesUpdateComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'profiles/:id/update', component: ProfilesUpdateComponent, canActivate: [AuthGuardService, TechniqueGuardService], data: {extraParameter: 'elementsMenu'}},
 
 
       // RETRAITS
@@ -224,7 +229,9 @@ const routes: Routes = [
       {path: 'retrait-produits/new', component: RetraitProduitsNewComponent, canActivate: [AuthGuardService, RetraitGuardService], data: {extraParameter: 'elementsMenu'}},
 
       // tslint:disable-next-line:max-line-length
-      {path: 'activites', component: ActivitesComponent, canActivate: [AuthGuardService, CheckAdminGuard], data: {extraParameter: 'elementsMenu'}}
+      {path: 'activites', component: ActivitesComponent, canActivate: [AuthGuardService, CheckAdminGuard], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'pacts/all', component: PactsAllComponent, canActivate: [AuthGuardService, CheckAdminGuard], data: {extraParameter: 'elementsMenu'}}
 
 
     ]

@@ -10,13 +10,8 @@
         </div>
         <div class="col-md-3">
           <div class="position-relative form-group"><label for="exampleSelect">Produit de pacts</label>
-            <select
-                    formControlName="pacts" id="exampleSelect" class="form-control">
-              <option value="VIP-1">VIP-1</option>
-              <option value="VIP-2">VIP-2</option>
-              <option value="VIP-3">VIP-3</option>
-              <option value="VIP-4">VIP-4</option>
-              <option value="VIP-5">VIP-5</option>
+            <select formControlName="pacts" id="exampleSelect" class="form-control">
+              <option *ngFor="let pact of pacts" [value]="pact.niveau">VIP-{{pact.niveau}}</option>
             </select>
           </div>
         </div>

@@ -12,7 +12,7 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProfilesByClientComponent implements OnInit {
 
-    profiles: Profile[] = [];
+    profiles: any[] = [];
     username = '';
     message: string;
     closeResult: string;

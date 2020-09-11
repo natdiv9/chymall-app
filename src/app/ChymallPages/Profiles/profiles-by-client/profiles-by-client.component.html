@@ -17,10 +17,14 @@
     <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
       <thead>
       <tr>
-        <th class="text-center">Nom d'utilisateur</th>
+        <th class="text-center">ID Client</th>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Prenom</th>
+        <th class="text-center">Username</th>
         <th class="text-center">Pacts</th>
         <th class="text-center">Produit adhésion</th>
         <th class="text-center">Capital</th>
+        <th class="text-center">Parain</th>
         <th class="text-center">Compte</th>
         <th class="text-center">Trading</th>
         <th class="text-center">Status</th>
@@ -29,21 +33,25 @@
       </thead>
       <tbody>
       <tr *ngFor="let profile of profiles ; let i = index">
+        <td class="text-center">{{profile.identifiant}}</td>
+        <td class="text-center">{{profile.nom}}</td>
+        <td class="text-center">{{profile.prenom}}</td>
         <td class="text-center">{{profile.username}}</td>
-        <td class="text-center">{{profile.niveau_adhesion}}</td>
+        <td class="text-center">VIP-{{profile.niveau_adhesion}}</td>
         <td class="text-center">{{profile.produit_adhesion}}</td>
         <td class="text-center">{{profile.capital}}</td>
+        <td class="text-center">{{profile.username_parain}}</td>
         <td class="text-center">
-          <div [class]="'badge badge-pill' + (profile.etat_activation==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_activation==1 ? 'activé' : 'inactivé'}}</div>
+          <div [class]="'badge badge-pill' + (profile.etat_activation==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_activation == 1 ? 'activé' : 'inactivé'}}</div>
         </td>
         <td class="text-center">
-          <div [class]="'badge badge-pill' + (profile.etat_trading==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_trading==1 ? 'activé' : 'inactivé'}}</div>
+          <div [class]="'badge badge-pill' + (profile.etat_trading==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_trading == 1 ? 'activé' : 'inactivé'}}</div>
         </td>
         <td class="text-center">
           <div [class]="'badge badge-pill' + (profile.etat==1 ? ' badge-warning' : (profile.etat==2 ? ' badge-success': ' badge-danger'))">
-            {{profile.etat==1 ? 'incomplet' : (profile.etat==2) ? 'actif' : 'inactif'}}</div>
+            {{profile.etat == 1 ? 'incomplet' : (profile.etat == 2) ? 'actif' : 'inactif'}}</div>
         </td>
-        <td>
+        <td class="text-center">
           <div class="mb-2 mr-2 btn-group" ngbDropdown>
             <button type="button" ngbDropdownToggle class="dropdown-toggle-split btn btn-primary"><span class="sr-only">Toggle Dropdown</span></button>
             <div ngbDropdownMenu>

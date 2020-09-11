@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../../ChymallServices/auth/auth.service';
+import {Pacts} from '../../../ChymallModels/models/pacts';
 
 @Component({
   selector: 'app-produits-new',
@@ -15,6 +16,8 @@ export class ProduitsNewComponent implements OnInit {
   newProduitForm: FormGroup;
   closeResult: string;
   private message: string;
+  chargement: boolean;
+  pacts: Pacts [] = [];
 
   constructor(private  formBuilder: FormBuilder,
               private router: Router,
@@ -24,8 +27,25 @@ export class ProduitsNewComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.refresh();
   }
 
+  refresh() {
+    this.chargement = true;
+    this.crudService.getPacts(this.authService.currentUser.username).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.pacts = reponse.data;
+            this.chargement = false;
+          } else {
+            this.chargement = false;
+            console.log(reponse.message);
+          }
+        }, (error) => {
+          console.log(error);
+        }
+    );
+  }
   open(content) {
     this.modalService.open(content,
         {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

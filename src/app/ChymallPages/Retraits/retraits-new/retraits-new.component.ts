@@ -104,7 +104,7 @@ export class RetraitsNewComponent implements OnInit {
         (reponse: any) => {
           if (reponse.status === true) {
               this.message = 'Retrait enregistré avec succcès';
-              this.refreshData(this.current_client.identifiant, content);
+              // this.refreshData(this.current_client.identifiant, content);
               this.refresh();
               this.open(content);
           } else {
@@ -160,8 +160,7 @@ export class RetraitsNewComponent implements OnInit {
     refresh() {
         this.chargement = true;
         this.crudService.getRetraits(
-            this.authService.currentUser.username,
-            'true'
+            this.authService.currentUser.username, 'true'
         ).subscribe(
             (reponse2: any) => {
                 if (reponse2.status === true) {

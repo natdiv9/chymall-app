@@ -137,6 +137,8 @@ import { ProfilesCompleterUsernameComponent } from './ChymallPages/Profiles/prof
 import { RetraitsDemandeNewComponent } from './ChymallPages/Retraits/retraits-demande-new/retraits-demande-new.component';
 import { TechniqueComponent } from './ChymallPages/Profiles/technique/technique.component';
 import { RetraitsAllDemandesComponent } from './ChymallPages/Retraits/retraits-all-demandes/retraits-all-demandes.component';
+import { PactsAllComponent } from './ChymallPages/pacts-all/pacts-all.component';
+import { ProfilesEnligneComponent } from './ChymallPages/Profiles/profiles-enligne/profiles-enligne.component';
 
 // CHY
 // import {AutocompleteLibModule} from 'angular-ng-autocomplete';
@@ -263,6 +265,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RetraitsDemandeNewComponent,
     TechniqueComponent,
     RetraitsAllDemandesComponent,
+    PactsAllComponent,
+    ProfilesEnligneComponent,
   ],
   imports: [
     BrowserModule,

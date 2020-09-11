@@ -11,6 +11,7 @@ import {RetraitProduits} from '../../ChymallModels/models/retrait-produits';
 
 // Environment
 import {environment} from '../../../environments/environment';
+import {Pacts} from '../../ChymallModels/models/pacts';
 
 @Injectable({
     providedIn: 'root'
@@ -59,6 +60,8 @@ export class CrudService {
     }
 
     getProfiles(auteur_operation: string, id?: number, is_by_client: boolean = false) {
+        // tslint:disable-next-line:max-line-length
+        // console.log(`${environment.server_base_url}/profiles.php?auteur_operation=${auteur_operation}&id=${id}&is_by_client=${is_by_client}`);
         return this.httpClient.get(
             `${environment.server_base_url}/profiles.php?auteur_operation=${auteur_operation}&id=${id}&is_by_client=${is_by_client}`);
     }
@@ -151,6 +154,26 @@ export class CrudService {
     getProfilesByRecherche(auteur_operation: string, recherche: string, incomplete?: string) {
         // tslint:disable-next-line:max-line-length
         return this.httpClient.get(`${environment.server_base_url}/profiles.php?auteur_operation=${auteur_operation}&recherche=${recherche}&incomplete=${incomplete}`);
+    }
 
+    getRetraitByRecherche(auteur_operation: string, recherche: string) {
+        // tslint:disable-next-line:max-line-length
+        return this.httpClient.get(`${environment.server_base_url}/retraits.php?auteur_operation=${auteur_operation}&recherche=${recherche}`);
+    }
+
+    getPacts(auteur_operation: string) {
+        return this.httpClient.get(`${environment.server_base_url}/pacts.php?auteur_operation=${auteur_operation}`);
+    }
+
+    putPacts(data: Pacts) {
+        return this.httpClient.put(`${environment.server_base_url}/pacts.php`, data);
+    }
+
+    addPacts(data: Pacts) {
+    return this.httpClient.post(`${environment.server_base_url}/pacts.php`, data);
+    }
+
+    deletePact(auteur_operation: string, id: number) {
+        return this.httpClient.delete(`${environment.server_base_url}/pacts.php?auteur_operation=${auteur_operation}&id=${id}`);
     }
 }

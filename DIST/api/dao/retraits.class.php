@@ -26,14 +26,45 @@ class Retraits
         {
             if($is_by_client)
             {
-                $sql = "SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, profiles.username, profiles.niveau_adhesion FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE retraits.etat=0 AND clients.id=$is_by_client ORDER BY retraits.date DESC";
+                $sql = "SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE retraits.etat=0 AND clients.id=$is_by_client ORDER BY retraits.date DESC";
                 $stmt = $this->connexion->prepare($sql);
             } else {
                 $stmt = ($id)
-                    ? $this->connexion->prepare("SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, profiles.username, profiles.niveau_adhesion FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id WHERE retraits.etat=0 ORDER BY retraits.date DESC")
-                    : $stmt = $this->connexion->prepare("SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, profiles.username, profiles.niveau_adhesion FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id ORDER BY retraits.date DESC");
+                    ? $this->connexion->prepare("SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE retraits.etat=0 ORDER BY retraits.date DESC")
+                    : $stmt = $this->connexion->prepare("SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client ORDER BY retraits.date DESC");
 
             }
+
+            $res = $stmt->execute();
+
+            if($res) {
+                OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
+                return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
+            }else{
+                // DEVELOPMENT
+                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+                return array(false, "message" => $stmt->errorInfo()[2]);
+
+                // PRODUCTION
+                // return array(false, "message" => "The server encountered a problem");
+            }
+        }catch (Exception | Error $e)
+        {
+            // DEVELOPMENT
+            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+            return array(false, "message" => $e->getMessage());
+
+            // PRODUCTION
+            // return array(false, "message" => "The server encountered a problem");
+        }
+    }
+
+    public function rechercherRetraits($recherche, $auteur_operation)
+    {
+        try
+        {
+            $sql = "SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE MATCH (profiles.username, profiles.niveau_adhesion) AGAINST ('$recherche') OR MATCH (clients.prenom, clients.nom, clients.identifiant, clients.telephone, clients.email, identifiant_sponsor ) AGAINST ('$recherche') ORDER BY retraits.date DESC ";
+            $stmt = $this->connexion->prepare($sql);
 
             $res = $stmt->execute();
 

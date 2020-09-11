@@ -9,9 +9,9 @@ class Connexion
     public function getConnexion()
     {
         try {
-            $host = 'mysql:host=127.0.0.1;dbname=chymall';
+            $host = 'mysql:host=localhost;dbname=chymall';
             $user = 'root';
-            $pwd = '';
+            $pwd = 'LInuxDEbian09';
             $bdd = new PDO($host, $user, $pwd,
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             return $bdd;

@@ -48,9 +48,10 @@
         <th class="text-center">ID Client</th>
         <th class="text-center">Nom</th>
         <th class="text-center">Prenom</th>
-        <th class="text-center">Nom d'utilisateur</th>
+        <th class="text-center">Username</th>
         <th class="text-center">Pacts</th>
-        <th class="text-center">Mot de passe généré</th>
+        <th class="text-center">Mot de passe</th>
+        <th class="text-center">Parain</th>
         <th class="text-center">Status</th>
         <th class="text-center">Actions</th>
       </tr>
@@ -61,8 +62,9 @@
         <td class="text-center">{{profile.nom}}</td>
         <td class="text-center">{{profile.prenom}}</td>
         <td class="text-center">{{profile.username}}</td>
-        <td class="text-center">{{profile.niveau_adhesion}}</td>
+        <td class="text-center">VIP-{{profile.niveau_adhesion}}</td>
         <td class="text-center">{{profile.password}}</td>
+        <td class="text-center">{{profile.username_parain}}</td>
         <td class="text-center">
           <div [class]="'badge badge-pill' + (profile.etat==1 ? ' badge-warning' : (profile.etat==2 ? ' badge-success': ' badge-danger'))">
             {{profile.etat==1 ? 'incomplet' : (profile.etat==2) ? 'actif' : 'inactif'}}</div>

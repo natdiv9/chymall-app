@@ -2,37 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07b96753-1936-4dc5-a84b-fe51329c5dba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqlDataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/natdiv.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/natdiv.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/chymall.sql" beforeDir="false" afterPath="$PROJECT_DIR$/api/chymall.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/dao/clients.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/clients.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/dao/connexion.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/connexion.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/dao/profils.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/profils.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/dao/resume.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/resume.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/dao/retraits.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/retraits.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/profiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/profiles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/retraits.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/retraits.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/main.6a0f506f904c748eb66f.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Clients/clients-all/clients-all.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Clients/clients-all/clients-all.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Clients/clients-all/clients-all.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Clients/clients-all/clients-all.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Clients/clients-new/clients-new.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Clients/clients-new/clients-new.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/main.ae9feb1da5798c59674a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallModels/models/produit.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallModels/models/produit.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallModels/models/profile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallModels/models/profile.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Produits/produits-all/produits-all.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Produits/produits-all/produits-all.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Produits/produits-new/produits-new.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Produits/produits-new/produits-new.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Produits/produits-new/produits-new.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Produits/produits-new/produits-new.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-all/profiles-all.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-all/profiles-all.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-all/profiles-all.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-all/profiles-all.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-by-client/profiles-by-client.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-by-client/profiles-by-client.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-by-client/profiles-by-client.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-by-client/profiles-by-client.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-completer-username/profiles-completer-username.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-completer-username/profiles-completer-username.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-completer-username/profiles-completer-username.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-completer-username/profiles-completer-username.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-new/profiles-new.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-new/profiles-new.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-new/profiles-new.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-new/profiles-new.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-update/profiles-update.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-update/profiles-update.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-update/profiles-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/profiles-update/profiles-update.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/technique/technique.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/technique/technique.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/technique/technique.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Profiles/technique/technique.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-all-demandes/retraits-all-demandes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-all-demandes/retraits-all-demandes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-all-demandes/retraits-all-demandes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-all-demandes/retraits-all-demandes.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-all/retraits-all.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-all/retraits-all.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-all/retraits-all.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-all/retraits-all.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-demande-new/retraits-demande-new.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-demande-new/retraits-demande-new.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-new/retraits-new.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-new/retraits-new.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-new/retraits-new.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/Retraits/retraits-new/retraits-new.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/connexion/connexion.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/connexion/connexion.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/ChymallServices/auth/adhesion-guard.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallServices/auth/adhesion-guard.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/ChymallServices/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallServices/auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/ChymallServices/auth/check-admin.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallServices/auth/check-admin.guard.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/ChymallServices/crud/crud.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallServices/crud/crud.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/Layout/Components/header/elements/search-box/search-box.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/Layout/Components/header/elements/search-box/search-box.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/Layout/Components/header/elements/search-box/search-box.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/Layout/Components/header/elements/search-box/search-box.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/Layout/Components/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/Layout/Components/header/header.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/Layout/Components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/Layout/Components/sidebar/sidebar.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app.module.ts" afterDir="false" />
@@ -70,31 +76,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/dao/resume.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="32" column="40" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
-              <folding>
-                <element signature="n#__construct#0;n#Resume#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/dao/connexion.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/retraits.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+            <state relative-caret-position="120">
+              <caret line="8" column="9" selection-end-line="113" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -102,11 +87,47 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/dao/retraits.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="56" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="56" />
+            <state relative-caret-position="945">
+              <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="118" selection-end-column="5" />
               <folding>
+                <element signature="n#rechercherRetraits#0;n#Retraits#0;n#!!top" />
                 <element signature="n#post#0;n#Retraits#0;n#!!top" />
                 <element signature="n#put#0;n#Retraits#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/dao/pacts.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+              <folding>
+                <element signature="n#__construct#0;n#Pacts#0;n#!!top" />
+                <element signature="n#put#0;n#Pacts#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/pacts.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="115" selection-start-line="26" selection-start-column="115" selection-end-line="26" selection-end-column="115" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/profiles.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
+              <folding>
+                <element signature="e#246#889#0#PHP" />
+                <element signature="e#903#1525#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -115,10 +136,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/dao/profils.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="157" column="78" selection-start-line="157" selection-start-column="78" selection-end-line="157" selection-end-column="78" />
+            <state relative-caret-position="74">
+              <caret line="35" column="35" lean-forward="true" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
               <folding>
                 <element signature="n#__construct#0;n#Profils#0;n#!!top" />
+                <element signature="n#getIncompletProfiles#0;n#Profils#0;n#!!top" />
+                <element signature="n#post#0;n#Profils#0;n#!!top" />
+                <element signature="n#postOnlineProfile#0;n#Profils#0;n#!!top" />
+                <element signature="n#rechercherProfile#0;n#Profils#0;n#!!top" />
                 <element signature="n#put#0;n#Profils#0;n#!!top" />
                 <element signature="n#gen_password#0;n#Profils#0;n#!!top" />
               </folding>
@@ -127,31 +152,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/chymall.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/profiles.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="51" selection-start-line="16" selection-start-column="51" selection-end-line="16" selection-end-column="51" />
-              <folding>
-                <element signature="n#response#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/clients.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+            <state relative-caret-position="465">
+              <caret line="31" column="13" selection-start-line="23" selection-start-column="12" selection-end-line="31" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -186,7 +190,6 @@
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/api/dao/retrait_produits.class.php" />
-        <option value="$PROJECT_DIR$/api/retraits.php" />
         <option value="$PROJECT_DIR$/api/stockages.php" />
         <option value="$PROJECT_DIR$/api/dao/stockages.class.php" />
         <option value="$PROJECT_DIR$/api/dao/produits.class.php" />
@@ -195,20 +198,24 @@
         <option value="$PROJECT_DIR$/api/resume.php" />
         <option value="$PROJECT_DIR$/api/dao/operations.class.php" />
         <option value="$PROJECT_DIR$/api/utilisateurs.php" />
-        <option value="$PROJECT_DIR$/api/dao/retraits.class.php" />
         <option value="$PROJECT_DIR$/api/dao/clients.class.php" />
-        <option value="$PROJECT_DIR$/api/dao/resume.class.php" />
         <option value="$PROJECT_DIR$/api/dao/connexion.class.php" />
         <option value="$PROJECT_DIR$/api/chymall.sql" />
+        <option value="$PROJECT_DIR$/api/dao/resume.class.php" />
+        <option value="$PROJECT_DIR$/api/dao/retraits.class.php" />
+        <option value="$PROJECT_DIR$/api/retraits.php" />
+        <option value="$PROJECT_DIR$/api/pacts.php" />
+        <option value="$PROJECT_DIR$/api/dao/pacts.class.php" />
         <option value="$PROJECT_DIR$/api/profiles.php" />
         <option value="$PROJECT_DIR$/api/dao/profils.class.php" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1" />
-    <option name="width" value="1368" />
-    <option name="height" value="769" />
+    <option name="x" value="1427" />
+    <option name="y" value="124" />
+    <option name="width" value="1026" />
+    <option name="height" value="576" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -244,7 +251,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/application" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/api" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -256,6 +263,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/application" />
     </key>
@@ -304,18 +314,26 @@
       <workItem from="1598953448893" duration="1811000" />
       <workItem from="1598994101698" duration="1494000" />
       <workItem from="1598995620686" duration="240000" />
-      <workItem from="1598995883789" duration="2099000" />
+      <workItem from="1598995883789" duration="5336000" />
+      <workItem from="1599067299327" duration="8541000" />
+      <workItem from="1599153184612" duration="1330000" />
+      <workItem from="1599420501428" duration="3140000" />
+      <workItem from="1599460845941" duration="7241000" />
+      <workItem from="1599486948560" duration="674000" />
+      <workItem from="1599629791139" duration="606000" />
+      <workItem from="1599769629574" duration="9554000" />
+      <workItem from="1599800425159" duration="1977000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105230000" />
+    <option name="totallyTimeSpent" value="141530000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1368" height="769" extended-state="6" />
+    <frame x="1365" y="0" width="1282" height="769" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25226587" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21405493" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -328,7 +346,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3297546" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17331289" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.18098159" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -425,52 +443,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/dao/clients.class.php">
+    <entry file="file://$PROJECT_DIR$/api/chymall.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
-          <folding>
-            <element signature="n#__construct#0;n#Clients#0;n#!!top" />
-            <element signature="n#get#0;n#Clients#0;n#!!top" />
-            <element signature="n#rechercherClient#0;n#Clients#0;n#!!top" />
-            <element signature="n#post#0;n#Clients#0;n#!!top" />
-            <element signature="n#put#0;n#Clients#0;n#!!top" />
-          </folding>
+        <state relative-caret-position="11760">
+          <caret line="784" selection-start-line="784" selection-end-line="784" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/dao/resume.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="32" column="40" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
+        <state relative-caret-position="375">
+          <caret line="35" column="90" selection-start-line="35" selection-start-column="90" selection-end-line="35" selection-end-column="90" />
           <folding>
             <element signature="n#__construct#0;n#Resume#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api/dao/connexion.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/retraits.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+        <state relative-caret-position="120">
+          <caret line="8" column="9" selection-end-line="113" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/dao/retraits.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="56" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="56" />
+        <state relative-caret-position="945">
+          <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="118" selection-end-column="5" />
           <folding>
+            <element signature="n#rechercherRetraits#0;n#Retraits#0;n#!!top" />
             <element signature="n#post#0;n#Retraits#0;n#!!top" />
             <element signature="n#put#0;n#Retraits#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api/dao/pacts.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding>
+            <element signature="n#__construct#0;n#Pacts#0;n#!!top" />
+            <element signature="n#put#0;n#Pacts#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/clients.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+        <state relative-caret-position="465">
+          <caret line="31" column="13" selection-start-line="23" selection-start-column="12" selection-end-line="31" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -488,36 +518,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/dao/connexion.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/chymall.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/profiles.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="51" selection-start-line="16" selection-start-column="51" selection-end-line="16" selection-end-column="51" />
+        <state relative-caret-position="135">
+          <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
           <folding>
-            <element signature="n#response#0;n#!!top" />
+            <element signature="e#246#889#0#PHP" />
+            <element signature="e#903#1525#0#PHP" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/dao/clients.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="152" column="18" selection-start-line="152" selection-start-column="18" selection-end-line="152" selection-end-column="18" />
+          <folding>
+            <element signature="n#__construct#0;n#Clients#0;n#!!top" />
+            <element signature="n#get#0;n#Clients#0;n#!!top" />
+            <element signature="n#getByIdentifiant#0;n#Clients#0;n#!!top" />
+            <element signature="n#rechercherClient#0;n#Clients#0;n#!!top" />
+            <element signature="n#put#0;n#Clients#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/pacts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="115" selection-start-line="26" selection-start-column="115" selection-end-line="26" selection-end-column="115" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/dao/profils.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="157" column="78" selection-start-line="157" selection-start-column="78" selection-end-line="157" selection-end-column="78" />
+        <state relative-caret-position="74">
+          <caret line="35" column="35" lean-forward="true" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
           <folding>
             <element signature="n#__construct#0;n#Profils#0;n#!!top" />
+            <element signature="n#getIncompletProfiles#0;n#Profils#0;n#!!top" />
+            <element signature="n#post#0;n#Profils#0;n#!!top" />
+            <element signature="n#postOnlineProfile#0;n#Profils#0;n#!!top" />
+            <element signature="n#rechercherProfile#0;n#Profils#0;n#!!top" />
             <element signature="n#put#0;n#Profils#0;n#!!top" />
             <element signature="n#gen_password#0;n#Profils#0;n#!!top" />
           </folding>

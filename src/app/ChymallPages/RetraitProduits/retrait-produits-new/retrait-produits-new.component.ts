@@ -24,12 +24,11 @@ export class RetraitProduitsNewComponent implements OnInit {
   stock_disponible: number;
   qte_message: string;
   currentProduit: Produit;
-  is_client_found_message: string;
    is_client_found = false;
-   current_client: Client;
-   all_profiles_client: Profile[] = [];
+   all_profiles_client: any[] = [];
   current_profile: Profile;
-    chargement: boolean;
+  chargement: boolean;
+  lastsearch: string;
   constructor(private crudService: CrudService,
               private authService: AuthService,
               private modalService: NgbModal,
@@ -150,28 +149,6 @@ export class RetraitProduitsNewComponent implements OnInit {
     this.currentProduit = produit;
   }
 
-  checkClient(input_id_client: HTMLInputElement, content: any) {
-    if (input_id_client.value === '' || input_id_client.value === undefined) { return; }
-    this.crudService.getClientByIdentifier(
-        this.authService.currentUser.username,
-        input_id_client.value
-    ).subscribe(
-        (reponse: any) => {
-          if (reponse.status === true) {
-            this.is_client_found = true;
-            this.current_client = reponse.data;
-            this.refresh();
-          } else {
-            this.is_client_found = false;
-            this.message = 'Cet identifiant client n\'existe pas dans la base de donnée';
-            this.open(content);
-          }
-        },
-        (error) => {console.log(error);
-        }
-    );
-  }
-
   retrait_produit_trading(profile: Profile, content: any, content2: any) {
     this.current_profile = profile;
     this.open(content2);
@@ -185,25 +162,6 @@ export class RetraitProduitsNewComponent implements OnInit {
   refresh() {
     this.chargement = true;
     if (this.is_client_found) {
-      this.crudService.getProfiles(
-          this.authService.currentUser.username,
-          this.current_client.id,
-          true
-      ).subscribe(
-          (reponse2: any) => {
-            if (reponse2.status === true) {
-              this.chargement = false;
-              this.all_profiles_client = reponse2.data;
-            } else {
-              this.chargement = false;
-              this.message = 'Echec de recupération de données';
-              console.log(reponse2.message);
-            }
-          }, (error2 => {
-            this.message = 'Echec de recupération de données';
-            console.log(error2);
-          })
-      );
     }
     this.crudService.getProduits(this.authService.currentUser.username).subscribe(
         (reponse: any) => {
@@ -213,4 +171,41 @@ export class RetraitProduitsNewComponent implements OnInit {
         }
     );
   }
+
+  rechercher(value: HTMLInputElement, content: any) {
+        if (value.value === '') {
+            return;
+        }
+        const recherche = value.value;
+        this.lastsearch = recherche;
+        value.value = '';
+
+        this.crudService.getProfilesByRecherche(
+            this.authService.currentUser.username,
+            recherche
+        ).subscribe(
+            (reponse: any) => {
+                if (reponse.status === true) {
+                    this.is_client_found = true;
+                    this.all_profiles_client = reponse.data;
+                    this.chargement = false;
+                    if (reponse.data.length === 0) {
+                        this.is_client_found = false;
+                        this.message = 'Aucune information correspondante!';
+                        this.open(content);
+                    }
+                    console.log(reponse.data);
+                } else {
+                    this.is_client_found = false;
+                    this.chargement = false;
+                    this.message = 'Aucune information correspondante!';
+                    this.open(content);
+                    console.log(reponse.message);
+                }
+                // tslint:disable-next-line:no-shadowed-variable
+            }, (error) => {
+                console.log(error);
+            }
+        );
+    }
 }

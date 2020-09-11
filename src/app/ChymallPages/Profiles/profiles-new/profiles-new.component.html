@@ -22,27 +22,33 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12">
-                            <div class="position-relative form-group"><label for="produit_adhesion">Produit d'adhesion</label>
-                                <select
-                                        formControlName="produit_adhesion"
-                                        id="produit_adhesion" class="form-control">
-                                    <option *ngFor="let produit of produits" [value]=produit.designation>{{produit.designation}}</option>
-                                </select>
+                            <div class="position-relative form-group"><label for="username_parain">Username du compte parain</label><input
+                                    formControlName="username_parain"
+                                    id="username_parain"
+                                    placeholder="Username du compte qui paraine"
+                                    type="text"
+                                    class="form-control">
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="col-6">
                     <div class="form-row">
                         <div class="col-md-12">
                             <div class="position-relative form-group"><label for="exampleSelect">Niveau d'adhésion</label>
-                                <select #vip (change)="patcs(vip)"
+                                <select #vip (change)="choix_patcs(vip.value)"
                                         formControlName="niveau_adhesion" id="exampleSelect" class="form-control">
-                                    <option value="VIP-1">VIP-1</option>
-                                    <option value="VIP-2">VIP-2</option>
-                                    <option value="VIP-3">VIP-3</option>
-                                    <option value="VIP-4">VIP-4</option>
-                                    <option value="VIP-5">VIP-5</option>
+                                    <option *ngFor="let pact of all_pacts" [value]="pact.niveau">VIP-{{pact.niveau}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="produit_adhesion">Produit d'adhesion</label>
+                                <select
+                                        formControlName="produit_adhesion"
+                                        id="produit_adhesion" class="form-control">
+                                    <option *ngFor="let produit of produits_by_pact" [value]=produit.designation>{{produit.designation}}</option>
                                 </select>
                             </div>
                         </div>

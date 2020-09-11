@@ -77,6 +77,11 @@
                         <a routerLinkActive="active-item" routerLink="/profiles/technique" class="vsm-link"><span
                                 class="vsm-title">Technique</span></a>
                       </div>
+                      <div class="divider"></div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/profiles/enligne" class="vsm-link"><span
+                                class="vsm-title">Profile en ligne</span></a>
+                      </div>
                     </div>
                   </div>
                 </ng-template>
@@ -135,12 +140,35 @@
                                 class="vsm-title">Demander retraits</span></a>
                       </div>
                       <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/retraits/demande/all" class="vsm-link"><span
+                                class="vsm-title">Liste de demandes</span></a>
+                      </div>
+                      <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/retraits/new" class="vsm-link"><span
                                 class="vsm-title">Validation retraits</span></a>
                       </div>
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/retraits/all" class="vsm-link"><span
                                 class="vsm-title">Liste retraits</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="pagesPacts">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon pe-7s-browser"></i>
+                    <span class="vsm-title">Gestion de pacts</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/pacts/all" class="vsm-link"><span
+                                class="vsm-title">Patcs</span></a>
                       </div>
                     </div>
                   </div>

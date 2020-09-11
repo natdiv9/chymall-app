@@ -28,7 +28,7 @@
       <tr *ngFor="let produit of produits ; let i = index">
         <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
         <td class="text-center">{{produit.designation}}</td>
-        <td class="text-center">{{produit.pacts}}</td>
+        <td class="text-center">VIP-{{produit.pacts}}</td>
         <td class="text-center">{{produit.stock_initial}}</td>
         <td class="text-center">{{produit.stock_final}}</td>
         <td>

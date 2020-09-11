@@ -150,6 +150,10 @@ export class ProfilesAllComponent implements OnInit {
                 if (reponse.status === true) {
                     this.profiles = reponse.data;
                     console.log(reponse.data);
+                    if (reponse.data.length === 0) {
+                        this.message = 'Aucune information correspondante!';
+                        this.open(content);
+                    }
                 } else {
                     console.log(reponse.message);
                 }

@@ -25,14 +25,15 @@ class Profils
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id='$id'  LIMIT 1")
+                ? $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id='$id' LIMIT 1")
                 : $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_clients clients INNER JOIN chy_profiles profiles ON clients.id=profiles.id_client ORDER  BY id DESC");
 
             $res = $stmt->execute();
 
             if($res) {
                 OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
-                return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return array(true, $data);
             }else{
                 // DEVELOPMENT
                 OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
@@ -57,8 +58,8 @@ class Profils
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id_client=$id")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_profiles");
+                ? $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_clients clients INNER JOIN chy_profiles profiles ON clients.id=profiles.id_client WHERE id_client=$id ORDER BY profiles.id DESC")
+                : $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_clients clients INNER JOIN chy_profiles profiles ON clients.id=profiles.id_client ORDER BY profiles.id DESC");
 
             $res = $stmt->execute();
 
@@ -89,9 +90,9 @@ class Profils
         try
         {
             if ($is_by_client && $id_client != 0){
-                $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.id_client='$id_client' AND profiles.username='_incomplet' AND profiles.etat=1");
+                $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.id_client='$id_client' AND profiles.username='_incomplet' AND profiles.etat=1 ORDER BY profiles.id DESC");
             } else {
-                $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.username='_incomplet' AND profiles.etat=1");
+                $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.username='_incomplet' AND profiles.etat=1 ORDER BY profiles.id DESC");
             }
 
             $res = $stmt->execute();
@@ -125,10 +126,37 @@ class Profils
             $password = $this->gen_password(8);
             $profil[] = $password;
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_profiles(id_client, username, niveau_adhesion, capital, produit_trading, produit_adhesion, activation_compte, activation_trading, etat_trading, etat_activation, password)"
-                ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                "INSERT INTO chy_profiles(id_client, username, niveau_adhesion, capital, produit_trading, produit_adhesion, activation_compte, activation_trading, etat_trading, etat_activation, username_parain, password)"
+                ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $res = $stmt->execute(
                 $profil
+            );
+
+            if($res)
+            {
+                OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
+                return array(true, []);
+            } else
+            {
+                OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
+                return array(false, "message" => $stmt->errorInfo()[2]);
+            }
+        } catch (Error | Exception $e)
+        {
+            OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
+            return array(false, "message" => $e->getMessage());
+        }
+    }
+
+    public function postOnlineProfile($profile, $auteur_operation)
+    {
+        try
+        {
+            $stmt = $this->connexion->prepare(
+                "INSERT INTO chy_profiles(is_online_profile, id_client, password, username, niveau_adhesion, capital, produit_trading, produit_adhesion, activation_compte, activation_trading, etat_trading, etat_activation, etat, etat_produit_adhesion, username_parain)"
+                ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $res = $stmt->execute(
+                $profile
             );
 
             if($res)
@@ -198,11 +226,11 @@ class Profils
         {
             if ($activated) {
                 $stmt = $this->connexion->prepare(
-                    "UPDATE chy_profiles SET date_activation=CURRENT_TIMESTAMP, id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=?  WHERE id=?");
+                    "UPDATE chy_profiles SET date_activation=CURRENT_TIMESTAMP, id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=?, username_parain=?  WHERE id=?");
 
             } else {
                 $stmt = $this->connexion->prepare(
-                    "UPDATE chy_profiles SET id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=?  WHERE id=?");
+                    "UPDATE chy_profiles SET id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=? , username_parain=? WHERE id=?");
 
             }
 

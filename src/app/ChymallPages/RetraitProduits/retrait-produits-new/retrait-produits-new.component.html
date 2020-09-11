@@ -1,29 +1,26 @@
-<div class="main-card mb-3 card">
+<div class="main-card mb-3 card no-shadow rm-border bg-transparent widget-chart">
     <div class="card-body">
         <h5 class="card-title">
             <strong>RETRAIT PRODUIT</strong>
         </h5>
         <div class="divider"></div>
         <div class="row">
-            <div class="col-6">
-                <div class="position-relative form-group"><label for="id_client">ID CLIENT</label>
-                    <input #input_id_client
-                           id="id_client" type="text"
-                           class="form-control">
+            <div class="col-12" style="text-align: center">
+                <div class="search-wrapper" [class.active]="true">
+                    <div class="input-holder">
+                        <input type="text" #input_id_client placeholder="Entrez un identifiant du client.." class="search-input">
+                        <button (click)="rechercher(input_id_client, content)"  class="search-icon"><span></span></button>
+                    </div>
                 </div>
-                <button (click)="checkClient(input_id_client, content)" class="btn btn-primary float-right">Lister
-                    profiles
-                </button>
             </div>
         </div>
-
         <div class="divider"></div>
     </div>
 </div>
 <div *ngIf="is_client_found" class="main-card mb-3 card">
     <div class="card-header">
         <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-            <strong>PROFILES DU CLIENT [{{current_client.identifiant}}]</strong>
+            <strong>PROFILES DU CLIENT</strong>
             <button (click)="refresh()"
                     class="btn-icon btn-icon-only  btn btn-outline-success float-right">
                 <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
@@ -40,6 +37,10 @@
             <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
                 <thead>
                 <tr>
+                    <th class="text-center text-muted">#</th>
+                    <th class="text-center">ID Client</th>
+                    <th class="text-center">Nom</th>
+                    <th class="text-center">Prenom</th>
                     <th class="text-center">Nom d'utilisateur</th>
                     <th class="text-center">Pacts</th>
                     <th class="text-center">Produit Adhesion</th>
@@ -48,12 +49,16 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let profile of all_profiles_client ; let i = index">
+                    <td class="text-center">{{i+1}}</td>
+                    <td class="text-center">{{profile.identifiant}}</td>
+                    <td class="text-center">{{profile.nom}}</td>
+                    <td class="text-center">{{profile.prenom}}</td>
                     <td class="text-center">{{profile.username}}</td>
                     <td class="text-center">{{profile.niveau_adhesion}}</td>
                     <td class="text-center">{{profile.produit_adhesion}}
                     <td class="text-center">
                         <div class="mb-2 mr-2 btn-group" ngbDropdown>
-                            <button type="button" ngbDropdownToggle class="dropdown-toggle-split btn btn-primary"><span
+                            <button [disabled]="profile.etat_activation==0" type="button" ngbDropdownToggle class="dropdown-toggle-split btn btn-primary"><span
                                     class="sr-only">Toggle Dropdown</span></button>
                             <div ngbDropdownMenu>
                                 <button [disabled]="profile.etat_produit_adhesion==1" class="dropdown-item"
