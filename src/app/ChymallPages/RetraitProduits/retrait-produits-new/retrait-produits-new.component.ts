@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Produit} from '../../../ChymallModels/models/produit';
 import {CrudService} from '../../../ChymallServices/crud/crud.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../../ChymallServices/auth/auth.service';
-import {Client} from '../../../ChymallModels/models/client';
 import {Profile} from '../../../ChymallModels/models/profile';
 declare  var $: any;
 
@@ -167,6 +166,7 @@ export class RetraitProduitsNewComponent implements OnInit {
         (reponse: any) => {
           if (reponse.status === true) {
             this.produits = reponse.data;
+            this.chargement = false;
           }
         }
     );
@@ -194,11 +194,10 @@ export class RetraitProduitsNewComponent implements OnInit {
                         this.message = 'Aucune information correspondante!';
                         this.open(content);
                     }
-                    console.log(reponse.data);
                 } else {
                     this.is_client_found = false;
                     this.chargement = false;
-                    this.message = 'Aucune information correspondante!';
+                    this.message = 'Une erreur est survenue!';
                     this.open(content);
                     console.log(reponse.message);
                 }
