@@ -17,7 +17,8 @@
         <div class="divider"></div>
     </div>
 </div>
-<div *ngIf="is_client_found" class="main-card mb-3 card">
+
+<div *ngIf="!is_retrait_produit && is_client_found" class="main-card mb-3 card">
     <div class="card-header">
         <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
             <strong>PROFILES DU CLIENT</strong>
@@ -62,11 +63,11 @@
                                     class="sr-only">Toggle Dropdown</span></button>
                             <div ngbDropdownMenu>
                                 <button [disabled]="profile.etat_produit_adhesion==1" class="dropdown-item"
-                                        (click)="retrait_produit_adhesion(profile, content, content2)">
+                                        (click)="retrait_produit_adhesion(profile, content)">
                                     Retirer produit d'adhésion
                                 </button>
                                 <button [disabled]="profile.etat_trading==0" class="dropdown-item"
-                                        (click)="retrait_produit_trading(profile, content, content2)">
+                                        (click)="retrait_produit_trading(profile, content)">
                                     Retirer produit de trading
                                 </button>
                             </div>
@@ -82,28 +83,26 @@
     </div>
 </div>
 
-<ng-template #content2 let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Retrait de produit</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
+<div *ngIf="is_retrait_produit" class="main-card mb-3 card">
+    <div class="card-header">
+        <h4>Retrait de produit</h4>
     </div>
-    <div class="modal-body">
+    <div class="card-body">
         <form [formGroup]="retraitProduitForm" (ngSubmit)="newRetraitProduit(content)">
             <div class="form-row">
                 <div class="col-md-6">
                     <div class="position-relative form-group"><label for="id_produit">Produits</label>
-                        <select formControlName="id_produit" id="id_produit" class="form-control">
+                        <select #selected_produit
+                                (change)="produitChange(selected_produit.value)"
+                                formControlName="id_produit" id="id_produit" class="form-control">
                             <option *ngFor="let produit of produits"
-                                    (click)="produitChange(produit)"
                                     [value]="produit.id">{{produit.designation}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="position-relative form-group"><label for="quantite">Quantite</label>
-                        <input #qte (keyup)="checkQuantite(qte)"
+                        <input #qte (keyup)="checkQuantite(qte.value)"
                                formControlName="quantite" id="quantite" type="number" min="1" [max]="stock_disponible"
                                class="form-control">
                         <span class="form-text" style="color: red;">{{qte_message}}
@@ -118,7 +117,7 @@
             </button>
         </form>
     </div>
-</ng-template>
+</div>
 
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">

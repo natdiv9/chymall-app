@@ -6,7 +6,6 @@ import {Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../../ChymallServices/auth/auth.service';
 import {Profile} from '../../../ChymallModels/models/profile';
-declare  var $: any;
 
 @Component({
   selector: 'app-retrait-produits-new',
@@ -28,6 +27,7 @@ export class RetraitProduitsNewComponent implements OnInit {
   current_profile: Profile;
   chargement: boolean;
   lastsearch: string;
+  is_retrait_produit = false;
   constructor(private crudService: CrudService,
               private authService: AuthService,
               private modalService: NgbModal,
@@ -37,10 +37,15 @@ export class RetraitProduitsNewComponent implements OnInit {
   ngOnInit() {
     this.retraitProduitForm = this.formBuilder.group({
       id_produit: [''],
-      quantite: [''],
-      id_client: ['']
+      quantite: ['']
     });
-    this.refresh();
+    this.crudService.getProduits(this.authService.currentUser.username).subscribe(
+          (reponse: any) => {
+              if (reponse.status === true) {
+                  this.produits = reponse.data;
+              }
+          }
+      );
   }
 
   open(content) {
@@ -64,7 +69,6 @@ export class RetraitProduitsNewComponent implements OnInit {
   }
 
   newRetraitProduit(content) {
-
     const retrait_produit = {
       id_profile: this.current_profile.id,
       id_produit: +this.retraitProduitForm.get('id_produit').value,
@@ -73,8 +77,6 @@ export class RetraitProduitsNewComponent implements OnInit {
     };
 
     if (retrait_produit.quantite > this.stock_disponible) {
-      this.message = this.qte_message;
-      this.open(content);
       return;
     }
 
@@ -135,41 +137,41 @@ export class RetraitProduitsNewComponent implements OnInit {
     );
   }
 
-  checkQuantite(qte: HTMLInputElement) {
-    if (+qte.value > this.stock_disponible) {
+  checkQuantite(qte: string) {
+    if (+qte > this.stock_disponible) {
       this.qte_message = 'Le stock est insuffisant';
     } else {
       this.qte_message = '';
     }
   }
 
-  produitChange(produit: Produit) {
-    this.stock_disponible = produit.stock_final;
-    this.currentProduit = produit;
+  produitChange(id_produit: string) {
+    this.find_stock_final(+id_produit);
+    console.log(this.currentProduit);
+    // this.stock_disponible = this.currentProduit.stock_final;
+    // console.log(this.stock_disponible);
   }
 
-  retrait_produit_trading(profile: Profile, content: any, content2: any) {
-    this.current_profile = profile;
-    this.open(content2);
+  find_stock_final(id_produit: number) {
+      for (const produit of this.produits) {
+          if (produit.id === id_produit) {
+              console.log(produit);
+              this.currentProduit = produit;
+          }
+      }
   }
 
-  retrait_produit_adhesion(profile: Profile, content: any, content2: any) {
+  retrait_produit_trading(profile: Profile, content: any) {
     this.current_profile = profile;
-    this.open(content2);
+    this.is_retrait_produit = true;
+  }
+
+  retrait_produit_adhesion(profile: Profile, content: any) {
+    this.current_profile = profile;
+    this.is_retrait_produit = true;
   }
 
   refresh() {
-    this.chargement = true;
-    if (this.is_client_found) {
-    }
-    this.crudService.getProduits(this.authService.currentUser.username).subscribe(
-        (reponse: any) => {
-          if (reponse.status === true) {
-            this.produits = reponse.data;
-            this.chargement = false;
-          }
-        }
-    );
   }
 
   rechercher(value: HTMLInputElement, content: any) {

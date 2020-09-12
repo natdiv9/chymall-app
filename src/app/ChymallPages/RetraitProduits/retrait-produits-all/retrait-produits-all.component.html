@@ -18,6 +18,9 @@
       <thead>
       <tr>
         <th class="text-center">#</th>
+        <th class="text-center">ID Client</th>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Prenom</th>
         <th class="text-center">Profile</th>
         <th class="text-center">Produit</th>
         <th class="text-center">Quantité</th>
@@ -27,6 +30,9 @@
       <tbody>
       <tr *ngFor="let retrait of retraits; let i = index">
         <td class="text-center text-muted" style="width: 80px;">{{i+1}}</td>
+        <td class="text-center">{{retrait.identifiant}}</td>
+        <td class="text-center">{{retrait.nom}}</td>
+        <td class="text-center">{{retrait.prenom}}</td>
         <td class="text-center">{{retrait.username}}</td>
         <td class="text-center">{{retrait.designation}}</td>
         <td class="text-center">{{retrait.quantite}}</td>

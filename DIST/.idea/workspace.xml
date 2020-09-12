@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07b96753-1936-4dc5-a84b-fe51329c5dba" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/api/dao/retrait_produits.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/retrait_produits.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/main.df54dcfb7743ffe0b740.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/ChymallPages/RetraitProduits/retrait-produits-new/retrait-produits-new.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,24 +40,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/retraits.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="9" selection-end-line="113" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/dao/retraits.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="945">
-              <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="118" selection-end-column="5" />
+            <state relative-caret-position="285">
+              <caret line="33" column="281" selection-start-line="33" selection-start-column="233" selection-end-line="33" selection-end-column="281" />
               <folding>
                 <element signature="n#rechercherRetraits#0;n#Retraits#0;n#!!top" />
                 <element signature="n#post#0;n#Retraits#0;n#!!top" />
                 <element signature="n#put#0;n#Retraits#0;n#!!top" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/api/dao/retrait_produits.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="28" column="280" selection-start-line="28" selection-start-column="280" selection-end-line="28" selection-end-column="280" />
             </state>
           </provider>
         </entry>
@@ -84,21 +87,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/profiles.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
+            <state relative-caret-position="780">
               <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
-              <folding>
-                <element signature="e#246#889#0#PHP" />
-                <element signature="e#903#1525#0#PHP" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/dao/profils.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+            <state relative-caret-position="389">
+              <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
               <folding>
                 <element signature="n#__construct#0;n#Profils#0;n#!!top" />
                 <element signature="n#getIncompletProfiles#0;n#Profils#0;n#!!top" />
@@ -150,7 +149,6 @@
         <option value="$PROJECT_DIR$/application/.htaccess" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/.htaccess" />
-        <option value="$PROJECT_DIR$/api/dao/retrait_produits.class.php" />
         <option value="$PROJECT_DIR$/api/stockages.php" />
         <option value="$PROJECT_DIR$/api/dao/stockages.class.php" />
         <option value="$PROJECT_DIR$/api/dao/produits.class.php" />
@@ -169,6 +167,7 @@
         <option value="$PROJECT_DIR$/api/dao/pacts.class.php" />
         <option value="$PROJECT_DIR$/api/profiles.php" />
         <option value="$PROJECT_DIR$/api/dao/profils.class.php" />
+        <option value="$PROJECT_DIR$/api/dao/retrait_produits.class.php" />
       </list>
     </option>
   </component>
@@ -284,17 +283,18 @@
       <workItem from="1599629791139" duration="606000" />
       <workItem from="1599769629574" duration="9554000" />
       <workItem from="1599800425159" duration="2601000" />
+      <workItem from="1599846350812" duration="2246000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="142154000" />
+    <option name="totallyTimeSpent" value="144400000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1365" y="0" width="1282" height="769" extended-state="6" />
+    <frame x="-1" y="0" width="1368" height="769" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21405493" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21676737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -307,7 +307,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3297546" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.18098159" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.24846625" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -335,13 +335,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/retrait_produits.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="40" column="34" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/produits.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
@@ -360,13 +353,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="33" column="84" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/dao/retrait_produits.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="139" lean-forward="true" selection-start-line="28" selection-start-column="92" selection-end-line="28" selection-end-column="139" />
         </state>
       </provider>
     </entry>
@@ -428,22 +414,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api/dao/clients.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="152" column="18" selection-start-line="152" selection-start-column="18" selection-end-line="152" selection-end-column="18" />
+          <folding>
+            <element signature="n#__construct#0;n#Clients#0;n#!!top" />
+            <element signature="n#get#0;n#Clients#0;n#!!top" />
+            <element signature="n#getByIdentifiant#0;n#Clients#0;n#!!top" />
+            <element signature="n#rechercherClient#0;n#Clients#0;n#!!top" />
+            <element signature="n#put#0;n#Clients#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/retraits.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="9" selection-end-line="113" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/dao/retraits.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="118" selection-end-column="5" />
-          <folding>
-            <element signature="n#rechercherRetraits#0;n#Retraits#0;n#!!top" />
-            <element signature="n#post#0;n#Retraits#0;n#!!top" />
-            <element signature="n#put#0;n#Retraits#0;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -455,6 +443,20 @@
             <element signature="n#__construct#0;n#Pacts#0;n#!!top" />
             <element signature="n#put#0;n#Pacts#0;n#!!top" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/pacts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="115" selection-start-line="26" selection-start-column="115" selection-end-line="26" selection-end-column="115" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/profiles.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -479,42 +481,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/profiles.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
-          <folding>
-            <element signature="e#246#889#0#PHP" />
-            <element signature="e#903#1525#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/dao/clients.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="152" column="18" selection-start-line="152" selection-start-column="18" selection-end-line="152" selection-end-column="18" />
-          <folding>
-            <element signature="n#__construct#0;n#Clients#0;n#!!top" />
-            <element signature="n#get#0;n#Clients#0;n#!!top" />
-            <element signature="n#getByIdentifiant#0;n#Clients#0;n#!!top" />
-            <element signature="n#rechercherClient#0;n#Clients#0;n#!!top" />
-            <element signature="n#put#0;n#Clients#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/pacts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="115" selection-start-line="26" selection-start-column="115" selection-end-line="26" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/dao/profils.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+        <state relative-caret-position="389">
+          <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
           <folding>
             <element signature="n#__construct#0;n#Profils#0;n#!!top" />
             <element signature="n#getIncompletProfiles#0;n#Profils#0;n#!!top" />
@@ -524,6 +494,32 @@
             <element signature="n#put#0;n#Profils#0;n#!!top" />
             <element signature="n#gen_password#0;n#Profils#0;n#!!top" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/retrait_produits.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/dao/retraits.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="33" column="281" selection-start-line="33" selection-start-column="233" selection-end-line="33" selection-end-column="281" />
+          <folding>
+            <element signature="n#rechercherRetraits#0;n#Retraits#0;n#!!top" />
+            <element signature="n#post#0;n#Retraits#0;n#!!top" />
+            <element signature="n#put#0;n#Retraits#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/dao/retrait_produits.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="28" column="280" selection-start-line="28" selection-start-column="280" selection-end-line="28" selection-end-column="280" />
         </state>
       </provider>
     </entry>

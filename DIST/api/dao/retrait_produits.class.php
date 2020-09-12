@@ -26,7 +26,7 @@ class RetraitProduits
         {
             $stmt = ($id)
                 ? $this->connexion->prepare("SELECT * FROM chy_retrait_produits WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT retraits.id, retraits.quantite, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.id_produit, produits.designation, profiles.username FROM chy_retrait_produits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_produits produits ON produits.id=retraits.id_produit ORDER BY retraits.date DESC ");
+                : $stmt = $this->connexion->prepare("SELECT retraits.id, retraits.quantite, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.id_produit, produits.designation, profiles.username, clients.identifiant, clients.nom, clients.prenom FROM chy_retrait_produits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_produits produits ON produits.id=retraits.id_produit INNER JOIN chy_clients clients ON clients.id=profiles.id_client ORDER BY retraits.date DESC ");
 
             $res = $stmt->execute();
 
