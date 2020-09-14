@@ -112,7 +112,19 @@ export class RetraitsDemandeNewComponent implements OnInit {
             this.message = 'Demande enregistrée avec succcès';
             this.demandeRetraitForm.reset();
             this.message_body = `CODE DE RETRAIT: ${reponse.data.code}`;
+            const _document = window.document.body.innerHTML;
+            const facture =
+                '<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">' +
+                '<title>Chymall</title>' +
+                '<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no\">' +
+            '<link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\"></head><body>' +
+                '<h1>CHYMALL LUBUMBASHI</h1>' +
+                '======================================' +
+                '</body></html>';
+
+            // this.router.navigate(['/', 'facture-retrait']);
             this.open(content);
+            window.document.body.innerHTML = facture;
           } else {
             this.message = 'Echèc de la demande';
             console.log(demande);

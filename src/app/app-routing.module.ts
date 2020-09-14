@@ -93,6 +93,8 @@ import {TechniqueComponent} from './ChymallPages/Profiles/technique/technique.co
 import {RetraitsAllDemandesComponent} from './ChymallPages/Retraits/retraits-all-demandes/retraits-all-demandes.component';
 import {PactsAllComponent} from './ChymallPages/pacts-all/pacts-all.component';
 import {ProfilesEnligneComponent} from './ChymallPages/Profiles/profiles-enligne/profiles-enligne.component';
+import {FactureRetraitArgentComponent} from './ChymallPages/Imprissions/facture-retrait-argent/facture-retrait-argent.component';
+import {FacturePaiementComponent} from './ChymallPages/Imprissions/facture-paiement/facture-paiement.component';
 
 const routes: Routes = [
   {
@@ -245,6 +247,8 @@ const routes: Routes = [
       // User Pages
 
       {path: 'connexion', component: ConnexionComponent, data: {extraParameter: ''}},
+      {path: 'facture-retrait', component: FactureRetraitArgentComponent, data: {extraParameter: ''}},
+      {path: 'facture-paiement', component: FacturePaiementComponent, data: {extraParameter: ''}},
       {path: 'pages/register-boxed', component: RegisterBoxedComponent, data: {extraParameter: ''}},
       {path: 'pages/forgot-password-boxed', component: ForgotPasswordBoxedComponent, data: {extraParameter: ''}},
     ]

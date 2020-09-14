@@ -18,7 +18,6 @@ export class RetraitProduitsNewComponent implements OnInit {
   retraitProduitForm: FormGroup;
   closeResult: string;
   message: string;
-  idprofile: number;
   stock_disponible: number;
   qte_message: string;
   currentProduit: Produit;
@@ -35,17 +34,18 @@ export class RetraitProduitsNewComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.retraitProduitForm = this.formBuilder.group({
-      id_produit: [''],
-      quantite: ['']
-    });
-    this.crudService.getProduits(this.authService.currentUser.username).subscribe(
+      this.crudService.getProduits(this.authService.currentUser.username).subscribe(
           (reponse: any) => {
               if (reponse.status === true) {
                   this.produits = reponse.data;
+                  // console.log(this.produits);
               }
           }
       );
+      this.retraitProduitForm = this.formBuilder.group({
+      id_produit: [''],
+      quantite: ['']
+    });
   }
 
   open(content) {
@@ -105,6 +105,8 @@ export class RetraitProduitsNewComponent implements OnInit {
                         (rep: any) => {
                           if (rep.status === true) {
                             this.message = 'Produit retiré avec succès!';
+                            this.is_retrait_produit = false;
+                            this.qte_message = '';
                             this.open(content);
                             this.retraitProduitForm.reset();
                           } else {
@@ -145,17 +147,14 @@ export class RetraitProduitsNewComponent implements OnInit {
     }
   }
 
-  produitChange(id_produit: string) {
-    this.find_stock_final(+id_produit);
-    console.log(this.currentProduit);
-    // this.stock_disponible = this.currentProduit.stock_final;
-    // console.log(this.stock_disponible);
+    produit_change(id_produit: string) {
+    this.find_stock_final(id_produit);
+    this.stock_disponible = this.currentProduit.stock_final;
   }
 
-  find_stock_final(id_produit: number) {
+  find_stock_final(id_produit: string) {
       for (const produit of this.produits) {
-          if (produit.id === id_produit) {
-              console.log(produit);
+          if (+produit.id === +id_produit) {
               this.currentProduit = produit;
           }
       }

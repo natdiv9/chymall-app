@@ -51,7 +51,7 @@ switch ($request_method)
         if(isset($_POST['id_profile'], $_POST['montant'], $_POST['auteur_operation']))
         {
             $retraitDAO = new Retraits();
-            $retrait = array($_POST['id_profile'], $_POST['montant']);
+            $retrait = array($_POST['id_profile'], $_POST['montant'], $_POST['auteur_operation']);
             $res = $retraitDAO->post($retrait, $_POST['auteur_operation']);
             response($res);
         } else
@@ -69,7 +69,7 @@ switch ($request_method)
         if(isset($_PUT['id_profile'], $_PUT['montant'], $_PUT['id'], $_PUT['etat'], $_PUT['auteur_operation']))
         {
             $retraitDAO = new Retraits();
-            $retrait = array($_PUT['id_profile'], $_PUT['montant'], $_PUT['etat'], $_PUT['id']);
+            $retrait = array($_PUT['id_profile'], $_PUT['montant'], $_PUT['etat'], $_PUT['auteur_operation'],  $_PUT['id']);
             $res = $retraitDAO->put($retrait, $_PUT['auteur_operation']);
             response($res);
         } else

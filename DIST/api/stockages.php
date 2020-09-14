@@ -36,7 +36,7 @@ switch ($request_method)
         if(isset($_POST['id_produit'], $_POST['quantite'], $_POST['auteur_operation']))
         {
             $stockageDAO = new Stockages();
-            $stockage = array($_POST['id_produit'], $_POST['quantite']);
+            $stockage = array($_POST['id_produit'], $_POST['quantite'], $_POST['auteur_operation']);
             $res = $stockageDAO->post($stockage, $_POST['auteur_operation']);
             response($res);
         } else
@@ -51,10 +51,10 @@ switch ($request_method)
         break;
     case 'PUT':
         $_PUT = json_decode(file_get_contents('php://input'), true);;
-        if(isset($_PUT['produit_id'], $_PUT['quantite'], $_PUT['entree_sortie'], $_PUT['id']))
+        if(isset($_PUT['produit_id'], $_PUT['quantite'], $_PUT['entree_sortie'], $_PUT['id'], $_PUT['auteur_operation']))
         {
             $stockageDAO = new Stockages();
-            $stockage = array($_PUT['produit_id'], $_PUT['quantite'], $_PUT['entree_sortie'], $_PUT['id']);
+            $stockage = array($_PUT['produit_id'], $_PUT['quantite'], $_PUT['entree_sortie'], $_PUT['auteur_operation'], $_PUT['id']);
             $res = $stockageDAO->put($stockage);
             response($res);
         } else

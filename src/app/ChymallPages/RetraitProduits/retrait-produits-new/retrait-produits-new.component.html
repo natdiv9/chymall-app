@@ -93,7 +93,7 @@
                 <div class="col-md-6">
                     <div class="position-relative form-group"><label for="id_produit">Produits</label>
                         <select #selected_produit
-                                (change)="produitChange(selected_produit.value)"
+                                (change)="produit_change(selected_produit.value)"
                                 formControlName="id_produit" id="id_produit" class="form-control">
                             <option *ngFor="let produit of produits"
                                     [value]="produit.id">{{produit.designation}}</option>

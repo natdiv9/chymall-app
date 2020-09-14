@@ -55,7 +55,7 @@
             <td class="text-center">{{profile.nom}}</td>
             <td class="text-center">{{profile.prenom}}</td>
             <td class="text-center">{{profile.username}}</td>
-            <td class="text-center">{{profile.niveau_adhesion}}</td>
+            <td class="text-center">VIP-{{profile.niveau_adhesion}}</td>
             <td class="text-center">
               <button [disabled]="profile.etat_trading==0 && profile.etat_activation==0"
                       class="btn-shadow btn btn-primary" (click)="demande_retrait(profile, content, content2)">

@@ -37,7 +37,7 @@ switch ($request_method)
         if(isset($_POST['quantite'], $_POST['id_profile'], $_POST['id_produit'], $_POST['auteur_operation']))
         {
             $retraitDAO = new RetraitProduits();
-            $retrait = array($_POST['quantite'], $_POST['id_profile'], $_POST['id_produit']);
+            $retrait = array($_POST['quantite'], $_POST['id_profile'], $_POST['id_produit'], $_POST['auteur_operation']);
             $res = $retraitDAO->post($retrait, $_POST['auteur_operation']);
             response($res);
         } else

@@ -26,7 +26,7 @@ class Stockages
         {
             $stmt = ($id)
                 ? $this->connexion->prepare("SELECT * FROM chy_stockages WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT chy_stockages.quantite, DATE_FORMAT(chy_stockages.date, '%d-%m-%Y %H:%i:%s') as date, chy_produits.designation FROM chy_stockages, chy_produits WHERE chy_stockages.id_produit=chy_produits.id");
+                : $stmt = $this->connexion->prepare("SELECT chy_stockages.quantite, DATE_FORMAT(chy_stockages.date, '%d-%m-%Y %H:%i:%s') as date, chy_produits.designation, chy_stockages.operateur FROM chy_stockages, chy_produits WHERE chy_stockages.id_produit=chy_produits.id GROUP BY chy_stockages.id DESC ");
 
             $res = $stmt->execute();
 
@@ -57,8 +57,8 @@ class Stockages
         try
         {
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_stockages(id_produit, quantite)"
-                ."VALUES(?, ?)");
+                "INSERT INTO chy_stockages(id_produit, quantite, operateur)"
+                ."VALUES(?, ?, ?)");
             $res = $stmt->execute(
                 $stockage
             );
@@ -84,7 +84,7 @@ class Stockages
         try
         {
             $stmt = $this->connexion->prepare(
-                "UPDATE chy_stockages SET produit_id=?, quantite=?, entree_sortie=? WHERE id=?");
+                "UPDATE chy_stockages SET produit_id=?, quantite=?, entree_sortie=?, operateur=? WHERE id=?");
             $res = $stmt->execute(
                 $stockage
             );

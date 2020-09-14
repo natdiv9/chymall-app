@@ -44,6 +44,7 @@
           <th class="text-center">Username</th>
           <th class="text-center">Pacts</th>
           <th class="text-center">Montant</th>
+          <th class="text-center">Opérateur</th>
           <th class="text-center">Action</th>
         </tr>
         </thead>
@@ -56,6 +57,7 @@
           <td class="text-center">{{profile.username}}</td>
           <td class="text-center">{{profile.niveau_adhesion}}</td>
           <td class="text-center">{{profile.montant}}</td>
+          <td class="text-center">{{profile.operateur}}</td>
           <td class="text-center">
             <button class="btn-shadow btn btn-primary" (click)="valider_retrait(profile, content, content2)">
               Valider retrait
