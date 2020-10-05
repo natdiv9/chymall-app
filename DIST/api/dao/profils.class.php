@@ -26,7 +26,7 @@ class Profils
         {
             $stmt = ($id)
                 ? $this->connexion->prepare("SELECT * FROM chy_profiles WHERE id='$id' LIMIT 1")
-                : $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_clients clients INNER JOIN chy_profiles profiles ON clients.id=profiles.id_client ORDER  BY id DESC");
+                : $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom, clients.telephone FROM chy_clients clients INNER JOIN chy_profiles profiles ON clients.id=profiles.id_client ORDER  BY id DESC");
 
             $res = $stmt->execute();
 
@@ -58,8 +58,8 @@ class Profils
         try
         {
             $stmt = ($id)
-                ? $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_clients clients INNER JOIN chy_profiles profiles ON clients.id=profiles.id_client WHERE id_client=$id ORDER BY profiles.id DESC")
-                : $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_clients clients INNER JOIN chy_profiles profiles ON clients.id=profiles.id_client ORDER BY profiles.id DESC");
+                ? $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom, clients.telephone FROM chy_clients clients INNER JOIN chy_profiles profiles ON clients.id=profiles.id_client WHERE id_client=$id ORDER BY profiles.id DESC")
+                : $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom, clients.telephone FROM chy_clients clients INNER JOIN chy_profiles profiles ON clients.id=profiles.id_client ORDER BY profiles.id DESC");
 
             $res = $stmt->execute();
 
@@ -90,9 +90,9 @@ class Profils
         try
         {
             if ($is_by_client && $id_client != 0){
-                $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.id_client='$id_client' AND profiles.username='_incomplet' AND profiles.etat=1 ORDER BY profiles.id DESC");
+                $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom, clients.telephone FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.id_client='$id_client' AND profiles.username='_incomplet' AND profiles.etat=1 ORDER BY profiles.id DESC");
             } else {
-                $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.username='_incomplet' AND profiles.etat=1 ORDER BY profiles.id DESC");
+                $stmt = $this->connexion->prepare("SELECT profiles.*, clients.identifiant, clients.nom, clients.prenom, clients.telephone FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.username='_incomplet' AND profiles.etat=1 ORDER BY profiles.id DESC");
             }
 
             $res = $stmt->execute();

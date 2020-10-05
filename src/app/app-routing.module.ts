@@ -183,13 +183,13 @@ const routes: Routes = [
       // PROFILES
 
       // tslint:disable-next-line:max-line-length
-      {path: 'profiles/all', component: ProfilesAllComponent, canActivate: [AuthGuardService, ComptabiliteGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'profiles/all', component: ProfilesAllComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
-      {path: 'profiles/:idclient/:username/all', component: ProfilesByClientComponent, canActivate: [AuthGuardService, ComptabiliteGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'profiles/:idclient/:username/all', component: ProfilesByClientComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'profiles/completer', component: ProfilesCompleterUsernameComponent, canActivate: [AuthGuardService, TechniqueGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
-      {path: 'profiles/enligne', component: ProfilesEnligneComponent, canActivate: [AuthGuardService, TechniqueGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'profiles/enligne', component: ProfilesEnligneComponent, canActivate: [AuthGuardService, TranfertGuard], data: {extraParameter: 'elementsMenu'}},
 
       // tslint:disable-next-line:max-line-length
       {path: 'profiles/:id/details', component: ProfilesIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},

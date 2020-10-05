@@ -117,14 +117,32 @@ export class RetraitsDemandeNewComponent implements OnInit {
                 '<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">' +
                 '<title>Chymall</title>' +
                 '<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no\">' +
-            '<link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\"></head><body>' +
-                '<h1>CHYMALL LUBUMBASHI</h1>' +
-                '======================================' +
+            '<link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\"></head>' +
+                '' +
+                '<body style="text-align: center">' +
+                '<p style="font-size: 12px;">CHYMALL LUBUMBASHI<br>' +
+                '============================================</p>' +
+                '<p style="font-size: 12px;">AV. MAMA YEMO LUBUMBASHI, BATIMENT HYPNOSE NIVEAU 2</p>' +
+                '<p style="font-size: 12px;">BON DE RETRAIT <br/>=================</p>' +
+                '<br>' +
+                '<table class="table-responsive" style="border-style: dotted">' +
+                '<tr>' +
+                '       <th>MONTANT RETIRE</th>' +
+                '       <td>' + demande.montant + 'USD</td>' +
+                '   </tr>' +
+                '</table>' +
                 '</body></html>';
 
             // this.router.navigate(['/', 'facture-retrait']);
             this.open(content);
-            window.document.body.innerHTML = facture;
+            // window.document.body.innerHTML = facture;
+            // window.print();
+            /* const newWin = window.open('', '', 'width=350,height=600');
+            newWin.document.write(facture);
+            newWin.document.close();
+            newWin.focus();
+            newWin.print();
+            newWin.close(); */
           } else {
             this.message = 'Echèc de la demande';
             console.log(demande);
