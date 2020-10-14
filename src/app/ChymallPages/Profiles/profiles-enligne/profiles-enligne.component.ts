@@ -169,7 +169,9 @@ export class ProfilesEnligneComponent implements OnInit {
       activation_compte: [''],
       activation_trading: [''],
       username_parain: [''],
-      password: ['']
+      password: [''],
+      activation_compte_state: false,
+      activation_trading_state: false
     });
   }
 
@@ -184,8 +186,8 @@ export class ProfilesEnligneComponent implements OnInit {
       password: this.new_profile_form.get('password').value,
       activation_compte: this.ct_inscription,
       activation_trading: this.cout_trading,
-      etat_trading: 1,
-      etat_activation: 1,
+      etat_trading: this.new_profile_form.get('activation_trading_state').value ? 1 : 0,
+      etat_activation: this.new_profile_form.get('activation_compte_state').value ? 1 : 0,
       etat: 2,
       etat_produit_adhesion: 1,
       username_parain: this.new_profile_form.get('username_parain').value,

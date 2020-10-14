@@ -1,0 +1,114 @@
+<div class="main-card mb-3 card">
+  <div class="card-body">
+    <h5 class="card-title">
+      <strong>ENREGISTRER CLIENT</strong>
+    </h5>
+    <div class="divider"></div>
+    <form [formGroup]="newClientForm" (ngSubmit)="newClient(content)">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="telephone">N° Téléphone</label><input
+                  formControlName="telephone"
+                  id="telephone"
+                  placeholder=""
+                  type="tel"
+                  class="form-control">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="email">Email</label><input
+                  formControlName="email" id="email" placeholder="" type="email"
+                  class="form-control"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="prenom">Prénom</label><input
+                  formControlName="prenom"
+                  id="prenom"
+                  placeholder=""
+                  type="text"
+                  class="form-control">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="position-relative form-group"><label for="nom">Nom</label><input
+                  formControlName="nom" id="nom" placeholder="" type="text"
+                  class="form-control"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-4">
+          <div class="position-relative form-group"><label for="exampleAddress">Adresse</label><input
+                  formControlName="adresse"
+                  id="exampleAddress"
+                  placeholder=""
+                  type="text"
+                  class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative form-group"><label for="exampleCity">Ville</label><input
+                  formControlName="ville"
+                  placeholder=""
+                  id="exampleCity"
+                  type="text"
+                  class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative form-group"><label for="exampleState">Pays</label><input
+                  formControlName="pays"
+                  placeholder=""
+                  id="exampleState"
+                  type="text"
+                  class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="divider"> Autre Informations</div>
+      <div class="form-row">
+        <div class="col-md-4">
+          <div class="position-relative form-group"><label for="nom_beneficiaire">Nom du Bénéficiaire</label><input
+                  formControlName="nom_beneficiaire"
+                  id="nom_beneficiaire"
+                  placeholder=""
+                  type="text"
+                  class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative form-group"><label for="prenom_beneficiaire">Prénom du Bénéficiaire</label><input
+                  formControlName="prenom_beneficiaire"
+                  placeholder=""
+                  id="prenom_beneficiaire"
+                  type="text"
+                  class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative form-group"><label for="identifiant_sponsor">ID Sponsor</label><input
+                  formControlName="identifiant_sponsor"
+                  placeholder=""
+                  id="identifiant_sponsor"
+                  type="text"
+                  class="form-control">
+          </div>
+        </div>
+      </div>
+      <button class="mt-2 btn btn-primary float-right" [disabled]="newClientForm.invalid || loading">
+        Ajouter Client
+      </button>
+    </form>
+  </div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <h4 class="text-center">{{message}}</h4>
+    <h6 *ngIf="identifiant ? true : false" class="text-center">L'identifiant du client est <strong>{{identifiant}}</strong></h6>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+  </div>
+</ng-template>

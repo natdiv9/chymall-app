@@ -95,6 +95,7 @@ import {PactsAllComponent} from './ChymallPages/pacts-all/pacts-all.component';
 import {ProfilesEnligneComponent} from './ChymallPages/Profiles/profiles-enligne/profiles-enligne.component';
 import {FactureRetraitArgentComponent} from './ChymallPages/Imprissions/facture-retrait-argent/facture-retrait-argent.component';
 import {FacturePaiementComponent} from './ChymallPages/Imprissions/facture-paiement/facture-paiement.component';
+import {ClientsEnligneComponent} from './ChymallPages/Clients/clients-enligne/clients-enligne.component';
 
 const routes: Routes = [
   {
@@ -166,6 +167,8 @@ const routes: Routes = [
       {path: 'clients/new', component: ClientsNewComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'clients/:id/update', component: ClientsUpdateComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'clients/enligne', component: ClientsEnligneComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
 
       // PRODUITS
 

@@ -1,182 +1,206 @@
 <div *ngIf="!creating_profile" class="row">
-  <div class="col-12">
-    <div class="float-right card no-shadow rm-border bg-transparent widget-chart">
-      <div class="search-wrapper" [class.active]="true">
-        <div class="input-holder">
-          <input #recherche type="text" placeholder="Rechercher un client" class="search-input">
-          <button (click)="rechercher(recherche, content)" class="search-icon"><span></span></button>
+    <div class="col-12">
+        <div class="float-right card no-shadow rm-border bg-transparent widget-chart">
+            <div class="search-wrapper" [class.active]="true">
+                <div class="input-holder">
+                    <input #recherche type="text" placeholder="Rechercher un client" class="search-input">
+                    <button (click)="rechercher(recherche, content)" class="search-icon"><span></span></button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 
 <div *ngIf="!creating_profile" class="main-card mb-3 card">
-  <div class="card-header">
-    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      <strong>LISTES DE MEMBRES</strong>
-      <button (click)="refresh()"
-              class="btn-icon btn-icon-only  btn btn-outline-success float-right">
-        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
-      </button>
-      <a  routerLink="/clients/new" class="btn-icon btn btn-outline-success mr-2 float-right">
-        Nouveau client
-      </a>
+    <div class="card-header">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+            <strong>LISTES DE MEMBRES</strong>
+            <button (click)="refresh()"
+                    class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+                <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+            </button>
+            <a routerLink="/clients/enligne" class="btn-icon btn btn-outline-success mr-2 float-right">
+                Nouveau client
+            </a>
+        </div>
     </div>
-  </div>
-  <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
-    <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
-    <br>
-    Chargement de données en cours..
-  </div>
-  <div *ngIf="!chargement" class="table-responsive">
-    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
-      <thead>
-      <tr>
-        <th class="text-center">Identifiant</th>
-        <th class="text-center">Prénom et Nom</th>
-        <th class="text-center">Téléphone</th>
-        <th class="text-center">Email</th>
-        <th class="text-center">Adresse</th>
-        <th class="text-center">Identifiant Parain</th>
-        <th class="text-center">Status</th>
-        <th class="text-center">Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let client of clients ; let i = index">
-        <td class="text-center text-muted" style="width: 80px;">{{client.identifiant}}</td>
-        <td class="text-center">{{client.prenom}} {{client.nom}}</td>
-        <td class="text-center">{{client.telephone}}</td>
-        <td class="text-center">{{client.email}}</td>
-        <td class="text-center">{{client.adresse}}</td>
-        <td class="text-center">{{client.identifiant_sponsor}}</td>
-        <td class="text-center">
-          <div [class]="'badge badge-pill' + (client.etat==1 ? ' badge-success' : ' badge-danger')">{{client.etat==1 ? 'actif' : 'inactif'}}</div>
-        </td>
-        <td class="text-center">
-          <div class="mb-2 mr-2 btn-group" ngbDropdown>
-            <button type="button" ngbDropdownToggle class="dropdown-toggle-split btn btn-primary"><span class="sr-only">Toggle Dropdown</span></button>
-            <div ngbDropdownMenu>
-              <button (click)="new_profile_enligne(client)" class="dropdown-item">
-                Ajouter Profile
-              </button>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <div class="col-12 mt-5 divider"></div>
-      </tbody>
-    </table>
-  </div>
+    <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+        <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+        <br>
+        Chargement de données en cours..
+    </div>
+    <div *ngIf="!chargement" class="table-responsive">
+        <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">Identifiant</th>
+                <th class="text-center">Prénom et Nom</th>
+                <th class="text-center">Téléphone</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Adresse</th>
+                <th class="text-center">Identifiant Parain</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let client of clients ; let i = index">
+                <td class="text-center text-muted" style="width: 80px;">{{client.identifiant}}</td>
+                <td class="text-center">{{client.prenom}} {{client.nom}}</td>
+                <td class="text-center">{{client.telephone}}</td>
+                <td class="text-center">{{client.email}}</td>
+                <td class="text-center">{{client.adresse}}</td>
+                <td class="text-center">{{client.identifiant_sponsor}}</td>
+                <td class="text-center">
+                    <div [class]="'badge badge-pill' + (client.etat==1 ? ' badge-success' : ' badge-danger')">{{client.etat == 1 ? 'actif' : 'inactif'}}</div>
+                </td>
+                <td class="text-center">
+                    <div class="mb-2 mr-2 btn-group" ngbDropdown>
+                        <button type="button" ngbDropdownToggle class="dropdown-toggle-split btn btn-primary"><span
+                                class="sr-only">Toggle Dropdown</span></button>
+                        <div ngbDropdownMenu>
+                            <button (click)="new_profile_enligne(client)" class="dropdown-item">
+                                Ajouter Profile
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <div class="col-12 mt-5 divider"></div>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-body">
-    <h4 class="text-center">{{message}}</h4>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
-  </div>
+    <div class="modal-body">
+        <h4 class="text-center">{{message}}</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+    </div>
 </ng-template>
 
 
 <!-- NEW PROFILE BLOC -->
-
 <div *ngIf="creating_profile" class="main-card mb-3 card">
-  <div class="card-body">
-    <h5 class="card-title">
-      <strong>CREER PROFILE  [{{current_client.nom}} {{current_client.prenom}}]</strong>
-    </h5>
-    <form [formGroup]="new_profile_form" (ngSubmit)="newProfile(content_new_profile)">
+    <div class="card-body">
+        <h5 class="card-title">
+            <strong>CREER PROFILE [{{current_client.nom}} {{current_client.prenom}}]</strong>
+        </h5>
+        <form [formGroup]="new_profile_form" (ngSubmit)="newProfile(content_new_profile)">
 
-      <div class="form-row">
-        <div class="col-6">
-          <div class="form-row">
-            <div class="col-md-12">
-              <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label><input
-                      formControlName="username"
-                      id="username"
-                      placeholder="Le nom d'utilisateur"
-                      type="text"
-                      class="form-control">
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-12">
-              <div class="position-relative form-group"><label for="username_parain">Username du compte parain</label><input
-                      formControlName="username_parain"
-                      id="username_parain"
-                      placeholder="Username du compte qui paraine"
-                      type="text"
-                      class="form-control">
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-12">
-              <div class="position-relative form-group"><label for="username_parain">Mot de passe</label><input
-                      formControlName="password"
-                      id="password"
-                      placeholder="Mot de passe"
-                      type="text"
-                      class="form-control">
-              </div>
-            </div>
-          </div>
+            <div class="form-row">
+                <div class="col-6">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="username">Nom
+                                d'utilisateur</label><input
+                                    formControlName="username"
+                                    id="username"
+                                    placeholder="Le nom d'utilisateur"
+                                    type="text"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="username_parain">Username du compte
+                                parain</label><input
+                                    formControlName="username_parain"
+                                    id="username_parain"
+                                    placeholder="Username du compte qui paraine"
+                                    type="text"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="username_parain">Mot de
+                                passe</label><input
+                                    formControlName="password"
+                                    id="password"
+                                    placeholder="Mot de passe"
+                                    type="text"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="custom-checkbox custom-control custom-control-inline"><input type="checkbox"
+                                                                                                 formControlName="activation_compte_state"
+                                                                                                 id="activation_compte_state"
+                                                                                                 class="custom-control-input"><label
+                                for="activation_compte_state" class="custom-control-label">Compte Activé</label></div>
+                        <div class="custom-checkbox custom-control custom-control-inline"><input type="checkbox"
+                                                                                                 formControlName="activation_trading_state"
+                                                                                                 id="activation_trading_state"
+                                                                                                 class="custom-control-input"><label
+                                for="activation_trading_state" class="custom-control-label">Trading Activé</label></div>
 
-        </div>
-        <div class="col-6">
-          <div class="form-row">
-            <div class="col-md-12">
-              <div class="position-relative form-group"><label for="exampleSelect">Niveau d'adhésion</label>
-                <select #vip (change)="choix_patcs(vip.value)"
-                        formControlName="niveau_adhesion" id="exampleSelect" class="form-control">
-                  <option *ngFor="let pact of all_pacts" [value]="pact.niveau">VIP-{{pact.niveau}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="position-relative form-group"><label for="produit_adhesion">Produit d'adhesion</label>
-                <select
-                        formControlName="produit_adhesion"
-                        id="produit_adhesion" class="form-control">
-                  <option *ngFor="let produit of produits_by_pact" [value]=produit.designation>{{produit.designation}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="position-relative form-group"><label for="capital">Montant d'inscription</label><input
-                      formControlName="capital" id="capital" placeholder="" type="text" readonly
-                      class="form-control" [disabled]="true" [value]="ct_inscription"></div>
-            </div>
-            <div class="col-md-12" *ngIf="trading_state!==0">
-              <div class="position-relative form-group"><label for="activation_compte">Montant Trading</label><input
-                      formControlName="activation_compte" id="activation_compte" placeholder="" type="text" readonly
-                      class="form-control" [disabled]="true" [value]="cout_trading"></div>
-            </div>
-            <div class="col-md-12" *ngIf="trading_state!==0">
-              <div class="position-relative form-group"><label for="activation_trading">Coût total (Inscription + Trading)</label><input
-                      formControlName="activation_trading" id="activation_trading" placeholder="" type="text" readonly
-                      class="form-control" [disabled]="true" [value]="cout_total"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="mt-2 btn btn-primary float-right" [disabled]="new_profile_form.invalid">Ajouter profile
-      </button>
-    </form>
+                    </div>
 
-  </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="exampleSelect">Niveau
+                                d'adhésion</label>
+                                <select #vip (change)="choix_patcs(vip.value)"
+                                        formControlName="niveau_adhesion" id="exampleSelect" class="form-control">
+                                    <option *ngFor="let pact of all_pacts" [value]="pact.niveau">
+                                        VIP-{{pact.niveau}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="produit_adhesion">Produit
+                                d'adhesion</label>
+                                <select
+                                        formControlName="produit_adhesion"
+                                        id="produit_adhesion" class="form-control">
+                                    <option *ngFor="let produit of produits_by_pact"
+                                            [value]=produit.designation>{{produit.designation}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label for="capital">Montant d'inscription</label><input
+                                    formControlName="capital" id="capital" placeholder="" type="text" readonly
+                                    class="form-control" [disabled]="true" [value]="ct_inscription"></div>
+                        </div>
+                        <div class="col-md-12" *ngIf="trading_state!==0">
+                            <div class="position-relative form-group"><label for="activation_compte">Montant
+                                Trading</label><input
+                                    formControlName="activation_compte" id="activation_compte" placeholder=""
+                                    type="text" readonly
+                                    class="form-control" [disabled]="true" [value]="cout_trading"></div>
+                        </div>
+                        <div class="col-md-12" *ngIf="trading_state!==0">
+                            <div class="position-relative form-group"><label for="activation_trading">Coût total
+                                (Inscription + Trading)</label><input
+                                    formControlName="activation_trading" id="activation_trading" placeholder=""
+                                    type="text" readonly
+                                    class="form-control" [disabled]="true" [value]="cout_total"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="mt-2 btn btn-primary float-right" [disabled]="new_profile_form.invalid">Ajouter profile
+            </button>
+        </form>
+
+    </div>
 </div>
 <ng-template #content_new_profile let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">{{message}}</h4>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
-  </div>
+    <div class="modal-header">
+        <h4 class="modal-title">{{message}}</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+    </div>
 </ng-template>
 

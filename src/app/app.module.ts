@@ -141,6 +141,7 @@ import { PactsAllComponent } from './ChymallPages/pacts-all/pacts-all.component'
 import { ProfilesEnligneComponent } from './ChymallPages/Profiles/profiles-enligne/profiles-enligne.component';
 import { FacturePaiementComponent } from './ChymallPages/Imprissions/facture-paiement/facture-paiement.component';
 import { FactureRetraitArgentComponent } from './ChymallPages/Imprissions/facture-retrait-argent/facture-retrait-argent.component';
+import { ClientsEnligneComponent } from './ChymallPages/Clients/clients-enligne/clients-enligne.component';
 
 // CHY
 // import {AutocompleteLibModule} from 'angular-ng-autocomplete';
@@ -271,6 +272,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProfilesEnligneComponent,
     FacturePaiementComponent,
     FactureRetraitArgentComponent,
+    ClientsEnligneComponent,
   ],
   imports: [
     BrowserModule,
