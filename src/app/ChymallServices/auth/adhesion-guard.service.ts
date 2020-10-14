@@ -8,6 +8,7 @@ import {CustomModalComponent} from './custom-modal/custom-modal.component';
 })
 export class AdhesionGuardService implements CanActivate {
 
+    services_admis = ['adhesion', 'admin'];
     constructor(
                 private router: Router,
                 private authService: AuthService,

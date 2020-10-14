@@ -20,6 +20,8 @@ export class ClientsUpdateComponent implements OnInit {
   icon = 'pe-7s-phone icon-gradient bg-premium-dark';
 
   closeResult: string;
+  message: string;
+  identifiant: string;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -59,28 +61,53 @@ export class ClientsUpdateComponent implements OnInit {
   }
 
   initForm() {
-    const id = this.route.snapshot.params.id;
-    this.crudService.getClients(id).subscribe(
-        (response: any) => {
-          if (response.status) {
-            this.client = response.data;
-            this.updateCientForm = this.formBuilder.group({
-              telephone: this.client.telephone,
-              email: this.client.email,
-              prenom: this.client.prenom,
-              adresse: this.client.adresse,
-              ville: this.client.ville,
-              nom: this.client.nom
-            });
-          }
-        }
-    );
+    this.updateCientForm = this.formBuilder.group({
+      telephone: '',
+      email: '',
+      prenom: '',
+      nom: '',
+      adresse: '',
+      ville: '',
+      pays: '',
+      nom_beneficiaire: '',
+      prenom_beneficiaire: '',
+      identifiant_sponsor: ''
+    });
+    const id = +this.route.snapshot.params.id;
+    if (typeof id === 'number') {
+      this.crudService.getClients(this.authService.currentUser.username, id).subscribe(
+          (response: any) => {
+            if (response.status === true) {
+              console.log(response);
+              this.client = response.data[0];
+              this.identifiant = this.client.identifiant;
+              this.updateCientForm = this.formBuilder.group({
+                telephone: this.client.telephone,
+                email: [this.client.email, [Validators.email]],
+                prenom: this.client.prenom,
+                nom: this.client.nom,
+                adresse: this.client.adresse,
+                ville: this.client.ville,
+                pays: this.client.pays,
+                nom_beneficiaire: this.client.nom_beneficiaire,
+                prenom_beneficiaire: this.client.prenom_beneficiaire,
+                identifiant_sponsor: this.client.identifiant_sponsor
+              });
+            } else {
+              console.log(response);
+            }
+          }, (error => {console.log(error); })
+      );
+    } else {
+      this.router.navigate(['/', 'clients', 'all']);
+    }
   }
 
 
-  updateClient() {
+  updateClient(content: any) {
     const client = {
       id: this.client.id,
+      identifiant: this.client.identifiant,
       telephone: this.updateCientForm.get('telephone').value,
       email: this.updateCientForm.get('email').value,
       prenom: this.updateCientForm.get('prenom').value,
@@ -88,20 +115,44 @@ export class ClientsUpdateComponent implements OnInit {
       adresse: this.updateCientForm.get('adresse').value,
       ville: this.updateCientForm.get('ville').value,
       pays: this.updateCientForm.get('pays').value,
-      etat: 1,
-      auteur_operation: this.authService.currentUser.username
+      nom_beneficiaire: this.updateCientForm.get('nom_beneficiaire').value,
+      prenom_beneficiaire: this.updateCientForm.get('prenom_beneficiaire').value,
+      identifiant_sponsor: this.updateCientForm.get('identifiant_sponsor').value,
+      auteur_operation: this.authService.currentUser.username,
+      etat: this.client.etat
+
     };
 
     this.crudService.putClient(client).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
-            this.modalService.open('Modification effectuée avec succès!');
-            this.updateCientForm.reset();
+            this.message = 'Modification effectuée avec succès!';
+            this.open(content);
             this.router.navigate(['/', 'clients', 'all']);
           } else {
-            this.modalService.open('Modification a echoué!');
+            this.message = 'Modification a echoué!';
+            this.open(content);
           }
         }
     );
+  }
+
+  supprimer(content: any, c: any) {
+    this.crudService.deleteClient(this.authService.currentUser.username, this.client.id).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.message = 'Suppression effectuée avec succès!';
+            this.open(content);
+            this.router.navigate(['/', 'clients', 'all']);
+          } else {
+            this.message = 'La suppression a echoué!';
+            this.open(content);
+          }
+        }
+    );
+  }
+
+  demande_validation(supprimer_client: any) {
+    this.open(supprimer_client);
   }
 }

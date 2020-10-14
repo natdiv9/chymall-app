@@ -12,7 +12,7 @@ import {error} from 'util';
 })
 export class ClientsAllComponent implements OnInit {
 
-    clients: Client[] = [];
+    clients: any[] = [];
     message = '';
     closeResult: string;
     chargement: boolean;
@@ -88,5 +88,9 @@ export class ClientsAllComponent implements OnInit {
                 console.log(error);
             }
         );
+    }
+
+    validerSuppression(content: any, c: any) {
+
     }
 }

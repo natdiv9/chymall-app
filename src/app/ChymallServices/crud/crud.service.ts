@@ -97,7 +97,7 @@ export class CrudService {
     }
 
     putClient(client: Client) {
-        return this.httpClient.put(`${environment.server_base_url}/clients,php`, client);
+        return this.httpClient.put(`${environment.server_base_url}/clients.php`, client);
     }
 
     putProfile(profile: Profile) {
@@ -175,5 +175,9 @@ export class CrudService {
 
     deletePact(auteur_operation: string, id: number) {
         return this.httpClient.delete(`${environment.server_base_url}/pacts.php?auteur_operation=${auteur_operation}&id=${id}`);
+    }
+
+    deleteClient(auteur_operation: string, id: number) {
+        return this.httpClient.delete(`${environment.server_base_url}/clients.php?auteur_operation=${auteur_operation}&id=${id}`);
     }
 }

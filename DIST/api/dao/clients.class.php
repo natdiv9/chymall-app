@@ -26,7 +26,7 @@ class Clients
         {
             $stmt = ($id)
                 ? $this->connexion->prepare("SELECT * FROM chy_clients WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_clients ORDER BY date DESC");
+                : $stmt = $this->connexion->prepare("SELECT *, DATE_FORMAT(chy_clients.date, '%d-%m-%Y %H:%i:%s') as date_ajout FROM chy_clients WHERE chy_clients.etat=1 ORDER BY date DESC");
 
             $res = $stmt->execute();
 
@@ -140,7 +140,7 @@ class Clients
                 } else {
                     $data = $data[0];
                     $identifiant = $data["identifiant"];
-                    $num = substr($identifiant, 10);
+                    $num = substr($identifiant, 8);
                     $new_num = $num + 1;
                     $new_identifiant = $current_date.$name.$new_num;
                 }
@@ -178,7 +178,7 @@ class Clients
         try
         {
             $stmt = $this->connexion->prepare(
-                "UPDATE chy_clients SET telephone=?, email=?, prenom=?, nom=?, adresse=?, ville=?, pays=?, zip=?, photo=?, etat=? WHERE id=?");
+                "UPDATE chy_clients SET telephone=?, email=?, prenom=?, nom=?, adresse=?, ville=?, pays=?, etat=?, identifiant=?, nom_beneficiaire=?, prenom_beneficiaire=?, identifiant_sponsor=? WHERE id=?");
             $res = $stmt->execute(
                 $client
             );
@@ -196,6 +196,37 @@ class Clients
         {
             OperationTracer::post([$auteur_operation, 'TENTATIVE DE MISE A JOUR', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
+        }
+    }
+
+    public function delete($id, $auteur_operation)
+    {
+        try
+        {
+
+            $stmt = $this->connexion->prepare("DELETE FROM chy_clients WHERE chy_clients.id=$id");
+
+            $res = $stmt->execute();
+
+            if($res) {
+                OperationTracer::post([$auteur_operation, 'SUPPRESSION', $this->table_name], $this->connexion);
+                return array(true, []);
+            }else{
+                // DEVELOPMENT
+                OperationTracer::post([$auteur_operation, 'TENTATIVE DE SUPPRESSION', $this->table_name], $this->connexion);
+                return array(false, "message" => $stmt->errorInfo()[2]);
+
+                // PRODUCTION
+                // return array(false, "message" => "The server encountered a problem");
+            }
+        }catch (Exception | Error $e)
+        {
+            // DEVELOPMENT
+            OperationTracer::post([$auteur_operation, 'TENTATIVE DE SUPPRESSION', $this->table_name], $this->connexion);
+            return array(false, "message" => $e->getMessage());
+
+            // PRODUCTION
+            // return array(false, "message" => "The server encountered a problem");
         }
     }
 }

@@ -30,13 +30,14 @@ class Resume
 (SELECT COALESCE(SUM(chy_retraits.montant), 0) FROM chy_retraits WHERE chy_retraits.etat=1 AND MONTH(chy_retraits.date)=MONTH(CURRENT_DATE)) as total_retrait_month,
 (SELECT COUNT(*) FROM chy_profiles WHERE MONTH(chy_profiles.date_activation)=MONTH(CURRENT_DATE) )  as total_activation_month,
 (SELECT COUNT(*) FROM chy_retrait_produits WHERE MONTH(chy_retrait_produits.date)=MONTH(CURRENT_DATE)) as tota_retrait_produit_month,
-(SELECT COALESCE(SUM(chy_profiles.capital), 0) FROM chy_profiles WHERE MONTH(chy_profiles.date)=MONTH(CURRENT_DATE)) as tota_capitaux_month,
+(SELECT COALESCE(SUM(chy_profiles.activation_compte), 0) FROM chy_profiles WHERE MONTH(chy_profiles.date)=MONTH(CURRENT_DATE) AND chy_profiles.etat_activation=1) as total_activation_compte,
+(SELECT COALESCE(SUM(chy_profiles.activation_trading), 0) FROM chy_profiles WHERE MONTH(chy_profiles.date)=MONTH(CURRENT_DATE) AND chy_profiles.etat_trading=1) as total_activation_trading,
 (SELECT COUNT(*) FROM chy_clients WHERE MONTH(chy_clients.date)=MONTH(CURRENT_DATE) ) as total_adhesion_month,
 (SELECT COUNT(*) FROM chy_stockages WHERE MONTH(chy_stockages.date)=MONTH(CURRENT_DATE) ) as total_stockage_month,
 (SELECT COALESCE(SUM(chy_retraits.montant), 0) FROM chy_retraits WHERE chy_retraits.etat=1) as total_retrait_all,
 (SELECT COUNT(*) FROM chy_profiles )  as total_compte_all,
 (SELECT COUNT(*) FROM chy_retrait_produits ) as tota_retrait_produit_all,
-(SELECT COALESCE(SUM(chy_profiles.capital), 0) FROM chy_profiles ) as tota_capitaux_all,
+(SELECT COALESCE(SUM(chy_profiles.activation_compte), 0) FROM chy_profiles WHERE chy_profiles.etat_activation=1) as total_capitaux_all_activation,
 (SELECT COUNT(*) FROM chy_clients ) as total_adhesion_all,
 (SELECT COUNT(*) FROM chy_stockages ) as total_stockage_all");
 

@@ -118,11 +118,29 @@
                   <div class="widget-chart-flex">
                     <div class="fsize-4">
                       <small class="opacity-5">$</small>
-                      <span>{{synthese.tota_capitaux_month}}</span></div>
+                      <span>{{synthese.total_activation_compte}}</span></div>
                   </div>
                 </div>
               </div>
-              <h6 class="widget-subheading mb-0 opacity-5">total de capitaux du mois</h6>
+              <h6 class="widget-subheading mb-0 opacity-5">total activation compte du mois</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-primary border-primary">
+          <div class="widget-chat-wrapper-outer">
+            <div class="widget-chart-content pt-3 pl-3 pb-1">
+              <div class="widget-chart-flex">
+                <div class="widget-numbers">
+                  <div class="widget-chart-flex">
+                    <div class="fsize-4">
+                      <small class="opacity-5">$</small>
+                      <span>{{synthese.total_activation_trading}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="widget-subheading mb-0 opacity-5">total activation trading du mois</h6>
             </div>
           </div>
         </div>
@@ -181,24 +199,6 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-warning border-warning">
-          <div class="widget-chat-wrapper-outer">
-            <div class="widget-chart-content pt-3 pl-3 pb-1">
-              <div class="widget-chart-flex">
-                <div class="widget-numbers">
-                  <div class="widget-chart-flex">
-                    <div class="fsize-4">
-                      <small class="opacity-5"></small>
-                      <span>{{synthese.total_stockage_month}}</span></div>
-                  </div>
-                </div>
-              </div>
-              <h6 class="widget-subheading mb-0 opacity-5">stockages du mois</h6>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -213,10 +213,10 @@
               <div class="widget-content-wrapper">
                 <div class="widget-content-left">
                   <div class="widget-heading">Total Capitaux</div>
-                  <div class="widget-subheading">Capitaux des membres</div>
+                  <div class="widget-subheading">Activation Compte</div>
                 </div>
                 <div class="widget-content-right">
-                  <div class="widget-numbers text-success">${{synthese.tota_capitaux_all}}</div>
+                  <div class="widget-numbers text-success">${{synthese.total_capitaux_all_activation}}</div>
                 </div>
               </div>
             </div>

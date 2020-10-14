@@ -30,7 +30,7 @@ switch ($request_method)
                 return;
 
             }
-            if(!empty($_GET['id']))
+            if(isset($_GET['id']) && $_GET['id'] != 'undefined')
             {
                 // Un client
                 $id = intval($_GET['id']);
@@ -73,10 +73,10 @@ switch ($request_method)
         break;
     case 'PUT':
         $_PUT = json_decode(file_get_contents('php://input'), true);
-        if(isset($_PUT['id'], $_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['photo'], $_PUT['zip'], $_PUT['etat'], $_PUT['auteur_operation']))
+        if(isset($_PUT['id'], $_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['etat'], $_PUT['identifiant'], $_PUT['nom_beneficiaire'], $_PUT['prenom_beneficiaire'], $_PUT['identifiant_sponsor'], $_PUT['auteur_operation']))
         {
             $clientsDAO = new Clients();
-            $clients = array($_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['zip'], $_PUT['photo'], $_PUT['etat'], intval($_PUT['id']));
+            $clients = array($_PUT['telephone'],$_PUT['email'], $_PUT['prenom'], $_PUT['nom'], $_PUT['adresse'], $_PUT['ville'], $_PUT['pays'], $_PUT['etat'], $_PUT['identifiant'], $_PUT['nom_beneficiaire'], $_PUT['prenom_beneficiaire'], $_PUT['identifiant_sponsor'], intval($_PUT['id']));
             $res = $clientsDAO->put($clients, $_PUT['auteur_operation']);
             response($res);
         } else
@@ -90,6 +90,20 @@ switch ($request_method)
         }
         break;
     case 'DELETE':
+        $clientsDAO = new Clients();
+        if (isset($_GET['auteur_operation'], $_GET['id'])) {
+
+            $res = $clientsDAO->delete($_GET['id'], $_GET['auteur_operation']);
+            response($res);
+
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode(array(
+                    "status" => false,
+                    "message" => "Data is not complete"
+                )
+            );
+        }
         break;
     default:
         http_response_code(405);

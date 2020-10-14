@@ -28,7 +28,7 @@
             <tr *ngFor="let utilisateur of utilisateurs; let i = index">
                 <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
                 <td class="text-center">{{utilisateur.username}}</td>
-                <td class="text-center">{{utilisateur.service === 'retrait' ? 'Retrait Produit': ''}}</td>
+                <td class="text-center">{{utilisateur.service === 'retrait' ? 'Retrait Produit': utilisateur.service}}</td>
                 <td class="text-center">
                     <div [class]="'badge badge-pill' + (utilisateur.etat==1 ? ' badge-success' : ' badge-danger')">{{utilisateur.etat == 1 ? 'actif' : 'inactif'}}</div>
                 </td>
