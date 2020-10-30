@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./profiles-enligne.component.sass']
 })
 export class ProfilesEnligneComponent implements OnInit {
-  clients: Client[] = [];
+  clients: any[] = [];
   message = '';
   closeResult: string;
   chargement: boolean;
@@ -170,7 +170,7 @@ export class ProfilesEnligneComponent implements OnInit {
       activation_trading: [''],
       username_parain: [''],
       password: [''],
-      activation_compte_state: false,
+      activation_compte_state: true,
       activation_trading_state: false
     });
   }
@@ -192,6 +192,7 @@ export class ProfilesEnligneComponent implements OnInit {
       etat_produit_adhesion: 1,
       username_parain: this.new_profile_form.get('username_parain').value,
       auteur_operation: this.authService.currentUser.username,
+      ajoute_par: this.authService.currentUser.username,
       is_online_profile: 1
     };
     this.crudService.addProfile(profile).subscribe(
@@ -200,7 +201,8 @@ export class ProfilesEnligneComponent implements OnInit {
             this.message = 'Enregistrement profile effectué avec succès!';
             this.open(content);
             this.new_profile_form.reset();
-            this.router.navigate(['/', 'profiles', this.current_client.id, this.current_client.identifiant, 'all']);
+            // this.router.navigate(['/', 'profiles', this.current_client.id, this.current_client.identifiant, 'all']);
+            this.creating_profile = false;
           } else {
             this.message = 'Enregistrement a échoué!';
             this.open(content);

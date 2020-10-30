@@ -90,8 +90,7 @@ export class ClientsUpdateComponent implements OnInit {
                 ville: this.client.ville,
                 pays: this.client.pays,
                 nom_beneficiaire: this.client.nom_beneficiaire,
-                prenom_beneficiaire: this.client.prenom_beneficiaire,
-                identifiant_sponsor: this.client.identifiant_sponsor
+                prenom_beneficiaire: this.client.prenom_beneficiaire
               });
             } else {
               console.log(response);
@@ -117,7 +116,7 @@ export class ClientsUpdateComponent implements OnInit {
       pays: this.updateCientForm.get('pays').value,
       nom_beneficiaire: this.updateCientForm.get('nom_beneficiaire').value,
       prenom_beneficiaire: this.updateCientForm.get('prenom_beneficiaire').value,
-      identifiant_sponsor: this.updateCientForm.get('identifiant_sponsor').value,
+      identifiant_sponsor: '-',
       auteur_operation: this.authService.currentUser.username,
       etat: this.client.etat
 
@@ -138,7 +137,7 @@ export class ClientsUpdateComponent implements OnInit {
   }
 
   supprimer(content: any, c: any) {
-    this.crudService.deleteClient(this.authService.currentUser.username, this.client.id).subscribe(
+    this.crudService.deleteClient(this.authService.currentUser.username, this.client.id, this.client.identifiant).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
             this.message = 'Suppression effectuée avec succès!';

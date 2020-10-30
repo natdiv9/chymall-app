@@ -16,6 +16,7 @@ export class Profile {
     public password?: string;
     public data?: string;
     public username_parain?: string;
+    public password_parain?: string;
     public date_activation?: string;
     public is_online_profile?: number;
 }

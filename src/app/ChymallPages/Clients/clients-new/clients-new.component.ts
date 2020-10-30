@@ -65,7 +65,6 @@ export class ClientsNewComponent implements OnInit {
       pays: ['RD Congo'],
       nom_beneficiaire: '',
       prenom_beneficiaire: '',
-      identifiant_sponsor: ''
     });
   }
 
@@ -80,7 +79,8 @@ export class ClientsNewComponent implements OnInit {
       pays: this.newClientForm.get('pays').value,
       nom_beneficiaire: this.newClientForm.get('nom_beneficiaire').value,
       prenom_beneficiaire: this.newClientForm.get('prenom_beneficiaire').value,
-      identifiant_sponsor: this.newClientForm.get('identifiant_sponsor').value,
+      identifiant_sponsor: '-',
+      ajoute_par: this.authService.currentUser.username,
       auteur_operation: this.authService.currentUser.username
     };
     this.crudService.addClient(client).subscribe(

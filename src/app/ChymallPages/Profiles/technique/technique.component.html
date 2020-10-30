@@ -39,10 +39,12 @@
         <th class="text-center">Produit adhésion</th>
         <th class="text-center">Capital</th>
         <th class="text-center">Mot de passe</th>
-        <th class="text-center">Parain</th>
+        <th class="text-center">Parain ID</th>
+        <th class="text-center">Mot de passe Parain</th>
         <th class="text-center">Compte</th>
         <th class="text-center">Trading</th>
         <th class="text-center">Status</th>
+        <th class="text-center">Date</th>
         <th class="text-center">Actions</th>
       </tr>
       </thead>
@@ -58,6 +60,7 @@
         <td class="text-center">{{profile.capital}}</td>
         <td class="text-center">{{profile.password}}</td>
         <td class="text-center">{{profile.username_parain}}</td>
+        <td class="text-center">{{profile.password_parain}}</td>
         <td class="text-center">
           <div [class]="'badge badge-pill' + (profile.etat_activation==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_activation == 1 ? 'activé' : 'inactivé'}}</div>
         </td>
@@ -68,6 +71,7 @@
           <div [class]="'badge badge-pill' + (profile.etat==1 ? ' badge-warning' : (profile.etat==2 ? ' badge-success': ' badge-danger'))">
             {{profile.etat == 1 ? 'incomplet' : (profile.etat == 2) ? 'actif' : 'inactif'}}</div>
         </td>
+        <td class="text-center">{{profile.date_ajout}}</td>
         <td class="text-center">
           <div class="mb-2 mr-2 btn-group" ngbDropdown>
             <button type="button" ngbDropdownToggle class="dropdown-toggle-split btn btn-primary"><span class="sr-only">Toggle Dropdown</span></button>

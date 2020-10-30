@@ -54,11 +54,11 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['telephone'], $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], $_POST['auteur_operation']))
+        if(isset($_POST['telephone'], $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], $_POST['ajoute_par'], $_POST['auteur_operation']))
         {
             $clientsDAO = new Clients();
             $client = array($_POST['telephone'], (isset($_POST['email'])? $_POST['email']: ''), ucfirst(strtolower($_POST['prenom'])), ucfirst(strtolower($_POST['nom'])), $_POST['adresse'], ucfirst(strtolower($_POST['ville'])), ucfirst(strtolower($_POST['pays'])),
-                $_POST['nom_beneficiaire'], $_POST['prenom_beneficiaire'], $_POST['identifiant_sponsor']);
+                $_POST['nom_beneficiaire'], $_POST['prenom_beneficiaire'], $_POST['identifiant_sponsor'], $_POST['ajoute_par']);
             $res = $clientsDAO->post($client, $_POST['auteur_operation']);
             response($res);
         } else
@@ -90,10 +90,9 @@ switch ($request_method)
         }
         break;
     case 'DELETE':
-        $clientsDAO = new Clients();
-        if (isset($_GET['auteur_operation'], $_GET['id'])) {
-
-            $res = $clientsDAO->delete($_GET['id'], $_GET['auteur_operation']);
+        if (isset($_GET['auteur_operation'], $_GET['id'], $_GET['identifiant'])) {
+            $clientsDAO = new Clients();
+            $res = $clientsDAO->delete($_GET['id'], $_GET['identifiant'], $_GET['auteur_operation']);
             response($res);
 
         } else {

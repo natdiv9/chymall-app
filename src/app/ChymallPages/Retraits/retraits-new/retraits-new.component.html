@@ -43,7 +43,9 @@
           <th class="text-center">Prenom</th>
           <th class="text-center">Username</th>
           <th class="text-center">Pacts</th>
-          <th class="text-center">Montant</th>
+          <th class="text-center">Total</th>
+          <th class="text-center">Montant remis</th>
+          <th class="text-center">Frais retrait</th>
           <th class="text-center">Opérateur</th>
           <th class="text-center">Action</th>
         </tr>
@@ -57,6 +59,8 @@
           <td class="text-center">{{profile.username}}</td>
           <td class="text-center">{{profile.niveau_adhesion}}</td>
           <td class="text-center">{{profile.montant}}</td>
+          <td class="text-center">{{profile.montant_remis}}</td>
+          <td class="text-center">{{profile.frais_retrait}}</td>
           <td class="text-center">{{profile.operateur}}</td>
           <td class="text-center">
             <button class="btn-shadow btn btn-primary" (click)="valider_retrait(profile, content, content2)">

@@ -8,7 +8,7 @@ import {AuthService} from '../../../../../ChymallServices/auth/auth.service';
 })
 export class UserBoxComponent implements OnInit {
 
-  constructor(public globals: ThemeOptions, private authService: AuthService) {
+  constructor(public globals: ThemeOptions, public authService: AuthService) {
   }
 
   ngOnInit() {

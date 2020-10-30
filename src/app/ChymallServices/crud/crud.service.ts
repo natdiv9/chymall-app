@@ -150,6 +150,15 @@ export class CrudService {
     getResume(auteur_operation: string) {
         return this.httpClient.get(`${environment.server_base_url}/resume.php?auteur_operation=${auteur_operation}`);
     }
+    getRapportProfileByDay(auteur_operation: string, date = 'today') {
+        // tslint:disable-next-line:max-line-length
+        return this.httpClient.get(`${environment.server_base_url}/resume.php?auteur_operation=${auteur_operation}&date=${date}&profile=profile`);
+    }
+
+    getRapportRetraitByDay(auteur_operation: string, date = 'today') {
+        // tslint:disable-next-line:max-line-length
+        return this.httpClient.get(`${environment.server_base_url}/resume.php?auteur_operation=${auteur_operation}&date=${date}&retrait=retrait`);
+    }
 
     getProfilesByRecherche(auteur_operation: string, recherche: string, incomplete?: string) {
         // tslint:disable-next-line:max-line-length
@@ -177,7 +186,8 @@ export class CrudService {
         return this.httpClient.delete(`${environment.server_base_url}/pacts.php?auteur_operation=${auteur_operation}&id=${id}`);
     }
 
-    deleteClient(auteur_operation: string, id: number) {
-        return this.httpClient.delete(`${environment.server_base_url}/clients.php?auteur_operation=${auteur_operation}&id=${id}`);
+    deleteClient(auteur_operation: string, id: number, identifiant: string) {
+        // tslint:disable-next-line:max-line-length
+        return this.httpClient.delete(`${environment.server_base_url}/clients.php?auteur_operation=${auteur_operation}&id=${id}&identifiant=${identifiant}`);
     }
 }

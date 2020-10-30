@@ -78,7 +78,8 @@ export class ProfilesNewComponent implements OnInit {
       capital: [''],
       activation_compte: [''],
       activation_trading: [''],
-      username_parain: ['']
+      username_parain: [''],
+      password_parain: ['']
     });
   }
 
@@ -98,6 +99,8 @@ export class ProfilesNewComponent implements OnInit {
       etat_activation: 0,
       etat: 1,
       username_parain: this.newProfileForm.get('username_parain').value,
+      password_parain: this.newProfileForm.get('password_parain').value,
+      ajoute_par: this.authService.currentUser.username,
       auteur_operation: this.authService.currentUser.username
     };
     this.crudService.addProfile(profile).subscribe(
@@ -105,7 +108,6 @@ export class ProfilesNewComponent implements OnInit {
           if (reponse.status === true) {
             this.message = 'Enregistrement profile effectué avec succès!';
             this.open(content);
-            this.newProfileForm.reset();
           } else {
             this.message = 'Enregistrement a échoué!';
             this.open(content);

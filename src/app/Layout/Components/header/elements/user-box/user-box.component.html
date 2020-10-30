@@ -12,8 +12,8 @@
               </span>
             </button>
             <div ngbDropdownMenu>
-              <button class="dropdown-item" >Profile</button>
-              <button class="dropdown-item" (click)="deconnecxion()">Deconnexion</button>
+              <button class="dropdown-item" disabled>Profile {{authService.currentUser.username}}</button>
+              <button class="dropdown-item" (click)="deconnecxion()">Déconnexion</button>
             </div>
           </div>
         </div>

@@ -39,8 +39,8 @@
                 <th class="text-center">Téléphone</th>
                 <th class="text-center">Email</th>
                 <th class="text-center">Adresse</th>
-                <th class="text-center">Identifiant Parain</th>
                 <th class="text-center">Status</th>
+                <th class="text-center">Date</th>
                 <th class="text-center">Actions</th>
             </tr>
             </thead>
@@ -51,10 +51,10 @@
                 <td class="text-center">{{client.telephone}}</td>
                 <td class="text-center">{{client.email}}</td>
                 <td class="text-center">{{client.adresse}}</td>
-                <td class="text-center">{{client.identifiant_sponsor}}</td>
                 <td class="text-center">
                     <div [class]="'badge badge-pill' + (client.etat==1 ? ' badge-success' : ' badge-danger')">{{client.etat == 1 ? 'actif' : 'inactif'}}</div>
                 </td>
+                <td class="text-center">{{client.date_ajout}}</td>
                 <td class="text-center">
                     <div class="mb-2 mr-2 btn-group" ngbDropdown>
                         <button type="button" ngbDropdownToggle class="dropdown-toggle-split btn btn-primary"><span
@@ -63,6 +63,10 @@
                             <button (click)="new_profile_enligne(client)" class="dropdown-item">
                                 Ajouter Profile
                             </button>
+                            <a class="dropdown-item"
+                               [routerLink]="'/profiles/visualiser/' + client.id + '/' + client.identifiant +'/all'">
+                                Afficher Profile
+                            </a>
                         </div>
                     </div>
                 </td>
@@ -130,15 +134,18 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="custom-checkbox custom-control custom-control-inline"><input type="checkbox"
-                                                                                                 formControlName="activation_compte_state"
-                                                                                                 id="activation_compte_state"
-                                                                                                 class="custom-control-input"><label
-                                for="activation_compte_state" class="custom-control-label">Compte Activé</label></div>
-                        <div class="custom-checkbox custom-control custom-control-inline"><input type="checkbox"
-                                                                                                 formControlName="activation_trading_state"
-                                                                                                 id="activation_trading_state"
-                                                                                                 class="custom-control-input"><label
+                        <div class="custom-checkbox custom-control custom-control-inline">
+                            <input type="checkbox" [checked]="true"
+                                   formControlName="activation_compte_state"
+                                   id="activation_compte_state"
+                                   class="custom-control-input"><label
+                                for="activation_compte_state" class="custom-control-label">Compte Activé</label>
+                        </div>
+                        <div class="custom-checkbox custom-control custom-control-inline">
+                            <input type="checkbox"
+                                   formControlName="activation_trading_state"
+                                   id="activation_trading_state"
+                                   class="custom-control-input"><label
                                 for="activation_trading_state" class="custom-control-label">Trading Activé</label></div>
 
                     </div>

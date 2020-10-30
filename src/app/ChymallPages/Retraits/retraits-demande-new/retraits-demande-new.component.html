@@ -57,7 +57,7 @@
             <td class="text-center">{{profile.username}}</td>
             <td class="text-center">VIP-{{profile.niveau_adhesion}}</td>
             <td class="text-center">
-              <button [disabled]="profile.etat_trading==0 && profile.etat_activation==0"
+              <button [disabled]="profile.etat_trading==0 && profile.etat_activation==0 || profile.etat==1"
                       class="btn-shadow btn btn-primary" (click)="demande_retrait(profile, content, content2)">
                 Valider tranfert
               </button>
@@ -79,10 +79,42 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="demandeRetraitForm" (ngSubmit)="newDemandeRetrait(content, c('Close click'))">
-      <div class="form-row">
-        <div class="col-md-6">
+      <div class="form-row align-middle">
+        <div class="col-md-12">
+          <div class="position-relative form-group"><label for="nom">Nom</label><input
+                  formControlName="nom" id="nom" type="text"
+                  placeholder="Nom de la personne qui retire"
+                  class="form-control">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="position-relative form-group"><label for="prenom">Prénom</label><input
+                  formControlName="prenom" id="prenom" type="text"
+                  placeholder="Prénom de la personne qui retire"
+                  class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
           <div class="position-relative form-group"><label for="montant">Montant</label><input
                   formControlName="montant" id="montant" type="number" min="1"
+                  #montant_retrait
+                  (keyup)="calculer_frais_retrait(+montant_retrait.value)"
+                  class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative form-group"><label for="frais_retrait">Frais de retrait</label><input
+                  formControlName="frais_retrait" id="frais_retrait" type="number"
+                  [value]="frais_retrait"
+                  readonly
+                  class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative form-group"><label for="montant_remis">Différence</label><input
+                  formControlName="montant_remis" id="montant_remis" type="number"
+                  [value]="montant_remis"
+                  readonly
                   class="form-control">
           </div>
         </div>

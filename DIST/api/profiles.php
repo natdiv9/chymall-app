@@ -76,18 +76,18 @@ switch ($request_method)
         break;
     case 'POST':
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(isset($_POST['is_online_profile'], $_POST['id_client'], $_POST['password'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['etat'], $_POST['etat_produit_adhesion'], $_POST['auteur_operation']))
+        if(isset($_POST['is_online_profile'], $_POST['id_client'], $_POST['password'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['etat'], $_POST['etat_produit_adhesion'], $_POST['ajoute_par'], $_POST['auteur_operation']))
         {
             $profilDAO = new Profils();
-            $profile = array($_POST['is_online_profile'], $_POST['id_client'], $_POST['password'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['etat'], $_POST['etat_produit_adhesion'], $_POST['username_parain']);
+            $profile = array($_POST['is_online_profile'], $_POST['id_client'], $_POST['password'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['etat'], $_POST['etat_produit_adhesion'], $_POST['username_parain'], $_POST['ajoute_par']);
             $res = $profilDAO->postOnlineProfile($profile, $_POST['auteur_operation']);
             response($res);
             return;
         }
-        if(isset($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['auteur_operation']))
+        if(isset($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['ajoute_par'], $_POST['auteur_operation']))
         {
             $profilDAO = new Profils();
-            $profil = array($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['username_parain']);
+            $profil = array($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['username_parain'], $_POST['password_parain'], $_POST['ajoute_par'],);
             $res = $profilDAO->post($profil, $_POST['auteur_operation']);
             response($res);
         } else
@@ -106,7 +106,7 @@ switch ($request_method)
         if(isset($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['id'], $_PUT['auteur_operation']))
         {
             $profilDAO = new Profils();
-            $profil = array($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['username_parain'], $_PUT['id']);
+            $profil = array($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['username_parain'], $_PUT['password_parain'], $_PUT['id']);
             if(isset($_PUT['date_activation']) && $_PUT['date_activation'] == 'activated'){
                 $res = $profilDAO->put($profil, $_PUT['auteur_operation'], true);
             } else {

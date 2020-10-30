@@ -1,8 +1,14 @@
 <div class="main-card mb-3 card">
-  <div class="card-body">
-    <h5 class="card-title">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
       <strong>MODIFIER CLIENT   {{identifiant}}</strong>
-    </h5>
+      <button (click)="demande_validation(supprimer_client)"
+              class="btn btn-outline-danger float-right">
+        Supprimer
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
     <div class="divider"></div>
     <form [formGroup]="updateCientForm" (ngSubmit)="updateClient(content)">
       <div class="form-row">
@@ -83,15 +89,6 @@
                   formControlName="prenom_beneficiaire"
                   placeholder=""
                   id="prenom_beneficiaire"
-                  type="text"
-                  class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="position-relative form-group"><label for="identifiant_sponsor">ID Sponsor</label><input
-                  formControlName="identifiant_sponsor"
-                  placeholder=""
-                  id="identifiant_sponsor"
                   type="text"
                   class="form-control">
           </div>

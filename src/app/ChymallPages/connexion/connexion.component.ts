@@ -45,9 +45,9 @@ export class ConnexionComponent implements OnInit {
         this.isChargement = false;
         this.chargement = false;
         if (this.authService.currentUser.service === 'adhesion') {
-          this.router.navigate(['/', 'clients', 'new']);
+          this.router.navigate(['/', 'clients', 'all']);
         } else if (this.authService.currentUser.service === 'comptabilite') {
-          this.router.navigate(['/', 'clients', 'all2']);
+          this.router.navigate(['/', 'retraits', 'new']);
         } else if (this.authService.currentUser.service === 'retrait') {
           this.router.navigate(['/', 'retrait-produits', 'all']);
         } else if (this.authService.currentUser.service === 'technique') {
@@ -56,6 +56,8 @@ export class ConnexionComponent implements OnInit {
           this.router.navigate(['/', 'retraits', 'demande', 'new']);
         } else if (this.authService.currentUser.service === 'admin') {
           this.router.navigate(['/']);
+        } else if (this.authService.currentUser.service === 'profile-enligne') {
+          this.router.navigate(['/', 'profiles', 'enligne']);
         } else {
           this.router.navigate(['/connexion']);
         }

@@ -142,6 +142,10 @@ import { ProfilesEnligneComponent } from './ChymallPages/Profiles/profiles-enlig
 import { FacturePaiementComponent } from './ChymallPages/Imprissions/facture-paiement/facture-paiement.component';
 import { FactureRetraitArgentComponent } from './ChymallPages/Imprissions/facture-retrait-argent/facture-retrait-argent.component';
 import { ClientsEnligneComponent } from './ChymallPages/Clients/clients-enligne/clients-enligne.component';
+import { RapportProfileComponent } from './ChymallPages/Profiles/rapport-profile/rapport-profile.component';
+import { RapportRetraitsComponent } from './ChymallPages/Retraits/rapport-retraits/rapport-retraits.component';
+import { ProfileVisualiserComponent } from './ChymallPages/Profiles/profile-visualiser/profile-visualiser.component';
+import { ProfileVisualiserByClientComponent } from './ChymallPages/Profiles/profile-visualiser-by-client/profile-visualiser-by-client.component';
 
 // CHY
 // import {AutocompleteLibModule} from 'angular-ng-autocomplete';
@@ -273,6 +277,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FacturePaiementComponent,
     FactureRetraitArgentComponent,
     ClientsEnligneComponent,
+    RapportProfileComponent,
+    RapportRetraitsComponent,
+    ProfileVisualiserComponent,
+    ProfileVisualiserByClientComponent,
   ],
   imports: [
     BrowserModule,

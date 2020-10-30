@@ -52,8 +52,10 @@
         <th class="text-center">Username</th>
         <th class="text-center">Pacts</th>
         <th class="text-center">Mot de passe</th>
-        <th class="text-center">Parain</th>
+        <th class="text-center">Parain ID</th>
+        <th class="text-center">Mot de passe parain</th>
         <th class="text-center">Status</th>
+        <th class="text-center">Date</th>
         <th class="text-center">Actions</th>
       </tr>
       </thead>
@@ -67,10 +69,12 @@
         <td class="text-center">VIP-{{profile.niveau_adhesion}}</td>
         <td class="text-center">{{profile.password}}</td>
         <td class="text-center">{{profile.username_parain}}</td>
+        <td class="text-center">{{profile.password_parain}}</td>
         <td class="text-center">
           <div [class]="'badge badge-pill' + (profile.etat==1 ? ' badge-warning' : (profile.etat==2 ? ' badge-success': ' badge-danger'))">
             {{profile.etat==1 ? 'incomplet' : (profile.etat==2) ? 'actif' : 'inactif'}}</div>
         </td>
+        <td class="text-center">{{profile.date_ajout}}</td>
         <td class="text-center">
           <button class="btn-shadow btn btn-primary" (click)="completer_profile(profile, content, content2)">
             Completer

@@ -10,6 +10,32 @@ switch ($request_method)
         $resumeDAO = new Resume();
         if(true || isset($_GET['auteur_operation']))
         {
+            if(isset($_GET['profile'], $_GET['date']) && $_GET['date'] != 'today')
+            {
+                $res = $resumeDAO->getRapportProfile($_GET['auteur_operation'], $_GET['date']);
+                response($res);
+                return;
+            } else if(isset($_GET['profile']) && $_GET['date'] == 'today')
+            {
+                $res = $resumeDAO->getRapportProfile($_GET['auteur_operation'], date('Y-m-d'));
+                response($res);
+                return;
+            }
+
+            if(isset($_GET['retrait'], $_GET['date']) && $_GET['date'] != 'today')
+            {
+                $res = $resumeDAO->getRapportRetrait($_GET['auteur_operation'], $_GET['date']);
+                response($res);
+                return;
+            } else if(isset($_GET['retrait']) && $_GET['date'] == 'today')
+            {
+                $res = $resumeDAO->getRapportRetrait($_GET['auteur_operation'], date('Y-m-d'));
+                response($res);
+                return;
+            }
+
+
+
             if(!empty($_GET['id']))
             {
                 // Un client

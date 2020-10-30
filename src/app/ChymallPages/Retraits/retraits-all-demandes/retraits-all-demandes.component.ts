@@ -71,6 +71,8 @@ export class RetraitsAllDemandesComponent implements OnInit {
             id: this.currentRetrait.id,
             montant: this.currentRetrait.montant,
             id_profile: this.currentRetrait.id_profile,
+            operateur_transfert: this.currentRetrait.operateur_transfert,
+            operateur_validation: this.currentRetrait.operateur_validation,
             etat: 2,
             auteur_operation: this.authService.currentUser.username
         };

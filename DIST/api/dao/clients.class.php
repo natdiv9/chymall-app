@@ -31,11 +31,11 @@ class Clients
             $res = $stmt->execute();
 
             if($res) {
-                OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
                 return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
             }else{
                 // DEVELOPMENT
-                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
 
                 // PRODUCTION
@@ -44,7 +44,7 @@ class Clients
         }catch (Exception | Error $e)
         {
             // DEVELOPMENT
-            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+            // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
 
             // PRODUCTION
@@ -66,13 +66,13 @@ class Clients
                 $is_exist = (sizeof($data) > 0) ? true : false;
                 if($is_exist) {
                     $data = $data[0];
-                    OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
+                    // OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
                     return array(true, $data);
                 }
                 return array(false, "message" => "Aucun identifiant ne correspondant");
             }else{
                 // DEVELOPMENT
-                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
 
                 // PRODUCTION
@@ -81,7 +81,7 @@ class Clients
         }catch (Exception | Error $e)
         {
             // DEVELOPMENT
-            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+            // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
 
             // PRODUCTION
@@ -103,11 +103,11 @@ class Clients
             $res = $stmt->execute();
 
             if($res) {
-                OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
                 return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC), "recherche" => true);
             }else{
                 // DEVELOPMENT
-                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
 
                 // PRODUCTION
@@ -116,7 +116,7 @@ class Clients
         }catch (Exception | Error $e)
         {
             // DEVELOPMENT
-            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+            // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
 
             // PRODUCTION
@@ -146,8 +146,8 @@ class Clients
                 }
                 $client[] = $new_identifiant;
                 $stmt = $this->connexion->prepare(
-                    "INSERT INTO chy_clients(telephone, email, prenom, nom, adresse, ville, pays, nom_beneficiaire, prenom_beneficiaire, identifiant_sponsor, identifiant)"
-                    ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO chy_clients(telephone, email, prenom, nom, adresse, ville, pays, nom_beneficiaire, prenom_beneficiaire, identifiant_sponsor, ajoute_par, identifiant)"
+                    ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 $res = $stmt->execute(
                     $client
                 );
@@ -199,17 +199,33 @@ class Clients
         }
     }
 
-    public function delete($id, $auteur_operation)
+    public function delete($id, $identifiant, $auteur_operation)
     {
         try
         {
 
-            $stmt = $this->connexion->prepare("DELETE FROM chy_clients WHERE chy_clients.id=$id");
+            $stmt = $this->connexion->prepare("DELETE FROM chy_clients WHERE chy_clients.id='$id' AND chy_clients.identifiant='$identifiant'");
 
             $res = $stmt->execute();
 
             if($res) {
                 OperationTracer::post([$auteur_operation, 'SUPPRESSION', $this->table_name], $this->connexion);
+
+                $stmt = $this->connexion->prepare("DELETE FROM chy_profiles WHERE chy_profiles.id_client='$id'");
+                $res = $stmt->execute();
+
+                if($res) {
+                    OperationTracer::post([$auteur_operation, 'SUPPRESSION', 'chy_profiles'], $this->connexion);
+
+                    return array(true, []);
+                }else{
+                    // DEVELOPMENT
+                    OperationTracer::post([$auteur_operation, 'TENTATIVE DE SUPPRESSION', 'chy_profiles'], $this->connexion);
+                    return array(false, "message" => $stmt->errorInfo()[2]);
+
+                    // PRODUCTION
+                    // return array(false, "message" => "The server encountered a problem");
+                }
                 return array(true, []);
             }else{
                 // DEVELOPMENT

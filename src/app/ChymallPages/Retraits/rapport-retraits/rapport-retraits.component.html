@@ -1,0 +1,136 @@
+
+<div class="row">
+  <div class="col-md-4 position-relative form-group">
+    <label for="date">Choisir une date</label>
+    <input id="date" #date
+           (change)="changer_date(date.value)"
+           type="date"
+           class="form-control">
+  </div>
+  <div class="col-md-6 float-right align-bottom">
+    <button (click)="refresh()"
+            class="btn-icon btn-icon-only  btn btn-outline-success">
+      <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+<div class="divider"></div>
+<div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+  <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+  <br>
+  Chargement de données en cours..
+</div>
+<div *ngIf="!chargement" class="row">
+  <div class="col-sm-12 col-lg-12">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-success border-success">
+          <div class="widget-chat-wrapper-outer">
+            <div class="widget-chart-content pt-3 pl-3 pb-1">
+              <div class="widget-chart-flex">
+                <div class="widget-numbers">
+                  <div class="widget-chart-flex">
+                    <div class="fsize-4">
+                      <small class="opacity-5">$</small>
+                      <span>{{synthese.total_retrait}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="widget-subheading mb-0 opacity-5">Total de retrait</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-primary border-primary">
+          <div class="widget-chat-wrapper-outer">
+            <div class="widget-chart-content pt-3 pl-3 pb-1">
+              <div class="widget-chart-flex">
+                <div class="widget-numbers">
+                  <div class="widget-chart-flex">
+                    <div class="fsize-4">
+                      <small class="opacity-5"></small>
+                      <span>{{synthese.total_montant_remis}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="widget-subheading mb-0 opacity-5">Total sans frais</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-primary border-warning">
+          <div class="widget-chat-wrapper-outer">
+            <div class="widget-chart-content pt-3 pl-3 pb-1">
+              <div class="widget-chart-flex">
+                <div class="widget-numbers">
+                  <div class="widget-chart-flex">
+                    <div class="fsize-4">
+                      <small class="opacity-5"></small>
+                      <span>{{synthese.total_frais_retrait}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="widget-subheading mb-0 opacity-5">Frais de retrait</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-warning border-warning">
+          <div class="widget-chat-wrapper-outer">
+            <div class="widget-chart-content pt-3 pl-3 pb-1">
+              <div class="widget-chart-flex">
+                <div class="widget-numbers">
+                  <div class="widget-chart-flex">
+                    <div class="fsize-4">
+                      <small class="opacity-5"></small>
+                      <span>{{synthese.nombre_retrait}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="widget-subheading mb-0 opacity-5">Retraits effectués</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-danger border-danger">
+          <div class="widget-chat-wrapper-outer">
+            <div class="widget-chart-content pt-3 pl-3 pb-1">
+              <div class="widget-chart-flex">
+                <div class="widget-numbers">
+                  <div class="widget-chart-flex">
+                    <div class="fsize-4">
+                      <small class="opacity-5"></small>
+                      <span>{{synthese.demande_en_cours}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="widget-subheading mb-0 opacity-5">Retraits en cours</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-info border-info">
+          <div class="widget-chat-wrapper-outer">
+            <div class="widget-chart-content pt-3 pl-3 pb-1">
+              <div class="widget-chart-flex">
+                <div class="widget-numbers">
+                  <div class="widget-chart-flex">
+                    <div class="fsize-4">
+                      <small class="opacity-5"></small>
+                      <span>{{synthese.demande_annulee}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="widget-subheading mb-0 opacity-5">Retraits annulés</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

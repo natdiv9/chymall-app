@@ -7,7 +7,7 @@ import {CustomModalComponent} from './custom-modal/custom-modal.component';
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileEnligneGuard implements  CanActivate{
+export class ProfileEnligneGuard implements  CanActivate {
   constructor(
       private router: Router,
       private authService: AuthService,

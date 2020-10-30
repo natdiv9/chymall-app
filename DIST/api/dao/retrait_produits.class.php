@@ -31,11 +31,11 @@ class RetraitProduits
             $res = $stmt->execute();
 
             if($res) {
-                OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
                 return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
             }else{
                 // DEVELOPMENT
-                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
 
                 // PRODUCTION
@@ -44,7 +44,7 @@ class RetraitProduits
         }catch (Exception | Error $e)
         {
             // DEVELOPMENT
-            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+            // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
 
             // PRODUCTION

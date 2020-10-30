@@ -26,23 +26,23 @@ class Retraits
         {
             if($is_by_client)
             {
-                $sql = "SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, retraits.operateur, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE retraits.etat=0 AND clients.id=$is_by_client ORDER BY retraits.date DESC";
+                $sql = "SELECT retraits.id, retraits.montant, retraits.frais_retrait, retraits.montant_remis, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, retraits.operateur_transfert, retraits.operateur_validation, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE retraits.etat=0 AND clients.id=$is_by_client ORDER BY retraits.date DESC";
                 $stmt = $this->connexion->prepare($sql);
             } else {
                 $stmt = ($id)
-                    ? $this->connexion->prepare("SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.operateur, retraits.etat, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE retraits.etat=0 ORDER BY retraits.date DESC")
-                    : $stmt = $this->connexion->prepare("SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.operateur, retraits.etat, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client ORDER BY retraits.date DESC");
+                    ? $this->connexion->prepare("SELECT retraits.id, retraits.montant, retraits.frais_retrait, retraits.montant_remis, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.operateur_transfert, retraits.operateur_validation, retraits.etat, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE retraits.etat=0 ORDER BY retraits.date DESC")
+                    : $stmt = $this->connexion->prepare("SELECT retraits.id, retraits.montant, retraits.frais_retrait, retraits.montant_remis, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.operateur_transfert, retraits.operateur_validation, retraits.etat, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client ORDER BY retraits.date DESC");
 
             }
 
             $res = $stmt->execute();
 
             if($res) {
-                OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
                 return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
             }else{
                 // DEVELOPMENT
-                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
 
                 // PRODUCTION
@@ -51,7 +51,7 @@ class Retraits
         }catch (Exception | Error $e)
         {
             // DEVELOPMENT
-            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+            // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
 
             // PRODUCTION
@@ -63,17 +63,17 @@ class Retraits
     {
         try
         {
-            $sql = "SELECT retraits.id, retraits.montant, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, retraits.operateur, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE MATCH (profiles.username, profiles.niveau_adhesion) AGAINST ('$recherche') OR MATCH (clients.prenom, clients.nom, clients.identifiant, clients.telephone, clients.email, identifiant_sponsor ) AGAINST ('$recherche') ORDER BY retraits.date DESC ";
+            $sql = "SELECT retraits.id, retraits.montant, retraits.frais_retrait, retraits.montant_remis, DATE_FORMAT(retraits.date, '%d-%m-%Y %H:%i:%s') as date, retraits.id_profile, retraits.etat, retraits.operateur_transfert, retraits.operateur_validation, profiles.username, profiles.niveau_adhesion, clients.identifiant, clients.nom, clients.prenom FROM chy_retraits retraits INNER JOIN chy_profiles profiles ON retraits.id_profile=profiles.id INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE MATCH (profiles.username, profiles.niveau_adhesion) AGAINST ('$recherche') OR MATCH (clients.prenom, clients.nom, clients.identifiant, clients.telephone, clients.email, identifiant_sponsor ) AGAINST ('$recherche') ORDER BY retraits.date DESC ";
             $stmt = $this->connexion->prepare($sql);
 
             $res = $stmt->execute();
 
             if($res) {
-                OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
                 return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
             }else{
                 // DEVELOPMENT
-                OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+                // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
 
                 // PRODUCTION
@@ -82,7 +82,7 @@ class Retraits
         }catch (Exception | Error $e)
         {
             // DEVELOPMENT
-            OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
+            // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);
             return array(false, "message" => $e->getMessage());
 
             // PRODUCTION
@@ -96,8 +96,8 @@ class Retraits
         {
             $code = $this->gen_code(6);
             $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_retraits(id_profile, montant, operateur)"
-                ."VALUES(?, ?, ?)");
+                "INSERT INTO chy_retraits(id_profile, montant, nom, prenom, frais_retrait, montant_remis, operateur_transfert)"
+                ."VALUES(?, ?, ?, ?, ?, ?, ?)");
             $res = $stmt->execute(
                 $retrait
             );
@@ -123,7 +123,7 @@ class Retraits
         try
         {
             $stmt = $this->connexion->prepare(
-                "UPDATE chy_retraits SET id_profile=?, montant=?, etat=?, operateur=? WHERE id=?");
+                "UPDATE chy_retraits SET id_profile=?, montant=?, etat=?, operateur_transfert=?, operateur_validation=? WHERE id=?");
             $res = $stmt->execute(
                 $retrait
             );

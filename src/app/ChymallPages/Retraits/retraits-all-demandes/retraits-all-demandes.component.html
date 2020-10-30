@@ -52,9 +52,12 @@
         <th class="text-center">Nom</th>
         <th class="text-center">Prenom</th>
         <th class="text-center">Profile</th>
-        <th class="text-center">Montant</th>
+        <th class="text-center">Total</th>
+        <th class="text-center">Montant remis</th>
+        <th class="text-center">Frais retrait</th>
         <th class="text-center">Date de Retrait</th>
-        <th class="text-center">Opérateur</th>
+        <th class="text-center">Opérateur Tranfert</th>
+        <th class="text-center">Opérateur Validation</th>
         <th class="text-center">Status</th>
         <th class="text-center">Action</th>
       </tr>
@@ -67,8 +70,11 @@
         <td class="text-center">{{retrait.prenom}}</td>
         <td class="text-center">{{retrait.username}}</td>
         <td class="text-center">{{retrait.montant}}</td>
+        <td class="text-center">{{retrait.montant_remis}}</td>
+        <td class="text-center">{{retrait.frais_retrait}}</td>
         <td class="text-center">{{retrait.date}}</td>
-        <td class="text-center">{{retrait.operateur}}</td>
+        <td class="text-center">{{retrait.operateur_transfert}}</td>
+        <td class="text-center">{{retrait.operateur_validation}}</td>
         <td class="text-center">
           <div [class]="'badge badge-pill' + ((retrait.etat==1) ? ' badge-success' : ((retrait.etat==2) ? ' badge-danger' : ' badge-warning'))">{{retrait.etat == 1 ? 'effectué' : retrait.etat == 2 ? 'annulé' : 'en attente'}}</div>
         </td>

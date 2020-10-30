@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-12">
+    <div class="float-right card no-shadow rm-border bg-transparent widget-chart">
+      <div class="search-wrapper" [class.active]="true">
+        <div class="input-holder">
+          <input type="text" #recherche placeholder="Rechercher un profile" class="search-input">
+          <button (click)="rechercher(recherche, content)"  class="search-icon"><span></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+      <strong>TOUS LES PROFILES</strong>
+      <button (click)="refresh()"
+              class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
+    <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
+    <br>
+    Chargement de données en cours..
+  </div>
+  <div *ngIf="!chargement" class="table-responsive">
+    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+      <thead>
+      <tr>
+        <th class="text-center">ID Client</th>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Prenom</th>
+        <th class="text-center">Username</th>
+        <th class="text-center">Pacts</th>
+        <th class="text-center">Produit adhésion</th>
+        <th class="text-center">Capital</th>
+        <th class="text-center">Parain ID</th>
+        <th class="text-center">Parain Mot de passe</th>
+        <th class="text-center">Compte</th>
+        <th class="text-center">Trading</th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let profile of profiles ; let i = index">
+        <td class="text-center">{{profile.identifiant}}</td>
+        <td class="text-center">{{profile.nom}}</td>
+        <td class="text-center">{{profile.prenom}}</td>
+        <td class="text-center">{{profile.username}}</td>
+        <td class="text-center">VIP-{{profile.niveau_adhesion}}</td>
+        <td class="text-center">{{profile.produit_adhesion}}</td>
+        <td class="text-center">{{profile.capital}}</td>
+        <td class="text-center">{{profile.username_parain}}</td>
+        <td class="text-center">{{profile.password_parain}}</td>
+        <td class="text-center">
+          <div [class]="'badge badge-pill' + (profile.etat_activation==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_activation == 1 ? 'activé' : 'inactivé'}}</div>
+        </td>
+        <td class="text-center">
+          <div [class]="'badge badge-pill' + (profile.etat_trading==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_trading == 1 ? 'activé' : 'inactivé'}}</div>
+        </td>
+        <td class="text-center">
+          <div [class]="'badge badge-pill' + (profile.etat==1 ? ' badge-warning' : (profile.etat==2 ? ' badge-success': ' badge-danger'))">
+            {{profile.etat == 1 ? 'incomplet' : (profile.etat == 2) ? 'actif' : 'inactif'}}</div>
+        </td>
+        <td class="text-center">{{profile.date_ajout}}</td>
+      </tr>
+      <div class="row mt-5">
+        <div class="col-12 divider mt-2"></div>
+      </div>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{message}}</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+  </div>
+</ng-template>

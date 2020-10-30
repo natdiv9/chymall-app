@@ -16,22 +16,9 @@
             <div class="col-md-12">
               <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label><input
                       formControlName="username"
-                      readonly
                       id="username"
-                      placeholder="Le nom d'utilisateur"
                       type="text"
-                      class="form-control">
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-12">
-              <div class="position-relative form-group"><label for="username_parain">Username du compte parain</label><input
-                      formControlName="username_parain"
-                      id="username_parain"
-                      readonly
-                      placeholder="Username du compte qui paraine"
-                      type="text"
+                      [readOnly]="is_allowed()"
                       class="form-control">
               </div>
             </div>
@@ -43,7 +30,31 @@
                       id="password"
                       placeholder="Mot de passe"
                       type="text"
+                      [readOnly]="is_allowed()"
                       class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12">
+              <div class="position-relative form-group"><label for="username_parain">Username du compte parain</label><input
+                      formControlName="username_parain"
+                      id="username_parain"
+                      placeholder="Username du compte qui paraine"
+                      type="text"
+                      class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12">
+              <div class="position-relative form-group"><label for="password_parain">Mot de passe du compte parain</label><input
+                      formControlName="password_parain"
+                      id="password_parain"
+                      placeholder="Mot de passe du compte qui paraine"
+                      type="text"
+                      class="form-control">
+                <small class="text-muted">Laissez vide s'il n'y a pas</small>
               </div>
             </div>
           </div>
@@ -53,9 +64,10 @@
           <div class="form-row">
             <div class="col-md-12">
               <div class="position-relative form-group"><label for="exampleSelect">Niveau d'adhésion</label>
-                <select
+                <select #vip (change)="choix_patcs(vip.value)"
                         formControlName="niveau_adhesion" id="exampleSelect" class="form-control">
-                  <option  [value]="profile.niveau_adhesion">VIP-{{profile.niveau_adhesion}}</option>
+                  <option [value]="profile.niveau_adhesion" selected readonly>VIP-{{profile.niveau_adhesion}}</option>
+                  <option *ngFor="let pact of all_pacts" [value]="pact.niveau">VIP-{{pact.niveau}}</option>
                 </select>
               </div>
             </div>
@@ -64,24 +76,25 @@
                 <select
                         formControlName="produit_adhesion"
                         id="produit_adhesion" class="form-control">
-                  <option [value]="profile.produit_adhesion">{{profile.produit_adhesion}}</option>
+                  <option [value]=profile.produit_adhesion selected readonly>{{profile.produit_adhesion}}</option>
+                  <option *ngFor="let produit of produits_by_pact" [value]=produit.designation>{{produit.designation}}</option>
                 </select>
               </div>
             </div>
             <div class="col-md-12">
               <div class="position-relative form-group"><label for="capital">Montant d'inscription</label><input
                       formControlName="capital" id="capital" placeholder="" type="text" readonly
-                      class="form-control" [disabled]="true" [value]="profile.activation_compte"></div>
+                      class="form-control" [disabled]="true" [value]="ct_inscription"></div>
             </div>
-            <div class="col-md-12" *ngIf="profile.etat_trading!==0">
+            <div class="col-md-12" *ngIf="trading_state!==0">
               <div class="position-relative form-group"><label for="activation_compte">Montant Trading</label><input
                       formControlName="activation_compte" id="activation_compte" placeholder="" type="text" readonly
-                      class="form-control" [disabled]="true" [value]="profile.activation_trading"></div>
+                      class="form-control" [disabled]="true" [value]="cout_trading"></div>
             </div>
-            <div class="col-md-12" *ngIf="profile.etat_trading!==0">
+            <div class="col-md-12" *ngIf="trading_state!==0">
               <div class="position-relative form-group"><label for="activation_trading">Coût total (Inscription + Trading)</label><input
                       formControlName="activation_trading" id="activation_trading" placeholder="" type="text" readonly
-                      class="form-control" [disabled]="true" [value]="profile.capital"></div>
+                      class="form-control" [disabled]="true" [value]="cout_total"></div>
             </div>
           </div>
         </div>

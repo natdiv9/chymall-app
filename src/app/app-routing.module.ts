@@ -96,6 +96,14 @@ import {ProfilesEnligneComponent} from './ChymallPages/Profiles/profiles-enligne
 import {FactureRetraitArgentComponent} from './ChymallPages/Imprissions/facture-retrait-argent/facture-retrait-argent.component';
 import {FacturePaiementComponent} from './ChymallPages/Imprissions/facture-paiement/facture-paiement.component';
 import {ClientsEnligneComponent} from './ChymallPages/Clients/clients-enligne/clients-enligne.component';
+import {RapportProfileComponent} from './ChymallPages/Profiles/rapport-profile/rapport-profile.component';
+import {RapportRetraitsComponent} from './ChymallPages/Retraits/rapport-retraits/rapport-retraits.component';
+import {ProfileEnligneGuard} from './ChymallServices/auth/profile-enligne.guard';
+import {ProfileVisualiserComponent} from './ChymallPages/Profiles/profile-visualiser/profile-visualiser.component';
+import {ProfileVisualiserByClientComponent} from './ChymallPages/Profiles/profile-visualiser-by-client/profile-visualiser-by-client.component';
+import {ProfilesUpdateGuard} from './ChymallPages/Profiles/profiles-update/profiles-update.guard';
+import {RetraitsAllGuard} from './ChymallPages/Retraits/retraits-all/retraits-all.guard';
+import {RapportRetraisGuard} from './ChymallPages/Retraits/rapport-retraits/rapport-retrais.guard';
 
 const routes: Routes = [
   {
@@ -161,14 +169,13 @@ const routes: Routes = [
       // tslint:disable-next-line:max-line-length
       {path: 'clients/all', component: ClientsAllComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
-      {path: 'clients/all2', component: ClientsAllComponent, canActivate: [AuthGuardService, ComptabiliteGuardService], data: {extraParameter: 'elementsMenu'}},
       {path: 'clients/:id/details', component: ClientsIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'clients/new', component: ClientsNewComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'clients/:id/update', component: ClientsUpdateComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
-      {path: 'clients/enligne', component: ClientsEnligneComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/enligne', component: ClientsEnligneComponent, canActivate: [AuthGuardService, ProfileEnligneGuard], data: {extraParameter: 'elementsMenu'}},
 
       // PRODUITS
 
@@ -190,22 +197,29 @@ const routes: Routes = [
       // tslint:disable-next-line:max-line-length
       {path: 'profiles/:idclient/:username/all', component: ProfilesByClientComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
+      {path: 'profiles/visualiser/:idclient/:username/all', component: ProfileVisualiserByClientComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
+
+      // tslint:disable-next-line:max-line-length
       {path: 'profiles/completer', component: ProfilesCompleterUsernameComponent, canActivate: [AuthGuardService, TechniqueGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
-      {path: 'profiles/enligne', component: ProfilesEnligneComponent, canActivate: [AuthGuardService, TranfertGuard], data: {extraParameter: 'elementsMenu'}},
+      {path: 'profiles/enligne', component: ProfilesEnligneComponent, canActivate: [AuthGuardService, ProfileEnligneGuard], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'profiles/visualiser', component: ProfileVisualiserComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
 
       // tslint:disable-next-line:max-line-length
       {path: 'profiles/:id/details', component: ProfilesIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'profiles/:id/:username/new', component: ProfilesNewComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
-      {path: 'profiles/:id/update', component: ProfilesUpdateComponent, canActivate: [AuthGuardService, TechniqueGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'profiles/:id/update', component: ProfilesUpdateComponent, canActivate: [AuthGuardService, ProfilesUpdateGuard], data: {extraParameter: 'elementsMenu'}},
+      // tslint:disable-next-line:max-line-length
+      {path: 'profiles/rapport', component: RapportProfileComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
 
 
       // RETRAITS
 
       // tslint:disable-next-line:max-line-length
-      {path: 'retraits/all', component: RetraitsAllComponent, canActivate: [AuthGuardService, ComptabiliteGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'retraits/all', component: RetraitsAllComponent, canActivate: [AuthGuardService, RetraitsAllGuard], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'retraits/:id/details', component: RetraitsIdComponent, canActivate: [AuthGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
@@ -214,6 +228,9 @@ const routes: Routes = [
       {path: 'retraits/demande/new', component: RetraitsDemandeNewComponent, canActivate: [AuthGuardService, TranfertGuard], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'retraits/demande/all', component: RetraitsAllDemandesComponent, canActivate: [AuthGuardService, TranfertGuard], data: {extraParameter: 'elementsMenu'}},
+
+      // tslint:disable-next-line:max-line-length
+      {path: 'retraits/rapport', component: RapportRetraitsComponent, canActivate: [AuthGuardService, RapportRetraisGuard], data: {extraParameter: 'elementsMenu'}},
 
       // STOCKAGES
 
