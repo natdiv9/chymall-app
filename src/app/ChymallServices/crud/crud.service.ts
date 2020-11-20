@@ -190,4 +190,9 @@ export class CrudService {
         // tslint:disable-next-line:max-line-length
         return this.httpClient.delete(`${environment.server_base_url}/clients.php?auteur_operation=${auteur_operation}&id=${id}&identifiant=${identifiant}`);
     }
+
+    deleteProfile(auteur_operation: string, to_be_deleted_id: string) {
+        // tslint:disable-next-line:max-line-length
+        return this.httpClient.delete(`${environment.server_base_url}/profiles.php?auteur_operation=${auteur_operation}&to_be_deleted_id=${to_be_deleted_id}`);
+    }
 }

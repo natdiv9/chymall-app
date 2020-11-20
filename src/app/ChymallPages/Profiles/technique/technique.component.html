@@ -27,7 +27,7 @@
     Chargement de données en cours..
   </div>
   <div *ngIf="!chargement" class="table-responsive">
-    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+    <table class="align-middle text-truncate mb-0 table table-sm table-striped table-borderless table-hover">
       <thead>
       <tr>
         <th class="text-center">ID Client</th>
@@ -36,11 +36,11 @@
         <th class="text-center">Téléphone</th>
         <th class="text-center">Username</th>
         <th class="text-center">Pacts</th>
-        <th class="text-center">Produit adhésion</th>
+        <th class="text-center text-wrap">Produit adhésion</th>
         <th class="text-center">Capital</th>
         <th class="text-center">Mot de passe</th>
         <th class="text-center">Parain ID</th>
-        <th class="text-center">Mot de passe Parain</th>
+        <th class="text-center text-wrap">Mot de passe Parain</th>
         <th class="text-center">Compte</th>
         <th class="text-center">Trading</th>
         <th class="text-center">Status</th>
@@ -51,16 +51,16 @@
       <tbody>
       <tr *ngFor="let profile of profiles ; let i = index">
         <td class="text-center">{{profile.identifiant}}</td>
-        <td class="text-center">{{profile.nom}}</td>
-        <td class="text-center">{{profile.prenom}}</td>
-        <td class="text-center">{{profile.telephone}}</td>
+        <td class="text-center text-wrap">{{profile.nom}}</td>
+        <td class="text-center text-wrap">{{profile.prenom}}</td>
+        <td class="text-center text-wrap">{{profile.telephone}}</td>
         <td class="text-center">{{profile.username}}</td>
         <td class="text-center">VIP-{{profile.niveau_adhesion}}</td>
-        <td class="text-center">{{profile.produit_adhesion}}</td>
+        <td class="text-center text-wrap">{{profile.produit_adhesion}}</td>
         <td class="text-center">{{profile.capital}}</td>
         <td class="text-center">{{profile.password}}</td>
-        <td class="text-center">{{profile.username_parain}}</td>
-        <td class="text-center">{{profile.password_parain}}</td>
+        <td class="text-center text-wrap">{{profile.username_parain}}</td>
+        <td class="text-center text-wrap">{{profile.password_parain}}</td>
         <td class="text-center">
           <div [class]="'badge badge-pill' + (profile.etat_activation==1 ? ' badge-success' : ' badge-danger')">{{profile.etat_activation == 1 ? 'activé' : 'inactivé'}}</div>
         </td>

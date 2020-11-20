@@ -28,7 +28,7 @@
     Chargement de données en cours..
   </div>
   <div *ngIf="!chargement" class="table-responsive">
-    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+    <table class="align-middle text-truncate mb-0 table table-sm table-striped table-borderless table-hover">
       <thead>
       <tr>
         <th class="text-center">Identifiant</th>
@@ -44,10 +44,10 @@
       <tbody>
       <tr *ngFor="let client of clients ; let i = index">
         <td class="text-center text-muted" style="width: 80px;">{{client.identifiant}}</td>
-        <td class="text-center">{{client.prenom}} {{client.nom}}</td>
-        <td class="text-center">{{client.telephone}}</td>
-        <td class="text-center">{{client.email}}</td>
-        <td class="text-center">{{client.adresse}}</td>
+        <td class="text-center text-wrap">{{client.prenom}} {{client.nom}}</td>
+        <td class="text-center text-wrap">{{client.telephone}}</td>
+        <td class="text-center text-wrap">{{client.email}}</td>
+        <td class="text-center text-wrap">{{client.adresse}}</td>
         <td class="text-center">{{client.date_ajout}}</td>
 
         <td class="text-center">

@@ -42,37 +42,37 @@
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-primary border-primary">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-danger border-danger">
           <div class="widget-chat-wrapper-outer">
             <div class="widget-chart-content pt-3 pl-3 pb-1">
               <div class="widget-chart-flex">
                 <div class="widget-numbers">
                   <div class="widget-chart-flex">
                     <div class="fsize-4">
-                      <small class="opacity-5"></small>
-                      <span>{{synthese.total_adhesion}}</span></div>
+                      <small class="opacity-5">$</small>
+                      <span>{{synthese.total_frais_activation}}</span></div>
                   </div>
                 </div>
               </div>
-              <h6 class="widget-subheading mb-0 opacity-5">Membre(s) ajouté(s)</h6>
+              <h6 class="widget-subheading mb-0 opacity-5">Total frais activation</h6>
             </div>
           </div>
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-primary border-warning">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-warning border-warning">
           <div class="widget-chat-wrapper-outer">
             <div class="widget-chart-content pt-3 pl-3 pb-1">
               <div class="widget-chart-flex">
                 <div class="widget-numbers">
                   <div class="widget-chart-flex">
                     <div class="fsize-4">
-                      <small class="opacity-5"></small>
-                      <span>{{synthese.nombre_trading}}</span></div>
+                      <small class="opacity-5">$</small>
+                      <span>{{+synthese.total_activation_trading + +synthese.total_activation_compte + +synthese.total_frais_activation + +synthese.total_frais_trading}}</span></div>
                   </div>
                 </div>
               </div>
-              <h6 class="widget-subheading mb-0 opacity-5">Trading activé</h6>
+              <h6 class="widget-subheading mb-0 opacity-5">Total  général</h6>
             </div>
           </div>
         </div>
@@ -96,6 +96,25 @@
         </div>
       </div>
       <div class="col-lg-4">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-info border-info">
+          <div class="widget-chat-wrapper-outer">
+            <div class="widget-chart-content pt-3 pl-3 pb-1">
+              <div class="widget-chart-flex">
+                <div class="widget-numbers">
+                  <div class="widget-chart-flex">
+                    <div class="fsize-4">
+                      <small class="opacity-5">$</small>
+                      <span>{{synthese.total_frais_trading}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="widget-subheading mb-0 opacity-5">Total frais trading</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="col-lg-4">
         <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-danger border-danger">
           <div class="widget-chat-wrapper-outer">
             <div class="widget-chart-content pt-3 pl-3 pb-1">
@@ -109,6 +128,42 @@
                 </div>
               </div>
               <h6 class="widget-subheading mb-0 opacity-5">Compte(s) ajouté(s)</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-primary border-warning">
+          <div class="widget-chat-wrapper-outer">
+            <div class="widget-chart-content pt-3 pl-3 pb-1">
+              <div class="widget-chart-flex">
+                <div class="widget-numbers">
+                  <div class="widget-chart-flex">
+                    <div class="fsize-4">
+                      <small class="opacity-5"></small>
+                      <span>{{synthese.nombre_trading}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="widget-subheading mb-0 opacity-5">Trading activé</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-primary border-primary">
+          <div class="widget-chat-wrapper-outer">
+            <div class="widget-chart-content pt-3 pl-3 pb-1">
+              <div class="widget-chart-flex">
+                <div class="widget-numbers">
+                  <div class="widget-chart-flex">
+                    <div class="fsize-4">
+                      <small class="opacity-5"></small>
+                      <span>{{synthese.total_adhesion}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="widget-subheading mb-0 opacity-5">Membre(s) ajouté(s)</h6>
             </div>
           </div>
         </div>
@@ -131,6 +186,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

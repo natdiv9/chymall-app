@@ -71,9 +71,10 @@ class Resume
 (SELECT COUNT(*) FROM chy_profiles WHERE DATE(chy_profiles.date)='$date' AND is_online_profile=0) as total_compte,
 (SELECT COUNT(*) FROM chy_profiles WHERE DATE(chy_profiles.date)='$date' AND etat_trading=1 AND is_online_profile=0)  as nombre_trading,
 (SELECT COUNT(*) FROM chy_profiles WHERE DATE(chy_profiles.date)='$date' AND etat_activation=1 AND is_online_profile=0)  as nombre_activation,
-(SELECT COALESCE(SUM(chy_profiles.activation_compte), 0) FROM chy_profiles WHERE DATE(chy_profiles.date)='$date' AND chy_profiles.etat_activation=1 AND is_online_profile=0) as total_activation_compte,
-(SELECT COALESCE(SUM(chy_profiles.activation_trading), 0) FROM chy_profiles WHERE DATE(chy_profiles.date)='$date' AND chy_profiles.etat_trading=1 AND is_online_profile=0) as total_activation_trading
-");
+(SELECT COALESCE(SUM(chy_profiles.activation_compte - chy_profiles.activation_compte / 11), 0) FROM chy_profiles WHERE DATE(chy_profiles.date)='$date' AND chy_profiles.etat_activation=1 AND is_online_profile=0) as total_activation_compte,
+(SELECT COALESCE(SUM(chy_profiles.activation_trading - chy_profiles.activation_trading / 11), 0) FROM chy_profiles WHERE DATE(chy_profiles.date)='$date' AND chy_profiles.etat_trading=1 AND is_online_profile=0) as total_activation_trading,
+(SELECT ROUND(COALESCE(SUM(chy_profiles.activation_trading / 11), 0), 0) FROM chy_profiles WHERE DATE(chy_profiles.date)='$date' AND chy_profiles.etat_trading=1 AND is_online_profile=0) as total_frais_trading,
+(SELECT COALESCE(SUM(chy_profiles.activation_compte / 11), 0) FROM chy_profiles WHERE DATE(chy_profiles.date)='$date' AND chy_profiles.etat_trading=1 AND is_online_profile=0) as total_frais_activation");
 
             $res = $stmt->execute();
 
@@ -101,12 +102,12 @@ class Resume
 
         try {
             $stmt = $stmt = $this->connexion->prepare("SELECT
-(SELECT COALESCE(SUM(chy_retraits.montant), 0) FROM chy_retraits WHERE chy_retraits.etat=1 AND DATE(chy_retraits.date)=CURRENT_DATE) as total_retrait,
-(SELECT COALESCE(SUM(chy_retraits.frais_retrait), 0) FROM chy_retraits WHERE chy_retraits.etat=1 AND DATE(chy_retraits.date)=CURRENT_DATE) as total_frais_retrait,
-(SELECT COALESCE(SUM(chy_retraits.montant_remis), 0) FROM chy_retraits WHERE chy_retraits.etat=1 AND DATE(chy_retraits.date)=CURRENT_DATE) as total_montant_remis,
-(SELECT COUNT(*) FROM chy_retraits WHERE chy_retraits.etat=1 AND DATE(chy_retraits.date)=CURRENT_DATE) as nombre_retrait,
-(SELECT COUNT(*) FROM chy_retraits WHERE chy_retraits.etat=0 AND DATE(chy_retraits.date)=CURRENT_DATE) as demande_en_cours,
-(SELECT COUNT(*) FROM chy_retraits WHERE chy_retraits.etat=2 AND DATE(chy_retraits.date)=CURRENT_DATE) as demande_annulee
+(SELECT COALESCE(SUM(chy_retraits.montant), 0) FROM chy_retraits WHERE chy_retraits.etat=1 AND DATE(chy_retraits.date)='$date') as total_retrait,
+(SELECT COALESCE(SUM(chy_retraits.frais_retrait), 0) FROM chy_retraits WHERE chy_retraits.etat=1 AND DATE(chy_retraits.date)='$date') as total_frais_retrait,
+(SELECT COALESCE(SUM(chy_retraits.montant_remis), 0) FROM chy_retraits WHERE chy_retraits.etat=1 AND DATE(chy_retraits.date)='$date') as total_montant_remis,
+(SELECT COUNT(*) FROM chy_retraits WHERE chy_retraits.etat=1 AND DATE(chy_retraits.date)='$date') as nombre_retrait,
+(SELECT COUNT(*) FROM chy_retraits WHERE chy_retraits.etat=0 AND DATE(chy_retraits.date)='$date') as demande_en_cours,
+(SELECT COUNT(*) FROM chy_retraits WHERE chy_retraits.etat=2 AND DATE(chy_retraits.date)='$date') as demande_annulee
 ");
 
             $res = $stmt->execute();

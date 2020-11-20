@@ -44,7 +44,7 @@
         Chargement de données en cours..
     </div>
     <div *ngIf="!chargement" class="table-responsive">
-        <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+        <table class="align-middle text-truncate mb-0 table table-sm table-striped table-borderless table-hover">
             <thead>
             <tr>
                 <th class="text-center">#</th>
@@ -55,9 +55,10 @@
                 <th class="text-center">Total</th>
                 <th class="text-center">Montant remis</th>
                 <th class="text-center">Frais retrait</th>
+                <th class="text-center">Bénéficiaire</th>
                 <th class="text-center">Date de Retrait</th>
-                <th class="text-center">Opérateur Tranfert</th>
-                <th class="text-center">Opérateur Validation</th>
+                <th class="text-center text-wrap">Opérateur Tranfert</th>
+                <th class="text-center text-wrap">Opérateur Validation</th>
                 <th class="text-center">Status</th>
             </tr>
             </thead>
@@ -65,12 +66,13 @@
             <tr *ngFor="let retrait of retraits; let i = index">
                 <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
                 <td class="text-center">{{retrait.identifiant}}</td>
-                <td class="text-center">{{retrait.nom}}</td>
-                <td class="text-center">{{retrait.prenom}}</td>
-                <td class="text-center">{{retrait.username}}</td>
+                <td class="text-center text-wrap">{{retrait.nom}}</td>
+                <td class="text-center text-wrap">{{retrait.prenom}}</td>
+                <td class="text-center text-wrap">{{retrait.username}}</td>
                 <td class="text-center">{{retrait.montant}}</td>
                 <td class="text-center">{{retrait.montant_remis}}</td>
                 <td class="text-center">{{retrait.frais_retrait}}</td>
+                <td class="text-center text-wrap">{{retrait.prenom_ben}} {{retrait.nom_ben}}</td>
                 <td class="text-center">{{retrait.date}}</td>
                 <td class="text-center">{{retrait.operateur_transfert}}</td>
                 <td class="text-center">{{retrait.operateur_validation}}</td>

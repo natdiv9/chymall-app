@@ -254,6 +254,36 @@ class Profils
         }
     }
 
+    public function delete($id, $auteur_operation)
+    {
+        try
+        {
+
+            $stmt = $this->connexion->prepare("DELETE FROM chy_profiles WHERE chy_profiles.id='$id' ");
+
+            $res = $stmt->execute();
+
+            if($res) {
+                return array(true, []);
+
+            }else{
+                // DEVELOPMENT
+                OperationTracer::post([$auteur_operation, 'TENTATIVE DE SUPPRESSION', $this->table_name], $this->connexion);
+                return array(false, "message" => $stmt->errorInfo()[2]);
+
+                // PRODUCTION
+                // return array(false, "message" => "The server encountered a problem");
+            }
+        }catch (Exception | Error $e)
+        {
+            // DEVELOPMENT
+            OperationTracer::post([$auteur_operation, 'TENTATIVE DE SUPPRESSION', $this->table_name], $this->connexion);
+            return array(false, "message" => $e->getMessage());
+
+            // PRODUCTION
+            // return array(false, "message" => "The server encountered a problem");
+        }
+    }
     private function gen_password($car) {
         $string = "";
         $chaine = "9aAbBcC1dDeEfF2gGhHiI3jJkKlL4mMnNpP5qQrRsS6tTuUvV7wWxXyY8";

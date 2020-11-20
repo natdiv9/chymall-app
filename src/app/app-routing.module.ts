@@ -100,10 +100,12 @@ import {RapportProfileComponent} from './ChymallPages/Profiles/rapport-profile/r
 import {RapportRetraitsComponent} from './ChymallPages/Retraits/rapport-retraits/rapport-retraits.component';
 import {ProfileEnligneGuard} from './ChymallServices/auth/profile-enligne.guard';
 import {ProfileVisualiserComponent} from './ChymallPages/Profiles/profile-visualiser/profile-visualiser.component';
+// tslint:disable-next-line:max-line-length
 import {ProfileVisualiserByClientComponent} from './ChymallPages/Profiles/profile-visualiser-by-client/profile-visualiser-by-client.component';
 import {ProfilesUpdateGuard} from './ChymallPages/Profiles/profiles-update/profiles-update.guard';
 import {RetraitsAllGuard} from './ChymallPages/Retraits/retraits-all/retraits-all.guard';
 import {RapportRetraisGuard} from './ChymallPages/Retraits/rapport-retraits/rapport-retrais.guard';
+import {ClientUpdateGuard} from './ChymallPages/Clients/clients-update/client-update.guard';
 
 const routes: Routes = [
   {
@@ -173,7 +175,7 @@ const routes: Routes = [
       // tslint:disable-next-line:max-line-length
       {path: 'clients/new', component: ClientsNewComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
-      {path: 'clients/:id/update', component: ClientsUpdateComponent, canActivate: [AuthGuardService, AdhesionGuardService], data: {extraParameter: 'elementsMenu'}},
+      {path: 'clients/:id/update', component: ClientsUpdateComponent, canActivate: [AuthGuardService, ClientUpdateGuard], data: {extraParameter: 'elementsMenu'}},
       // tslint:disable-next-line:max-line-length
       {path: 'clients/enligne', component: ClientsEnligneComponent, canActivate: [AuthGuardService, ProfileEnligneGuard], data: {extraParameter: 'elementsMenu'}},
 

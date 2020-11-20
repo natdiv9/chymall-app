@@ -124,6 +124,19 @@ switch ($request_method)
         }
         break;
     case 'DELETE':
+        if (isset($_GET['auteur_operation'], $_GET['to_be_deleted_id'])) {
+            $profileDAO = new Profils();
+            $res = $profileDAO->delete($_GET['to_be_deleted_id'], $_GET['auteur_operation']);
+            response($res);
+
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode(array(
+                    "status" => false,
+                    "message" => "Data is not complete"
+                )
+            );
+        }
         break;
     default:
         http_response_code(405);

@@ -19,6 +19,7 @@ export class ProfileVisualiserByClientComponent implements OnInit {
   closeResult: string;
   chargement: boolean;
   selected_profile: Profile;
+  to_be_deleted_id: string;
 
   constructor(private crudService: CrudService,
               private authService: AuthService,
@@ -76,4 +77,24 @@ export class ProfileVisualiserByClientComponent implements OnInit {
     }
   }
 
+  demande_validation(supprimer_client: any, id: string) {
+    this.to_be_deleted_id = id;
+    this.open(supprimer_client);
+  }
+
+  supprimer(content: any, c: any) {
+    this.crudService.deleteProfile(this.authService.currentUser.username, this.to_be_deleted_id).subscribe(
+        (reponse: any) => {
+          if (reponse.status === true) {
+            this.message = 'Suppression effectuée avec succès!';
+            this.open(content);
+            // this.router.navigate(['/', 'profiles', 'visualiser']);
+            this.refresh();
+          } else {
+            this.message = 'La suppression a echoué!';
+            this.open(content);
+          }
+        }
+    );
+  }
 }

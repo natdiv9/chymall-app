@@ -36,7 +36,13 @@ export class ProfilesAllComponent implements OnInit {
             (reponse: any) => {
                 if (reponse.status === true) {
                     this.chargement = false;
-                    this.profiles = reponse.data;
+                    this.profiles = [];
+                    for (const data of reponse.data) {
+                        // tslint:disable-next-line:triple-equals
+                        if (+data.is_online_profile == 0) {
+                            this.profiles.push(data);
+                        }
+                    }
                 } else {
                     this.chargement = false;
                     this.message = 'Echec de recupération de données';

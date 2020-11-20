@@ -31,7 +31,7 @@
         Chargement de données en cours..
     </div>
     <div *ngIf="!chargement" class="table-responsive">
-        <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+        <table class="align-middle text-truncate mb-0 table table-sm table-striped table-borderless table-hover">
             <thead>
             <tr>
                 <th class="text-center">Identifiant</th>
@@ -47,10 +47,10 @@
             <tbody>
             <tr *ngFor="let client of clients ; let i = index">
                 <td class="text-center text-muted" style="width: 80px;">{{client.identifiant}}</td>
-                <td class="text-center">{{client.prenom}} {{client.nom}}</td>
-                <td class="text-center">{{client.telephone}}</td>
-                <td class="text-center">{{client.email}}</td>
-                <td class="text-center">{{client.adresse}}</td>
+                <td class="text-center text-wrap">{{client.prenom}} {{client.nom}}</td>
+                <td class="text-center text-wrap">{{client.telephone}}</td>
+                <td class="text-center text-wrap">{{client.email}}</td>
+                <td class="text-center text-wrap">{{client.adresse}}</td>
                 <td class="text-center">
                     <div [class]="'badge badge-pill' + (client.etat==1 ? ' badge-success' : ' badge-danger')">{{client.etat == 1 ? 'actif' : 'inactif'}}</div>
                 </td>
@@ -66,6 +66,10 @@
                             <a class="dropdown-item"
                                [routerLink]="'/profiles/visualiser/' + client.id + '/' + client.identifiant +'/all'">
                                 Afficher Profile
+                            </a>
+                            <a class="dropdown-item"
+                               [routerLink]="'/clients/' + client.id + '/update'">
+                                Modifier Client
                             </a>
                         </div>
                     </div>
@@ -169,6 +173,7 @@
                                 <select
                                         formControlName="produit_adhesion"
                                         id="produit_adhesion" class="form-control">
+                                    <option selected>Choisir un produit</option>
                                     <option *ngFor="let produit of produits_by_pact"
                                             [value]=produit.designation>{{produit.designation}}</option>
                                 </select>

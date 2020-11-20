@@ -127,7 +127,7 @@ export class ClientsUpdateComponent implements OnInit {
           if (reponse.status === true) {
             this.message = 'Modification effectuée avec succès!';
             this.open(content);
-            this.router.navigate(['/', 'clients', 'all']);
+            // this.router.navigate(['/', 'clients', 'all']);
           } else {
             this.message = 'Modification a echoué!';
             this.open(content);
@@ -142,7 +142,7 @@ export class ClientsUpdateComponent implements OnInit {
           if (reponse.status === true) {
             this.message = 'Suppression effectuée avec succès!';
             this.open(content);
-            this.router.navigate(['/', 'clients', 'all']);
+            this.router.navigate(['/', 'profiles', 'visualiser']);
           } else {
             this.message = 'La suppression a echoué!';
             this.open(content);

@@ -34,7 +34,7 @@
   </div>
   <div class="card-body">
     <div class="table">
-      <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+      <table class="align-middle text-truncate mb-0 table table-sm table-striped table-borderless table-hover">
         <thead>
         <tr>
           <th class="text-center text-muted">#</th>
@@ -46,7 +46,8 @@
           <th class="text-center">Total</th>
           <th class="text-center">Montant remis</th>
           <th class="text-center">Frais retrait</th>
-          <th class="text-center">Opérateur</th>
+          <th class="text-center">Bénéficiaire</th>
+          <th class="text-center text-wrap">Opérateur Tranfert</th>
           <th class="text-center">Action</th>
         </tr>
         </thead>
@@ -54,14 +55,15 @@
         <tr *ngFor="let profile of all_profiles_client ; let i = index">
           <td class="text-center">{{i+1}}</td>
           <td class="text-center">{{profile.identifiant}}</td>
-          <td class="text-center">{{profile.nom}}</td>
-          <td class="text-center">{{profile.prenom}}</td>
-          <td class="text-center">{{profile.username}}</td>
-          <td class="text-center">{{profile.niveau_adhesion}}</td>
+          <td class="text-center text-wrap">{{profile.nom}}</td>
+          <td class="text-center text-wrap">{{profile.prenom}}</td>
+          <td class="text-center text-wrap">{{profile.username}}</td>
+          <td class="text-center">VIP-{{profile.niveau_adhesion}}</td>
           <td class="text-center">{{profile.montant}}</td>
           <td class="text-center">{{profile.montant_remis}}</td>
           <td class="text-center">{{profile.frais_retrait}}</td>
-          <td class="text-center">{{profile.operateur}}</td>
+          <td class="text-center text-wrap">{{profile.prenom_ben}} {{profile.nom_ben}}</td>
+          <td class="text-center">{{profile.operateur_transfert}}</td>
           <td class="text-center">
             <button class="btn-shadow btn btn-primary" (click)="valider_retrait(profile, content, content2)">
               Valider retrait
