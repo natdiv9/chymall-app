@@ -59,9 +59,12 @@
             <button type="button" ngbDropdownToggle class="dropdown-toggle-split btn btn-primary"><span
                     class="sr-only">Toggle Dropdown</span></button>
             <div ngbDropdownMenu>
-              <a class="btn dropdown-item" (click)="demande_validation(supprimer_client, profile.id)">
-                Supprimer Profile
+              <a class="dropdown-item" [routerLink]="'/profiles/' + profile.id + '/update'">
+                Modifier
               </a>
+              <button class="btn dropdown-item" (click)="demande_validation(supprimer_client, profile.id)">
+                Supprimer Profile
+              </button>
             </div>
           </div>
         </td>

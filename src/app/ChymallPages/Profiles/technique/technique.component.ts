@@ -23,7 +23,7 @@ export class TechniqueComponent implements OnInit {
   is_client_found = false;
   current_client: Client;
   all_profiles_client: Profile[] = [];
-  current_profile: Profile;
+  private current_profile: Profile;
   chargement: boolean;
 
   constructor(
@@ -48,6 +48,7 @@ export class TechniqueComponent implements OnInit {
       etat: 2,
       date_activation: 'activated'
     });
+    this.completerProfileForm.reset();
     this.crudService.putProfile(
         data_sent
     ).subscribe(
@@ -58,7 +59,12 @@ export class TechniqueComponent implements OnInit {
             this.refresh();
             this.open(content);
           } else {
-            this.message = 'Echec de l\'opération!';
+            this.refresh();
+            if (reponse.message === 'DOUBLON') {
+              this.message = 'Ce username existe dans le système';
+            } else {
+              this.message = 'Enregistrement a échoué!';
+            }
             this.open(content);
             console.log(data_sent);
             console.log(reponse.message);

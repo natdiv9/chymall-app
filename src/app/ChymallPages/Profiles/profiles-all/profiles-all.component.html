@@ -81,6 +81,9 @@
                             <a class="dropdown-item" [routerLink]="'/profiles/' + profile.id + '/update'">
                                 Modifier
                             </a>
+                            <button class="btn dropdown-item" (click)="demande_validation(supprimer_client, profile.id)">
+                                Supprimer Profile
+                            </button>
                         </div>
                     </div>
                 </td>
@@ -119,5 +122,16 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+    </div>
+</ng-template>
+
+<ng-template #supprimer_client let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <h5 class="text-center">Voulez-vous supprimer ce membre?</h5>
+        <p class="text-center">Ceci va entrainer la suppression de tous ses comptes!</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="supprimer(content, c('Close click'))">Oui</button>
+        <button type="button" class="btn btn-danger" (click)="c('Close click')">Non</button>
     </div>
 </ng-template>

@@ -204,7 +204,11 @@ export class ProfilesEnligneComponent implements OnInit {
             // this.router.navigate(['/', 'profiles', this.current_client.id, this.current_client.identifiant, 'all']);
             this.creating_profile = false;
           } else {
-            this.message = 'Enregistrement a échoué!';
+            if (reponse.message === 'DOUBLON') {
+              this.message = 'Ce username existe dans le système';
+            } else {
+              this.message = 'Enregistrement a échoué!';
+            }
             this.open(content);
             console.log(reponse);
           }

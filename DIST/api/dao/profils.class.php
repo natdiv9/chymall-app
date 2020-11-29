@@ -152,22 +152,38 @@ class Profils
     {
         try
         {
-            $stmt = $this->connexion->prepare(
-                "INSERT INTO chy_profiles(is_online_profile, id_client, password, username, niveau_adhesion, capital, produit_trading, produit_adhesion, activation_compte, activation_trading, etat_trading, etat_activation, etat, etat_produit_adhesion, username_parain, ajoute_par)"
-                ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $res = $stmt->execute(
-                $profile
-            );
+            $st_doublon = $this->connexion->prepare("SELECT * FROM `chy_profiles` WHERE username='$profile[3]'");
+            $re_doublon = $st_doublon->execute();
 
-            if($res)
-            {
-                OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
-                return array(true, []);
-            } else
-            {
+            if($re_doublon) {
+                $data = $st_doublon->fetchAll(PDO::FETCH_ASSOC);
+                $is_first = (sizeof($data) > 0) ? true : false;
+                if(!$is_first) {
+                    $stmt = $this->connexion->prepare(
+                        "INSERT INTO chy_profiles(is_online_profile, id_client, password, username, niveau_adhesion, capital, produit_trading, produit_adhesion, activation_compte, activation_trading, etat_trading, etat_activation, etat, etat_produit_adhesion, username_parain, ajoute_par)"
+                        ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $res = $stmt->execute(
+                        $profile
+                    );
+
+                    if($res)
+                    {
+                        OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
+                        return array(true, []);
+                    } else
+                    {
+                        OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
+                        return array(false, "message" => $stmt->errorInfo()[2]);
+                    }
+                } else {
+                    return array(false, "message" => "DOUBLON");
+                }
+
+            }else {
                 OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
-                return array(false, "message" => $stmt->errorInfo()[2]);
+                return array(false, "message" => $st_doublon->errorInfo()[2]);
             }
+
         } catch (Error | Exception $e)
         {
             OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
@@ -225,12 +241,87 @@ class Profils
         try
         {
             if ($activated) {
-                $stmt = $this->connexion->prepare(
-                    "UPDATE chy_profiles SET date_activation=CURRENT_TIMESTAMP, id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=?, username_parain=?, password_parain=?  WHERE id=?");
+                $st_doublon = $this->connexion->prepare("SELECT * FROM `chy_profiles` WHERE username='$profil[1]'");
+                $re_doublon = $st_doublon->execute();
+
+                if($re_doublon) {
+                    $data = $st_doublon->fetchAll(PDO::FETCH_ASSOC);
+                    $is_first = (sizeof($data) > 0) ? true : false;
+                    if(!$is_first) {
+
+                        $stmt = $this->connexion->prepare(
+                            "UPDATE chy_profiles SET date_activation=CURRENT_TIMESTAMP, id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=?, username_parain=?, password_parain=?  WHERE id=?");
+
+                        $res = $stmt->execute(
+                            $profil
+                        );
+
+                        if($res)
+                        {
+                            OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
+                            return array(true, []);
+                        } else
+                        {
+                            OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
+                            return array(false, "message" => $stmt->errorInfo()[2]);
+                        }
+                    } else {
+                        return array(false, "message" => "DOUBLON");
+                    }
+
+                }else {
+                    OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
+                    return array(false, "message" => $st_doublon->errorInfo()[2]);
+                }
 
             } else {
-                $stmt = $this->connexion->prepare(
-                    "UPDATE chy_profiles SET id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=? , username_parain=?, password_parain=? WHERE id=?");
+                $st_doublon = $this->connexion->prepare("SELECT * FROM `chy_profiles` WHERE username='$profil[1]'");
+                $re_doublon = $st_doublon->execute();
+                if($re_doublon) {
+                    $data = $st_doublon->fetchAll(PDO::FETCH_ASSOC);
+
+                    if(sizeof($data) == 1 && $data[0]['id']==$profil[16]) {
+                        $stmt = $this->connexion->prepare(
+                            "UPDATE chy_profiles SET id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=? , username_parain=?, password_parain=? WHERE id=?");
+                        $res = $stmt->execute(
+                            $profil
+                        );
+
+                        if($res)
+                        {
+                            OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
+                            return array(true, []);
+                        } else
+                        {
+                            OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
+                            return array(false, "message" => $stmt->errorInfo()[2]);
+                        }
+                    } else if (sizeof($data) == 0) {
+                        $stmt = $this->connexion->prepare(
+                            "UPDATE chy_profiles SET id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=? , username_parain=?, password_parain=? WHERE id=?");
+                        $res = $stmt->execute(
+                            $profil
+                        );
+
+                        if($res)
+                        {
+                            OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
+                            return array(true, []);
+                        } else
+                        {
+                            OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
+                            return array(false, "message" => $stmt->errorInfo()[2]);
+                        }
+                    }
+                    else {
+                        return array(false, "message" => "DOUBLON");
+                    }
+
+                }else {
+                    OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
+                    return array(false, "message" => $st_doublon->errorInfo()[2]);
+                }
+
 
             }
 

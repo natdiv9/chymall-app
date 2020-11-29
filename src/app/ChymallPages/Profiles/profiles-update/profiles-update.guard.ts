@@ -8,7 +8,7 @@ import {CustomModalComponent} from '../../../ChymallServices/auth/custom-modal/c
   providedIn: 'root'
 })
 export class ProfilesUpdateGuard implements CanActivate {
-  services_admis = ['technique', 'adhesion', 'admin'];
+  services_admis = ['technique', 'adhesion', 'profile-enligne', 'admin'];
 
   constructor(
       private router: Router,

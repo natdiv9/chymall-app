@@ -240,7 +240,9 @@ export class ProfilesUpdateComponent implements OnInit {
                             activation_trading: [this.profile.activation_trading],
                             username_parain: [this.profile.username_parain],
                             password_parain: [this.profile.password_parain],
-                            password: [this.profile.password]
+                            password: [this.profile.password],
+                            activation_compte_state: [this.profile.etat_activation == 1 ? true : false],
+                            activation_trading_state: [this.profile.etat_trading == 1 ? true : false]
                         });
                     } else {
                         console.log(response);
@@ -265,6 +267,8 @@ export class ProfilesUpdateComponent implements OnInit {
         this.profile.username_parain = this.edit_profile_form.get('username_parain').value;
         this.profile.password_parain = this.edit_profile_form.get('password_parain').value;
         this.profile.password = this.edit_profile_form.get('password').value;
+        this.profile.etat_trading = this.edit_profile_form.get('activation_trading_state').value ? 1 : 0;
+        this.profile.etat_activation = this.edit_profile_form.get('activation_compte_state').value ? 1 : 0;
         this.crudService.putProfile(Object.assign(
             this.profile,
             {
@@ -276,7 +280,11 @@ export class ProfilesUpdateComponent implements OnInit {
                     this.message = 'Modification profile effectuée avec succès!';
                     this.open(content);
                 } else {
-                    this.message = 'La modification a échoué!';
+                    if (reponse.message === 'DOUBLON') {
+                        this.message = 'Ce username existe dans le système';
+                    } else {
+                        this.message = 'La modification a échoué!';
+                    }
                     this.open(content);
                     console.log(reponse.message);
                 }
@@ -337,8 +345,11 @@ export class ProfilesUpdateComponent implements OnInit {
     }
 
     is_allowed() {
-        if (this.authService.currentUser.service === 'admin' || this.authService.currentUser.service === 'technique') {
-            return false;
+        const droits = ['admin', 'technique', 'profile-enligne'];
+        for (const droit of droits) {
+            if (this.authService.currentUser.service === droit) {
+                return false;
+            }
         }
         return true;
     }
