@@ -7,14 +7,14 @@
         <option value="attente">En attente</option>
     </select>
 </div-->
-<div class="main-card mb-3 card no-shadow rm-border bg-transparent widget-chart">
+<div class="main-card mb-0 card no-shadow rm-border bg-transparent widget-chart">
     <div class="card-body">
         <h5 class="card-title">
             <strong>LISTE DE RETRAITS</strong>
         </h5>
         <div class="divider"></div>
         <div class="row">
-            <div class="col-12" style="text-align: center">
+            <div class="col-9" style="text-align: center">
                 <div class="search-wrapper" [class.active]="true">
                     <div class="input-holder">
                         <input type="text" #input_id_client placeholder="Entrez un identifiant du client.." class="search-input">
@@ -22,19 +22,32 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3 position-relative form-group float-right">
+                <input id="date" #date
+                       (change)="changer_date(date.value)"
+                       type="date"
+                       placeholder="Choisir une date"
+                       class="form-control">
+            </div>
         </div>
         <div class="divider"></div>
     </div>
 </div>
 
-
 <div class="main-card mb-3 card">
     <div class="card-header">
         <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-            <button (click)="refresh()"
-                    class="btn-icon btn-icon-only  btn btn-outline-success float-right">
-                <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
-            </button>
+            <div class="row">
+                <div class="col-md-4 text-success">
+                    {{datetext}}
+                </div>
+                <div class="col-md-8 float-right">
+                    <button (click)="refresh()"
+                            class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+                        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
             <div class="float-right mr-5"></div>
         </div>
     </div>

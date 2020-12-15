@@ -12,7 +12,9 @@ class Produits
     {
         try{
             require 'connexion.class.php';
-            $this->connexion = Connexion::getConnexion();
+            session_start();
+            $db_name = $_SESSION['connected_user']['database'];
+            $this->connexion = Connexion::getConnexion($db_name);
 
         } catch (Exception | Error $e)
         {
@@ -27,7 +29,7 @@ class Produits
         {
             $stmt = ($id)
                 ? $this->connexion->prepare("SELECT * FROM chy_produits WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT * FROM chy_produits");
+                : $stmt = $this->connexion->prepare("SELECT * FROM `chy_produits` ORDER BY `pacts` ASC");
 
             $res = $stmt->execute();
 

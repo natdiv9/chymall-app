@@ -91,6 +91,7 @@ export class ProfilesByClientComponent implements OnInit {
             this.selected_profile,
             {
                 etat_trading: 1,
+                activations: 'activations',
                 auteur_operation: this.authService.currentUser.username
             }
         )).subscribe(
@@ -119,6 +120,7 @@ export class ProfilesByClientComponent implements OnInit {
             this.selected_profile,
             {
                 etat_activation: 1,
+                activations: 'activations',
                 auteur_operation: this.authService.currentUser.username
             }
         )).subscribe(

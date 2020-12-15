@@ -79,9 +79,9 @@ export class CrudService {
         return this.httpClient.get(`${environment.server_base_url}/produits.php?auteur_operation=${auteur_operation}&id=${id}`);
     }
 
-    getRetraits(auteur_operation: string, activated = 'false', is_by_client = 'false') {
+    getRetraits(auteur_operation: string, activated = 'false', is_by_client = 'false', date = 'today') {
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.get(`${environment.server_base_url}/retraits.php?auteur_operation=${auteur_operation}&activated=${activated}&is_by_client=${is_by_client}`);
+        return this.httpClient.get(`${environment.server_base_url}/retraits.php?auteur_operation=${auteur_operation}&activated=${activated}&is_by_client=${is_by_client}&date=${date}`);
     }
 
     getRetraitProduit(auteur_operation: string, id?: number) {

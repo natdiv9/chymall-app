@@ -17,6 +17,18 @@ switch ($request_method)
 
         }
 
+        if(isset($_GET['date']) && $_GET['date'] != 'today')
+        {
+            $res = $retraitsDAO->getByDate($_GET['date']);
+            response($res);
+            return;
+        } else if($_GET['date'] == 'today')
+        {
+            $res = $retraitsDAO->getByDate(date('Y-m-d'));
+            response($res);
+            return;
+        }
+
         if(isset($_GET['auteur_operation'], $_GET['activated']))
         {
 

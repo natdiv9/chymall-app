@@ -16,6 +16,7 @@ export class RetraitsAllComponent implements OnInit {
   message: string;
   synthese: any;
     private closeResult: string;
+    datetext: string;
 
     constructor(private crudService: CrudService,
                 private authService: AuthService,
@@ -45,9 +46,10 @@ export class RetraitsAllComponent implements OnInit {
         }
     }
 
-  refresh() {
+  refresh(date = 'today') {
       this.chargement = true;
-      this.crudService.getRetraits(this.authService.currentUser.username).subscribe(
+      this.datetext = (date === 'today') ? 'Aujourd\'hui' : (new Date(date)).toDateString();
+      this.crudService.getRetraits(this.authService.currentUser.username, 'false', 'false', date).subscribe(
           (reponse: any) => {
               if (reponse.status === true) {
                   this.chargement = false;
@@ -83,7 +85,6 @@ export class RetraitsAllComponent implements OnInit {
                         this.message = 'Aucune information correspondante!';
                         this.open(content);
                     }
-                    console.log(reponse.data);
                 } else {
                     this.chargement = false;
                     this.message = 'Aucune information correspondante';
@@ -95,5 +96,9 @@ export class RetraitsAllComponent implements OnInit {
                 console.log(error);
             }
         );
+    }
+
+    changer_date(value: string) {
+        this.refresh(value);
     }
 }

@@ -56,6 +56,7 @@ switch ($request_method)
         $_POST = json_decode(file_get_contents('php://input'), true);
         if(isset($_POST['telephone'], $_POST['prenom'], $_POST['nom'], $_POST['adresse'], $_POST['ville'], $_POST['pays'], $_POST['ajoute_par'], $_POST['auteur_operation']))
         {
+            // TO IMPLEMENT htmlspecialchars($str, ENT_NOQUOTES, "UTF-8")
             $clientsDAO = new Clients();
             $client = array($_POST['telephone'], (isset($_POST['email'])? $_POST['email']: ''), ucfirst(strtolower($_POST['prenom'])), ucfirst(strtolower($_POST['nom'])), $_POST['adresse'], ucfirst(strtolower($_POST['ville'])), ucfirst(strtolower($_POST['pays'])),
                 $_POST['nom_beneficiaire'], $_POST['prenom_beneficiaire'], $_POST['identifiant_sponsor'], $_POST['ajoute_par']);
@@ -115,13 +116,13 @@ switch ($request_method)
 function response($res) {
     if($res[0]) {
         header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(
+        echo html_entity_decode(json_encode(
             array(
                 "status" => true,
                 "data" => $res[1]
             ),
             JSON_PRETTY_PRINT
-        );
+        ));
     } else {
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode(

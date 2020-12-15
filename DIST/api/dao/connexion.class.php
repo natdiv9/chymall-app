@@ -6,14 +6,17 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Authorization, C
 
 class Connexion
 {
-    public function getConnexion()
+    public static function getConnexion($db_name = 'chymall')
     {
         try {
-            $host = 'mysql:host=localhost;dbname=chymall';
-            $user = 'root';
+            $host = "mysql:host=vt60918-001.privatesql;port=35851;dbname=$db_name";
+            // $host = "mysql:host=localhost;dbname=$db_name";
+            $user = 'chryadmin'; //root
             $pwd = 'LInuxDEbian09';
             $bdd = new PDO($host, $user, $pwd,
-                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+            // $bdd->exec("SET NAMES utf8");
             return $bdd;
 
         } catch (PDOException $e) {
@@ -21,8 +24,9 @@ class Connexion
             echo json_encode(
                 array(
                     "status" => false,
-                    "message" => $e->getMessage(),
-                    "code" => 0
+                    "message" => "Une erreur inatendue est survenue, veuillez contactez votre administrateur",
+                    "code" => 0,
+                    "type" => "WARNING"
                 ),
                 JSON_PRETTY_PRINT
                 );

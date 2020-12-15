@@ -24,8 +24,16 @@ export class AuthService {
   }
 
   logout() {
-    this.currentUser = null;
+    this.currentUser = new Utilisateur();
+    console.log(this.currentUser);
     this.connected = false;
-    this.router.navigate(['/connexion']);
+    this.httpClient.get(`${environment.server_base_url}/authentification.php?logout=chylogout`)
+        .subscribe((response: any) => {
+          console.log('deconnexion destroyed');
+          this.router.navigate(['/connexion']);
+        }, (error => {
+          console.log('deconnexion destroyed => ', error);
+          this.router.navigate(['/connexion']);
+        }));
   }
 }

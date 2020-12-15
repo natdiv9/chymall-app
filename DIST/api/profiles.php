@@ -103,10 +103,18 @@ switch ($request_method)
         break;
     case 'PUT':
         $_PUT = json_decode(file_get_contents('php://input'), true);
+
         if(isset($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['id'], $_PUT['auteur_operation']))
         {
             $profilDAO = new Profils();
             $profil = array($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['username_parain'], $_PUT['password_parain'], $_PUT['id']);
+
+            if(isset($_PUT['activations']) && $_PUT['activations'] == 'activations')
+            {
+                $res = $profilDAO->putActivation($profil, $_PUT['auteur_operation']);
+                return;
+            }
+
             if(isset($_PUT['date_activation']) && $_PUT['date_activation'] == 'activated'){
                 $res = $profilDAO->put($profil, $_PUT['auteur_operation'], true);
             } else {

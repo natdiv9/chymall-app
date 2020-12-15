@@ -21,7 +21,7 @@ export class UtilisateursUpdateComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private crudService: CrudService,
-              private authService: AuthService,
+              public authService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
               private modalService: NgbModal) { }
@@ -70,7 +70,11 @@ export class UtilisateursUpdateComponent implements OnInit {
               username: this.utilisateur.username,
               password: this.utilisateur.pwd,
               service: this.utilisateur.service,
-              droits: this.utilisateur.droits
+              type_user: this.utilisateur.type_user,
+              nom: this.utilisateur.nom,
+              prenom: this.utilisateur.prenom,
+              telephone: this.utilisateur.telephone,
+              bureau: this.utilisateur.bureau,
             });
           }
         }
@@ -79,13 +83,17 @@ export class UtilisateursUpdateComponent implements OnInit {
 
   updateUser(content: any) {
     const utilisateur = {
-      id: this.utilisateur.id,
       username: this.updateUserForm.get('username').value,
       pwd: this.updateUserForm.get('password').value,
       service: this.updateUserForm.get('service').value,
-      droits: this.updateUserForm.get('droits').value,
-      etat: 1,
-      auteur_operation: this.authService.currentUser.username
+      type_user: this.updateUserForm.get('type_user').value,
+      nom: this.updateUserForm.get('nom').value,
+      prenom: this.updateUserForm.get('prenom').value,
+      telephone: this.updateUserForm.get('telephone').value,
+      bureau: this.updateUserForm.get('bureau').value,
+      auteur_operation: this.authService.currentUser.username,
+      etat: this.utilisateur.etat,
+      id: this.utilisateur.id
     };
     this.crudService.putUtilisateur(utilisateur).subscribe(
         (reponse: any) => {

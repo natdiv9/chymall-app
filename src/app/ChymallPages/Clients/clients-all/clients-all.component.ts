@@ -62,7 +62,7 @@ export class ClientsAllComponent implements OnInit {
                 }
                 this.message = 'Echec de recupération de données';
                 console.log(reponse);
-            }
+            }, (error1 => console.log(error1))
         );
     }
 

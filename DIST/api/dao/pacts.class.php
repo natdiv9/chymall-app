@@ -10,7 +10,9 @@ class Pacts
     {
         try{
             require 'connexion.class.php';
-            $this->connexion = Connexion::getConnexion();
+            session_start();
+            $db_name = $_SESSION['connected_user']['database'];
+            $this->connexion = Connexion::getConnexion($db_name);
 
         } catch (Exception | Error $e)
         {

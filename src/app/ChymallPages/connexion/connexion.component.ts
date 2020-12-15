@@ -60,11 +60,13 @@ export class ConnexionComponent implements OnInit {
           this.router.navigate(['/', 'profiles', 'enligne']);
         } else {
           this.router.navigate(['/connexion']);
+          console.log(this.authService.currentUser.service);
         }
       } else {
         this.isChargement = false;
         this.chargement = false;
         this.message = reponse.message;
+        console.log(reponse.message);
       }
     },
         (error1 => {

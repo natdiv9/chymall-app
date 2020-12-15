@@ -7,6 +7,14 @@
     {
         case 'GET':
             $utilisateursDAO = new Utilisateurs();
+
+            if(isset($_GET['logout']) && $_GET['logout'] == 'chylogout')
+            {
+                session_destroy();
+                response(array(true, []));
+                // return;
+            }
+
             if(isset($_GET['auteur_operation']))
             {
                 if(!empty($_GET['id']) && intval($_GET['id'] > 0))
@@ -33,10 +41,10 @@
             break;
         case 'POST':
             $_POST = json_decode(file_get_contents('php://input'), true);
-            if(isset($_POST['username'], $_POST['pwd'], $_POST['service'], $_POST['droits'], $_POST['auteur_operation']))
+            if(isset($_POST['username'], $_POST['pwd'], $_POST['service'], $_POST['type_user'], $_POST['nom'], $_POST['prenom'], $_POST['telephone'], $_POST['bureau'], $_POST['auteur_operation']))
             {
                 $utilisateursDAO = new Utilisateurs();
-                $utilisateur = array($_POST['username'], $_POST['pwd'], $_POST['service'], $_POST['droits']);
+                $utilisateur = array($_POST['username'], $_POST['pwd'], $_POST['service'], $_POST['type_user'], $_POST['nom'], $_POST['prenom'], $_POST['telephone'], $_POST['bureau'], $_POST['auteur_operation']);
                 $res = $utilisateursDAO->post($utilisateur, $_POST['auteur_operation']);
                 response($res);
             } else
@@ -51,10 +59,10 @@
             break;
         case 'PUT':
             $_PUT = json_decode(file_get_contents('php://input'), true);
-            if(isset($_PUT['id'], $_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['droits'], $_PUT['etat'],  $_PUT['auteur_operation']))
+            if(isset($_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['type_user'], $_PUT['nom'], $_PUT['prenom'], $_PUT['telephone'], $_PUT['bureau'], $_PUT['auteur_operation']))
             {
                 $utilisateursDAO = new Utilisateurs();
-                $utilisateur = array($_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['droits'], $_PUT['etat'], $_PUT['id']);
+                $utilisateur = array($_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['type_user'], $_PUT['nom'], $_PUT['prenom'], $_PUT['telephone'], $_PUT['bureau'], $_PUT['etat'], $_PUT['id'], $_PUT['auteur_operation']);
                 $res = $utilisateursDAO->put($utilisateur, $_PUT['auteur_operation']);
                 response($res);
             } else

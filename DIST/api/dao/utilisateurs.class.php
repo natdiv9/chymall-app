@@ -26,7 +26,7 @@ class Utilisateurs
        {
            $stmt = ($id)
                ? $this->connexion->prepare("SELECT * FROM chy_utilisateurs WHERE id=$id LIMIT 1")
-               : $stmt = $this->connexion->prepare("SELECT * FROM chy_utilisateurs");
+               : $stmt = $this->connexion->prepare("SELECT *, DATE_FORMAT(date, '%d-%m-%Y %H:%i:%s') as dateformat FROM chy_utilisateurs");
 
            $res = $stmt->execute();
 
@@ -53,7 +53,7 @@ class Utilisateurs
     {
        try
        {
-           $stmt = $this->connexion->prepare("INSERT INTO chy_utilisateurs(username, pwd, service, droits) VALUES(?, ?, ?, ?)");
+           $stmt = $this->connexion->prepare("INSERT INTO chy_utilisateurs(username, pwd, service, type_user, nom, prenom, telephone, bureau, ajoute_par) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
            $res = $stmt->execute(
                $utilisateur
            );
@@ -109,10 +109,14 @@ class Utilisateurs
 
             if($res) {
                 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                // $data = array_map('htmlentities', $data, array(), array());
                 $is_auth = (sizeof($data) > 0) ? true : false;
                 if($is_auth) {
+                    session_start();
                     $data = $data[0];
                     $data["pwd"] = NULL;
+                    $data['database'] = 'chymall_'.strtolower($data['bureau']);
+                    $_SESSION['connected_user'] =$data;
                     OperationTracer::post([$data["username"], 'CONNEXION', $this->table_name], $this->connexion);
                     return array(true, $data);
                 }

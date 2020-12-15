@@ -18,8 +18,15 @@
             <thead>
             <tr>
                 <th class="text-center">#</th>
-                <th class="text-center">Nom d'utilisateur</th>
+                <th class="text-center">Username</th>
+                <th class="text-center">Prenom</th>
+                <th class="text-center">Nom de famille</th>
+                <th class="text-center">Téléphone</th>
                 <th class="text-center">Service</th>
+                <th class="text-center">Niveau</th>
+                <th class="text-center">Bureau</th>
+                <th class="text-center">Ajouté par</th>
+                <th class="text-center">Date</th>
                 <th class="text-center">Etat</th>
                 <th class="text-center">Actions</th>
             </tr>
@@ -27,8 +34,15 @@
             <tbody>
             <tr *ngFor="let utilisateur of utilisateurs; let i = index">
                 <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
-                <td class="text-center">{{utilisateur.username}}</td>
-                <td class="text-center">{{utilisateur.service === 'retrait' ? 'Retrait Produit': utilisateur.service}}</td>
+                <td class="text-center text-wrap">{{utilisateur.username}}</td>
+                <td class="text-center text-wrap">{{utilisateur.prenom}}</td>
+                <td class="text-center text-wrap">{{utilisateur.nom}}</td>
+                <td class="text-center text-wrap">{{utilisateur.telephone}}</td>
+                <td class="text-center text-wrap">{{utilisateur.service === 'retrait' ? 'Retrait Produit': utilisateur.service}}</td>
+                <td class="text-center text-wrap">{{utilisateur.type_user}}</td>
+                <td class="text-center text-wrap">{{utilisateur.bureau}}</td>
+                <td class="text-center text-wrap">{{utilisateur.ajoute_par}}</td>
+                <td class="text-center text-wrap">{{utilisateur.dateformat}}</td>
                 <td class="text-center">
                     <div [class]="'badge badge-pill' + (utilisateur.etat==1 ? ' badge-success' : ' badge-danger')">{{utilisateur.etat == 1 ? 'actif' : 'inactif'}}</div>
                 </td>

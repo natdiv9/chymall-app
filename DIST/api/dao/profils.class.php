@@ -11,7 +11,9 @@ class Profils
     {
         try{
             require 'connexion.class.php';
-            $this->connexion = Connexion::getConnexion();
+            session_start();
+            $db_name = $_SESSION['connected_user']['database'];
+            $this->connexion = Connexion::getConnexion($db_name);
 
         } catch (Exception | Error $e)
         {
@@ -90,9 +92,9 @@ class Profils
         try
         {
             if ($is_by_client && $id_client != 0){
-                $stmt = $this->connexion->prepare("SELECT profiles.*, DATE_FORMAT(profiles.date, '%d-%m-%Y %H:%i:%s') as date_ajout, clients.identifiant, clients.nom, clients.prenom, clients.telephone FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.id_client='$id_client' AND profiles.username='_incomplet' AND profiles.etat=1 ORDER BY profiles.id DESC");
+                $stmt = $this->connexion->prepare("SELECT profiles.*, DATE_FORMAT(profiles.date, '%d-%m-%Y %H:%i:%s') as date_ajout, clients.identifiant, clients.nom, clients.prenom, clients.telephone FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.id_client='$id_client' AND profiles.username='_incomplet' AND profiles.etat=1");
             } else {
-                $stmt = $this->connexion->prepare("SELECT profiles.*, DATE_FORMAT(profiles.date, '%d-%m-%Y %H:%i:%s') as date_ajout, clients.identifiant, clients.nom, clients.prenom, clients.telephone FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.username='_incomplet' AND profiles.etat=1 ORDER BY profiles.id DESC");
+                $stmt = $this->connexion->prepare("SELECT profiles.*, DATE_FORMAT(profiles.date, '%d-%m-%Y %H:%i:%s') as date_ajout, clients.identifiant, clients.nom, clients.prenom, clients.telephone FROM chy_profiles profiles INNER JOIN chy_clients clients ON clients.id=profiles.id_client WHERE profiles.username='_incomplet' AND profiles.etat=1");
             }
 
             $res = $stmt->execute();
@@ -274,7 +276,8 @@ class Profils
                     return array(false, "message" => $st_doublon->errorInfo()[2]);
                 }
 
-            } else {
+            }
+            else {
                 $st_doublon = $this->connexion->prepare("SELECT * FROM `chy_profiles` WHERE username='$profil[1]'");
                 $re_doublon = $st_doublon->execute();
                 if($re_doublon) {
@@ -336,6 +339,31 @@ class Profils
             } else
             {
                 OperationTracer::post([$auteur_operation, 'TENTATIVE DE MISE A JOUR', $this->table_name], $this->connexion);
+                return array(false, "message" => $stmt->errorInfo()[2]);
+            }
+        } catch (Error | Exception $e)
+        {
+            OperationTracer::post([$auteur_operation, 'TENTATIVE DE MISE A JOUR', $this->table_name], $this->connexion);
+            return array(false, "message" => $e->getMessage());
+        }
+    }
+    public function putActivation($profil, $auteur_operation)
+    {
+        try
+        {
+            $stmt = $this->connexion->prepare(
+                "UPDATE chy_profiles SET id_client=?, username=?, niveau_adhesion=?, capital=?, produit_trading=?, produit_adhesion=?, activation_compte=?, activation_trading=?, solde=?, etat=?, etat_trading=?, etat_activation=?, password=?, etat_produit_adhesion=? , username_parain=?, password_parain=? WHERE id=?");
+            $res = $stmt->execute(
+                $profil
+            );
+
+            if($res)
+            {
+                OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
+                return array(true, []);
+            } else
+            {
+                OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
                 return array(false, "message" => $stmt->errorInfo()[2]);
             }
         } catch (Error | Exception $e)

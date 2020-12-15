@@ -11,7 +11,9 @@ class Clients
     {
         try{
             require 'connexion.class.php';
-            $this->connexion = Connexion::getConnexion();
+            session_start();
+            $db_name = $_SESSION['connected_user']['database'];
+            $this->connexion = Connexion::getConnexion($db_name);
 
         } catch (Exception | Error $e)
         {
@@ -30,9 +32,16 @@ class Clients
 
             $res = $stmt->execute();
 
-            if($res) {
+            if($res)
+            {
                 // OperationTracer::post([$auteur_operation, 'LECTURE', $this->table_name], $this->connexion);
-                return array(true, $stmt->fetchAll(PDO::FETCH_ASSOC));
+                foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){
+                    // $array[] = array_map('htmlentities', $row, array(), array());
+                    $array[] = $row;
+            }
+
+            return array(true, $array);
+
             }else{
                 // DEVELOPMENT
                 // OperationTracer::post([$auteur_operation, 'TENTATIVE DE LECTURE', $this->table_name], $this->connexion);

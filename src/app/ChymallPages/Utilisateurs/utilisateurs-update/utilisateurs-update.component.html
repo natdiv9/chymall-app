@@ -1,59 +1,101 @@
-<div class="main-card mb-3 card">
+<div class="main-card mb-3 card" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <div class="card-body"><h5 class="card-title">
         <strong>MODIFIER UTILISATEUR</strong>
+        <button class="btn btn-danger float-right">
+            Supprimer
+        </button>
     </h5>
-        <div *ngIf="chargement" class="mt-5 mb-5" style="text-align: center;">
-            <img src="./assets/images/gifs/en_cours.gif" width="100px" border="0">
-            <br>
-            Chargement de données en cours..
-        </div>
-        <form *ngIf="!chargement" [formGroup]="updateUserForm" (ngSubmit)="updateUser(content)">
+        <form [formGroup]="updateUserForm" (ngSubmit)="updateUser(content)">
+            <div class="form-row">
+                <div class="col-md-4">
+                    <div class="position-relative form-group"><label for="prenom">Prenom</label><input
+                            formControlName="prenom"
+                            id="prenom"
+                            type="text"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="position-relative form-group"><label for="nom">Nom de famille</label><input
+                            formControlName="nom"
+                            id="nom"
+                            type="text"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="position-relative form-group"><label for="telephone">Téléphone</label><input
+                            formControlName="telephone"
+                            id="telephone"
+                            type="text"
+                            class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
             <div class="form-row">
                 <div class="col-md-6">
-                    <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label>
-                        <input formControlName="username"
-                               id="username"
-                               type="text"
-                               [value]="utilisateur.username"
-                               class="form-control">
+                    <div class="position-relative form-group"><label for="username">Nom d'utilisateur</label><input
+                            formControlName="username"
+                            id="username"
+                            type="text"
+                            class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="position-relative form-group"><label for="password">Password</label><input
-                            formControlName="password" id="password" type="text" [value]="utilisateur.pwd"
+                            formControlName="password" id="password" type="text"
                             class="form-control"></div>
                 </div>
             </div>
+            <div class="divider"></div>
             <div class="form-row">
-                <div class="col-md-6">
-                    <div class="position-relative form-group"><label for="exampleSelect">Services</label>
-                        <select formControlName="service" id="exampleSelect" class="form-control">
-                          <option [value]="utilisateur.service" selected [disabled]="true">{{utilisateur.service}}</option>
-                            <option value="adhesion">Adhésion</option>
-                            <option value="comptabilite">Comptabilité</option>
-                            <option value="retrait">Retrait Produit</option>
-                            <option value="technique">Technique</option>
-                            <option value="stock">Gestion de stock</option>
-                            <option value="transfert">Transfert de point</option>
+                <div class="col-md-4">
+                    <div class="position-relative form-group"><label for="type_user">Type utilisateur</label>
+                        <select formControlName="type_user" id="type_user" class="form-control" #type_user>
+                            <option value="USER">Utilisateur</option>
+                            <option value="ADMIN">Administrateur</option>
+                            <option *ngIf="authService.currentUser.type_user === 'SUPADMIN'" value="SUPADMIN">Super
+                                administrateur
+                            </option>
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="position-relative form-group"><label for="droits">Type utilisateur</label>
-                        <select formControlName="droits" id="droits" class="form-control">
-                            <option value="2">Utilisateur simple</option>
-                            <option value="3">Administrateur</option>
+                <div class="col-md-4">
+                    <div class="position-relative form-group"><label for="bureau">Bureau</label>
+                        <select formControlName="bureau" id="bureau" class="form-control">
+                            <option *ngIf="authService.currentUser.type_user === 'ADMIN'" [value]="authService.currentUser.bureau" selected>{{authService.currentUser.bureau}}</option>
+                            <option *ngIf="authService.currentUser.type_user === 'SUPADMIN'" value="Lubumbashi">Lubumbashi</option>
+                            <option *ngIf="authService.currentUser.type_user === 'SUPADMIN'" value="Kasumbalesa">Kasumbalesa</option>
+                            <option *ngIf="authService.currentUser.type_user === 'SUPADMIN'" value="Likasi">Likasi</option>
+                            <option *ngIf="authService.currentUser.type_user === 'SUPADMIN'" value="Kolwezi">Kolwezi</option>
+                            <option *ngIf="authService.currentUser.type_user === 'SUPADMIN'" value="Kinshasa">Kinshasa</option>
                         </select>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="position-relative form-group"><label for="service">Services</label>
+                        <select formControlName="service" id="service" #service class="form-control">
+                            <option  selected>Service de l'utilisateur</option>
+                            <option *ngIf="type_user.value !== 'USER'" value="admin">Administration</option>
+                            <option *ngIf="type_user.value === 'USER'" value="adhesion">Adhésion</option>
+                            <option *ngIf="type_user.value === 'USER'" value="comptabilite">Comptabilité</option>
+                            <option *ngIf="type_user.value === 'USER'" value="retrait">Retrait Produit</option>
+                            <option *ngIf="type_user.value === 'USER'" value="technique">Technique</option>
+                            <option *ngIf="type_user.value === 'USER'" value="transfert">Transfert de point</option>
+                            <option *ngIf="type_user.value === 'USER'" value="profile-enligne">Profile en ligne</option>
+                        </select>
+                        <span class="text-muted">{{service.value}}</span>
+                    </div>
+                </div>
+
             </div>
-            <button class="mt-2 btn btn-primary float-right" [disabled]="updateUserForm.invalid">Modifier utilisateur
+            <button class="mt-2 btn btn-primary float-right" [disabled]="updateUserForm.invalid" type="submit">Modifier
+                utilisateur
             </button>
         </form>
     </div>
 </div>
-
-
 
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">

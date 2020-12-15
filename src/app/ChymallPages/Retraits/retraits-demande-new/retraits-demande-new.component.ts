@@ -124,6 +124,8 @@ export class RetraitsDemandeNewComponent implements OnInit {
                 if (reponse.status === true) {
                     this.message = 'Demande enregistrée avec succcès';
                     this.demandeRetraitForm.reset();
+                    this.frais_retrait = 0;
+                    this.montant_remis = 0;
                     this.message_body = `CODE DE RETRAIT: ${reponse.data.code}`;
                     const _document = window.document.body.innerHTML;
                     const facture =

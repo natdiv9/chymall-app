@@ -71,7 +71,8 @@ export class ProfilesAllComponent implements OnInit {
         this.crudService.putProfile(Object.assign(
             this.selected_profile,
             {
-            etat_trading: 1,
+                etat_trading: 1,
+                activations: 'activations',
                 auteur_operation: this.authService.currentUser.username
             }
         )).subscribe(
@@ -100,6 +101,7 @@ export class ProfilesAllComponent implements OnInit {
             this.selected_profile,
             {
                 etat_activation: 1,
+                activations: 'activations',
                 auteur_operation: this.authService.currentUser.username
             }
         )).subscribe(

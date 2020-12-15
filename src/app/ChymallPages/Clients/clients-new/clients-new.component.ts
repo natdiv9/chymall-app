@@ -61,7 +61,7 @@ export class ClientsNewComponent implements OnInit {
       prenom: ['', [Validators.required]],
       nom: ['', [Validators.required]],
       adresse: [''],
-      ville: ['Lubumbashi'],
+      ville: [this.authService.currentUser.bureau],
       pays: ['RD Congo'],
       nom_beneficiaire: '',
       prenom_beneficiaire: '',

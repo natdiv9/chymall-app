@@ -34,13 +34,13 @@ switch ($request_method)
 function response($res) {
     if($res[0]) {
         header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(
+        echo html_entity_decode(json_encode(
             array(
                 "status" => true,
                 "data" => $res[1]
             ),
             JSON_PRETTY_PRINT
-        );
+        ));
     } else {
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode(

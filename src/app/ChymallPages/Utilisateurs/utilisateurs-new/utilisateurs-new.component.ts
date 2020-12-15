@@ -20,7 +20,7 @@ export class UtilisateursNewComponent implements OnInit {
               private router: Router,
               private modalService: NgbModal,
               private crudService: CrudService,
-              private authService: AuthService) { }
+              public authService: AuthService) { }
 
   ngOnInit() {
     this.initForm();
@@ -56,10 +56,14 @@ export class UtilisateursNewComponent implements OnInit {
 
   initForm() {
     this.newUserForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
       password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
       service: ['', [Validators.required]],
-      droits: ['', [Validators.required]]
+      type_user: ['', [Validators.required]],
+      nom: ['', [Validators.required]],
+      prenom: ['', [Validators.required]],
+      telephone: ['', [Validators.pattern(/[0-9]{9,}/)]],
+      bureau: ['', [Validators.required]]
     });
   }
 
@@ -68,7 +72,11 @@ export class UtilisateursNewComponent implements OnInit {
       username: this.newUserForm.get('username').value,
       pwd: this.newUserForm.get('password').value,
       service: this.newUserForm.get('service').value,
-      droits: this.newUserForm.get('droits').value,
+      type_user: this.newUserForm.get('type_user').value,
+      nom: this.newUserForm.get('nom').value,
+      prenom: this.newUserForm.get('prenom').value,
+      telephone: this.newUserForm.get('telephone').value,
+      bureau: this.newUserForm.get('bureau').value,
       auteur_operation: this.authService.currentUser.username
     };
     this.crudService.addUtilisateur(utilisateur).subscribe(
