@@ -16,6 +16,8 @@ export class ClientsAllComponent implements OnInit {
     message = '';
     closeResult: string;
     chargement: boolean;
+    page = 1;
+    nb_pages: number;
 
     constructor(
         private crudService: CrudService,
@@ -48,13 +50,16 @@ export class ClientsAllComponent implements OnInit {
         this.refresh();
     }
 
-    refresh() {
+    refresh(page = 1) {
         this.chargement = true;
-        this.crudService.getClients(this.authService.currentUser.username).subscribe(
+        const id = undefined;
+        this.crudService.getClients(this.authService.currentUser.username, id, page).subscribe(
             (reponse: any) => {
                 if (reponse.status === true) {
                     this.chargement = false;
-                    this.clients = reponse.data;
+                    this.clients = reponse.data.array;
+                    this.nb_pages = reponse.data.nb_pages;
+                    // console.log(reponse.data);
                 } else {
                     this.chargement = false;
                     this.message = 'Echec de recupération de données';
@@ -92,5 +97,9 @@ export class ClientsAllComponent implements OnInit {
 
     validerSuppression(content: any, c: any) {
 
+    }
+
+    onPageChange(event: any) {
+        this.refresh(+event);
     }
 }

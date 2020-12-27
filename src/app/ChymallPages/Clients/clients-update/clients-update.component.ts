@@ -82,7 +82,7 @@ export class ClientsUpdateComponent implements OnInit {
               this.client = response.data[0];
               this.identifiant = this.client.identifiant;
               this.updateCientForm = this.formBuilder.group({
-                telephone: this.client.telephone,
+                telephone: [this.client.telephone, Validators.pattern(/[0-9]{9,}/)],
                 email: [this.client.email, [Validators.email]],
                 prenom: this.client.prenom,
                 nom: this.client.nom,

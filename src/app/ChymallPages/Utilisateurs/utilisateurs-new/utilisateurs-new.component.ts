@@ -86,7 +86,11 @@ export class UtilisateursNewComponent implements OnInit {
             this.open(content);
             this.newUserForm.reset();
           } else {
-            this.message = 'Echec de l\'enregistrement!';
+            if (reponse.message === 'DOUBLON') {
+              this.message = 'Cet utilisateur existe dans le système';
+            } else {
+              this.message = 'La modification a échoué!';
+            }
             this.open(content);
             console.log(reponse.message);
           }

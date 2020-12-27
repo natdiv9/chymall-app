@@ -73,8 +73,11 @@
           </div>
         </td>
       </tr>
-      <div class="col-12 mt-5 divider"></div>
-      <div class="col-12 mt-5 divider"></div>
+      <tr><td colspan="9"><div class="col-12 mt-5"></div></td></tr>
+      <tr><td colspan="9"><ngb-pagination  class="d-flex justify-content-center"
+                       (pageChange)="onPageChange($event)"
+                       [collectionSize]="nb_pages * 10" [(page)]="page" [maxSize]="5" [rotate]="true"
+                                           [boundaryLinks]="true"></ngb-pagination></td></tr>
       </tbody>
     </table>
   </div>

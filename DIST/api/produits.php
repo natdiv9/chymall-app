@@ -1,5 +1,6 @@
 <?php
 include 'dao/produits.class.php';
+include_once 'functions/htmlspecialchars.php';
 $request_method = $_SERVER["REQUEST_METHOD"];
 
 
@@ -12,8 +13,8 @@ switch ($request_method)
             if(!empty($_GET['id']))
             {
                 // Un produit
-                $id = intval($_GET['id']);
-                $res = $produitDAO->get($id, $_GET['auteur_operation']);
+                $id = intval(htmlspecialchars($_GET['id']));
+                $res = $produitDAO->get($id, htmlspecialchars($_GET['auteur_operation']));
                 response($res);
             } else {
                 // Tous les produits
@@ -37,7 +38,8 @@ switch ($request_method)
         {
             $produitDAO = new Produits();
             $produit = array($_POST['designation'], $_POST['stock_initial'], $_POST['stock_final'], $_POST['pacts']);
-            $res = $produitDAO->post($produit, $_POST['auteur_operation']);
+            $data = array_to_hsc($produit);
+            $res = $produitDAO->post($data, htmlspecialchars($_POST['auteur_operation']));
             response($res);
         } else
         {
@@ -55,7 +57,8 @@ switch ($request_method)
         {
             $produitDAO = new Produits();
             $produit = array($_PUT['designation'], $_PUT['stock_initial'], $_PUT['stock_final'], $_PUT['id']);
-            $res = $produitDAO->put($produit, $_PUT['auteur_operation']);
+            $data = array_to_hsc($produit);
+            $res = $produitDAO->put($data, htmlspecialchars($_PUT['auteur_operation']));
             response($res);
         } else
         {

@@ -1,12 +1,3 @@
-<!--div class="card">
-    <div class="widget-numbers text-success float-right ">Total du jour: <span>${{synthese.total_retrait_today}}</span></div>
-    <select class="float-right mr-4" id="exampleSelect">
-        <option value="" [disabled]="true">Trier par</option>
-        <option value="today">Aujourd'hui</option>
-        <option value="effectue">Effectué</option>
-        <option value="attente">En attente</option>
-    </select>
-</div-->
 <div class="main-card mb-3 card no-shadow rm-border bg-transparent widget-chart">
   <div class="card-body">
     <h5 class="card-title">
@@ -14,13 +5,20 @@
     </h5>
     <div class="divider"></div>
     <div class="row">
-      <div class="col-12" style="text-align: center">
+      <div class="col-9" style="text-align: center">
         <div class="search-wrapper" [class.active]="true">
           <div class="input-holder">
             <input type="text" #input_id_client placeholder="Entrez un identifiant du client.." class="search-input">
             <button (click)="rechercher(input_id_client, content)"  class="search-icon"><span></span></button>
           </div>
         </div>
+      </div>
+      <div class="col-md-3 position-relative form-group float-right">
+        <input id="date" #date
+               (change)="changer_date(date.value)"
+               type="date"
+               placeholder="Choisir une date"
+               class="form-control">
       </div>
     </div>
     <div class="divider"></div>
@@ -30,11 +28,17 @@
 <div class="main-card mb-3 card">
   <div class="card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      <strong>Total du jour: <span class="text-success">${{synthese.total_retrait_today}}</span></strong>
-      <button (click)="refresh()"
-              class="btn-icon btn-icon-only  btn btn-outline-success float-right">
-        <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
-      </button>
+      <div class="row">
+        <div class="col-md-4 text-success">
+          {{datetext}}
+        </div>
+        <div class="col-md-8 float-right">
+          <button (click)="refresh()"
+                  class="btn-icon btn-icon-only  btn btn-outline-success float-right">
+            <i class="pe-7s-refresh-2 btn-icon-wrapper" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
       <div class="float-right mr-5"></div>
     </div>
   </div>

@@ -20,7 +20,10 @@ export class ConnexionComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.chargement = false;
+    this.chargement = true;
+    setTimeout(() => {
+      this.chargement = false;
+    }, 2000);
     this.initForm();
   }
 

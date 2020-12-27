@@ -3,6 +3,7 @@ import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {Retrait} from '../../../ChymallModels/models/retrait';
 import {AuthService} from '../../../ChymallServices/auth/auth.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Datetranslate} from '../../../ChymallServices/helpers/datetranslate';
 
 @Component({
   selector: 'app-retraits-all',
@@ -48,7 +49,7 @@ export class RetraitsAllComponent implements OnInit {
 
   refresh(date = 'today') {
       this.chargement = true;
-      this.datetext = (date === 'today') ? 'Aujourd\'hui' : (new Date(date)).toDateString();
+      this.datetext = (date === 'today') ? 'Aujourd\'hui' : Datetranslate.formatInFrench(new Date(date));
       this.crudService.getRetraits(this.authService.currentUser.username, 'false', 'false', date).subscribe(
           (reponse: any) => {
               if (reponse.status === true) {

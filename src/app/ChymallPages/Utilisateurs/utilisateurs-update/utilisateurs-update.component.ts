@@ -18,6 +18,7 @@ export class UtilisateursUpdateComponent implements OnInit {
   id: string;
   message: string;
   chargement: boolean;
+  get_data = false;
 
   constructor(private formBuilder: FormBuilder,
               private crudService: CrudService,
@@ -68,14 +69,15 @@ export class UtilisateursUpdateComponent implements OnInit {
             this.chargement = false;
             this.updateUserForm = this.formBuilder.group({
               username: this.utilisateur.username,
-              password: this.utilisateur.pwd,
+              password: [this.utilisateur.pwd],
               service: this.utilisateur.service,
               type_user: this.utilisateur.type_user,
               nom: this.utilisateur.nom,
               prenom: this.utilisateur.prenom,
-              telephone: this.utilisateur.telephone,
+              telephone: [this.utilisateur.telephone, [Validators.pattern(/[0-9]{9,}/)]],
               bureau: this.utilisateur.bureau,
             });
+            this.get_data = true;
           }
         }
     );
@@ -101,8 +103,13 @@ export class UtilisateursUpdateComponent implements OnInit {
             this.message = 'Utilisateur enregistré avec succès!';
             this.open(content);
             this.updateUserForm.reset();
+            this.router.navigate(['/', 'utilisateurs', 'all']);
           } else {
-            this.message = 'Echec de l\'enregistrement!';
+            if (reponse.message === 'DOUBLON') {
+              this.message = 'Cet utilisateur existe dans le système';
+            } else {
+              this.message = 'La modification a échoué!';
+            }
             this.open(content);
             console.log(reponse.message);
           }

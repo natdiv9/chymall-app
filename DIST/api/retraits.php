@@ -1,5 +1,6 @@
 <?php
 include 'dao/retraits.class.php';
+include_once 'functions/htmlspecialchars.php';
 $request_method = $_SERVER["REQUEST_METHOD"];
 
 
@@ -64,7 +65,8 @@ switch ($request_method)
         {
             $retraitDAO = new Retraits();
             $retrait = array($_POST['id_profile'], $_POST['montant'], $_POST['nom'], $_POST['prenom'], $_POST['frais_retrait'], $_POST['montant_remis'], $_POST['operateur_transfert']);
-            $res = $retraitDAO->post($retrait, $_POST['auteur_operation']);
+            $data = array_to_hsc($retrait);
+            $res = $retraitDAO->post($data, htmlspecialchars($_POST['auteur_operation']));
             response($res);
         } else
         {
@@ -82,7 +84,8 @@ switch ($request_method)
         {
             $retraitDAO = new Retraits();
             $retrait = array($_PUT['id_profile'], $_PUT['montant'], $_PUT['etat'], $_PUT['operateur_transfert'], $_PUT['operateur_validation'],  $_PUT['id']);
-            $res = $retraitDAO->put($retrait, $_PUT['auteur_operation']);
+            $data = array_to_hsc($retrait);
+            $res = $retraitDAO->put($data, htmlspecialchars($_PUT['auteur_operation']));
             response($res);
         } else
         {

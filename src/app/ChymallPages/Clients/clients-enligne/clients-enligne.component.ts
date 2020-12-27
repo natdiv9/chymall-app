@@ -57,7 +57,7 @@ export class ClientsEnligneComponent implements OnInit {
 
   initForm() {
     this.newClientForm = this.formBuilder.group({
-      telephone: ['', [Validators.required]],
+      telephone: ['', [Validators.required], Validators.pattern(/[0-9]{9,}/)],
       email: ['', [Validators.email]],
       prenom: ['', [Validators.required]],
       nom: ['', [Validators.required]],

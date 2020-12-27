@@ -1,5 +1,6 @@
 <?php
     include 'dao/utilisateurs.class.php';
+    include_once 'functions/htmlspecialchars.php';
     $request_method = $_SERVER["REQUEST_METHOD"];
 
 
@@ -7,13 +8,6 @@
     {
         case 'GET':
             $utilisateursDAO = new Utilisateurs();
-
-            if(isset($_GET['logout']) && $_GET['logout'] == 'chylogout')
-            {
-                session_destroy();
-                response(array(true, []));
-                // return;
-            }
 
             if(isset($_GET['auteur_operation']))
             {
@@ -45,7 +39,10 @@
             {
                 $utilisateursDAO = new Utilisateurs();
                 $utilisateur = array($_POST['username'], $_POST['pwd'], $_POST['service'], $_POST['type_user'], $_POST['nom'], $_POST['prenom'], $_POST['telephone'], $_POST['bureau'], $_POST['auteur_operation']);
-                $res = $utilisateursDAO->post($utilisateur, $_POST['auteur_operation']);
+                $data = array_to_hsc($utilisateur);
+                $pwd = password_hash( $_POST['pwd'], PASSWORD_DEFAULT);
+                $data[1] = $pwd;
+                $res = $utilisateursDAO->post($data, $_POST['auteur_operation']);
                 response($res);
             } else
             {
@@ -62,7 +59,10 @@
             if(isset($_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['type_user'], $_PUT['nom'], $_PUT['prenom'], $_PUT['telephone'], $_PUT['bureau'], $_PUT['auteur_operation']))
             {
                 $utilisateursDAO = new Utilisateurs();
-                $utilisateur = array($_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['type_user'], $_PUT['nom'], $_PUT['prenom'], $_PUT['telephone'], $_PUT['bureau'], $_PUT['etat'], $_PUT['id'], $_PUT['auteur_operation']);
+                $utilisateur = array($_PUT['username'], $_PUT['pwd'], $_PUT['service'], $_PUT['type_user'], $_PUT['nom'], $_PUT['prenom'], $_PUT['telephone'], $_PUT['bureau'], $_PUT['etat'], $_PUT['id']);
+                $data = array_to_hsc($utilisateur);
+                $pwd = $_PUT['pwd'];
+                $data[1] = $pwd;
                 $res = $utilisateursDAO->put($utilisateur, $_PUT['auteur_operation']);
                 response($res);
             } else

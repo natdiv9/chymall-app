@@ -1,6 +1,7 @@
 <?php
 
 include 'dao/operations.class.php';
+include_once 'functions/htmlspecialchars.php';
 $request_method = $_SERVER["REQUEST_METHOD"];
 
 

@@ -24,9 +24,25 @@ class Utilisateurs
     {
        try
        {
-           $stmt = ($id)
-               ? $this->connexion->prepare("SELECT * FROM chy_utilisateurs WHERE id=$id LIMIT 1")
-               : $stmt = $this->connexion->prepare("SELECT *, DATE_FORMAT(date, '%d-%m-%Y %H:%i:%s') as dateformat FROM chy_utilisateurs");
+           session_start();
+           $type_user = $_SESSION['connected_user']['type_user'];
+           $bureau = $_SESSION['connected_user']['bureau'];
+           if($type_user == 'SUPADMIN')
+           {
+               $stmt = ($id)
+                   ? $this->connexion->prepare("SELECT * FROM chy_utilisateurs WHERE id=$id LIMIT 1")
+                   : $stmt = $this->connexion->prepare("SELECT *, DATE_FORMAT(date, '%d-%m-%Y %H:%i:%s') as dateformat FROM chy_utilisateurs");
+
+           } else if($type_user == 'ADMIN')
+           {
+               $stmt = ($id)
+                   ? $this->connexion->prepare("SELECT * FROM chy_utilisateurs WHERE id=$id LIMIT 1")
+                   : $stmt = $this->connexion->prepare("SELECT *, DATE_FORMAT(date, '%d-%m-%Y %H:%i:%s') as dateformat FROM chy_utilisateurs WHERE  bureau='$bureau' AND type_user<>'SUPADMIN'");
+
+           } else
+           {
+               return array(true, []);
+           }
 
            $res = $stmt->execute();
 
@@ -53,19 +69,34 @@ class Utilisateurs
     {
        try
        {
-           $stmt = $this->connexion->prepare("INSERT INTO chy_utilisateurs(username, pwd, service, type_user, nom, prenom, telephone, bureau, ajoute_par) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-           $res = $stmt->execute(
-               $utilisateur
-           );
+           $st_doublon = $this->connexion->prepare("SELECT * FROM `chy_utilisateurs` WHERE username='$utilisateur[0]'");
+           $re_doublon = $st_doublon->execute();
 
-           if($res)
-           {
-               OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
-               return array(true, []);
-           } else
-           {
+           if($re_doublon) {
+               $data = $st_doublon->fetchAll(PDO::FETCH_ASSOC);
+               $is_first = (sizeof($data) > 0) ? true : false;
+               if(!$is_first) {
+                   $stmt = $this->connexion->prepare("INSERT INTO chy_utilisateurs(username, pwd, service, type_user, nom, prenom, telephone, bureau, ajoute_par) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                   $res = $stmt->execute(
+                       $utilisateur
+                   );
+
+                   if($res)
+                   {
+                       OperationTracer::post([$auteur_operation, 'ECRITURE', $this->table_name], $this->connexion);
+                       return array(true, []);
+                   } else
+                   {
+                       OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
+                       return array(false, "message" => $stmt->errorInfo()[2]);
+                   }
+               } else {
+                   return array(false, "message" => "DOUBLON");
+               }
+
+           }else {
                OperationTracer::post([$auteur_operation, 'TENTATIVE D\'ECRITURE', $this->table_name], $this->connexion);
-               return array(false, "message" => $stmt->errorInfo()[2]);
+               return array(false, "message" => $st_doublon->errorInfo()[2]);
            }
        } catch (Error | Exception $e)
        {
@@ -78,7 +109,7 @@ class Utilisateurs
     {
         try
         {
-            $stmt = $this->connexion->prepare("UPDATE chy_utilisateurs SET username=?, pwd=?, service=?, droits=?, etat=? WHERE id=?");
+            $stmt = $this->connexion->prepare("UPDATE chy_utilisateurs SET username=?, pwd=?, service=?, type_user=?, nom=?, prenom=?, telephone=?, bureau=?, etat=? WHERE id=?");
             $res = $stmt->execute(
                 $utilisateur
             );
@@ -103,17 +134,18 @@ class Utilisateurs
     {
         try
         {
-            $stmt = $this->connexion->prepare("SELECT * FROM chy_utilisateurs WHERE username=? AND pwd=? LIMIT 1");
+            $stmt = $this->connexion->prepare("SELECT * FROM chy_utilisateurs WHERE username=? LIMIT 1");
 
-            $res = $stmt->execute($utilisateur);
+            $res = $stmt->execute([$utilisateur[0]]);
 
             if($res) {
                 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 // $data = array_map('htmlentities', $data, array(), array());
                 $is_auth = (sizeof($data) > 0) ? true : false;
-                if($is_auth) {
+                $data = $data[0];
+                if($is_auth && password_verify($utilisateur[1], $data['pwd']))
+                {
                     session_start();
-                    $data = $data[0];
                     $data["pwd"] = NULL;
                     $data['database'] = 'chymall_'.strtolower($data['bureau']);
                     $_SESSION['connected_user'] =$data;

@@ -1,0 +1,17 @@
+{
+  "name": "Chymall RDC",
+  "lang": "fr",
+  "background_color": "#6610f2",
+  "description": "L'application qui vous permet de faire votre travail en tant que travailleur chez Chymall RDC ",
+  "display": "standalone",
+  "short_name": "CHY RDC",
+  "theme_color": "aliceblue",
+  "icons": [{
+    "src": "src/assets/images/logo.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "related_applications": [{
+    "platform": "web"
+  }]
+}

@@ -5,7 +5,7 @@
             Supprimer
         </button>
     </h5>
-        <form [formGroup]="updateUserForm" (ngSubmit)="updateUser(content)">
+        <form [formGroup]="updateUserForm" (ngSubmit)="updateUser(content)" *ngIf="get_data">
             <div class="form-row">
                 <div class="col-md-4">
                     <div class="position-relative form-group"><label for="prenom">Prenom</label><input
@@ -27,7 +27,7 @@
                     <div class="position-relative form-group"><label for="telephone">Téléphone</label><input
                             formControlName="telephone"
                             id="telephone"
-                            type="text"
+                            type="tel"
                             class="form-control">
                     </div>
                 </div>
@@ -43,7 +43,9 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="position-relative form-group"><label for="password">Password</label><input
+                    <div class="position-relative form-group">
+                        <label for="password">Password</label><input
+                            [readOnly]="true"
                             formControlName="password" id="password" type="text"
                             class="form-control"></div>
                 </div>

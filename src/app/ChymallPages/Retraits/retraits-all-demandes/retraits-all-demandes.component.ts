@@ -3,6 +3,7 @@ import {CrudService} from '../../../ChymallServices/crud/crud.service';
 import {AuthService} from '../../../ChymallServices/auth/auth.service';
 import {Retrait} from '../../../ChymallModels/models/retrait';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Datetranslate} from '../../../ChymallServices/helpers/datetranslate';
 
 @Component({
   selector: 'app-retraits-all-demandes',
@@ -17,6 +18,7 @@ export class RetraitsAllDemandesComponent implements OnInit {
   synthese: any;
   currentRetrait: any;
   closeResult: string;
+    datetext: string;
 
     constructor(private crudService: CrudService,
                 private authService: AuthService,
@@ -95,10 +97,11 @@ export class RetraitsAllDemandesComponent implements OnInit {
         );
     }
 
-  refresh() {
-    this.getResume();
+  refresh(date = 'today') {
+    // this.getResume();
     this.chargement = true;
-    this.crudService.getRetraits(this.authService.currentUser.username).subscribe(
+    this.datetext = (date === 'today') ? 'Aujourd\'hui' : Datetranslate.formatInFrench(new Date(date));
+    this.crudService.getRetraits(this.authService.currentUser.username, 'false', 'false', date).subscribe(
         (reponse: any) => {
           if (reponse.status === true) {
             this.chargement = false;
@@ -147,5 +150,9 @@ export class RetraitsAllDemandesComponent implements OnInit {
                 console.log(error);
             }
         );
+    }
+
+    changer_date(value: string) {
+        this.refresh(value);
     }
 }

@@ -9,9 +9,9 @@ class Connexion
     public static function getConnexion($db_name = 'chymall')
     {
         try {
-            $host = "mysql:host=vt60918-001.privatesql;port=35851;dbname=$db_name";
-            // $host = "mysql:host=localhost;dbname=$db_name";
-            $user = 'chryadmin'; //root
+           // $host = "mysql:host=vt60918-001.privatesql;port=35851;dbname=$db_name";
+            $host = "mysql:host=localhost;dbname=$db_name";
+            $user = 'root'; //'chryadmin'; //root
             $pwd = 'LInuxDEbian09';
             $bdd = new PDO($host, $user, $pwd,
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

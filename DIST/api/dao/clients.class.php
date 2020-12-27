@@ -22,15 +22,29 @@ class Clients
         }
     }
 
-    public function get($id = false, $auteur_operation)
+    public function get($id = false, $auteur_operation, $currentPage = 1)
     {
         try
         {
+            $sql = 'SELECT COUNT(*) AS nb_ligne FROM '.$this->table_name;
+            $count_stmt = $this->connexion->prepare($sql);
+            $count_stmt->execute();
+            $result = $count_stmt->fetch();
+            $nb_ligne = (int) $result['nb_ligne'];
+
+            $parPage = 10;
+            $pages = ceil($nb_ligne / $parPage);
+            $premier = ($currentPage * $parPage) - $parPage;
+
             $stmt = ($id)
                 ? $this->connexion->prepare("SELECT * FROM chy_clients WHERE id=$id LIMIT 1")
-                : $stmt = $this->connexion->prepare("SELECT *, DATE_FORMAT(chy_clients.date, '%d-%m-%Y %H:%i:%s') as date_ajout FROM chy_clients WHERE chy_clients.etat=1 ORDER BY date DESC");
+                : $stmt = $this->connexion->prepare("SELECT *, DATE_FORMAT(chy_clients.date, '%d-%m-%Y %H:%i:%s') as date_ajout FROM chy_clients WHERE chy_clients.etat=1 ORDER BY date DESC LIMIT :premier, :parpage");
 
+
+            $stmt->bindValue(':premier', $premier, PDO::PARAM_INT);
+            $stmt->bindValue(':parpage', $parPage, PDO::PARAM_INT);
             $res = $stmt->execute();
+
 
             if($res)
             {
@@ -40,7 +54,7 @@ class Clients
                     $array[] = $row;
             }
 
-            return array(true, $array);
+            return array(true, array("array" => $array, "nb_ligne" => $nb_ligne, "nb_pages" => $pages, "current_page" => $currentPage));
 
             }else{
                 // DEVELOPMENT

@@ -1,5 +1,6 @@
 <?php
 include 'dao/profils.class.php';
+include_once 'functions/htmlspecialchars.php';
 $request_method = $_SERVER["REQUEST_METHOD"];
 
 
@@ -14,14 +15,14 @@ switch ($request_method)
             {
                 if (!empty($_GET['incomplete']) && $_GET['incomplete'] == 'incomplete')
                 {
-                    $recherche = $_GET['recherche'];
-                    $res = $profilDAO->rechercherProfile($recherche, $_GET['auteur_operation'], true);
+                    $recherche = htmlspecialchars($_GET['recherche']);
+                    $res = $profilDAO->rechercherProfile($recherche, htmlspecialchars($_GET['auteur_operation']), true);
                     response($res);
                 }
                 else
                 {
-                    $recherche = $_GET['recherche'];
-                    $res = $profilDAO->rechercherProfile($recherche, $_GET['auteur_operation']);
+                    $recherche = htmlspecialchars($_GET['recherche']);
+                    $res = $profilDAO->rechercherProfile($recherche, htmlspecialchars($_GET['auteur_operation']));
                     response($res);
                 }
 
@@ -31,11 +32,11 @@ switch ($request_method)
 
             if(isset($_GET['incomplete']) && $_GET['incomplete'] == true){
                 if(!empty($_GET['id']) && $_GET['id'] != 'undefined' && isset($_GET['is_by_client']) && $_GET['is_by_client'] == true) {
-                    $res = $profilDAO->getIncompletProfiles($_GET['incomplete'], $_GET['auteur_operation'], true, $_GET['id']);
+                    $res = $profilDAO->getIncompletProfiles(htmlspecialchars($_GET['incomplete']), htmlspecialchars($_GET['auteur_operation']), true, htmlspecialchars($_GET['id']));
                     response($res);
                     return;
                 } else {
-                    $res = $profilDAO->getIncompletProfiles($_GET['incomplete'], $_GET['auteur_operation']);
+                    $res = $profilDAO->getIncompletProfiles(htmlspecialchars($_GET['incomplete']), htmlspecialchars($_GET['auteur_operation']));
                     response($res);
                     return;
                 }
@@ -47,20 +48,20 @@ switch ($request_method)
 
                 if(isset($_GET['is_by_client']) && $_GET['is_by_client'] == 'true'){
                     // Un profil
-                    $id = intval($_GET['id']);
-                    $res = $profilDAO->getByClient($id, $_GET['auteur_operation']);
+                    $id = intval(htmlspecialchars($_GET['id']));
+                    $res = $profilDAO->getByClient($id, htmlspecialchars($_GET['auteur_operation']));
                     response($res);
                 } else {
                     // Un profil
-                    $id = intval($_GET['id']);
-                    $res = $profilDAO->get($id, $_GET['auteur_operation']);
+                    $id = intval(htmlspecialchars($_GET['id']));
+                    $res = $profilDAO->get($id, htmlspecialchars($_GET['auteur_operation']));
                     response($res);
                 }
 
             } else {
                 // Tous les profils
                 // die("TOUS LES PROFILES");
-                $res = $profilDAO->get(false, $_GET['auteur_operation']);
+                $res = $profilDAO->get(false, htmlspecialchars($_GET['auteur_operation']));
                 response($res);
 
             }
@@ -69,7 +70,7 @@ switch ($request_method)
             header('Content-Type: application/json');
             echo json_encode( array(
                     "status" => false,
-                    "message" => "Data is not complete"
+                    "message" => "Expected data is not complete"
                 )
             );
         }
@@ -80,15 +81,17 @@ switch ($request_method)
         {
             $profilDAO = new Profils();
             $profile = array($_POST['is_online_profile'], $_POST['id_client'], $_POST['password'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['etat'], $_POST['etat_produit_adhesion'], $_POST['username_parain'], $_POST['ajoute_par']);
-            $res = $profilDAO->postOnlineProfile($profile, $_POST['auteur_operation']);
+            $data = array_to_hsc($profile);
+            $res = $profilDAO->postOnlineProfile($data, htmlspecialchars($_POST['auteur_operation']));
             response($res);
             return;
         }
         if(isset($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['ajoute_par'], $_POST['auteur_operation']))
         {
             $profilDAO = new Profils();
-            $profil = array($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['username_parain'], $_POST['password_parain'], $_POST['ajoute_par'],);
-            $res = $profilDAO->post($profil, $_POST['auteur_operation']);
+            $profile = array($_POST['id_client'], $_POST['username'], $_POST['niveau_adhesion'], $_POST['capital'], $_POST['produit_trading'], $_POST['produit_adhesion'], $_POST['activation_compte'], $_POST['activation_trading'], $_POST['etat_trading'], $_POST['etat_activation'], $_POST['username_parain'], $_POST['password_parain'], $_POST['ajoute_par'],);
+            $data = array_to_hsc($profile);
+            $res = $profilDAO->post($data, htmlspecialchars($_POST['auteur_operation']));
             response($res);
         } else
         {
@@ -107,18 +110,19 @@ switch ($request_method)
         if(isset($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['id'], $_PUT['auteur_operation']))
         {
             $profilDAO = new Profils();
-            $profil = array($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['username_parain'], $_PUT['password_parain'], $_PUT['id']);
+            $profile = array($_PUT['id_client'], $_PUT['username'],$_PUT['niveau_adhesion'], $_PUT['capital'], $_PUT['produit_trading'], $_PUT['produit_adhesion'], $_PUT['activation_compte'], $_PUT['activation_trading'], $_PUT['solde'], $_PUT['etat'], $_PUT['etat_trading'], $_PUT['etat_activation'], $_PUT['password'], $_PUT['etat_produit_adhesion'], $_PUT['username_parain'], $_PUT['password_parain'], $_PUT['id']);
+            $data = array_to_hsc($profile);
 
             if(isset($_PUT['activations']) && $_PUT['activations'] == 'activations')
             {
-                $res = $profilDAO->putActivation($profil, $_PUT['auteur_operation']);
+                $res = $profilDAO->putActivation($data, htmlspecialchars($_PUT['auteur_operation']));
                 return;
             }
 
             if(isset($_PUT['date_activation']) && $_PUT['date_activation'] == 'activated'){
-                $res = $profilDAO->put($profil, $_PUT['auteur_operation'], true);
+                $res = $profilDAO->put($data, htmlspecialchars($_PUT['auteur_operation']), true);
             } else {
-                $res = $profilDAO->put($profil, $_PUT['auteur_operation']);
+                $res = $profilDAO->put($data, htmlspecialchars($_PUT['auteur_operation']));
             }
             response($res);
         } else
@@ -134,7 +138,7 @@ switch ($request_method)
     case 'DELETE':
         if (isset($_GET['auteur_operation'], $_GET['to_be_deleted_id'])) {
             $profileDAO = new Profils();
-            $res = $profileDAO->delete($_GET['to_be_deleted_id'], $_GET['auteur_operation']);
+            $res = $profileDAO->delete(htmlspecialchars($_GET['to_be_deleted_id']), htmlspecialchars($_GET['auteur_operation']));
             response($res);
 
         } else {

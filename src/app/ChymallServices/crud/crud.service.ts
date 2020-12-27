@@ -66,9 +66,9 @@ export class CrudService {
             `${environment.server_base_url}/profiles.php?auteur_operation=${auteur_operation}&id=${id}&is_by_client=${is_by_client}`);
     }
 
-    getClients(auteur_operation: string, id?: number) {
+    getClients(auteur_operation: string, id?: number, page?: number) {
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.get(`${environment.server_base_url}/clients.php?auteur_operation=${auteur_operation}&id=${id}`);
+        return this.httpClient.get(`${environment.server_base_url}/clients.php?auteur_operation=${auteur_operation}&id=${id}&page=${page}`);
     }
 
     getPaiements(auteur_operation: string, id?: number) {
